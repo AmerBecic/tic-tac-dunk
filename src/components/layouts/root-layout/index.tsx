@@ -24,7 +24,7 @@ const RootLayout = async ({
       lang={locale}
       className={`${spaceGrotesk.variable} ${inter.variable}`}
     >
-      <title>COMSO</title>
+      <title>Tic Tac Dunk</title>
       <body className={spaceGrotesk.className}>
         <NextIntlClientProvider messages={messages}>
           {children}

@@ -6,8 +6,26 @@ import '@/styles/globals.css';
 import { inter, spaceGrotesk } from '@/fonts';
 
 export const metadata: Metadata = {
-  title: 'Tic Tac Dunk',
-  icons: '/favicon.ico',
+  title: 'Tic Tac Dunk - NBA Trivia Grid Game',
+  description:
+    'Test your NBA knowledge by matching players to teams in a strategic and addictive grid game.',
+  openGraph: {
+    title: 'Tic Tac Dunk',
+    description:
+      'Think you know NBA history? Prove it in the ultimate grid challenge!',
+    url: 'https://yourdomain.com',
+    siteName: 'Tic Tac Dunk',
+    images: [
+      {
+        url: 'https://yourdomain.com/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Tic Tac Dunk - NBA Grid Game',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
 };
 
 const RootLayout = async ({

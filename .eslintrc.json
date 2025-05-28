@@ -1,0 +1,118 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "ignorePatterns": [
+    "**/node_modules/*",
+    "dist",
+    "coverage",
+    "**/.next/*",
+    "**/testDir",
+    "*.js",
+    "*.json",
+    "*.lock",
+    "*.css",
+    "*.scss",
+    "**/out/*",
+    "next-env.d.ts",
+    "next.config.mjs"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+
+  // all plugins (eslint-plugin-xxx) go here:
+  "plugins": ["@typescript-eslint", "import"],
+
+
+  // all configs (eslint-config-xxx) go here:
+"extends": [
+  "next/core-web-vitals",
+  "eslint:recommended",
+  "plugin:react/recommended",
+  "plugin:@typescript-eslint/recommended",
+  "plugin:@typescript-eslint/recommended-requiring-type-checking",
+  "prettier"
+],
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "no-empty-pattern": "error",
+    "no-empty-function": "error",
+    "no-unused-vars": ["error", { "args": "none" }],
+    "padding-line-between-statements": [
+      "error",
+      { "blankLine": "always", "prev": "*", "next": "return" },
+      { "blankLine": "always", "prev": "*", "next": "export" }
+    ],
+
+    "@typescript-eslint/explicit-function-return-type": [
+      "error",
+      {
+        "allowTypedFunctionExpressions": false
+      }
+    ],
+    "@typescript-eslint/no-misused-promises": [
+      "error",
+      {
+        "checksVoidReturn": false
+      }
+    ],
+
+    // import plugin
+    // Unbound imports should be moved as the last of the all imports in order to formatOnSave and fix work
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index",
+          "object"
+        ],
+        "newlines-between": "always",
+        "pathGroups": [
+          {
+            "pattern": "*react*|*next*",
+            "group": "external",
+            "position": "before"
+          }
+        ],
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        },
+        "pathGroupsExcludedImportTypes": ["react"]
+      }
+    ],
+    "import/namespace": "off",
+    "import/newline-after-import": "error",
+    "import/no-unresolved": "off",
+    "import/named": "off",
+    "import/no-duplicates": "error"
+  },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "rules": {
+        "react/prop-types": "off"
+      }
+    }
+  ]
+}

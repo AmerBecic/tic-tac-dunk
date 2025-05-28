@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
+import { APP_URL } from '@/constants/env';
+
 export interface MetadataGenericsProps {
   title: string;
   description: string;
@@ -11,9 +13,7 @@ export interface MetadataGenericsProps {
   publishedTime?: string;
 }
 
-const SITE_NAME = 'Tic Tac Dunk';
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://yourdomain.com';
-const DEFAULT_IMAGE = `${SITE_URL}/og-image.jpg`;
+const DEFAULT_IMAGE = `${APP_URL}/og-image.jpg`;
 
 export const MetadataGenerics = ({
   title,
@@ -24,7 +24,7 @@ export const MetadataGenerics = ({
   imageUrl,
   publishedTime,
 }: MetadataGenericsProps): Metadata => {
-  const pageUrl = slug ? `${SITE_URL}${slug}` : SITE_URL;
+  const pageUrl = slug ? `${APP_URL}${slug}` : APP_URL;
 
   return {
     title,
@@ -38,7 +38,7 @@ export const MetadataGenerics = ({
       description,
       url: pageUrl,
       type,
-      siteName: SITE_NAME,
+      siteName: 'Tic Tac Dunk',
       locale: 'en_US',
       images: [
         {
@@ -49,12 +49,6 @@ export const MetadataGenerics = ({
         },
       ],
       publishedTime,
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title,
-      description,
-      images: [imageUrl || DEFAULT_IMAGE],
     },
     robots: {
       index: true,

@@ -1,5 +1,8 @@
 {
   "home": {
+    "metadata_title": "Home Page | Tic Tac Dunk",
+    "metadata_description": "Welcome to the ultimate NBA grid game.",
+    "metadata_keywords": "NBA, trivia, immaculate grid, basketball, players, teams",
     "test": "testing"
   }
 }

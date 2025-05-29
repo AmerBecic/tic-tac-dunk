@@ -7,7 +7,7 @@ export interface MetadataGenericsProps {
   title: string;
   description: string;
   keywords?: string;
-  slug?: string;
+  route?: string;
   type?: 'website' | 'article';
   imageUrl?: string;
   publishedTime?: string;
@@ -19,12 +19,12 @@ export const MetadataGenerics = ({
   title,
   description,
   keywords,
-  slug,
+  route,
   type = 'website',
   imageUrl,
   publishedTime,
 }: MetadataGenericsProps): Metadata => {
-  const pageUrl = slug ? `${APP_URL}${slug}` : APP_URL;
+  const pageUrl = route ? `${APP_URL}${route}` : APP_URL;
 
   return {
     title,
@@ -62,7 +62,7 @@ export const MetadataGenerics = ({
 
 export const generateBasicMetadata = async (
   translationKey: string,
-  slug?: string
+  route?: string
 ): Promise<Metadata> => {
   const t = await getTranslations(translationKey);
 
@@ -70,6 +70,6 @@ export const generateBasicMetadata = async (
     title: t('metadata_title'),
     description: t('metadata_description'),
     keywords: t('metadata_keywords'),
-    slug,
+    route,
   });
 };

@@ -37,3 +37,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# generated-data
+player_team_1950_2024.csv
+player_seasons.json
+players_raw.json

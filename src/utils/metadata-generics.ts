@@ -60,7 +60,7 @@ export const MetadataGenerics = ({
   };
 };
 
-export const generateBasicMetadata = async (
+export const generateMetadataForRoute = async (
   translationKey: string,
   route?: string
 ): Promise<Metadata> => {

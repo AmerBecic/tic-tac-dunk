@@ -10,7 +10,7 @@
     "prepare": "husky",
     "generate-player-data-per-season": "tsx src/database/scripts/generate-player-data-per-season.ts",
     "generate-raw-player-data": "tsx src/database/scripts/generate-raw-player-data.ts",
-    "checks": "tsx src/database/scripts/checks.ts"
+    "generate-final-player-data": "tsx src/database/scripts/generate-final-player-data.ts"
   },
   "dependencies": {
     "csv-parse": "^5.6.0",
@@ -39,6 +39,7 @@
     "lint-staged": "^16.1.0",
     "prettier": "^3.5.3",
     "ts-node": "^10.9.2",
+    "tsx": "^4.19.4",
     "typescript": "^5",
     "uuid": "^11.1.0"
   }

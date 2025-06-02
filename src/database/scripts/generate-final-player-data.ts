@@ -29,11 +29,25 @@ const finalPlayers: FinalPlayer[] = rawPlayers.map((rp): FinalPlayer => {
   };
 });
 
+const countsByBase = new Map<string, number>();
+
+for (const p of finalPlayers) {
+  const [baseName] = p.name.split(' #');
+  countsByBase.set(baseName, (countsByBase.get(baseName) || 0) + 1);
+}
+
+for (const p of finalPlayers) {
+  const [baseName] = p.name.split(' #');
+  if ((countsByBase.get(baseName) || 0) > 1) {
+    p.name = `${baseName} (${p.firstSeason}-${p.lastSeason})`;
+  }
+}
+
 fs.writeFileSync(
-  'data/json/players-final.json',
+  'data/json/players_final.json',
   JSON.stringify(finalPlayers, null, 2),
   'utf-8'
 );
 console.log(
-  `Exported ${finalPlayers.length} records to 'data/json/players-final.json'`
+  `Exported ${finalPlayers.length} records to 'data/json/players_final.json'`
 );

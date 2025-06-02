@@ -1,13 +1,13 @@
 import fs from 'fs';
 
-import { PlayerSeason, Player } from './types';
+import { PlayerSeason, PlayerRaw } from './types';
 
 const rawJson = fs.readFileSync('data/json/player_seasons.json', 'utf-8');
 
 const playerSeasons = JSON.parse(rawJson) as PlayerSeason[];
 
 // Group by player name
-const groupsByName = new Map<string, Player[]>();
+const groupsByName = new Map<string, PlayerRaw[]>();
 
 const GAP_THRESHOLD = 2;
 
@@ -28,7 +28,7 @@ for (const singlePlayerSeason of playerSeasons) {
 
   // If this player does not yet exist in the map, create a new player
   if (!groupsByName.has(playerName)) {
-    const initialGroup: Player = {
+    const initialGroup: PlayerRaw = {
       name: playerName,
       allSeasons: [season],
       allAges: [age],
@@ -94,7 +94,7 @@ for (const singlePlayerSeason of playerSeasons) {
     const newGroupIndex = groupList.length + 1;
     const newGroupName = `${playerName} #${newGroupIndex}`;
 
-    const newGroup: Player = {
+    const newGroup: PlayerRaw = {
       name: newGroupName,
       allSeasons: [season],
       allAges: [age],
@@ -112,7 +112,7 @@ for (const singlePlayerSeason of playerSeasons) {
 }
 
 //Flatten all groups into one array of Player objects & sort
-const allPlayers: Player[] = [];
+const allPlayers: PlayerRaw[] = [];
 Array.from(groupsByName.values()).forEach((groups): void => {
   allPlayers.push(...groups);
 });

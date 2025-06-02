@@ -26,7 +26,7 @@ export interface PlayerRaw {
   as: boolean;
 }
 
-export interface FinalPlayer {
+export interface Player {
   id: string;
   name: string;
   firstSeason: number;

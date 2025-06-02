@@ -2,12 +2,12 @@ import fs from 'fs';
 
 import { v4 } from 'uuid';
 
-import { FinalPlayer, PlayerRaw } from './types';
+import { Player, PlayerRaw } from './types';
 
 const rawText = fs.readFileSync('data/json/players_raw.json', 'utf-8');
 const rawPlayers = JSON.parse(rawText) as PlayerRaw[];
 
-const finalPlayers: FinalPlayer[] = rawPlayers.map((rp): FinalPlayer => {
+const players: Player[] = rawPlayers.map((rp): Player => {
   const seasons = rp.allSeasons.slice();
   seasons.sort((a, b): number => a - b);
   const firstSeason = seasons[0];
@@ -31,12 +31,12 @@ const finalPlayers: FinalPlayer[] = rawPlayers.map((rp): FinalPlayer => {
 
 const countsByBase = new Map<string, number>();
 
-for (const p of finalPlayers) {
+for (const p of players) {
   const [baseName] = p.name.split(' #');
   countsByBase.set(baseName, (countsByBase.get(baseName) || 0) + 1);
 }
 
-for (const p of finalPlayers) {
+for (const p of players) {
   const [baseName] = p.name.split(' #');
   if ((countsByBase.get(baseName) || 0) > 1) {
     p.name = `${baseName} (${p.firstSeason}-${p.lastSeason})`;
@@ -45,9 +45,9 @@ for (const p of finalPlayers) {
 
 fs.writeFileSync(
   'data/json/players_final.json',
-  JSON.stringify(finalPlayers, null, 2),
+  JSON.stringify(players, null, 2),
   'utf-8'
 );
 console.log(
-  `Exported ${finalPlayers.length} records to 'data/json/players_final.json'`
+  `Exported ${players.length} records to 'data/json/players_final.json'`
 );

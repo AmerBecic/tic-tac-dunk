@@ -1,3 +1,4 @@
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
 import type { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
@@ -51,7 +52,7 @@ const RootLayout = async ({
     >
       <body className={spaceGrotesk.className}>
         <NextIntlClientProvider messages={messages}>
-          {children}
+          <AppRouterCacheProvider>{children}</AppRouterCacheProvider>
         </NextIntlClientProvider>
       </body>
     </html>

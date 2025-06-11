@@ -1,5 +1,4 @@
-@use 'sass:meta';
-@use '@/styles/layout.module' as layout;
+@use '@/styles/layout' as layout;
 
 * {
   box-sizing: border-box;

@@ -1,0 +1,14 @@
+@use 'sass:meta';
+@use '@/styles/layout.module' as layout;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  @include layout.flex-column;
+  height: 100vh;
+  width: 100vw;
+}

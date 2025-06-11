@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 
-import '@/styles/globals.css';
+import '@/styles/globals.scss';
 import { APP_URL } from '@/constants/env';
 import { inter, spaceGrotesk } from '@/fonts';
 

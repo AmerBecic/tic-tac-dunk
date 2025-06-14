@@ -1,0 +1,60 @@
+@use '@/styles/_text.scss' as *;
+
+.text {
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  height: min-content;
+  color: white;
+}
+
+.center {
+  text-align: center;
+}
+
+.left {
+  text-align: left;
+}
+
+.right {
+  text-align: right;
+}
+
+.white {
+  color: white;
+}
+
+.black {
+  color: black;
+}
+
+.bold {
+  font-weight: font-weight(bold);
+}
+
+.spaceGrotesk {
+  font-family: font-family(spaceGrotesk);
+}
+
+.inter {
+  font-family: font-family(inter);
+}
+
+.text56 {
+  font-size: 56px;
+}
+
+.text32 {
+  font-size: 32px;
+}
+
+.text20 {
+  font-size: 20px;
+}
+
+.text16 {
+  font-size: 16px;
+}
+
+.text12 {
+  font-size: 12px;
+}

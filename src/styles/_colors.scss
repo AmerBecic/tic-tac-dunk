@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 $color: (
   primary: #ff5733,
   secondary: #06402b,
@@ -5,4 +7,9 @@ $color: (
   error: #dc3545,
   info: #0059ff,
   text: #000,
+  focus: #1976d2,
 );
+
+@function color($type) {
+  @return map.get($color, $type);
+}

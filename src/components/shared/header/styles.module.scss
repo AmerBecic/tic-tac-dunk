@@ -1,0 +1,12 @@
+@use '@/styles/_layout.scss' as layout;
+
+.headerContainer {
+  @include layout.flex-row;
+  justify-content: space-between;
+}
+
+.logoAndTitleContainer {
+  @include layout.flex-row;
+  align-items: center;
+  gap: 14px;
+}

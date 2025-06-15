@@ -1,5 +1,7 @@
-@use '@/styles/_layout.scss' as layout;
-@use '@/styles/_colors.scss' as *;
+@use '@/styles/layout' as layout;
+@use '@/styles/colors' as *;
+@use '@/styles/design-tokens' as *;
+@use '@/styles/breakpoints' as *;
 
 .headerContainer {
   @include layout.flex-row;
@@ -10,12 +12,28 @@
 .logoAndTitleContainer {
   @include layout.flex-row;
   align-items: center;
-  gap: 10px;
+  gap: gap(medium);
 }
 
 .logoWrapper {
   background-color: color(primary);
   width: 40px;
   height: 40px;
-  border-radius: 6px;
+  border-radius: border-radius(small);
+}
+
+.mobileOnly {
+  display: block;
+
+  @include respond-from(lg) {
+    display: none;
+  }
+}
+
+.desktopOnly {
+  display: none;
+
+  @include respond-from(lg) {
+    display: block;
+  }
 }

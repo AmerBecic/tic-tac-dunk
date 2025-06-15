@@ -9,11 +9,10 @@ const MainLayout = ({
 }): JSX.Element => {
   return (
     <div className={styles.layoutContainer}>
-      <div>
-        <Header />
-      </div>
+      <Header />
 
-      <div>{children}</div>
+      <main>{children}</main>
+
       <div>
         <p>Footer</p>
       </div>

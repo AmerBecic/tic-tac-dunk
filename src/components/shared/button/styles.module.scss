@@ -1,16 +1,17 @@
-@use '@/styles/_layout.scss' as layout;
-@use '@/styles/_colors.scss' as *;
-@use '@/styles/_design-tokens.scss' as *;
+@use '@/styles/layout.scss' as layout;
+@use '@/styles/colors.scss' as *;
+@use '@/styles/design-tokens' as *;
 
 .button {
   @include layout.flex-row;
   cursor: pointer;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: gap(small);
   padding: 12px;
   height: 36px;
   border: none;
+  background: none;
   border-radius: border-radius(medium);
 
   &:focus-visible {

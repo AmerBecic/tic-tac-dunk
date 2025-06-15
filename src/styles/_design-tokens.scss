@@ -1,17 +1,21 @@
 @use 'sass:map';
 
 $border-radius: (
-  xxSmall: 2px,
-  xSmall: 4px,
-  small: 5px,
+  small: 4px,
   medium: 8px,
-  large: 10px,
-  xLarge: 12px,
-  xxLarge: 16px,
-  xxxLarge: 20px,
-  xxxxLarge: 32px,
+  large: 12px,
+);
+
+$gap: (
+  small: 8px,
+  medium: 10px,
+  large: 14px,
 );
 
 @function border-radius($type) {
   @return map.get($border-radius, $type);
+}
+
+@function gap($type) {
+  @return map.get($gap, $type);
 }

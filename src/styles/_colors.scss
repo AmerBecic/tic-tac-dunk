@@ -6,10 +6,25 @@ $color: (
   warning: #ffc107,
   error: #dc3545,
   info: #0059ff,
-  text: #000,
   focus: #1976d2,
+);
+
+$white: (
+  100: #ffffff,
+);
+
+$black: (
+  100: #000000,
 );
 
 @function color($type) {
   @return map.get($color, $type);
+}
+
+@function white($type) {
+  @return map.get($white, $type);
+}
+
+@function black($type) {
+  @return map.get($black, $type);
 }

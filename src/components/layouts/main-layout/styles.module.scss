@@ -1,0 +1,7 @@
+@use '@/styles/_layout.scss' as layout;
+
+.layoutContainer {
+  @include layout.flex-column;
+  height: 100%;
+  justify-content: space-between;
+}

@@ -1,0 +1,21 @@
+@use '@/styles/_layout.scss' as layout;
+@use '@/styles/_colors.scss' as *;
+
+.headerContainer {
+  @include layout.flex-row;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+.logoAndTitleContainer {
+  @include layout.flex-row;
+  align-items: center;
+  gap: 10px;
+}
+
+.logoWrapper {
+  background-color: color(primary);
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+}

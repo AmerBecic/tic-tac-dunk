@@ -4,5 +4,11 @@
     "metadata_description": "Dobrodošli u najbolju NBA igru s mrežama.",
     "metadata_keywords": "NBA, trivia, immaculate grid, basketball, players, teams",
     "test": "testiram"
+  },
+
+  "header": {
+    "home": "Home",
+    "how_to_play": "Pravila igre",
+    "dev_blog": "Dev blog"
   }
 }

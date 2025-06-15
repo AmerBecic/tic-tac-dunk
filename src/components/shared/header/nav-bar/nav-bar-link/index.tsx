@@ -1,0 +1,31 @@
+'use client';
+
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+
+import styles from './styles.module.scss';
+
+interface NavbarLinkProps {
+  children: React.ReactNode;
+  href: string;
+  onClick?: () => void;
+}
+
+export const NavbarLink = ({
+  children,
+  href = '#',
+  onClick,
+}: NavbarLinkProps): JSX.Element => {
+  const pathname = usePathname();
+  const isActive = pathname.endsWith(href);
+
+  return (
+    <Link
+      href={href}
+      onClick={onClick}
+      className={`${styles.navLink} ${isActive ? styles.active : ''}`}
+    >
+      {children}
+    </Link>
+  );
+};

@@ -4,5 +4,11 @@
     "metadata_description": "Welcome to the ultimate NBA grid game.",
     "metadata_keywords": "NBA, trivia, immaculate grid, basketball, players, teams",
     "test": "testing"
+  },
+
+  "header": {
+    "home": "Home",
+    "how_to_play": "How to play",
+    "dev_blog": "Dev blog"
   }
 }

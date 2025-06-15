@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 
-import { HOME_URL } from '@/constants/routes/home';
+import { HOME_URL } from '@/constants/routes';
 import { generateMetadataForRoute } from '@/utils/metadata-generics';
 
 export const generateMetadata = (): Promise<Metadata> =>

@@ -1,5 +1,5 @@
-@use '@/styles/_colors.scss' as *;
-@use '@/styles/_design-tokens.scss' as *;
+@use '@/styles/colors' as *;
+@use '@/styles/design-tokens' as *;
 
 .navLink {
   position: relative;

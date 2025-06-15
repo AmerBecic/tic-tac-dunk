@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 import { Paragraph } from '../paragraph';
 
-import { NavBar } from './nav-bar';
+import { MobileNav } from './mobile-nav';
 import styles from './styles.module.scss';
 
 export const Header = (): JSX.Element => {
@@ -14,7 +14,11 @@ export const Header = (): JSX.Element => {
         </div>
         <Paragraph>Tic Tac Dunk</Paragraph>
       </div>
-      <NavBar />
+      <div className={styles.mobileOnly}>
+        <MobileNav />
+      </div>
+
+      <div className={styles.desktopOnly}>Desktop Nav</div>
     </header>
   );
 };

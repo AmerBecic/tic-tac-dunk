@@ -1,6 +1,7 @@
 @use '@/styles/layout' as layout;
 @use '@/styles/colors' as *;
 @use '@/styles/design-tokens' as *;
+@use '@/styles/breakpoints' as *;
 
 .headerContainer {
   @include layout.flex-row;
@@ -19,4 +20,20 @@
   width: 40px;
   height: 40px;
   border-radius: border-radius(small);
+}
+
+.mobileOnly {
+  display: block;
+
+  @include respond-from(lg) {
+    display: none;
+  }
+}
+
+.desktopOnly {
+  display: none;
+
+  @include respond-from(lg) {
+    display: block;
+  }
 }

@@ -1,8 +1,10 @@
 @use '@/styles/layout' as layout;
+@use '@/styles/design-tokens' as *;
 
 .nav {
   position: fixed;
   @include layout.flex-column;
+  align-items: flex-start;
   top: 60px;
   right: 0;
   bottom: 0;

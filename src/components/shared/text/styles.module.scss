@@ -1,10 +1,11 @@
 @use '@/styles/text' as *;
+@use '@/styles/colors' as *;
 
 .text {
   letter-spacing: -0.02em;
   text-decoration: none;
   height: min-content;
-  color: white;
+  color: white(100);
 }
 
 .center {
@@ -20,11 +21,11 @@
 }
 
 .white {
-  color: white;
+  color: white(100);
 }
 
 .black {
-  color: black;
+  color: black(100);
 }
 
 .bold {

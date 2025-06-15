@@ -1,6 +1,6 @@
-@use '@/styles/_layout.scss' as layout;
-@use '@/styles/_colors.scss' as *;
-@use '@/styles/_design-tokens.scss' as *;
+@use '@/styles/layout.scss' as layout;
+@use '@/styles/colors.scss' as *;
+@use '@/styles/design-tokens' as *;
 
 .button {
   @include layout.flex-row;

@@ -7,7 +7,8 @@ import { useClickAway } from 'react-use';
 
 import { DEV_BLOG_URL, HOME_URL, HOW_TO_PLAY_URL } from '@/constants/routes';
 
-import { NavbarLink } from './nav-bar-link';
+import { NavbarLink } from '../nav-bar-link';
+
 import styles from './styles.module.scss';
 
 const PAGES = [
@@ -16,7 +17,7 @@ const PAGES = [
   { titleKey: 'dev_blog', href: DEV_BLOG_URL },
 ];
 
-export const NavBar = (): JSX.Element => {
+export const MobileNav = (): JSX.Element => {
   const t = useTranslations('header');
   const containerRef = useRef(null);
 

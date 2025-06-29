@@ -44,3 +44,5 @@ player_team_1950_2024.csv
 player_seasons.json
 players_raw.json
 players_final.json
+
+/src/generated/prisma

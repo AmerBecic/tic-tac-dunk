@@ -16,6 +16,19 @@ npx tsx src/database/scripts/generate-raw-player-data.ts
 
 npx tsx src/database/scripts/generate-final-player-data.ts
 
+Install docker desktop & supabase https://supabase.com/docs/guides/local-development/cli/getting-started
+
+Run supabase start
+
+Open http://localhost:54323
+
+Create .env with connection to local Supabase
+
+Run npx prisma migrate dev --name init
+
+Run pnpm run seed
+
+Your DB should be populated
 
 ```bash
 npm run dev

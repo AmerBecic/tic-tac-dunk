@@ -2,7 +2,7 @@
 
 First, clone https://github.com/AmerBecic/nba-webscrape - and run webscrape scripts
 
-Those scripts will generate: player_team_1950_2024.csv
+Those scripts will generate: player_team_1950_2026.csv
 
 Drop player_team_1950_2026.csv into tic-tac-dunk/data/csv (in this project)
 

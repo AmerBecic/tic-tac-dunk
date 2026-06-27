@@ -9,7 +9,7 @@ type CSVRow = Record<string, string>;
 const parseCSV = parse as unknown as (input: string, opts: Options) => CSVRow[];
 
 // read from raw web-scraped csv file
-const rawCsv = fs.readFileSync('data/csv/player_team_1950_2024.csv', 'utf-8');
+const rawCsv = fs.readFileSync('data/csv/player_team_1950_2026.csv', 'utf-8');
 
 const allPlayersallSeasons = parseCSV(rawCsv, {
   columns: true,

@@ -1,11 +1,26 @@
-import { Player, PrismaClient } from '@/generated/prisma/client';
+import 'dotenv/config';
+
+import { PrismaPg } from '@prisma/adapter-pg';
+
+import { PrismaClient, type Player } from '@/generated/prisma/client';
 
 import players from '../data/json/players_final.json';
 
-const prisma = new PrismaClient();
+const databaseUrl = process.env.DATABASE_URL;
+
+if (!databaseUrl) {
+  throw new Error('DATABASE_URL is not defined');
+}
+
+const adapter = new PrismaPg({
+  connectionString: databaseUrl,
+});
+
+const prisma = new PrismaClient({ adapter });
 
 async function main(): Promise<void> {
   const chunkSize = 500;
+
   for (let i = 0; i < players.length; i += chunkSize) {
     const batch = players.slice(i, i + chunkSize).map(
       (p): Player => ({
@@ -23,17 +38,19 @@ async function main(): Promise<void> {
         as: p.as,
       })
     );
+
     await prisma.player.createMany({
       data: batch,
       skipDuplicates: true,
     });
   }
+
   console.log(`Seeded all ${players.length} players`);
 }
 
 main()
-  .catch((e): never => {
-    console.error(e);
+  .catch((error): never => {
+    console.error(error);
     process.exit(1);
   })
   .finally((): Promise<void> => prisma.$disconnect());

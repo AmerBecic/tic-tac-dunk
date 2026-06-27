@@ -8,6 +8,7 @@
     "esModuleInterop": true,
     "module": "ESNext",
     "moduleResolution": "bundler",
+    "target": "es2023",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",

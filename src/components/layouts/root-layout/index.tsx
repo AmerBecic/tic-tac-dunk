@@ -1,11 +1,14 @@
-import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import type { Metadata } from 'next';
-import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
+import { hasLocale, NextIntlClientProvider } from 'next-intl';
+import { getMessages, setRequestLocale } from 'next-intl/server';
+import { notFound } from 'next/navigation';
 
 import '@/styles/globals.scss';
+
 import { APP_URL } from '@/constants/env';
 import { inter, spaceGrotesk } from '@/fonts';
+import { routing } from '@/i18n/routing';
 
 export const metadata: Metadata = {
   description:
@@ -36,13 +39,25 @@ export const metadata: Metadata = {
   },
 };
 
+export function generateStaticParams(): { locale: string }[] {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
 const RootLayout = async ({
   children,
-  params: { locale },
+  params,
 }: {
   children: React.ReactNode;
-  params: { locale: string };
-}): Promise<JSX.Element> => {
+  params: Promise<{ locale: string }>;
+}): Promise<React.ReactNode> => {
+  const { locale } = await params;
+
+  if (!hasLocale(routing.locales, locale)) {
+    notFound();
+  }
+
+  setRequestLocale(locale);
+
   const messages = await getMessages();
 
   return (
@@ -51,7 +66,7 @@ const RootLayout = async ({
       className={`${spaceGrotesk.variable} ${inter.variable}`}
     >
       <body className={spaceGrotesk.className}>
-        <NextIntlClientProvider messages={messages}>
+        <NextIntlClientProvider locale={locale} messages={messages}>
           <AppRouterCacheProvider>{children}</AppRouterCacheProvider>
         </NextIntlClientProvider>
       </body>

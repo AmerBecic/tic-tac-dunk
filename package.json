@@ -10,6 +10,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "prepare": "husky",
+    "typecheck": "tsc --noEmit",
     "seed": "tsx -r tsconfig-paths/register prisma/seed.ts",
     "generate-player-data-per-season": "tsx src/database/scripts/generate-player-data-per-season.ts",
     "generate-raw-player-data": "tsx src/database/scripts/generate-raw-player-data.ts",

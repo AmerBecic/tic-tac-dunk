@@ -1,17 +1,17 @@
-// next.config.js
+import type { NextConfig } from 'next';
 import createNextIntlPlugin from 'next-intl/plugin';
 
-const withNextIntl = createNextIntlPlugin();
+const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig: NextConfig = {
   webpack(config) {
     config.ignoreWarnings = [
-      ...(config.ignoreWarnings || []),
+      ...(config.ignoreWarnings ?? []),
       {
         message: /No serializer registered for Warning/,
       },
     ];
+
     return config;
   },
 };

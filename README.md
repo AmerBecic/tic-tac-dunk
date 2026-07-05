@@ -1,6 +1,6 @@
-# Tic Tac Dunk
+# 🏀 Tic Tac Dunk
 
-A basketball player data application built with Next.js, Prisma, PostgreSQL, and Supabase.
+A basketball player data application built with **Next.js**, **Prisma**, **PostgreSQL**, and **Supabase**.
 
 The project uses historical NBA player data generated from the companion scraping repository:
 
@@ -8,7 +8,17 @@ The project uses historical NBA player data generated from the companion scrapin
 https://github.com/AmerBecic/nba-webscrape
 ```
 
-## Prerequisites
+## 🛠 Tech Stack
+
+* ⚛️ **Frontend:** Next.js, React, TypeScript
+* 🗄️ **Database:** PostgreSQL
+* 🔺 **Backend Platform:** Supabase
+* 🧩 **ORM:** Prisma
+* 📦 **Package Manager:** pnpm
+
+---
+
+## 📋 Prerequisites
 
 Before running the project locally, install:
 
@@ -27,7 +37,7 @@ docker ps
 
 ---
 
-## 1. Clone and install dependencies
+## 1. 📥 Clone and install dependencies
 
 ```bash
 git clone git@github.com:YOUR_USERNAME/tic-tac-dunk.git
@@ -37,7 +47,7 @@ pnpm install
 
 ---
 
-## 2. Generate NBA player source data
+## 2. 🏀 Generate NBA player source data
 
 Clone the NBA scraping repository separately:
 
@@ -68,7 +78,7 @@ cd ../tic-tac-dunk
 
 ---
 
-## 3. Generate application data files
+## 3. ⚙️ Generate application data files
 
 Run these scripts in this exact order:
 
@@ -82,7 +92,7 @@ These scripts transform the scraped NBA season data into the final player datase
 
 ---
 
-## 4. Start local Supabase
+## 4. 🔺 Start local Supabase
 
 Start Docker Desktop first.
 
@@ -115,7 +125,7 @@ pnpm exec supabase status
 
 ---
 
-## 5. Generate Prisma Client
+## 5. 🧩 Generate Prisma Client
 
 Generate the Prisma Client after installing dependencies or changing the Prisma schema:
 
@@ -125,7 +135,7 @@ pnpm exec prisma generate
 
 ---
 
-## 6. Apply database migrations
+## 6. 🗃️ Apply database migrations
 
 Apply the committed Prisma migrations to your local Supabase database:
 
@@ -147,7 +157,7 @@ pnpm exec prisma migrate dev --name add_player_statistic
 
 ---
 
-## 7. Seed the database
+## 7. 🌱 Seed the database
 
 Populate the local database with generated player data:
 
@@ -165,7 +175,7 @@ You can confirm the data in Supabase Studio under the `players` table.
 
 ---
 
-## 9. Run the development server
+## 8. 🚀 Run the development server
 
 ```bash
 pnpm dev
@@ -179,7 +189,7 @@ http://localhost:3000
 
 ---
 
-## Useful Commands
+## 💻 Useful Commands
 
 ```bash
 # Start local Supabase
@@ -219,7 +229,7 @@ pnpm build
 
 ---
 
-## Local Database Reset
+## 🔄 Local Database Reset
 
 To completely remove local database data and recreate it from Prisma migrations:
 

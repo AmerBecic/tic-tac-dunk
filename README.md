@@ -10,11 +10,11 @@ https://github.com/AmerBecic/nba-webscrape
 
 ## 🛠 Tech Stack
 
-* ⚛️ **Frontend:** Next.js, React, TypeScript
-* 🗄️ **Database:** PostgreSQL
-* 🔺 **Backend Platform:** Supabase
-* 🧩 **ORM:** Prisma
-* 📦 **Package Manager:** pnpm
+- ⚛️ **Frontend:** Next.js, React, TypeScript
+- 🗄️ **Database:** PostgreSQL
+- 🔺 **Backend Platform:** Supabase
+- 🧩 **ORM:** Prisma
+- 📦 **Package Manager:** pnpm
 
 ---
 
@@ -22,10 +22,10 @@ https://github.com/AmerBecic/nba-webscrape
 
 Before running the project locally, install:
 
-* Node.js 20+
-* pnpm
-* Docker Desktop
-* Supabase CLI is installed as a project dependency and is run through `pnpm exec`
+- Node.js 20+
+- pnpm
+- Docker Desktop
+- Supabase CLI is installed as a project dependency and is run through `pnpm exec`
 
 Make sure Docker Desktop is open and running before starting Supabase.
 
@@ -37,17 +37,7 @@ docker ps
 
 ---
 
-## 1. 📥 Clone and install dependencies
-
-```bash
-git clone git@github.com:YOUR_USERNAME/tic-tac-dunk.git
-cd tic-tac-dunk
-pnpm install
-```
-
----
-
-## 2. 🏀 Generate NBA player source data
+## 1. 🏀 Generate NBA player source data
 
 Clone the NBA scraping repository separately:
 
@@ -78,7 +68,7 @@ cd ../tic-tac-dunk
 
 ---
 
-## 3. ⚙️ Generate application data files
+## 2. ⚙️ Generate application data files
 
 Run these scripts in this exact order:
 
@@ -92,7 +82,7 @@ These scripts transform the scraped NBA season data into the final player datase
 
 ---
 
-## 4. 🔺 Start local Supabase
+## 3. 🔺 Start local Supabase
 
 Start Docker Desktop first.
 
@@ -125,7 +115,7 @@ pnpm exec supabase status
 
 ---
 
-## 5. 🧩 Generate Prisma Client
+## 4. 🧩 Generate Prisma Client
 
 Generate the Prisma Client after installing dependencies or changing the Prisma schema:
 
@@ -135,7 +125,7 @@ pnpm exec prisma generate
 
 ---
 
-## 6. 🗃️ Apply database migrations
+## 5. 🗃️ Apply database migrations
 
 Apply the committed Prisma migrations to your local Supabase database:
 
@@ -157,7 +147,7 @@ pnpm exec prisma migrate dev --name add_player_statistic
 
 ---
 
-## 7. 🌱 Seed the database
+## 6. 🌱 Seed the database
 
 Populate the local database with generated player data:
 
@@ -175,7 +165,7 @@ You can confirm the data in Supabase Studio under the `players` table.
 
 ---
 
-## 8. 🚀 Run the development server
+## 7. 🚀 Run the development server
 
 ```bash
 pnpm dev

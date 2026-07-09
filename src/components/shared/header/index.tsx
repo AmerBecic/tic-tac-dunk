@@ -1,9 +1,8 @@
 import Image from 'next/image';
 
-import { Paragraph } from '../paragraph';
-
 import { MobileNav } from './mobile-nav';
 import styles from './styles.module.scss';
+import { Paragraph } from '../ui/paragraph';
 
 export const Header = (): JSX.Element => {
   return (

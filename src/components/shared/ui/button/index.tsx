@@ -1,6 +1,9 @@
 'use client';
 
+import React from 'react';
 import { CircularProgress } from '@mui/material';
+
+import { cn } from '@/utils/utils';
 
 import { Paragraph } from '../paragraph';
 import { TextProps } from '../text';
@@ -9,7 +12,7 @@ import styles from './styles.module.scss';
 
 type ButtonVariant = 'primary' | 'secondary';
 
-export interface ButtonProps extends React.ComponentProps<'button'> {
+export interface ButtonProps extends React.ComponentPropsWithoutRef<'button'> {
   disabled?: boolean;
   variant?: ButtonVariant;
   startIcon?: React.ReactNode;
@@ -20,36 +23,34 @@ export interface ButtonProps extends React.ComponentProps<'button'> {
 
 export const Button = ({
   disabled = false,
-  variant,
+  variant = 'primary',
   children,
   startIcon,
   endIcon,
   className,
   textProps,
   isPending = false,
+  onClick,
   ...rest
-}: ButtonProps): JSX.Element => {
-  const classNames = [
+}: ButtonProps): React.JSX.Element => {
+  const classNames = cn(
     styles.button,
-    variant && styles[variant],
+    styles[variant],
     disabled && styles.disabled,
-    className,
-  ]
-    .filter(Boolean)
-    .join(' ');
-
-  //   const textColor = variant === 'primary' ? 'white' : 'primary';
+    className
+  );
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.currentTarget.blur();
-    if (rest.onClick) {
-      rest.onClick(event);
-    }
+
+    onClick?.(event);
   };
 
   return (
     <button
-      {...{ disabled, className: classNames, ...rest }}
+      {...rest}
+      disabled={disabled || isPending}
+      className={classNames}
       onClick={handleClick}
     >
       {isPending ? (
@@ -57,11 +58,13 @@ export const Button = ({
       ) : (
         <>
           {startIcon}
+
           {children && (
             <Paragraph fontFamily="spaceGrotesk" bold {...textProps}>
               {children}
             </Paragraph>
           )}
+
           {endIcon}
         </>
       )}

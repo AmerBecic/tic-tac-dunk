@@ -10,6 +10,7 @@ import { DEV_BLOG_URL, HOME_URL, HOW_TO_PLAY_URL } from '@/constants/routes';
 import { NavbarLink } from '../nav-bar-link';
 
 import styles from './styles.module.scss';
+import React from 'react';
 
 const PAGES = [
   { titleKey: 'home', href: HOME_URL },
@@ -17,7 +18,7 @@ const PAGES = [
   { titleKey: 'dev_blog', href: DEV_BLOG_URL },
 ];
 
-export const MobileNav = (): JSX.Element => {
+export const MobileNav = (): React.JSX.Element => {
   const t = useTranslations('header');
   const containerRef = useRef(null);
 
@@ -34,7 +35,7 @@ export const MobileNav = (): JSX.Element => {
       {isOpen && (
         <nav className={styles.nav}>
           {PAGES.map(
-            ({ titleKey, href }): JSX.Element => (
+            ({ titleKey, href }): React.JSX.Element => (
               <NavbarLink key={titleKey} href={href} onClick={closeDrawer}>
                 {t(titleKey)}
               </NavbarLink>

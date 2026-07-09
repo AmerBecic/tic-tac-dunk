@@ -1,4 +1,6 @@
+import { cn } from '@/utils/utils';
 import styles from './styles.module.scss';
+import React from 'react';
 
 export type FontSize = '56' | '40' | '32' | '28' | '24' | '20' | '16' | '12';
 
@@ -31,22 +33,22 @@ export const Text = <T extends React.ElementType = 'span'>({
   fontFamily = 'spaceGrotesk',
   fontSize,
   ...rest
-}: TextProps<T>): JSX.Element => {
+}: TextProps<T>): React.JSX.Element => {
   const Component = as || 'span';
 
-  const classNames = [
+  const classNames = cn(
     styles.text,
     bold && styles.bold,
     styles[textColor],
     fontSize && styles[`text${fontSize}`],
     styles[textAlign],
     styles[fontFamily],
-    className,
-  ]
-    .filter(Boolean)
-    .join(' ');
+    className
+  );
 
   return (
-    <Component {...{ className: classNames, ...rest }}>{children}</Component>
+    <Component className={classNames} {...rest}>
+      {children}
+    </Component>
   );
 };

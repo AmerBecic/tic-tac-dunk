@@ -10,7 +10,7 @@ https://github.com/AmerBecic/nba-webscrape
 
 ## 🛠 Tech Stack
 
-- ⚛️ **Frontend:** Next.js, React, TypeScript
+- ⚛️ **Frontend:** Next.js 16.2.9, React 19.2.7, TypeScript
 - 🗄️ **Database:** PostgreSQL
 - 🔺 **Backend Platform:** Supabase
 - 🧩 **ORM:** Prisma

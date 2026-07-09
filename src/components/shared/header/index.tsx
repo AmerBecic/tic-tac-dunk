@@ -1,7 +1,6 @@
-import Image from 'next/image';
-
 import { MobileNav } from './mobile-nav';
 import styles from './styles.module.scss';
+import { Image } from '../ui/image';
 import { Paragraph } from '../ui/paragraph';
 
 export const Header = (): JSX.Element => {
@@ -9,7 +8,13 @@ export const Header = (): JSX.Element => {
     <header className={styles.headerContainer}>
       <div className={styles.logoAndTitleContainer}>
         <div className={styles.logoWrapper}>
-          <Image src="/logo.png" width={40} height={40} alt="logo" />
+          <Image
+            src="/logo.png"
+            width={40}
+            height={40}
+            alt="logo"
+            className={styles.logo}
+          />
         </div>
         <Paragraph>Tic Tac Dunk</Paragraph>
       </div>

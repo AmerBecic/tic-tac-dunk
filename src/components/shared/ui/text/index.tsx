@@ -1,3 +1,4 @@
+import { cn } from '@/utils/utils';
 import styles from './styles.module.scss';
 
 export type FontSize = '56' | '40' | '32' | '28' | '24' | '20' | '16' | '12';
@@ -34,19 +35,19 @@ export const Text = <T extends React.ElementType = 'span'>({
 }: TextProps<T>): JSX.Element => {
   const Component = as || 'span';
 
-  const classNames = [
+  const classNames = cn(
     styles.text,
     bold && styles.bold,
     styles[textColor],
     fontSize && styles[`text${fontSize}`],
     styles[textAlign],
     styles[fontFamily],
-    className,
-  ]
-    .filter(Boolean)
-    .join(' ');
+    className
+  );
 
   return (
-    <Component {...{ className: classNames, ...rest }}>{children}</Component>
+    <Component className={classNames} {...rest}>
+      {children}
+    </Component>
   );
 };

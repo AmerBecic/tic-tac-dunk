@@ -1,6 +1,7 @@
 import { useTranslations } from 'next-intl';
+import React from 'react';
 
-const Home = (): JSX.Element => {
+const Home = (): React.JSX.Element => {
   const t = useTranslations('home');
 
   return <div>{t('test')}</div>;

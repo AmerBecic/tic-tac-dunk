@@ -2,8 +2,9 @@ import { MobileNav } from './mobile-nav';
 import styles from './styles.module.scss';
 import { Image } from '../ui/image';
 import { Paragraph } from '../ui/paragraph';
+import React from 'react';
 
-export const Header = (): JSX.Element => {
+export const Header = (): React.JSX.Element => {
   return (
     <header className={styles.headerContainer}>
       <div className={styles.logoAndTitleContainer}>

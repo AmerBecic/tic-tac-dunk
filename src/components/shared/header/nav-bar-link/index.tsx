@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import styles from './styles.module.scss';
+import React from 'react';
 
 interface NavbarLinkProps {
   children: React.ReactNode;
@@ -15,7 +16,7 @@ export const NavbarLink = ({
   children,
   href = '#',
   onClick,
-}: NavbarLinkProps): JSX.Element => {
+}: NavbarLinkProps): React.JSX.Element => {
   const pathname = usePathname();
   const isActive = pathname.endsWith(href);
 

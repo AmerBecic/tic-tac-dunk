@@ -2,6 +2,7 @@ import NextImage, { type ImageProps as NextImageProps } from 'next/image';
 
 import styles from './styles.module.scss';
 import { cn } from '@/utils/utils';
+import React from 'react';
 
 export type ImageObjectFit =
   | 'contain'
@@ -24,7 +25,7 @@ export const Image = ({
   objectPosition,
   style,
   ...rest
-}: ImageProps): JSX.Element => {
+}: ImageProps): React.JSX.Element => {
   const classNames = cn(styles.image, className);
 
   const imageStyles = {

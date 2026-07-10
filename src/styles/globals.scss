@@ -5,13 +5,36 @@
   color-scheme: light dark;
   --background-primary: #{colors.white(100)};
   --text-primary: #{colors.black(100)};
+  --color-primary: #{colors.color(primary)};
+  --color-focus: #{colors.color(info)};
+  --color-switch-unchecked: #767676;
+  --color-switch-thumb: #{colors.white(100)};
+  --color-tooltip-background: #{colors.black(100)};
+  --color-tooltip-text: #{colors.white(100)};
+  --color-border: #d1d5db;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme]) {
     --background-primary: #{colors.black(100)};
     --text-primary: #{colors.white(100)};
+    --color-tooltip-background: #{colors.white(100)};
+    --color-tooltip-text: #{colors.black(100)};
+    --color-border: #4b5563;
   }
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --background-primary: #{colors.black(100)};
+  --text-primary: #{colors.white(100)};
+  --color-tooltip-background: #{colors.white(100)};
+  --color-tooltip-text: #{colors.black(100)};
+  --color-border: #4b5563;
 }
 
 * {
@@ -24,5 +47,6 @@ body {
   @include layout.flex-column;
   height: 100vh;
   width: 100vw;
+  align-items: center;
   background-color: colors.background(primary);
 }

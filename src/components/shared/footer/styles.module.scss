@@ -1,0 +1,38 @@
+@use '@/styles/layout' as layout;
+@use '@/styles/design-tokens' as *;
+@use '@/styles/breakpoints' as *;
+
+.footer {
+  @include layout.flex-column;
+  gap: gap(large);
+  padding: 1rem;
+  height: 72px;
+
+  @include respond-from(md) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.brand {
+  @include layout.flex-column;
+  gap: gap(medium);
+
+  @include respond-from(md) {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.copyright {
+  flex-shrink: 0;
+}
+
+.desktopOnly {
+  display: none;
+
+  @include respond-from(lg) {
+    display: block;
+  }
+}

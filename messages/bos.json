@@ -10,5 +10,10 @@
     "home": "Home",
     "how_to_play": "Pravila igre",
     "dev_blog": "Dev blog"
+  },
+
+  "footer": {
+    "description": "NBA mreža koja odvaja prave košarkaške znalce od povremenih navijača.",
+    "copyright": "© 2026 Tic Tac Dunk. Sva prava zadržana."
   }
 }

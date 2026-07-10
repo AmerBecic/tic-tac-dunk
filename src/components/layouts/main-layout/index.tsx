@@ -2,6 +2,7 @@ import { Header } from '@/components/shared/header';
 
 import styles from './styles.module.scss';
 import React from 'react';
+import { Footer } from '@/components/shared/footer';
 
 const MainLayout = ({
   children,
@@ -15,7 +16,7 @@ const MainLayout = ({
       <main>{children}</main>
 
       <div>
-        <p>Footer</p>
+        <Footer />
       </div>
     </div>
   );

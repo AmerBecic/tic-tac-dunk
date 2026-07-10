@@ -5,18 +5,11 @@ import { useTranslations } from 'next-intl';
 import { useRef, useState } from 'react';
 import { useClickAway } from 'react-use';
 
-import { DEV_BLOG_URL, HOME_URL, HOW_TO_PLAY_URL } from '@/constants/routes';
-
 import { NavbarLink } from '../nav-bar-link';
 
 import styles from './styles.module.scss';
 import React from 'react';
-
-const PAGES = [
-  { titleKey: 'home', href: HOME_URL },
-  { titleKey: 'how_to_play', href: HOW_TO_PLAY_URL },
-  { titleKey: 'dev_blog', href: DEV_BLOG_URL },
-];
+import { NAVIGATION } from '@/constants/pages';
 
 export const MobileNav = (): React.JSX.Element => {
   const t = useTranslations('header');
@@ -34,7 +27,7 @@ export const MobileNav = (): React.JSX.Element => {
       <Hamburger toggled={isOpen} size={20} toggle={setOpen} />
       {isOpen && (
         <nav className={styles.nav}>
-          {PAGES.map(
+          {NAVIGATION.map(
             ({ titleKey, href }): React.JSX.Element => (
               <NavbarLink key={titleKey} href={href} onClick={closeDrawer}>
                 {t(titleKey)}

@@ -10,5 +10,10 @@
     "home": "Home",
     "how_to_play": "How to play",
     "dev_blog": "Dev blog"
+  },
+
+  "footer": {
+    "description": "The NBA grid that separates true hoopers from casual fans.",
+    "copyright": "© 2026 Tic Tac Dunk. All rights reserved."
   }
 }

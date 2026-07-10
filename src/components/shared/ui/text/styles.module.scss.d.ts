@@ -8,5 +8,8 @@ export declare const text: string;
 export declare const text12: string;
 export declare const text16: string;
 export declare const text20: string;
+export declare const text24: string;
+export declare const text28: string;
 export declare const text32: string;
+export declare const text40: string;
 export declare const text56: string;

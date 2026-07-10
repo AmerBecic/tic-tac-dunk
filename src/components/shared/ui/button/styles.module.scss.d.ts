@@ -1,4 +1,10 @@
 export declare const button: string;
+export declare const danger: string;
 export declare const disabled: string;
+export declare const ghost: string;
+export declare const lg: string;
+export declare const md: string;
+export declare const pending: string;
 export declare const primary: string;
 export declare const secondary: string;
+export declare const sm: string;

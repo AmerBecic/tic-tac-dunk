@@ -4,7 +4,7 @@
 .navLink {
   position: relative;
   text-decoration: none;
-  color: text(primary);
+  color: var(--text-primary);
 
   &::after {
     content: '';

@@ -27,11 +27,3 @@ $black: (
 @function black($type) {
   @return map.get($black, $type);
 }
-
-@function background($type) {
-  @return var(--background-#{$type});
-}
-
-@function text($type) {
-  @return var(--text-#{$type});
-}

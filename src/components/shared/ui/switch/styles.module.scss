@@ -1,3 +1,5 @@
+@use '@/styles/colors' as colors;
+
 .root {
   position: relative;
   display: inline-flex;
@@ -10,7 +12,7 @@
 
   cursor: pointer;
 
-  background-color: var(--color-switch-unchecked);
+  background-color: colors.gray(300);
   border: 2px solid transparent;
   border-radius: 9999px;
 
@@ -19,8 +21,8 @@
     border-color 150ms ease,
     box-shadow 150ms ease;
 
-  &[data-state='checked'] {
-    background-color: var(--color-primary);
+  &[aria-checked='true'] {
+    background-color: colors.color(primary);
   }
 
   &:focus-visible {

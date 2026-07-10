@@ -2,17 +2,23 @@
 @use '@/styles/colors' as colors;
 
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
+
   --background-primary: #{colors.white(100)};
   --text-primary: #{colors.black(100)};
+
   --color-primary: #{colors.color(primary)};
+  --color-secondary: #{colors.color(secondary)};
+  --color-warning: #{colors.color(warning)};
+  --color-error: #{colors.color(error)};
   --color-focus: #{colors.color(info)};
-  --color-switch-unchecked: #767676;
+
+  --color-switch-unchecked: #{colors.gray(500)};
   --color-switch-thumb: #{colors.white(100)};
-  --color-skeleton: #d1d5db;
+  --color-skeleton: #{colors.gray(300)};
+
   --color-tooltip-background: #{colors.black(100)};
   --color-tooltip-text: #{colors.white(100)};
-  --color-border: #d1d5db;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -21,8 +27,7 @@
     --text-primary: #{colors.white(100)};
     --color-tooltip-background: #{colors.white(100)};
     --color-tooltip-text: #{colors.black(100)};
-    --color-border: #4b5563;
-    --color-skeleton: #4b5563;
+    --color-skeleton: #{colors.gray(600)};
   }
 }
 
@@ -36,8 +41,7 @@
   --text-primary: #{colors.white(100)};
   --color-tooltip-background: #{colors.white(100)};
   --color-tooltip-text: #{colors.black(100)};
-  --color-border: #4b5563;
-  --color-skeleton: #4b5563;
+  --color-skeleton: #{colors.gray(600)};
 }
 
 * {

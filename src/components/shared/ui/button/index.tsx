@@ -36,10 +36,23 @@ export const Button = ({
   onClick,
   ...rest
 }: ButtonProps): React.JSX.Element => {
+  const variantClassMap = {
+    primary: styles.primary,
+    secondary: styles.secondary,
+    danger: styles.danger,
+    ghost: styles.ghost,
+  } satisfies Record<ButtonVariant, string>;
+
+  const sizeClassMap = {
+    sm: styles.sm,
+    md: styles.md,
+    lg: styles.lg,
+  } satisfies Record<ButtonSize, string>;
+
   const classNames = cn(
     styles.button,
-    styles[variant],
-    styles[size],
+    variantClassMap[variant],
+    sizeClassMap[size],
     disabled && styles.disabled,
     isPending && styles.pending,
     className

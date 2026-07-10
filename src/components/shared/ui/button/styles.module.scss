@@ -1,5 +1,5 @@
-@use '@/styles/layout.scss' as layout;
-@use '@/styles/colors.scss' as *;
+@use '@/styles/layout' as layout;
+@use '@/styles/colors' as *;
 @use '@/styles/design-tokens' as *;
 
 .button {
@@ -8,8 +8,6 @@
   justify-content: center;
   align-items: center;
   gap: gap(small);
-  padding: 12px;
-  height: 36px;
   border: none;
   background: none;
   border-radius: border-radius(medium);
@@ -19,24 +17,46 @@
   }
 }
 
-.disabled {
-  opacity: 40%;
+.sm {
+  height: 32px;
+  padding: 8px 10px;
+}
+
+.md {
+  height: 36px;
+  padding: 12px;
+}
+
+.lg {
+  height: 44px;
+  padding: 14px 18px;
 }
 
 .primary {
   background-color: color(primary);
   color: var(--background-primary);
-
-  &:focus-visible {
-    outline: 2px solid color(secondary);
-  }
 }
 
 .secondary {
   background-color: var(--background-accent);
   color: color(primary);
+}
 
-  &:focus-visible {
-    outline: 2px solid color(secondary);
-  }
+.danger {
+  background-color: color(error);
+  color: white(100);
+}
+
+.ghost {
+  background-color: transparent;
+  color: var(--text-primary);
+}
+
+.disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.pending {
+  cursor: wait;
 }

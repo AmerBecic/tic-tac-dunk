@@ -1,4 +1,18 @@
 @use '@/styles/layout' as layout;
+@use '@/styles/colors' as colors;
+
+:root {
+  color-scheme: light dark;
+  --background-primary: #{colors.white(100)};
+  --text-primary: #{colors.black(100)};
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-primary: #{colors.black(100)};
+    --text-primary: #{colors.white(100)};
+  }
+}
 
 * {
   box-sizing: border-box;
@@ -10,4 +24,5 @@ body {
   @include layout.flex-column;
   height: 100vh;
   width: 100vw;
+  background-color: colors.background(primary);
 }

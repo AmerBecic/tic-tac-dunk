@@ -29,7 +29,6 @@ export const Text = <T extends React.ElementType = 'span'>({
   className,
   bold = false,
   textAlign = 'center',
-  textColor = 'black',
   fontFamily = 'spaceGrotesk',
   fontSize,
   ...rest
@@ -39,7 +38,6 @@ export const Text = <T extends React.ElementType = 'span'>({
   const classNames = cn(
     styles.text,
     bold && styles.bold,
-    styles[textColor],
     fontSize && styles[`text${fontSize}`],
     styles[textAlign],
     styles[fontFamily],

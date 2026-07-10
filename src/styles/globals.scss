@@ -9,6 +9,7 @@
   --color-focus: #{colors.color(info)};
   --color-switch-unchecked: #767676;
   --color-switch-thumb: #{colors.white(100)};
+  --color-skeleton: #d1d5db;
   --color-tooltip-background: #{colors.black(100)};
   --color-tooltip-text: #{colors.white(100)};
   --color-border: #d1d5db;
@@ -21,6 +22,7 @@
     --color-tooltip-background: #{colors.white(100)};
     --color-tooltip-text: #{colors.black(100)};
     --color-border: #4b5563;
+    --color-skeleton: #4b5563;
   }
 }
 
@@ -35,6 +37,7 @@
   --color-tooltip-background: #{colors.white(100)};
   --color-tooltip-text: #{colors.black(100)};
   --color-border: #4b5563;
+  --color-skeleton: #4b5563;
 }
 
 * {

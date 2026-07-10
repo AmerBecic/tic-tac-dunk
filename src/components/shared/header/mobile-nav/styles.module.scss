@@ -4,7 +4,7 @@
 .nav {
   position: fixed;
   @include layout.flex-column;
-  align-items: flex-start;
+  align-items: flex-end;
   top: 60px;
   right: 0;
   bottom: 0;

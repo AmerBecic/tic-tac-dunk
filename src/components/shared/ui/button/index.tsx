@@ -10,11 +10,13 @@ import { TextProps } from '../text';
 
 import styles from './styles.module.scss';
 
-type ButtonVariant = 'primary' | 'secondary';
+type ButtonVariant = 'primary' | 'secondary' | 'danger' | 'ghost';
+type ButtonSize = 'sm' | 'md' | 'lg';
 
 export interface ButtonProps extends React.ComponentPropsWithoutRef<'button'> {
   disabled?: boolean;
   variant?: ButtonVariant;
+  size?: ButtonSize;
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
   textProps?: TextProps<'p'>;
@@ -24,6 +26,7 @@ export interface ButtonProps extends React.ComponentPropsWithoutRef<'button'> {
 export const Button = ({
   disabled = false,
   variant = 'primary',
+  size = 'md',
   children,
   startIcon,
   endIcon,
@@ -36,13 +39,14 @@ export const Button = ({
   const classNames = cn(
     styles.button,
     styles[variant],
+    styles[size],
     disabled && styles.disabled,
+    isPending && styles.pending,
     className
   );
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.currentTarget.blur();
-
     onClick?.(event);
   };
 
@@ -54,7 +58,7 @@ export const Button = ({
       onClick={handleClick}
     >
       {isPending ? (
-        <CircularProgress />
+        <CircularProgress size={20} />
       ) : (
         <>
           {startIcon}

@@ -10,7 +10,8 @@
   right: 0;
   bottom: 0;
   width: 100%;
-  background: colors.white(100);
+  background: colors.background(primary);
+  color: colors.text(primary);
   padding: 1rem;
   z-index: 100;
   gap: gap(large);

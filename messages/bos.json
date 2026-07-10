@@ -12,6 +12,10 @@
     "dev_blog": "Dev blog"
   },
 
+  "themeSwitcher": {
+    "switchTheme": "Promijeni temu"
+  },
+
   "footer": {
     "description": "NBA mreža koja odvaja prave košarkaške znalce od povremenih navijača.",
     "copyright": "© 2026 Tic Tac Dunk. Sva prava zadržana."

@@ -12,6 +12,10 @@
     "dev_blog": "Dev blog"
   },
 
+  "themeSwitcher": {
+    "switchTheme": "Switch Theme"
+  },
+
   "footer": {
     "description": "The NBA grid that separates true hoopers from casual fans.",
     "copyright": "© 2026 Tic Tac Dunk. All rights reserved."

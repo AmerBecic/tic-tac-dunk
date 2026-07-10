@@ -1,0 +1,21 @@
+import { Paragraph } from '../ui/paragraph';
+import styles from './styles.module.scss';
+import { Image } from '../ui/image';
+import React from 'react';
+
+export const Logo = (): React.JSX.Element => {
+  return (
+    <div className={styles.logoAndTitleContainer}>
+      <div className={styles.logoWrapper}>
+        <Image
+          src="/logo.png"
+          width={40}
+          height={40}
+          alt="logo"
+          className={styles.logo}
+        />
+      </div>
+      <Paragraph>Tic Tac Dunk</Paragraph>
+    </div>
+  );
+};

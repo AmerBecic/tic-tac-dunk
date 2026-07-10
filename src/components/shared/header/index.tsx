@@ -3,6 +3,7 @@ import styles from './styles.module.scss';
 import { Image } from '../ui/image';
 import { Paragraph } from '../ui/paragraph';
 import React from 'react';
+import { DesktopNav } from './desktop-nav';
 
 export const Header = (): React.JSX.Element => {
   return (
@@ -23,7 +24,9 @@ export const Header = (): React.JSX.Element => {
         <MobileNav />
       </div>
 
-      <div className={styles.desktopOnly}>Desktop Nav</div>
+      <div className={styles.desktopOnly}>
+        <DesktopNav />
+      </div>
     </header>
   );
 };

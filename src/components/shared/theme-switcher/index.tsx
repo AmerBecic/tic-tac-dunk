@@ -3,6 +3,7 @@
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 
+import { SwitchSkeleton } from '@/components/shared/ui/loaders/switch-skeleton';
 import { Switch } from '@/components/shared/ui/switch';
 import {
   Tooltip,
@@ -17,7 +18,7 @@ const THEME_STORAGE_KEY = 'theme';
 
 export const ThemeSwitcher = (): React.JSX.Element => {
   const t = useTranslations('themeSwitcher');
-  const [theme, setTheme] = useState<Theme>('light');
+  const [theme, setTheme] = useState<Theme | null>(null);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
@@ -43,6 +44,10 @@ export const ThemeSwitcher = (): React.JSX.Element => {
     localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
     document.documentElement.dataset.theme = nextTheme;
   };
+
+  if (theme === null) {
+    return <SwitchSkeleton />;
+  }
 
   return (
     <TooltipProvider>

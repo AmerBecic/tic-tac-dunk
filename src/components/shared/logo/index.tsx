@@ -9,8 +9,8 @@ export const Logo = (): React.JSX.Element => {
       <div className={styles.logoWrapper}>
         <Image
           src="/logo.png"
-          width={40}
-          height={40}
+          width={30}
+          height={30}
           alt="logo"
           className={styles.logo}
         />

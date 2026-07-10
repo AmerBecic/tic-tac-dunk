@@ -1,0 +1,12 @@
+export declare const bold: string;
+export declare const center: string;
+export declare const inter: string;
+export declare const left: string;
+export declare const right: string;
+export declare const spaceGrotesk: string;
+export declare const text: string;
+export declare const text12: string;
+export declare const text16: string;
+export declare const text20: string;
+export declare const text32: string;
+export declare const text56: string;

@@ -10,10 +10,32 @@ $color: (
 
 $white: (
   100: #ffffff,
+  200: #f9fafb,
+  300: #f3f4f6,
+  400: #e5e7eb,
+  500: #d1d5db,
 );
 
 $black: (
   100: #000000,
+  200: #111111,
+  300: #1f1f1f,
+  400: #2d2d2d,
+  500: #404040,
+);
+
+$gray: (
+  50: #f9fafb,
+  100: #f3f4f6,
+  200: #e5e7eb,
+  300: #d1d5db,
+  400: #9ca3af,
+  500: #6b7280,
+  600: #4b5563,
+  700: #374151,
+  800: #1f2937,
+  900: #111827,
+  950: #030712,
 );
 
 @function color($type) {
@@ -26,4 +48,8 @@ $black: (
 
 @function black($type) {
   @return map.get($black, $type);
+}
+
+@function gray($type) {
+  @return map.get($gray, $type);
 }

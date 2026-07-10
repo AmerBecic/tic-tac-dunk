@@ -8,13 +8,10 @@ export type TextAlign = 'center' | 'left' | 'right';
 
 export type FontFamily = 'inter' | 'spaceGrotesk';
 
-export type TextColor = 'white' | 'black';
-
 interface BaseTextProps {
   bold?: boolean;
   fontSize?: FontSize;
   textAlign?: TextAlign;
-  textColor?: TextColor;
   fontFamily?: FontFamily;
 }
 

@@ -1,6 +1,6 @@
-@use '@/styles/layout' as layout;
-@use '@/styles/colors' as *;
-@use '@/styles/design-tokens' as *;
+@use '@/core/styles/layout' as layout;
+@use '@/core/styles/colors' as *;
+@use '@/core/styles/design-tokens' as *;
 
 .button {
   @include layout.flex-row;

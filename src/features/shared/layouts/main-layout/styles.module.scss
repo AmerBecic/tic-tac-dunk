@@ -1,4 +1,4 @@
-@use '@/styles/layout' as layout;
+@use '@/core/styles/layout' as layout;
 
 .layoutContainer {
   @include layout.flex-column;

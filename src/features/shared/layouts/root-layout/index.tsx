@@ -1,10 +1,9 @@
-import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import type { Metadata } from 'next';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 
-import '@/styles/globals.scss';
+import '@/core/styles/globals.scss';
 
 import { APP_URL } from '@/core/constants/env';
 import { inter, spaceGrotesk } from '@/core/fonts';
@@ -63,7 +62,7 @@ const RootLayout = async ({
     >
       <body className={spaceGrotesk.className}>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <AppRouterCacheProvider>{children}</AppRouterCacheProvider>
+          {children}
         </NextIntlClientProvider>
       </body>
     </html>

@@ -2,7 +2,7 @@ import { Header } from '@/features/shared/header';
 
 import styles from './styles.module.scss';
 import React from 'react';
-import { Footer } from '@/components/shared/footer';
+import { Footer } from '../../footer';
 
 const MainLayout = ({
   children,

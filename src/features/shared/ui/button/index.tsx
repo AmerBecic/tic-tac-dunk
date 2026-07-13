@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { CircularProgress } from '@mui/material';
 
 import { cn } from '@/core/utils/utils';
 
@@ -20,7 +19,6 @@ export interface ButtonProps extends React.ComponentPropsWithoutRef<'button'> {
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
   textProps?: TextProps<'p'>;
-  isPending?: boolean;
 }
 
 export const Button = ({
@@ -32,7 +30,6 @@ export const Button = ({
   endIcon,
   className,
   textProps,
-  isPending = false,
   onClick,
   ...rest
 }: ButtonProps): React.JSX.Element => {
@@ -54,7 +51,6 @@ export const Button = ({
     variantClassMap[variant],
     sizeClassMap[size],
     disabled && styles.disabled,
-    isPending && styles.pending,
     className
   );
 
@@ -66,25 +62,19 @@ export const Button = ({
   return (
     <button
       {...rest}
-      disabled={disabled || isPending}
+      disabled={disabled}
       className={classNames}
       onClick={handleClick}
     >
-      {isPending ? (
-        <CircularProgress size={20} />
-      ) : (
-        <>
-          {startIcon}
+      {startIcon}
 
-          {children && (
-            <Paragraph fontFamily="spaceGrotesk" bold {...textProps}>
-              {children}
-            </Paragraph>
-          )}
-
-          {endIcon}
-        </>
+      {children && (
+        <Paragraph fontFamily="spaceGrotesk" bold {...textProps}>
+          {children}
+        </Paragraph>
       )}
+
+      {endIcon}
     </button>
   );
 };

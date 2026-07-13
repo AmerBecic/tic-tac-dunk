@@ -1,6 +1,6 @@
-@use '@/styles/layout' as layout;
-@use '@/styles/design-tokens' as *;
-@use '@/styles/breakpoints' as *;
+@use '@/core/styles/layout' as layout;
+@use '@/core/styles/design-tokens' as *;
+@use '@/core/styles/breakpoints' as *;
 
 .footer {
   @include layout.flex-column;

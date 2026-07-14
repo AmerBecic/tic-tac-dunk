@@ -5,10 +5,14 @@
     "metadata_keywords": "NBA, trivia, immaculate grid, basketball, players, teams"
   },
 
-  "header": {
+  "pages": {
     "home": "Home",
     "how_to_play": "How to play",
     "dev_blog": "Dev blog"
+  },
+
+  "common": {
+    "play_now": "Play Now"
   },
 
   "themeSwitcher": {

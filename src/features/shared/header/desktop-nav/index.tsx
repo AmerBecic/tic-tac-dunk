@@ -4,7 +4,7 @@ import styles from './styles.module.scss';
 import { getTranslations } from 'next-intl/server';
 
 export const DesktopNav = async (): Promise<React.JSX.Element> => {
-  const t = await getTranslations('header');
+  const t = await getTranslations('pages');
 
   return (
     <div>

@@ -10,7 +10,7 @@ import { TextProps } from '../text';
 import styles from './styles.module.scss';
 
 type ButtonVariant = 'primary' | 'secondary' | 'danger' | 'ghost';
-type ButtonSize = 'sm' | 'md' | 'lg';
+type ButtonSize = 'sm' | 'md' | 'lg' | 'xl';
 
 export interface ButtonProps extends React.ComponentPropsWithoutRef<'button'> {
   disabled?: boolean;
@@ -44,6 +44,7 @@ export const Button = ({
     sm: styles.sm,
     md: styles.md,
     lg: styles.lg,
+    xl: styles.xl,
   } satisfies Record<ButtonSize, string>;
 
   const classNames = cn(
@@ -54,27 +55,27 @@ export const Button = ({
     className
   );
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
-    event.currentTarget.blur();
-    onClick?.(event);
-  };
-
   return (
     <button
       {...rest}
       disabled={disabled}
       className={classNames}
-      onClick={handleClick}
+      onClick={onClick}
     >
-      {startIcon}
+      {startIcon && <span className={styles.icon}>{startIcon}</span>}
 
       {children && (
-        <Paragraph fontFamily="spaceGrotesk" bold {...textProps}>
+        <Paragraph
+          fontFamily="spaceGrotesk"
+          bold
+          {...textProps}
+          className={cn(styles.label, textProps?.className)}
+        >
           {children}
         </Paragraph>
       )}
 
-      {endIcon}
+      {endIcon && <span className={styles.icon}>{endIcon}</span>}
     </button>
   );
 };

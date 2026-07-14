@@ -6,4 +6,4 @@ import { generateMetadataForRoute } from '@/core/utils/metadata-generics';
 export const generateMetadata = (): Promise<Metadata> =>
   generateMetadataForRoute('home', HOME_URL);
 
-export { default } from '@/features/home';
+export { default } from '@/features/home/Home';

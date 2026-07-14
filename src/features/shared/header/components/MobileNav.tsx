@@ -5,11 +5,10 @@ import { useTranslations } from 'next-intl';
 import { useRef, useState } from 'react';
 import { useClickAway } from 'react-use';
 
-import { NavbarLink } from '../nav-bar-link';
-
-import styles from './styles.module.scss';
+import styles from './MobileNav.module.scss';
 import React from 'react';
 import { NAVIGATION } from '@/core/constants/pages';
+import { NavbarLink } from '.';
 
 export const MobileNav = (): React.JSX.Element => {
   const t = useTranslations('pages');

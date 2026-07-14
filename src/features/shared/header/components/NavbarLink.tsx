@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import styles from './styles.module.scss';
+import styles from './NavbarLink.module.scss';
 import React from 'react';
 
 interface NavbarLinkProps {

@@ -1,14 +1,14 @@
 import type { HTMLAttributes } from 'react';
 
 import { cn } from '@/core/utils/utils';
-import styles from './styles.module.scss';
+import styles from './Skeleton.module.scss';
 
 export type SkeletonProps = HTMLAttributes<HTMLDivElement>;
 
-export function Skeleton({
+export const Skeleton = ({
   className,
   ...props
-}: SkeletonProps): React.JSX.Element {
+}: SkeletonProps): React.JSX.Element => {
   return (
     <div
       className={cn(styles.skeleton, className)}
@@ -16,4 +16,4 @@ export function Skeleton({
       {...props}
     />
   );
-}
+};

@@ -4,35 +4,40 @@ import styles from './styles.module.scss';
 import { cn } from '@/core/utils/utils';
 import React from 'react';
 
-export type ImageObjectFit =
-  | 'contain'
-  | 'cover'
-  | 'fill'
-  | 'none'
-  | 'scale-down';
-
 interface BaseImageProps {
-  objectFit?: ImageObjectFit;
-  objectPosition?: React.CSSProperties['objectPosition'];
+  className?: NextImageProps['className'];
+  style?: NextImageProps['style'];
 }
 
 export type ImageProps = BaseImageProps &
-  Omit<NextImageProps, keyof BaseImageProps>;
+  Pick<NextImageProps, 'src' | 'alt' | 'width' | 'height' | 'fill' | 'preload'>;
 
 export const Image = ({
   className,
-  objectFit,
-  objectPosition,
   style,
-  ...rest
+  src,
+  alt,
+  width,
+  height,
+  fill,
+  preload,
 }: ImageProps): React.JSX.Element => {
   const classNames = cn(styles.image, className);
 
   const imageStyles = {
     ...style,
-    ...(objectFit && { objectFit }),
-    ...(objectPosition && { objectPosition }),
   };
 
-  return <NextImage {...rest} className={classNames} style={imageStyles} />;
+  return (
+    <NextImage
+      src={src}
+      alt={alt}
+      width={width}
+      height={height}
+      fill={fill}
+      preload={preload}
+      className={classNames}
+      style={imageStyles}
+    />
+  );
 };

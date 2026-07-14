@@ -1,10 +1,10 @@
-import { useTranslations } from 'next-intl';
 import { NavbarLink } from '../nav-bar-link';
 import { NAVIGATION } from '@/core/constants/pages';
 import styles from './styles.module.scss';
+import { getTranslations } from 'next-intl/server';
 
-export const DesktopNav = (): React.JSX.Element => {
-  const t = useTranslations('header');
+export const DesktopNav = async (): Promise<React.JSX.Element> => {
+  const t = await getTranslations('header');
 
   return (
     <div>

@@ -17,6 +17,22 @@
   }
 }
 
+.label,
+.icon {
+  color: inherit;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    color: inherit;
+    stroke: currentColor;
+  }
+}
+
 .sm {
   height: 32px;
   padding: 8px 10px;
@@ -32,9 +48,14 @@
   padding: 14px 18px;
 }
 
+.xl {
+  height: 48px;
+  padding: 16px 20px;
+}
+
 .primary {
   background-color: color(primary);
-  color: var(--background-primary);
+  color: var(--text-primary);
 }
 
 .secondary {

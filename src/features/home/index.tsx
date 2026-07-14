@@ -1,10 +1,8 @@
-import { useTranslations } from 'next-intl';
 import React from 'react';
+import { PlayNowButton } from './play-now-button';
 
 const Home = (): React.JSX.Element => {
-  const t = useTranslations('home');
-
-  return <div>{t('test')}</div>;
+  return <PlayNowButton />;
 };
 
 export default Home;

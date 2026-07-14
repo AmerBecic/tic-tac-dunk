@@ -12,7 +12,7 @@ import React from 'react';
 import { NAVIGATION } from '@/core/constants/pages';
 
 export const MobileNav = (): React.JSX.Element => {
-  const t = useTranslations('header');
+  const t = useTranslations('pages');
   const containerRef = useRef(null);
 
   const [isOpen, setOpen] = useState<boolean>(false);

@@ -1,7 +1,7 @@
 import { getTranslations } from 'next-intl/server';
 import styles from './Footer.module.scss';
-import { Paragraph } from '../ui/paragraph';
-import { Logo } from '../logo';
+import { Paragraph } from '../../../ui/paragraph';
+import { Logo } from '../../../logo';
 
 export const Footer = async (): Promise<React.JSX.Element> => {
   const t = await getTranslations('footer');

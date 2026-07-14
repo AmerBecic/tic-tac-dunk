@@ -1,5 +1,5 @@
-import { Logo } from '../logo';
-import { ThemeSwitcher } from '../theme-switcher';
+import { Logo } from '../../../logo';
+import { ThemeSwitcher } from '../../../theme-switcher';
 import { DesktopNav, MobileNav } from './components';
 import styles from './Header.module.scss';
 import React from 'react';

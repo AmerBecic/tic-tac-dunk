@@ -1,5 +1,5 @@
-import { Footer } from '../../footer';
-import { Header } from '../../header';
+import { Footer } from './footer';
+import { Header } from './header';
 import styles from './MainLayout.module.scss';
 import React from 'react';
 

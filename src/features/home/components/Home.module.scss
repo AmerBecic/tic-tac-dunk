@@ -1,19 +1,75 @@
 @use '@/core/styles/layout' as layout;
 @use '@/core/styles/colors' as colors;
 @use '@/core/styles/breakpoints' as breakpoints;
+@use '@/core/styles/design-tokens' as *;
 
 .mainContainer {
-  @include layout.flex-row;
+  @include layout.flex-column;
   align-items: center;
+  justify-content: center;
+  gap: 48px;
+  width: 100%;
+  padding: 32px 20px;
+
+  @include breakpoints.respond-from(lg) {
+    @include layout.flex-row;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 48px 32px;
+  }
+}
+
+.heroContent {
+  @include layout.flex-column;
+  align-items: center;
+  gap: 24px;
+
+  @include breakpoints.respond-from(lg) {
+    align-items: flex-start;
+  }
+}
+
+.title {
+  color: var(--text-primary);
+  font-size: clamp(64px, 18vw, 96px);
+  font-weight: 700;
+  line-height: 0.82;
+  letter-spacing: 0.01em;
+  text-align: center;
+  white-space: nowrap;
+
+  @include breakpoints.respond-from(lg) {
+    font-size: 96px;
+    text-align: left;
+  }
+}
+
+.highlight {
+  color: colors.color(primary);
+  text-shadow: 0 0 28px
+    color-mix(in srgb, colors.color(primary) 24%, transparent);
 }
 
 .imageContainer {
-  border: 1px solid colors.color(primary);
+  border: 2px solid colors.color(primary);
+  box-shadow: 8px 10px 0
+    color-mix(in srgb, colors.color(primary) 34%, transparent);
+  line-height: 0;
+  transform: rotate(3deg);
 }
 
 .gameplayImage {
-  @include breakpoints.respond-to(md) {
-    width: 200px;
-    height: 200px;
+  display: block;
+  width: 200px;
+  height: 200px;
+
+  @include breakpoints.respond-from(sm) {
+    width: 300px;
+    height: 300px;
+  }
+
+  @include breakpoints.respond-from(md) {
+    width: 400px;
+    height: 400px;
   }
 }

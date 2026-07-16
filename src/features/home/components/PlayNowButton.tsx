@@ -3,6 +3,7 @@
 import { Button } from '@/features/shared/ui/button';
 import { ChevronRight } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import styles from './PlayNowButton.module.scss';
 
 export const PlayNowButton = (): React.JSX.Element => {
   const t = useTranslations('common');
@@ -15,6 +16,7 @@ export const PlayNowButton = (): React.JSX.Element => {
       onClick={() => {
         window.open('https://app.vega.xyz/', '_blank');
       }}
+      className={styles.button}
     >
       {t('play_now')}
     </Button>

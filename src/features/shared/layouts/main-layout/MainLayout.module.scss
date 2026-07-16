@@ -5,10 +5,15 @@
   position: relative;
   z-index: 1;
 
-  height: 100%;
+  width: 100%;
+  min-height: 100dvh;
   justify-content: space-between;
   max-width: 960px;
   align-items: center;
+}
+
+.mainContent {
+  width: 100%;
 }
 
 .heroBackground {

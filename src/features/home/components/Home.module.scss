@@ -30,7 +30,7 @@
 }
 
 .title {
-  color: var(--text-primary);
+  color: colors.color(secondary);
   font-size: clamp(64px, 18vw, 96px);
   font-weight: 700;
   line-height: 0.82;

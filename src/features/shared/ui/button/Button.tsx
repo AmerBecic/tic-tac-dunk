@@ -65,7 +65,6 @@ export const Button = ({
 
       {children && (
         <Paragraph
-          fontFamily="spaceGrotesk"
           bold
           {...textProps}
           className={cn(styles.label, textProps?.className)}

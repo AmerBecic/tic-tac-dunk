@@ -6,7 +6,7 @@ import { notFound } from 'next/navigation';
 import '@/core/styles/globals.scss';
 
 import { APP_URL } from '@/core/constants/env';
-import { inter, spaceGrotesk } from '@/core/fonts';
+import { teko } from '@/core/fonts';
 import { routing } from '@/core/i18n/routing';
 
 export const metadata: Metadata = {
@@ -56,11 +56,8 @@ const RootLayout = async ({
   const messages = await getMessages();
 
   return (
-    <html
-      lang={locale}
-      className={`${spaceGrotesk.variable} ${inter.variable}`}
-    >
-      <body className={spaceGrotesk.className}>
+    <html lang={locale} className={teko.variable}>
+      <body className={teko.className}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           {children}
         </NextIntlClientProvider>

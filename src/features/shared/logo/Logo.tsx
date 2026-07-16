@@ -15,7 +15,7 @@ export const Logo = (): React.JSX.Element => {
           className={styles.logo}
         />
       </div>
-      <Paragraph>Tic Tac Dunk</Paragraph>
+      <Paragraph fontSize="24">Tic Tac Dunk</Paragraph>
     </div>
   );
 };

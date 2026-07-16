@@ -10,7 +10,17 @@ interface BaseImageProps {
 }
 
 export type ImageProps = BaseImageProps &
-  Pick<NextImageProps, 'src' | 'alt' | 'width' | 'height' | 'fill' | 'preload'>;
+  Pick<
+    NextImageProps,
+    | 'src'
+    | 'alt'
+    | 'width'
+    | 'height'
+    | 'fill'
+    | 'preload'
+    | 'loading'
+    | 'sizes'
+  >;
 
 export const Image = ({
   className,
@@ -21,6 +31,8 @@ export const Image = ({
   height,
   fill,
   preload,
+  loading,
+  sizes,
 }: ImageProps): React.JSX.Element => {
   const classNames = cn(styles.image, className);
 
@@ -38,6 +50,8 @@ export const Image = ({
       preload={preload}
       className={classNames}
       style={imageStyles}
+      loading={loading}
+      sizes={sizes}
     />
   );
 };

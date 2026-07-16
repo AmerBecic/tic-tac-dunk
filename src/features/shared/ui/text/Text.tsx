@@ -6,13 +6,10 @@ export type FontSize = '56' | '40' | '32' | '28' | '24' | '20' | '16' | '12';
 
 export type TextAlign = 'center' | 'left' | 'right';
 
-export type FontFamily = 'inter' | 'spaceGrotesk';
-
 interface BaseTextProps {
   bold?: boolean;
   fontSize?: FontSize;
   textAlign?: TextAlign;
-  fontFamily?: FontFamily;
 }
 
 export type TextProps<T extends React.ElementType> = BaseTextProps &
@@ -26,7 +23,6 @@ export const Text = <T extends React.ElementType = 'span'>({
   className,
   bold = false,
   textAlign = 'center',
-  fontFamily = 'spaceGrotesk',
   fontSize,
   ...rest
 }: TextProps<T>): React.JSX.Element => {
@@ -37,7 +33,6 @@ export const Text = <T extends React.ElementType = 'span'>({
     bold && styles.bold,
     fontSize && styles[`text${fontSize}`],
     styles[textAlign],
-    styles[fontFamily],
     className
   );
 

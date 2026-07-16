@@ -1,0 +1,19 @@
+@use '@/core/styles/layout' as layout;
+@use '@/core/styles/colors' as colors;
+@use '@/core/styles/breakpoints' as breakpoints;
+
+.mainContainer {
+  @include layout.flex-row;
+  align-items: center;
+}
+
+.imageContainer {
+  border: 1px solid colors.color(primary);
+}
+
+.gameplayImage {
+  @include breakpoints.respond-to(md) {
+    width: 200px;
+    height: 200px;
+  }
+}

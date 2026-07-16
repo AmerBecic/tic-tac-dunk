@@ -1,10 +1,5 @@
 @use 'sass:map';
 
-$font-family: (
-  inter: var(--ff-inter),
-  spaceGrotesk: var(--ff-space-grotesk),
-);
-
 $font-weight: (
   normal: 400,
   bold: 700,
@@ -20,10 +15,6 @@ $font-size: (
   xxLarge: 56px,
   xxxLarge: 84px,
 );
-
-@function font-family($type) {
-  @return map.get($font-family, $type);
-}
 
 @function font-weight($type) {
   @return map.get($font-weight, $type);

@@ -2,7 +2,6 @@
 @use '@/core/styles/colors' as *;
 
 .text {
-  letter-spacing: -0.02em;
   text-decoration: none;
   height: min-content;
   color: var(--text-primary);
@@ -22,14 +21,6 @@
 
 .bold {
   font-weight: font-weight(bold);
-}
-
-.spaceGrotesk {
-  font-family: font-family(spaceGrotesk);
-}
-
-.inter {
-  font-family: font-family(inter);
 }
 
 .text56 {

@@ -7,6 +7,16 @@ datasource db {
   provider = "postgresql"
 }
 
+model Team {
+  code          String   @id
+  name          String
+  logoPath      String?  @map("logo_path")
+  gridEligible  Boolean  @default(true) @map("grid_eligible")
+  includedNames String[] @default([]) @map("included_names")
+
+  @@map("teams")
+}
+
 model Player {
   id                       String   @id
   name                     String

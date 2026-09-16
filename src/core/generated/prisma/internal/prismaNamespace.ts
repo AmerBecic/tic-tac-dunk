@@ -412,6 +412,7 @@ type FieldRefInputType<Model, FieldType> = Model extends never
   : FieldRef<Model, FieldType>;
 
 export const ModelName = {
+  Team: 'Team',
   Player: 'Player',
   PlayerTeammate: 'PlayerTeammate',
 } as const;
@@ -435,10 +436,86 @@ export type TypeMap<
     omit: GlobalOmitOptions;
   };
   meta: {
-    modelProps: 'player' | 'playerTeammate';
+    modelProps: 'team' | 'player' | 'playerTeammate';
     txIsolationLevel: TransactionIsolationLevel;
   };
   model: {
+    Team: {
+      payload: Prisma.$TeamPayload<ExtArgs>;
+      fields: Prisma.TeamFieldRefs;
+      operations: {
+        findUnique: {
+          args: Prisma.TeamFindUniqueArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TeamPayload> | null;
+        };
+        findUniqueOrThrow: {
+          args: Prisma.TeamFindUniqueOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TeamPayload>;
+        };
+        findFirst: {
+          args: Prisma.TeamFindFirstArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TeamPayload> | null;
+        };
+        findFirstOrThrow: {
+          args: Prisma.TeamFindFirstOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TeamPayload>;
+        };
+        findMany: {
+          args: Prisma.TeamFindManyArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TeamPayload>[];
+        };
+        create: {
+          args: Prisma.TeamCreateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TeamPayload>;
+        };
+        createMany: {
+          args: Prisma.TeamCreateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        createManyAndReturn: {
+          args: Prisma.TeamCreateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TeamPayload>[];
+        };
+        delete: {
+          args: Prisma.TeamDeleteArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TeamPayload>;
+        };
+        update: {
+          args: Prisma.TeamUpdateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TeamPayload>;
+        };
+        deleteMany: {
+          args: Prisma.TeamDeleteManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateMany: {
+          args: Prisma.TeamUpdateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateManyAndReturn: {
+          args: Prisma.TeamUpdateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TeamPayload>[];
+        };
+        upsert: {
+          args: Prisma.TeamUpsertArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TeamPayload>;
+        };
+        aggregate: {
+          args: Prisma.TeamAggregateArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTeam>;
+        };
+        groupBy: {
+          args: Prisma.TeamGroupByArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.TeamGroupByOutputType>[];
+        };
+        count: {
+          args: Prisma.TeamCountArgs<ExtArgs>;
+          result:
+            | runtime.Types.Utils.Optional<Prisma.TeamCountAggregateOutputType>
+            | number;
+        };
+      };
+    };
     Player: {
       payload: Prisma.$PlayerPayload<ExtArgs>;
       fields: Prisma.PlayerFieldRefs;
@@ -630,6 +707,17 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel =
   (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel];
 
+export const TeamScalarFieldEnum = {
+  code: 'code',
+  name: 'name',
+  logoPath: 'logoPath',
+  gridEligible: 'gridEligible',
+  includedNames: 'includedNames',
+} as const;
+
+export type TeamScalarFieldEnum =
+  (typeof TeamScalarFieldEnum)[keyof typeof TeamScalarFieldEnum];
+
 export const PlayerScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -672,6 +760,13 @@ export const QueryMode = {
 
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode];
 
+export const NullsOrder = {
+  first: 'first',
+  last: 'last',
+} as const;
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder];
+
 /**
  * Field references
  */
@@ -690,6 +785,14 @@ export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<
 export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<
   $PrismaModel,
   'String[]'
+>;
+
+/**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<
+  $PrismaModel,
+  'Boolean'
 >;
 
 /**
@@ -722,14 +825,6 @@ export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<
 export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<
   $PrismaModel,
   'Float[]'
->;
-
-/**
- * Reference to a field of type 'Boolean'
- */
-export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<
-  $PrismaModel,
-  'Boolean'
 >;
 
 /**
@@ -850,6 +945,7 @@ export type PrismaClientOptions = (
   queryPlanCacheMaxSize?: number;
 };
 export type GlobalOmitConfig = {
+  team?: Prisma.TeamOmit;
   player?: Prisma.PlayerOmit;
   playerTeammate?: Prisma.PlayerTeammateOmit;
 };

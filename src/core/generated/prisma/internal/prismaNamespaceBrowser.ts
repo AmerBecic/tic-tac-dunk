@@ -54,6 +54,7 @@ export const JsonNull = runtime.JsonNull;
 export const AnyNull = runtime.AnyNull;
 
 export const ModelName = {
+  Team: 'Team',
   Player: 'Player',
   PlayerTeammate: 'PlayerTeammate',
 } as const;
@@ -73,6 +74,17 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 
 export type TransactionIsolationLevel =
   (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel];
+
+export const TeamScalarFieldEnum = {
+  code: 'code',
+  name: 'name',
+  logoPath: 'logoPath',
+  gridEligible: 'gridEligible',
+  includedNames: 'includedNames',
+} as const;
+
+export type TeamScalarFieldEnum =
+  (typeof TeamScalarFieldEnum)[keyof typeof TeamScalarFieldEnum];
 
 export const PlayerScalarFieldEnum = {
   id: 'id',
@@ -115,3 +127,10 @@ export const QueryMode = {
 } as const;
 
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode];
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last',
+} as const;
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder];

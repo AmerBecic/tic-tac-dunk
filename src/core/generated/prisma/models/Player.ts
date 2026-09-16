@@ -592,6 +592,10 @@ export type FloatFieldUpdateOperationsInput = {
   divide?: number;
 };
 
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean;
+};
+
 export type PlayerCreateNestedOneWithoutTeammatePairsAsPlayerInput = {
   create?: Prisma.XOR<
     Prisma.PlayerCreateWithoutTeammatePairsAsPlayerInput,

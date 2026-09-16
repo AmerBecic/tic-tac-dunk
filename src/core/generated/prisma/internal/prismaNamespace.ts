@@ -711,7 +711,6 @@ export const TeamScalarFieldEnum = {
   code: 'code',
   name: 'name',
   logoPath: 'logoPath',
-  gridEligible: 'gridEligible',
   includedNames: 'includedNames',
 } as const;
 
@@ -788,14 +787,6 @@ export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<
 >;
 
 /**
- * Reference to a field of type 'Boolean'
- */
-export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<
-  $PrismaModel,
-  'Boolean'
->;
-
-/**
  * Reference to a field of type 'Int'
  */
 export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<
@@ -825,6 +816,14 @@ export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<
 export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<
   $PrismaModel,
   'Float[]'
+>;
+
+/**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<
+  $PrismaModel,
+  'Boolean'
 >;
 
 /**

@@ -28,21 +28,18 @@ export type TeamMinAggregateOutputType = {
   code: string | null;
   name: string | null;
   logoPath: string | null;
-  gridEligible: boolean | null;
 };
 
 export type TeamMaxAggregateOutputType = {
   code: string | null;
   name: string | null;
   logoPath: string | null;
-  gridEligible: boolean | null;
 };
 
 export type TeamCountAggregateOutputType = {
   code: number;
   name: number;
   logoPath: number;
-  gridEligible: number;
   includedNames: number;
   _all: number;
 };
@@ -51,21 +48,18 @@ export type TeamMinAggregateInputType = {
   code?: true;
   name?: true;
   logoPath?: true;
-  gridEligible?: true;
 };
 
 export type TeamMaxAggregateInputType = {
   code?: true;
   name?: true;
   logoPath?: true;
-  gridEligible?: true;
 };
 
 export type TeamCountAggregateInputType = {
   code?: true;
   name?: true;
   logoPath?: true;
-  gridEligible?: true;
   includedNames?: true;
   _all?: true;
 };
@@ -153,7 +147,6 @@ export type TeamGroupByOutputType = {
   code: string;
   name: string;
   logoPath: string | null;
-  gridEligible: boolean;
   includedNames: string[];
   _count: TeamCountAggregateOutputType | null;
   _min: TeamMinAggregateOutputType | null;
@@ -180,7 +173,6 @@ export type TeamWhereInput = {
   code?: Prisma.StringFilter<'Team'> | string;
   name?: Prisma.StringFilter<'Team'> | string;
   logoPath?: Prisma.StringNullableFilter<'Team'> | string | null;
-  gridEligible?: Prisma.BoolFilter<'Team'> | boolean;
   includedNames?: Prisma.StringNullableListFilter<'Team'>;
 };
 
@@ -188,7 +180,6 @@ export type TeamOrderByWithRelationInput = {
   code?: Prisma.SortOrder;
   name?: Prisma.SortOrder;
   logoPath?: Prisma.SortOrderInput | Prisma.SortOrder;
-  gridEligible?: Prisma.SortOrder;
   includedNames?: Prisma.SortOrder;
 };
 
@@ -200,7 +191,6 @@ export type TeamWhereUniqueInput = Prisma.AtLeast<
     NOT?: Prisma.TeamWhereInput | Prisma.TeamWhereInput[];
     name?: Prisma.StringFilter<'Team'> | string;
     logoPath?: Prisma.StringNullableFilter<'Team'> | string | null;
-    gridEligible?: Prisma.BoolFilter<'Team'> | boolean;
     includedNames?: Prisma.StringNullableListFilter<'Team'>;
   },
   'code'
@@ -210,7 +200,6 @@ export type TeamOrderByWithAggregationInput = {
   code?: Prisma.SortOrder;
   name?: Prisma.SortOrder;
   logoPath?: Prisma.SortOrderInput | Prisma.SortOrder;
-  gridEligible?: Prisma.SortOrder;
   includedNames?: Prisma.SortOrder;
   _count?: Prisma.TeamCountOrderByAggregateInput;
   _max?: Prisma.TeamMaxOrderByAggregateInput;
@@ -228,7 +217,6 @@ export type TeamScalarWhereWithAggregatesInput = {
   code?: Prisma.StringWithAggregatesFilter<'Team'> | string;
   name?: Prisma.StringWithAggregatesFilter<'Team'> | string;
   logoPath?: Prisma.StringNullableWithAggregatesFilter<'Team'> | string | null;
-  gridEligible?: Prisma.BoolWithAggregatesFilter<'Team'> | boolean;
   includedNames?: Prisma.StringNullableListFilter<'Team'>;
 };
 
@@ -236,7 +224,6 @@ export type TeamCreateInput = {
   code: string;
   name: string;
   logoPath?: string | null;
-  gridEligible?: boolean;
   includedNames?: Prisma.TeamCreateincludedNamesInput | string[];
 };
 
@@ -244,7 +231,6 @@ export type TeamUncheckedCreateInput = {
   code: string;
   name: string;
   logoPath?: string | null;
-  gridEligible?: boolean;
   includedNames?: Prisma.TeamCreateincludedNamesInput | string[];
 };
 
@@ -252,7 +238,6 @@ export type TeamUpdateInput = {
   code?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   logoPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
-  gridEligible?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   includedNames?: Prisma.TeamUpdateincludedNamesInput | string[];
 };
 
@@ -260,7 +245,6 @@ export type TeamUncheckedUpdateInput = {
   code?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   logoPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
-  gridEligible?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   includedNames?: Prisma.TeamUpdateincludedNamesInput | string[];
 };
 
@@ -268,7 +252,6 @@ export type TeamCreateManyInput = {
   code: string;
   name: string;
   logoPath?: string | null;
-  gridEligible?: boolean;
   includedNames?: Prisma.TeamCreateincludedNamesInput | string[];
 };
 
@@ -276,7 +259,6 @@ export type TeamUpdateManyMutationInput = {
   code?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   logoPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
-  gridEligible?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   includedNames?: Prisma.TeamUpdateincludedNamesInput | string[];
 };
 
@@ -284,7 +266,6 @@ export type TeamUncheckedUpdateManyInput = {
   code?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   logoPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
-  gridEligible?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   includedNames?: Prisma.TeamUpdateincludedNamesInput | string[];
 };
 
@@ -300,7 +281,6 @@ export type TeamCountOrderByAggregateInput = {
   code?: Prisma.SortOrder;
   name?: Prisma.SortOrder;
   logoPath?: Prisma.SortOrder;
-  gridEligible?: Prisma.SortOrder;
   includedNames?: Prisma.SortOrder;
 };
 
@@ -308,14 +288,12 @@ export type TeamMaxOrderByAggregateInput = {
   code?: Prisma.SortOrder;
   name?: Prisma.SortOrder;
   logoPath?: Prisma.SortOrder;
-  gridEligible?: Prisma.SortOrder;
 };
 
 export type TeamMinOrderByAggregateInput = {
   code?: Prisma.SortOrder;
   name?: Prisma.SortOrder;
   logoPath?: Prisma.SortOrder;
-  gridEligible?: Prisma.SortOrder;
 };
 
 export type TeamCreateincludedNamesInput = {
@@ -328,10 +306,6 @@ export type StringFieldUpdateOperationsInput = {
 
 export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null;
-};
-
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean;
 };
 
 export type TeamUpdateincludedNamesInput = {
@@ -347,7 +321,6 @@ export type TeamSelect<
     code?: boolean;
     name?: boolean;
     logoPath?: boolean;
-    gridEligible?: boolean;
     includedNames?: boolean;
   },
   ExtArgs['result']['team']
@@ -361,7 +334,6 @@ export type TeamSelectCreateManyAndReturn<
     code?: boolean;
     name?: boolean;
     logoPath?: boolean;
-    gridEligible?: boolean;
     includedNames?: boolean;
   },
   ExtArgs['result']['team']
@@ -375,7 +347,6 @@ export type TeamSelectUpdateManyAndReturn<
     code?: boolean;
     name?: boolean;
     logoPath?: boolean;
-    gridEligible?: boolean;
     includedNames?: boolean;
   },
   ExtArgs['result']['team']
@@ -385,7 +356,6 @@ export type TeamSelectScalar = {
   code?: boolean;
   name?: boolean;
   logoPath?: boolean;
-  gridEligible?: boolean;
   includedNames?: boolean;
 };
 
@@ -393,7 +363,7 @@ export type TeamOmit<
   ExtArgs extends
     runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = runtime.Types.Extensions.GetOmit<
-  'code' | 'name' | 'logoPath' | 'gridEligible' | 'includedNames',
+  'code' | 'name' | 'logoPath' | 'includedNames',
   ExtArgs['result']['team']
 >;
 
@@ -408,7 +378,6 @@ export type $TeamPayload<
       code: string;
       name: string;
       logoPath: string | null;
-      gridEligible: boolean;
       includedNames: string[];
     },
     ExtArgs['result']['team']
@@ -1005,7 +974,6 @@ export interface TeamFieldRefs {
   readonly code: Prisma.FieldRef<'Team', 'String'>;
   readonly name: Prisma.FieldRef<'Team', 'String'>;
   readonly logoPath: Prisma.FieldRef<'Team', 'String'>;
-  readonly gridEligible: Prisma.FieldRef<'Team', 'Boolean'>;
   readonly includedNames: Prisma.FieldRef<'Team', 'String[]'>;
 }
 

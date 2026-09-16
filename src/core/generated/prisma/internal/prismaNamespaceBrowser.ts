@@ -79,7 +79,6 @@ export const TeamScalarFieldEnum = {
   code: 'code',
   name: 'name',
   logoPath: 'logoPath',
-  gridEligible: 'gridEligible',
   includedNames: 'includedNames',
 } as const;
 

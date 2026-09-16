@@ -87,6 +87,7 @@ export const PlayerScalarFieldEnum = {
   roy: 'roy',
   mip: 'mip',
   as: 'as',
+  teammateClueEligible: 'teammateClueEligible',
 } as const;
 
 export type PlayerScalarFieldEnum =

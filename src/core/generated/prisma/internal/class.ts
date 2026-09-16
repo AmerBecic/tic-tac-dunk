@@ -19,7 +19,7 @@ const config: runtime.GetPrismaClientConfig = {
   engineVersion: '3c6e192761c0362d496ed980de936e2f3cebcd3a',
   activeProvider: 'postgresql',
   inlineSchema:
-    'generator client {\n  provider = "prisma-client"\n  output   = "../src/generated/prisma"\n}\n\ndatasource db {\n  provider = "postgresql"\n}\n\nmodel Player {\n  id                       String   @id\n  name                     String\n  firstSeason              Int      @map("first_season")\n  lastSeason               Int      @map("last_season")\n  teams                    String[]\n  highestFgPercentage      Float    @map("highest_fg_percentage")\n  highestSeasonPointsTotal Int      @map("highest_season_points_total")\n  mvp                      Boolean\n  dpoy                     Boolean\n  roy                      Boolean\n  mip                      Boolean\n  as                       Boolean\n\n  @@map("players")\n}\n',
+    'generator client {\n  provider = "prisma-client"\n  output   = "../src/core/generated/prisma"\n}\n\ndatasource db {\n  provider = "postgresql"\n}\n\nmodel Player {\n  id                       String   @id\n  name                     String\n  firstSeason              Int      @map("first_season")\n  lastSeason               Int      @map("last_season")\n  teams                    String[]\n  highestFgPercentage      Float    @map("highest_fg_percentage")\n  highestSeasonPointsTotal Int      @map("highest_season_points_total")\n  mvp                      Boolean\n  dpoy                     Boolean\n  roy                      Boolean\n  mip                      Boolean\n  as                       Boolean\n\n  @@map("players")\n}\n',
   runtimeDataModel: {
     models: {},
     enums: {},

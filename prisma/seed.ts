@@ -2,7 +2,7 @@ import 'dotenv/config';
 
 import { PrismaPg } from '@prisma/adapter-pg';
 
-import { PrismaClient, type Player } from '@/generated/prisma/client';
+import { PrismaClient, type Player } from '@/core/generated/prisma/client';
 
 import players from '../data/json/players_final.json';
 

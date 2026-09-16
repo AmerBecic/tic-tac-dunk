@@ -17,6 +17,7 @@ export const PlayNowButton = (): React.JSX.Element => {
         window.open('https://app.vega.xyz/', '_blank');
       }}
       className={styles.button}
+      textProps={{ className: styles.label }}
     >
       {t('play_now')}
     </Button>

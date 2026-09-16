@@ -284,6 +284,8 @@ export type PlayerWhereInput = {
   roy?: Prisma.BoolFilter<'Player'> | boolean;
   mip?: Prisma.BoolFilter<'Player'> | boolean;
   as?: Prisma.BoolFilter<'Player'> | boolean;
+  teammatePairsAsPlayer?: Prisma.PlayerTeammateListRelationFilter;
+  teammatePairsAsTeammate?: Prisma.PlayerTeammateListRelationFilter;
 };
 
 export type PlayerOrderByWithRelationInput = {
@@ -299,6 +301,8 @@ export type PlayerOrderByWithRelationInput = {
   roy?: Prisma.SortOrder;
   mip?: Prisma.SortOrder;
   as?: Prisma.SortOrder;
+  teammatePairsAsPlayer?: Prisma.PlayerTeammateOrderByRelationAggregateInput;
+  teammatePairsAsTeammate?: Prisma.PlayerTeammateOrderByRelationAggregateInput;
 };
 
 export type PlayerWhereUniqueInput = Prisma.AtLeast<
@@ -318,6 +322,8 @@ export type PlayerWhereUniqueInput = Prisma.AtLeast<
     roy?: Prisma.BoolFilter<'Player'> | boolean;
     mip?: Prisma.BoolFilter<'Player'> | boolean;
     as?: Prisma.BoolFilter<'Player'> | boolean;
+    teammatePairsAsPlayer?: Prisma.PlayerTeammateListRelationFilter;
+    teammatePairsAsTeammate?: Prisma.PlayerTeammateListRelationFilter;
   },
   'id'
 >;
@@ -377,6 +383,8 @@ export type PlayerCreateInput = {
   roy: boolean;
   mip: boolean;
   as: boolean;
+  teammatePairsAsPlayer?: Prisma.PlayerTeammateCreateNestedManyWithoutPlayerInput;
+  teammatePairsAsTeammate?: Prisma.PlayerTeammateCreateNestedManyWithoutTeammateInput;
 };
 
 export type PlayerUncheckedCreateInput = {
@@ -392,6 +400,8 @@ export type PlayerUncheckedCreateInput = {
   roy: boolean;
   mip: boolean;
   as: boolean;
+  teammatePairsAsPlayer?: Prisma.PlayerTeammateUncheckedCreateNestedManyWithoutPlayerInput;
+  teammatePairsAsTeammate?: Prisma.PlayerTeammateUncheckedCreateNestedManyWithoutTeammateInput;
 };
 
 export type PlayerUpdateInput = {
@@ -407,6 +417,8 @@ export type PlayerUpdateInput = {
   roy?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   mip?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   as?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+  teammatePairsAsPlayer?: Prisma.PlayerTeammateUpdateManyWithoutPlayerNestedInput;
+  teammatePairsAsTeammate?: Prisma.PlayerTeammateUpdateManyWithoutTeammateNestedInput;
 };
 
 export type PlayerUncheckedUpdateInput = {
@@ -422,6 +434,8 @@ export type PlayerUncheckedUpdateInput = {
   roy?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   mip?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   as?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+  teammatePairsAsPlayer?: Prisma.PlayerTeammateUncheckedUpdateManyWithoutPlayerNestedInput;
+  teammatePairsAsTeammate?: Prisma.PlayerTeammateUncheckedUpdateManyWithoutTeammateNestedInput;
 };
 
 export type PlayerCreateManyInput = {
@@ -534,6 +548,11 @@ export type PlayerSumOrderByAggregateInput = {
   highestSeasonPointsTotal?: Prisma.SortOrder;
 };
 
+export type PlayerScalarRelationFilter = {
+  is?: Prisma.PlayerWhereInput;
+  isNot?: Prisma.PlayerWhereInput;
+};
+
 export type PlayerCreateteamsInput = {
   set: string[];
 };
@@ -567,6 +586,296 @@ export type BoolFieldUpdateOperationsInput = {
   set?: boolean;
 };
 
+export type PlayerCreateNestedOneWithoutTeammatePairsAsPlayerInput = {
+  create?: Prisma.XOR<
+    Prisma.PlayerCreateWithoutTeammatePairsAsPlayerInput,
+    Prisma.PlayerUncheckedCreateWithoutTeammatePairsAsPlayerInput
+  >;
+  connectOrCreate?: Prisma.PlayerCreateOrConnectWithoutTeammatePairsAsPlayerInput;
+  connect?: Prisma.PlayerWhereUniqueInput;
+};
+
+export type PlayerCreateNestedOneWithoutTeammatePairsAsTeammateInput = {
+  create?: Prisma.XOR<
+    Prisma.PlayerCreateWithoutTeammatePairsAsTeammateInput,
+    Prisma.PlayerUncheckedCreateWithoutTeammatePairsAsTeammateInput
+  >;
+  connectOrCreate?: Prisma.PlayerCreateOrConnectWithoutTeammatePairsAsTeammateInput;
+  connect?: Prisma.PlayerWhereUniqueInput;
+};
+
+export type PlayerUpdateOneRequiredWithoutTeammatePairsAsPlayerNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.PlayerCreateWithoutTeammatePairsAsPlayerInput,
+    Prisma.PlayerUncheckedCreateWithoutTeammatePairsAsPlayerInput
+  >;
+  connectOrCreate?: Prisma.PlayerCreateOrConnectWithoutTeammatePairsAsPlayerInput;
+  upsert?: Prisma.PlayerUpsertWithoutTeammatePairsAsPlayerInput;
+  connect?: Prisma.PlayerWhereUniqueInput;
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.PlayerUpdateToOneWithWhereWithoutTeammatePairsAsPlayerInput,
+      Prisma.PlayerUpdateWithoutTeammatePairsAsPlayerInput
+    >,
+    Prisma.PlayerUncheckedUpdateWithoutTeammatePairsAsPlayerInput
+  >;
+};
+
+export type PlayerUpdateOneRequiredWithoutTeammatePairsAsTeammateNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.PlayerCreateWithoutTeammatePairsAsTeammateInput,
+    Prisma.PlayerUncheckedCreateWithoutTeammatePairsAsTeammateInput
+  >;
+  connectOrCreate?: Prisma.PlayerCreateOrConnectWithoutTeammatePairsAsTeammateInput;
+  upsert?: Prisma.PlayerUpsertWithoutTeammatePairsAsTeammateInput;
+  connect?: Prisma.PlayerWhereUniqueInput;
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.PlayerUpdateToOneWithWhereWithoutTeammatePairsAsTeammateInput,
+      Prisma.PlayerUpdateWithoutTeammatePairsAsTeammateInput
+    >,
+    Prisma.PlayerUncheckedUpdateWithoutTeammatePairsAsTeammateInput
+  >;
+};
+
+export type PlayerCreateWithoutTeammatePairsAsPlayerInput = {
+  id: string;
+  name: string;
+  firstSeason: number;
+  lastSeason: number;
+  teams?: Prisma.PlayerCreateteamsInput | string[];
+  highestFgPercentage: number;
+  highestSeasonPointsTotal: number;
+  mvp: boolean;
+  dpoy: boolean;
+  roy: boolean;
+  mip: boolean;
+  as: boolean;
+  teammatePairsAsTeammate?: Prisma.PlayerTeammateCreateNestedManyWithoutTeammateInput;
+};
+
+export type PlayerUncheckedCreateWithoutTeammatePairsAsPlayerInput = {
+  id: string;
+  name: string;
+  firstSeason: number;
+  lastSeason: number;
+  teams?: Prisma.PlayerCreateteamsInput | string[];
+  highestFgPercentage: number;
+  highestSeasonPointsTotal: number;
+  mvp: boolean;
+  dpoy: boolean;
+  roy: boolean;
+  mip: boolean;
+  as: boolean;
+  teammatePairsAsTeammate?: Prisma.PlayerTeammateUncheckedCreateNestedManyWithoutTeammateInput;
+};
+
+export type PlayerCreateOrConnectWithoutTeammatePairsAsPlayerInput = {
+  where: Prisma.PlayerWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.PlayerCreateWithoutTeammatePairsAsPlayerInput,
+    Prisma.PlayerUncheckedCreateWithoutTeammatePairsAsPlayerInput
+  >;
+};
+
+export type PlayerCreateWithoutTeammatePairsAsTeammateInput = {
+  id: string;
+  name: string;
+  firstSeason: number;
+  lastSeason: number;
+  teams?: Prisma.PlayerCreateteamsInput | string[];
+  highestFgPercentage: number;
+  highestSeasonPointsTotal: number;
+  mvp: boolean;
+  dpoy: boolean;
+  roy: boolean;
+  mip: boolean;
+  as: boolean;
+  teammatePairsAsPlayer?: Prisma.PlayerTeammateCreateNestedManyWithoutPlayerInput;
+};
+
+export type PlayerUncheckedCreateWithoutTeammatePairsAsTeammateInput = {
+  id: string;
+  name: string;
+  firstSeason: number;
+  lastSeason: number;
+  teams?: Prisma.PlayerCreateteamsInput | string[];
+  highestFgPercentage: number;
+  highestSeasonPointsTotal: number;
+  mvp: boolean;
+  dpoy: boolean;
+  roy: boolean;
+  mip: boolean;
+  as: boolean;
+  teammatePairsAsPlayer?: Prisma.PlayerTeammateUncheckedCreateNestedManyWithoutPlayerInput;
+};
+
+export type PlayerCreateOrConnectWithoutTeammatePairsAsTeammateInput = {
+  where: Prisma.PlayerWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.PlayerCreateWithoutTeammatePairsAsTeammateInput,
+    Prisma.PlayerUncheckedCreateWithoutTeammatePairsAsTeammateInput
+  >;
+};
+
+export type PlayerUpsertWithoutTeammatePairsAsPlayerInput = {
+  update: Prisma.XOR<
+    Prisma.PlayerUpdateWithoutTeammatePairsAsPlayerInput,
+    Prisma.PlayerUncheckedUpdateWithoutTeammatePairsAsPlayerInput
+  >;
+  create: Prisma.XOR<
+    Prisma.PlayerCreateWithoutTeammatePairsAsPlayerInput,
+    Prisma.PlayerUncheckedCreateWithoutTeammatePairsAsPlayerInput
+  >;
+  where?: Prisma.PlayerWhereInput;
+};
+
+export type PlayerUpdateToOneWithWhereWithoutTeammatePairsAsPlayerInput = {
+  where?: Prisma.PlayerWhereInput;
+  data: Prisma.XOR<
+    Prisma.PlayerUpdateWithoutTeammatePairsAsPlayerInput,
+    Prisma.PlayerUncheckedUpdateWithoutTeammatePairsAsPlayerInput
+  >;
+};
+
+export type PlayerUpdateWithoutTeammatePairsAsPlayerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  firstSeason?: Prisma.IntFieldUpdateOperationsInput | number;
+  lastSeason?: Prisma.IntFieldUpdateOperationsInput | number;
+  teams?: Prisma.PlayerUpdateteamsInput | string[];
+  highestFgPercentage?: Prisma.FloatFieldUpdateOperationsInput | number;
+  highestSeasonPointsTotal?: Prisma.IntFieldUpdateOperationsInput | number;
+  mvp?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+  dpoy?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+  roy?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+  mip?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+  as?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+  teammatePairsAsTeammate?: Prisma.PlayerTeammateUpdateManyWithoutTeammateNestedInput;
+};
+
+export type PlayerUncheckedUpdateWithoutTeammatePairsAsPlayerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  firstSeason?: Prisma.IntFieldUpdateOperationsInput | number;
+  lastSeason?: Prisma.IntFieldUpdateOperationsInput | number;
+  teams?: Prisma.PlayerUpdateteamsInput | string[];
+  highestFgPercentage?: Prisma.FloatFieldUpdateOperationsInput | number;
+  highestSeasonPointsTotal?: Prisma.IntFieldUpdateOperationsInput | number;
+  mvp?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+  dpoy?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+  roy?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+  mip?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+  as?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+  teammatePairsAsTeammate?: Prisma.PlayerTeammateUncheckedUpdateManyWithoutTeammateNestedInput;
+};
+
+export type PlayerUpsertWithoutTeammatePairsAsTeammateInput = {
+  update: Prisma.XOR<
+    Prisma.PlayerUpdateWithoutTeammatePairsAsTeammateInput,
+    Prisma.PlayerUncheckedUpdateWithoutTeammatePairsAsTeammateInput
+  >;
+  create: Prisma.XOR<
+    Prisma.PlayerCreateWithoutTeammatePairsAsTeammateInput,
+    Prisma.PlayerUncheckedCreateWithoutTeammatePairsAsTeammateInput
+  >;
+  where?: Prisma.PlayerWhereInput;
+};
+
+export type PlayerUpdateToOneWithWhereWithoutTeammatePairsAsTeammateInput = {
+  where?: Prisma.PlayerWhereInput;
+  data: Prisma.XOR<
+    Prisma.PlayerUpdateWithoutTeammatePairsAsTeammateInput,
+    Prisma.PlayerUncheckedUpdateWithoutTeammatePairsAsTeammateInput
+  >;
+};
+
+export type PlayerUpdateWithoutTeammatePairsAsTeammateInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  firstSeason?: Prisma.IntFieldUpdateOperationsInput | number;
+  lastSeason?: Prisma.IntFieldUpdateOperationsInput | number;
+  teams?: Prisma.PlayerUpdateteamsInput | string[];
+  highestFgPercentage?: Prisma.FloatFieldUpdateOperationsInput | number;
+  highestSeasonPointsTotal?: Prisma.IntFieldUpdateOperationsInput | number;
+  mvp?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+  dpoy?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+  roy?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+  mip?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+  as?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+  teammatePairsAsPlayer?: Prisma.PlayerTeammateUpdateManyWithoutPlayerNestedInput;
+};
+
+export type PlayerUncheckedUpdateWithoutTeammatePairsAsTeammateInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  firstSeason?: Prisma.IntFieldUpdateOperationsInput | number;
+  lastSeason?: Prisma.IntFieldUpdateOperationsInput | number;
+  teams?: Prisma.PlayerUpdateteamsInput | string[];
+  highestFgPercentage?: Prisma.FloatFieldUpdateOperationsInput | number;
+  highestSeasonPointsTotal?: Prisma.IntFieldUpdateOperationsInput | number;
+  mvp?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+  dpoy?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+  roy?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+  mip?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+  as?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+  teammatePairsAsPlayer?: Prisma.PlayerTeammateUncheckedUpdateManyWithoutPlayerNestedInput;
+};
+
+/**
+ * Count Type PlayerCountOutputType
+ */
+
+export type PlayerCountOutputType = {
+  teammatePairsAsPlayer: number;
+  teammatePairsAsTeammate: number;
+};
+
+export type PlayerCountOutputTypeSelect<
+  ExtArgs extends
+    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+> = {
+  teammatePairsAsPlayer?:
+    | boolean
+    | PlayerCountOutputTypeCountTeammatePairsAsPlayerArgs;
+  teammatePairsAsTeammate?:
+    | boolean
+    | PlayerCountOutputTypeCountTeammatePairsAsTeammateArgs;
+};
+
+/**
+ * PlayerCountOutputType without action
+ */
+export type PlayerCountOutputTypeDefaultArgs<
+  ExtArgs extends
+    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the PlayerCountOutputType
+   */
+  select?: Prisma.PlayerCountOutputTypeSelect<ExtArgs> | null;
+};
+
+/**
+ * PlayerCountOutputType without action
+ */
+export type PlayerCountOutputTypeCountTeammatePairsAsPlayerArgs<
+  ExtArgs extends
+    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.PlayerTeammateWhereInput;
+};
+
+/**
+ * PlayerCountOutputType without action
+ */
+export type PlayerCountOutputTypeCountTeammatePairsAsTeammateArgs<
+  ExtArgs extends
+    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.PlayerTeammateWhereInput;
+};
+
 export type PlayerSelect<
   ExtArgs extends
     runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
@@ -584,6 +893,13 @@ export type PlayerSelect<
     roy?: boolean;
     mip?: boolean;
     as?: boolean;
+    teammatePairsAsPlayer?:
+      | boolean
+      | Prisma.Player$teammatePairsAsPlayerArgs<ExtArgs>;
+    teammatePairsAsTeammate?:
+      | boolean
+      | Prisma.Player$teammatePairsAsTeammateArgs<ExtArgs>;
+    _count?: boolean | Prisma.PlayerCountOutputTypeDefaultArgs<ExtArgs>;
   },
   ExtArgs['result']['player']
 >;
@@ -663,13 +979,36 @@ export type PlayerOmit<
   | 'as',
   ExtArgs['result']['player']
 >;
+export type PlayerInclude<
+  ExtArgs extends
+    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+> = {
+  teammatePairsAsPlayer?:
+    | boolean
+    | Prisma.Player$teammatePairsAsPlayerArgs<ExtArgs>;
+  teammatePairsAsTeammate?:
+    | boolean
+    | Prisma.Player$teammatePairsAsTeammateArgs<ExtArgs>;
+  _count?: boolean | Prisma.PlayerCountOutputTypeDefaultArgs<ExtArgs>;
+};
+export type PlayerIncludeCreateManyAndReturn<
+  ExtArgs extends
+    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+> = {};
+export type PlayerIncludeUpdateManyAndReturn<
+  ExtArgs extends
+    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+> = {};
 
 export type $PlayerPayload<
   ExtArgs extends
     runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   name: 'Player';
-  objects: {};
+  objects: {
+    teammatePairsAsPlayer: Prisma.$PlayerTeammatePayload<ExtArgs>[];
+    teammatePairsAsTeammate: Prisma.$PlayerTeammatePayload<ExtArgs>[];
+  };
   scalars: runtime.Types.Extensions.GetPayloadResult<
     {
       id: string;
@@ -1234,6 +1573,32 @@ export interface Prisma__PlayerClient<
   GlobalOmitOptions = {},
 > extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: 'PrismaPromise';
+  teammatePairsAsPlayer<
+    T extends Prisma.Player$teammatePairsAsPlayerArgs<ExtArgs> = {},
+  >(
+    args?: Prisma.Subset<T, Prisma.Player$teammatePairsAsPlayerArgs<ExtArgs>>
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$PlayerTeammatePayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    | Null
+  >;
+  teammatePairsAsTeammate<
+    T extends Prisma.Player$teammatePairsAsTeammateArgs<ExtArgs> = {},
+  >(
+    args?: Prisma.Subset<T, Prisma.Player$teammatePairsAsTeammateArgs<ExtArgs>>
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$PlayerTeammatePayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    | Null
+  >;
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1307,6 +1672,10 @@ export type PlayerFindUniqueArgs<
    */
   omit?: Prisma.PlayerOmit<ExtArgs> | null;
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PlayerInclude<ExtArgs> | null;
+  /**
    * Filter, which Player to fetch.
    */
   where: Prisma.PlayerWhereUniqueInput;
@@ -1328,6 +1697,10 @@ export type PlayerFindUniqueOrThrowArgs<
    */
   omit?: Prisma.PlayerOmit<ExtArgs> | null;
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PlayerInclude<ExtArgs> | null;
+  /**
    * Filter, which Player to fetch.
    */
   where: Prisma.PlayerWhereUniqueInput;
@@ -1348,6 +1721,10 @@ export type PlayerFindFirstArgs<
    * Omit specific fields from the Player
    */
   omit?: Prisma.PlayerOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PlayerInclude<ExtArgs> | null;
   /**
    * Filter, which Player to fetch.
    */
@@ -1402,6 +1779,10 @@ export type PlayerFindFirstOrThrowArgs<
    */
   omit?: Prisma.PlayerOmit<ExtArgs> | null;
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PlayerInclude<ExtArgs> | null;
+  /**
    * Filter, which Player to fetch.
    */
   where?: Prisma.PlayerWhereInput;
@@ -1455,6 +1836,10 @@ export type PlayerFindManyArgs<
    */
   omit?: Prisma.PlayerOmit<ExtArgs> | null;
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PlayerInclude<ExtArgs> | null;
+  /**
    * Filter, which Players to fetch.
    */
   where?: Prisma.PlayerWhereInput;
@@ -1507,6 +1892,10 @@ export type PlayerCreateArgs<
    * Omit specific fields from the Player
    */
   omit?: Prisma.PlayerOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PlayerInclude<ExtArgs> | null;
   /**
    * The data needed to create a Player.
    */
@@ -1564,6 +1953,10 @@ export type PlayerUpdateArgs<
    * Omit specific fields from the Player
    */
   omit?: Prisma.PlayerOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PlayerInclude<ExtArgs> | null;
   /**
    * The data needed to update a Player.
    */
@@ -1646,6 +2039,10 @@ export type PlayerUpsertArgs<
    */
   omit?: Prisma.PlayerOmit<ExtArgs> | null;
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PlayerInclude<ExtArgs> | null;
+  /**
    * The filter to search for the Player to update in case it exists.
    */
   where: Prisma.PlayerWhereUniqueInput;
@@ -1681,6 +2078,10 @@ export type PlayerDeleteArgs<
    */
   omit?: Prisma.PlayerOmit<ExtArgs> | null;
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PlayerInclude<ExtArgs> | null;
+  /**
    * Filter which Player to delete.
    */
   where: Prisma.PlayerWhereUniqueInput;
@@ -1704,6 +2105,68 @@ export type PlayerDeleteManyArgs<
 };
 
 /**
+ * Player.teammatePairsAsPlayer
+ */
+export type Player$teammatePairsAsPlayerArgs<
+  ExtArgs extends
+    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the PlayerTeammate
+   */
+  select?: Prisma.PlayerTeammateSelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the PlayerTeammate
+   */
+  omit?: Prisma.PlayerTeammateOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PlayerTeammateInclude<ExtArgs> | null;
+  where?: Prisma.PlayerTeammateWhereInput;
+  orderBy?:
+    | Prisma.PlayerTeammateOrderByWithRelationInput
+    | Prisma.PlayerTeammateOrderByWithRelationInput[];
+  cursor?: Prisma.PlayerTeammateWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?:
+    | Prisma.PlayerTeammateScalarFieldEnum
+    | Prisma.PlayerTeammateScalarFieldEnum[];
+};
+
+/**
+ * Player.teammatePairsAsTeammate
+ */
+export type Player$teammatePairsAsTeammateArgs<
+  ExtArgs extends
+    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the PlayerTeammate
+   */
+  select?: Prisma.PlayerTeammateSelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the PlayerTeammate
+   */
+  omit?: Prisma.PlayerTeammateOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PlayerTeammateInclude<ExtArgs> | null;
+  where?: Prisma.PlayerTeammateWhereInput;
+  orderBy?:
+    | Prisma.PlayerTeammateOrderByWithRelationInput
+    | Prisma.PlayerTeammateOrderByWithRelationInput[];
+  cursor?: Prisma.PlayerTeammateWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?:
+    | Prisma.PlayerTeammateScalarFieldEnum
+    | Prisma.PlayerTeammateScalarFieldEnum[];
+};
+
+/**
  * Player without action
  */
 export type PlayerDefaultArgs<
@@ -1718,4 +2181,8 @@ export type PlayerDefaultArgs<
    * Omit specific fields from the Player
    */
   omit?: Prisma.PlayerOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PlayerInclude<ExtArgs> | null;
 };

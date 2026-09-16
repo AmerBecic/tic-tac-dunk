@@ -51,3 +51,8 @@ export { Prisma };
  *
  */
 export type Player = Prisma.PlayerModel;
+/**
+ * Model PlayerTeammate
+ * Pair ordering, positive season counts, RLS, and grants are enforced by the SQL migration.
+ */
+export type PlayerTeammate = Prisma.PlayerTeammateModel;

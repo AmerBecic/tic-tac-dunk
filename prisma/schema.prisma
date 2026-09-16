@@ -21,5 +21,22 @@ model Player {
   mip                      Boolean
   as                       Boolean
 
+  teammatePairsAsPlayer   PlayerTeammate[] @relation("TeammatePairPlayer")
+  teammatePairsAsTeammate PlayerTeammate[] @relation("TeammatePairTeammate")
+
   @@map("players")
+}
+
+/// Pair ordering, positive season counts, RLS, and grants are enforced by the SQL migration.
+model PlayerTeammate {
+  playerId        String @map("player_id")
+  teammateId      String @map("teammate_id")
+  seasonsTogether Int    @default(1) @map("seasons_together")
+
+  player   Player @relation("TeammatePairPlayer", fields: [playerId], references: [id], onDelete: Cascade, onUpdate: Cascade, map: "player_teammates_player_fkey")
+  teammate Player @relation("TeammatePairTeammate", fields: [teammateId], references: [id], onDelete: Cascade, onUpdate: Cascade, map: "player_teammates_teammate_fkey")
+
+  @@id([playerId, teammateId], map: "player_teammates_pkey")
+  @@index([teammateId], map: "player_teammates_teammate_id_idx")
+  @@map("player_teammates")
 }

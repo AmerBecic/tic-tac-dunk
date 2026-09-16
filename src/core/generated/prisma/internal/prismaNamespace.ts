@@ -413,6 +413,7 @@ type FieldRefInputType<Model, FieldType> = Model extends never
 
 export const ModelName = {
   Player: 'Player',
+  PlayerTeammate: 'PlayerTeammate',
 } as const;
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName];
@@ -434,7 +435,7 @@ export type TypeMap<
     omit: GlobalOmitOptions;
   };
   meta: {
-    modelProps: 'player';
+    modelProps: 'player' | 'playerTeammate';
     txIsolationLevel: TransactionIsolationLevel;
   };
   model: {
@@ -514,6 +515,82 @@ export type TypeMap<
         };
       };
     };
+    PlayerTeammate: {
+      payload: Prisma.$PlayerTeammatePayload<ExtArgs>;
+      fields: Prisma.PlayerTeammateFieldRefs;
+      operations: {
+        findUnique: {
+          args: Prisma.PlayerTeammateFindUniqueArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerTeammatePayload> | null;
+        };
+        findUniqueOrThrow: {
+          args: Prisma.PlayerTeammateFindUniqueOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerTeammatePayload>;
+        };
+        findFirst: {
+          args: Prisma.PlayerTeammateFindFirstArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerTeammatePayload> | null;
+        };
+        findFirstOrThrow: {
+          args: Prisma.PlayerTeammateFindFirstOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerTeammatePayload>;
+        };
+        findMany: {
+          args: Prisma.PlayerTeammateFindManyArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerTeammatePayload>[];
+        };
+        create: {
+          args: Prisma.PlayerTeammateCreateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerTeammatePayload>;
+        };
+        createMany: {
+          args: Prisma.PlayerTeammateCreateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        createManyAndReturn: {
+          args: Prisma.PlayerTeammateCreateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerTeammatePayload>[];
+        };
+        delete: {
+          args: Prisma.PlayerTeammateDeleteArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerTeammatePayload>;
+        };
+        update: {
+          args: Prisma.PlayerTeammateUpdateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerTeammatePayload>;
+        };
+        deleteMany: {
+          args: Prisma.PlayerTeammateDeleteManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateMany: {
+          args: Prisma.PlayerTeammateUpdateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateManyAndReturn: {
+          args: Prisma.PlayerTeammateUpdateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerTeammatePayload>[];
+        };
+        upsert: {
+          args: Prisma.PlayerTeammateUpsertArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerTeammatePayload>;
+        };
+        aggregate: {
+          args: Prisma.PlayerTeammateAggregateArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePlayerTeammate>;
+        };
+        groupBy: {
+          args: Prisma.PlayerTeammateGroupByArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.PlayerTeammateGroupByOutputType>[];
+        };
+        count: {
+          args: Prisma.PlayerTeammateCountArgs<ExtArgs>;
+          result:
+            | runtime.Types.Utils.Optional<Prisma.PlayerTeammateCountAggregateOutputType>
+            | number;
+        };
+      };
+    };
   };
 } & {
   other: {
@@ -570,6 +647,15 @@ export const PlayerScalarFieldEnum = {
 
 export type PlayerScalarFieldEnum =
   (typeof PlayerScalarFieldEnum)[keyof typeof PlayerScalarFieldEnum];
+
+export const PlayerTeammateScalarFieldEnum = {
+  playerId: 'playerId',
+  teammateId: 'teammateId',
+  seasonsTogether: 'seasonsTogether',
+} as const;
+
+export type PlayerTeammateScalarFieldEnum =
+  (typeof PlayerTeammateScalarFieldEnum)[keyof typeof PlayerTeammateScalarFieldEnum];
 
 export const SortOrder = {
   asc: 'asc',
@@ -764,6 +850,7 @@ export type PrismaClientOptions = (
 };
 export type GlobalOmitConfig = {
   player?: Prisma.PlayerOmit;
+  playerTeammate?: Prisma.PlayerTeammateOmit;
 };
 
 /* Types for Logging */

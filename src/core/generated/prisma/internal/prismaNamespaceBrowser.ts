@@ -55,6 +55,7 @@ export const AnyNull = runtime.AnyNull;
 
 export const ModelName = {
   Player: 'Player',
+  PlayerTeammate: 'PlayerTeammate',
 } as const;
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName];
@@ -90,6 +91,15 @@ export const PlayerScalarFieldEnum = {
 
 export type PlayerScalarFieldEnum =
   (typeof PlayerScalarFieldEnum)[keyof typeof PlayerScalarFieldEnum];
+
+export const PlayerTeammateScalarFieldEnum = {
+  playerId: 'playerId',
+  teammateId: 'teammateId',
+  seasonsTogether: 'seasonsTogether',
+} as const;
+
+export type PlayerTeammateScalarFieldEnum =
+  (typeof PlayerTeammateScalarFieldEnum)[keyof typeof PlayerTeammateScalarFieldEnum];
 
 export const SortOrder = {
   asc: 'asc',

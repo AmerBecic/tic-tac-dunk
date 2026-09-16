@@ -52,6 +52,7 @@ export type PlayerMinAggregateOutputType = {
   roy: boolean | null;
   mip: boolean | null;
   as: boolean | null;
+  teammateClueEligible: boolean | null;
 };
 
 export type PlayerMaxAggregateOutputType = {
@@ -66,6 +67,7 @@ export type PlayerMaxAggregateOutputType = {
   roy: boolean | null;
   mip: boolean | null;
   as: boolean | null;
+  teammateClueEligible: boolean | null;
 };
 
 export type PlayerCountAggregateOutputType = {
@@ -81,6 +83,7 @@ export type PlayerCountAggregateOutputType = {
   roy: number;
   mip: number;
   as: number;
+  teammateClueEligible: number;
   _all: number;
 };
 
@@ -110,6 +113,7 @@ export type PlayerMinAggregateInputType = {
   roy?: true;
   mip?: true;
   as?: true;
+  teammateClueEligible?: true;
 };
 
 export type PlayerMaxAggregateInputType = {
@@ -124,6 +128,7 @@ export type PlayerMaxAggregateInputType = {
   roy?: true;
   mip?: true;
   as?: true;
+  teammateClueEligible?: true;
 };
 
 export type PlayerCountAggregateInputType = {
@@ -139,6 +144,7 @@ export type PlayerCountAggregateInputType = {
   roy?: true;
   mip?: true;
   as?: true;
+  teammateClueEligible?: true;
   _all?: true;
 };
 
@@ -248,6 +254,7 @@ export type PlayerGroupByOutputType = {
   roy: boolean;
   mip: boolean;
   as: boolean;
+  teammateClueEligible: boolean;
   _count: PlayerCountAggregateOutputType | null;
   _avg: PlayerAvgAggregateOutputType | null;
   _sum: PlayerSumAggregateOutputType | null;
@@ -284,6 +291,7 @@ export type PlayerWhereInput = {
   roy?: Prisma.BoolFilter<'Player'> | boolean;
   mip?: Prisma.BoolFilter<'Player'> | boolean;
   as?: Prisma.BoolFilter<'Player'> | boolean;
+  teammateClueEligible?: Prisma.BoolFilter<'Player'> | boolean;
   teammatePairsAsPlayer?: Prisma.PlayerTeammateListRelationFilter;
   teammatePairsAsTeammate?: Prisma.PlayerTeammateListRelationFilter;
 };
@@ -301,6 +309,7 @@ export type PlayerOrderByWithRelationInput = {
   roy?: Prisma.SortOrder;
   mip?: Prisma.SortOrder;
   as?: Prisma.SortOrder;
+  teammateClueEligible?: Prisma.SortOrder;
   teammatePairsAsPlayer?: Prisma.PlayerTeammateOrderByRelationAggregateInput;
   teammatePairsAsTeammate?: Prisma.PlayerTeammateOrderByRelationAggregateInput;
 };
@@ -322,6 +331,7 @@ export type PlayerWhereUniqueInput = Prisma.AtLeast<
     roy?: Prisma.BoolFilter<'Player'> | boolean;
     mip?: Prisma.BoolFilter<'Player'> | boolean;
     as?: Prisma.BoolFilter<'Player'> | boolean;
+    teammateClueEligible?: Prisma.BoolFilter<'Player'> | boolean;
     teammatePairsAsPlayer?: Prisma.PlayerTeammateListRelationFilter;
     teammatePairsAsTeammate?: Prisma.PlayerTeammateListRelationFilter;
   },
@@ -341,6 +351,7 @@ export type PlayerOrderByWithAggregationInput = {
   roy?: Prisma.SortOrder;
   mip?: Prisma.SortOrder;
   as?: Prisma.SortOrder;
+  teammateClueEligible?: Prisma.SortOrder;
   _count?: Prisma.PlayerCountOrderByAggregateInput;
   _avg?: Prisma.PlayerAvgOrderByAggregateInput;
   _max?: Prisma.PlayerMaxOrderByAggregateInput;
@@ -368,6 +379,7 @@ export type PlayerScalarWhereWithAggregatesInput = {
   roy?: Prisma.BoolWithAggregatesFilter<'Player'> | boolean;
   mip?: Prisma.BoolWithAggregatesFilter<'Player'> | boolean;
   as?: Prisma.BoolWithAggregatesFilter<'Player'> | boolean;
+  teammateClueEligible?: Prisma.BoolWithAggregatesFilter<'Player'> | boolean;
 };
 
 export type PlayerCreateInput = {
@@ -383,6 +395,7 @@ export type PlayerCreateInput = {
   roy: boolean;
   mip: boolean;
   as: boolean;
+  teammateClueEligible?: boolean;
   teammatePairsAsPlayer?: Prisma.PlayerTeammateCreateNestedManyWithoutPlayerInput;
   teammatePairsAsTeammate?: Prisma.PlayerTeammateCreateNestedManyWithoutTeammateInput;
 };
@@ -400,6 +413,7 @@ export type PlayerUncheckedCreateInput = {
   roy: boolean;
   mip: boolean;
   as: boolean;
+  teammateClueEligible?: boolean;
   teammatePairsAsPlayer?: Prisma.PlayerTeammateUncheckedCreateNestedManyWithoutPlayerInput;
   teammatePairsAsTeammate?: Prisma.PlayerTeammateUncheckedCreateNestedManyWithoutTeammateInput;
 };
@@ -417,6 +431,7 @@ export type PlayerUpdateInput = {
   roy?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   mip?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   as?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+  teammateClueEligible?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   teammatePairsAsPlayer?: Prisma.PlayerTeammateUpdateManyWithoutPlayerNestedInput;
   teammatePairsAsTeammate?: Prisma.PlayerTeammateUpdateManyWithoutTeammateNestedInput;
 };
@@ -434,6 +449,7 @@ export type PlayerUncheckedUpdateInput = {
   roy?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   mip?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   as?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+  teammateClueEligible?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   teammatePairsAsPlayer?: Prisma.PlayerTeammateUncheckedUpdateManyWithoutPlayerNestedInput;
   teammatePairsAsTeammate?: Prisma.PlayerTeammateUncheckedUpdateManyWithoutTeammateNestedInput;
 };
@@ -451,6 +467,7 @@ export type PlayerCreateManyInput = {
   roy: boolean;
   mip: boolean;
   as: boolean;
+  teammateClueEligible?: boolean;
 };
 
 export type PlayerUpdateManyMutationInput = {
@@ -466,6 +483,7 @@ export type PlayerUpdateManyMutationInput = {
   roy?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   mip?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   as?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+  teammateClueEligible?: Prisma.BoolFieldUpdateOperationsInput | boolean;
 };
 
 export type PlayerUncheckedUpdateManyInput = {
@@ -481,6 +499,7 @@ export type PlayerUncheckedUpdateManyInput = {
   roy?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   mip?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   as?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+  teammateClueEligible?: Prisma.BoolFieldUpdateOperationsInput | boolean;
 };
 
 export type StringNullableListFilter<$PrismaModel = never> = {
@@ -504,6 +523,7 @@ export type PlayerCountOrderByAggregateInput = {
   roy?: Prisma.SortOrder;
   mip?: Prisma.SortOrder;
   as?: Prisma.SortOrder;
+  teammateClueEligible?: Prisma.SortOrder;
 };
 
 export type PlayerAvgOrderByAggregateInput = {
@@ -525,6 +545,7 @@ export type PlayerMaxOrderByAggregateInput = {
   roy?: Prisma.SortOrder;
   mip?: Prisma.SortOrder;
   as?: Prisma.SortOrder;
+  teammateClueEligible?: Prisma.SortOrder;
 };
 
 export type PlayerMinOrderByAggregateInput = {
@@ -539,6 +560,7 @@ export type PlayerMinOrderByAggregateInput = {
   roy?: Prisma.SortOrder;
   mip?: Prisma.SortOrder;
   as?: Prisma.SortOrder;
+  teammateClueEligible?: Prisma.SortOrder;
 };
 
 export type PlayerSumOrderByAggregateInput = {
@@ -651,6 +673,7 @@ export type PlayerCreateWithoutTeammatePairsAsPlayerInput = {
   roy: boolean;
   mip: boolean;
   as: boolean;
+  teammateClueEligible?: boolean;
   teammatePairsAsTeammate?: Prisma.PlayerTeammateCreateNestedManyWithoutTeammateInput;
 };
 
@@ -667,6 +690,7 @@ export type PlayerUncheckedCreateWithoutTeammatePairsAsPlayerInput = {
   roy: boolean;
   mip: boolean;
   as: boolean;
+  teammateClueEligible?: boolean;
   teammatePairsAsTeammate?: Prisma.PlayerTeammateUncheckedCreateNestedManyWithoutTeammateInput;
 };
 
@@ -691,6 +715,7 @@ export type PlayerCreateWithoutTeammatePairsAsTeammateInput = {
   roy: boolean;
   mip: boolean;
   as: boolean;
+  teammateClueEligible?: boolean;
   teammatePairsAsPlayer?: Prisma.PlayerTeammateCreateNestedManyWithoutPlayerInput;
 };
 
@@ -707,6 +732,7 @@ export type PlayerUncheckedCreateWithoutTeammatePairsAsTeammateInput = {
   roy: boolean;
   mip: boolean;
   as: boolean;
+  teammateClueEligible?: boolean;
   teammatePairsAsPlayer?: Prisma.PlayerTeammateUncheckedCreateNestedManyWithoutPlayerInput;
 };
 
@@ -751,6 +777,7 @@ export type PlayerUpdateWithoutTeammatePairsAsPlayerInput = {
   roy?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   mip?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   as?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+  teammateClueEligible?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   teammatePairsAsTeammate?: Prisma.PlayerTeammateUpdateManyWithoutTeammateNestedInput;
 };
 
@@ -767,6 +794,7 @@ export type PlayerUncheckedUpdateWithoutTeammatePairsAsPlayerInput = {
   roy?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   mip?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   as?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+  teammateClueEligible?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   teammatePairsAsTeammate?: Prisma.PlayerTeammateUncheckedUpdateManyWithoutTeammateNestedInput;
 };
 
@@ -803,6 +831,7 @@ export type PlayerUpdateWithoutTeammatePairsAsTeammateInput = {
   roy?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   mip?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   as?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+  teammateClueEligible?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   teammatePairsAsPlayer?: Prisma.PlayerTeammateUpdateManyWithoutPlayerNestedInput;
 };
 
@@ -819,6 +848,7 @@ export type PlayerUncheckedUpdateWithoutTeammatePairsAsTeammateInput = {
   roy?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   mip?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   as?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+  teammateClueEligible?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   teammatePairsAsPlayer?: Prisma.PlayerTeammateUncheckedUpdateManyWithoutPlayerNestedInput;
 };
 
@@ -893,6 +923,7 @@ export type PlayerSelect<
     roy?: boolean;
     mip?: boolean;
     as?: boolean;
+    teammateClueEligible?: boolean;
     teammatePairsAsPlayer?:
       | boolean
       | Prisma.Player$teammatePairsAsPlayerArgs<ExtArgs>;
@@ -921,6 +952,7 @@ export type PlayerSelectCreateManyAndReturn<
     roy?: boolean;
     mip?: boolean;
     as?: boolean;
+    teammateClueEligible?: boolean;
   },
   ExtArgs['result']['player']
 >;
@@ -942,6 +974,7 @@ export type PlayerSelectUpdateManyAndReturn<
     roy?: boolean;
     mip?: boolean;
     as?: boolean;
+    teammateClueEligible?: boolean;
   },
   ExtArgs['result']['player']
 >;
@@ -959,6 +992,7 @@ export type PlayerSelectScalar = {
   roy?: boolean;
   mip?: boolean;
   as?: boolean;
+  teammateClueEligible?: boolean;
 };
 
 export type PlayerOmit<
@@ -976,7 +1010,8 @@ export type PlayerOmit<
   | 'dpoy'
   | 'roy'
   | 'mip'
-  | 'as',
+  | 'as'
+  | 'teammateClueEligible',
   ExtArgs['result']['player']
 >;
 export type PlayerInclude<
@@ -1023,6 +1058,7 @@ export type $PlayerPayload<
       roy: boolean;
       mip: boolean;
       as: boolean;
+      teammateClueEligible: boolean;
     },
     ExtArgs['result']['player']
   >;
@@ -1653,6 +1689,7 @@ export interface PlayerFieldRefs {
   readonly roy: Prisma.FieldRef<'Player', 'Boolean'>;
   readonly mip: Prisma.FieldRef<'Player', 'Boolean'>;
   readonly as: Prisma.FieldRef<'Player', 'Boolean'>;
+  readonly teammateClueEligible: Prisma.FieldRef<'Player', 'Boolean'>;
 }
 
 // Custom InputTypes

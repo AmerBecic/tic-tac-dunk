@@ -20,6 +20,7 @@ model Player {
   roy                      Boolean
   mip                      Boolean
   as                       Boolean
+  teammateClueEligible     Boolean  @default(false) @map("teammate_clue_eligible")
 
   teammatePairsAsPlayer   PlayerTeammate[] @relation("TeammatePairPlayer")
   teammatePairsAsTeammate PlayerTeammate[] @relation("TeammatePairTeammate")

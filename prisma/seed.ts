@@ -2,7 +2,7 @@ import 'dotenv/config';
 
 import { PrismaPg } from '@prisma/adapter-pg';
 
-import { PrismaClient, type Player } from '@/core/generated/prisma/client';
+import { PrismaClient, type Prisma } from '@/core/generated/prisma/client';
 
 import players from '../data/json/players_final.json';
 
@@ -23,7 +23,7 @@ async function main(): Promise<void> {
 
   for (let i = 0; i < players.length; i += chunkSize) {
     const batch = players.slice(i, i + chunkSize).map(
-      (p): Player => ({
+      (p): Prisma.PlayerCreateManyInput => ({
         id: p.id,
         name: p.name,
         firstSeason: p.firstSeason,

@@ -1,0 +1,90 @@
+@use '@/core/styles/breakpoints' as breakpoints;
+@use '@/core/styles/design-tokens' as tokens;
+@use '@/core/styles/layout' as layout;
+
+.dailyPuzzle {
+  @include layout.flex-column;
+  align-items: center;
+  gap: 28px;
+  width: 100%;
+  padding: 32px 16px;
+
+  @include breakpoints.respond-from(md) {
+    gap: 40px;
+    padding: 48px 32px;
+  }
+}
+
+.title {
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--color-primary);
+  color: var(--text-primary);
+  font-size: clamp(32px, 7vw, 52px);
+  line-height: 1;
+  text-align: center;
+  text-transform: uppercase;
+  text-shadow: 0 0 24px
+    color-mix(in srgb, var(--color-primary) 18%, transparent);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  width: min(100%, 600px);
+  padding: 10px;
+  border: 2px solid
+    color-mix(in srgb, var(--color-primary) 70%, var(--text-primary));
+  border-radius: tokens.border-radius(large);
+  background-color: color-mix(
+    in srgb,
+    var(--color-secondary) 7%,
+    var(--background-primary)
+  );
+  box-shadow: 0 0 28px
+    color-mix(in srgb, var(--color-secondary) 16%, transparent);
+
+  @include breakpoints.respond-from(md) {
+    gap: 14px;
+    padding: 18px;
+  }
+}
+
+.corner,
+.criterion,
+.cell {
+  aspect-ratio: 1;
+  border-radius: tokens.border-radius(medium);
+}
+
+.corner {
+  @include layout.flex-column;
+  align-items: center;
+  justify-content: center;
+  gap: tokens.gap(small);
+  border: 1px solid color-mix(in srgb, var(--color-secondary) 45%, transparent);
+  background-color: color-mix(
+    in srgb,
+    var(--color-secondary) 30%,
+    var(--background-primary)
+  );
+}
+
+.criterion {
+  border: 1px solid
+    color-mix(in srgb, var(--color-primary) 48%, var(--color-secondary));
+  background-color: color-mix(
+    in srgb,
+    var(--color-secondary) 74%,
+    var(--background-primary)
+  );
+}
+
+.cell {
+  border: 2px dashed color-mix(in srgb, var(--text-primary) 34%, transparent);
+  background-color: color-mix(
+    in srgb,
+    var(--text-primary) 8%,
+    var(--background-primary)
+  );
+}

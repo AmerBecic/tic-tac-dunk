@@ -2,10 +2,20 @@ import styles from './Logo.module.scss';
 import React from 'react';
 import { Image } from '../ui/image';
 import { Paragraph } from '../ui/paragraph';
+import { cn } from '@/core/utils/utils';
 
-export const Logo = (): React.JSX.Element => {
+interface LogoProps {
+  showLabel?: boolean;
+}
+
+export const Logo = ({ showLabel = true }: LogoProps): React.JSX.Element => {
   return (
-    <div className={styles.logoAndTitleContainer}>
+    <div
+      className={cn(
+        styles.logoAndTitleContainer,
+        !showLabel && styles.logoOnly
+      )}
+    >
       <div className={styles.logoWrapper}>
         <Image
           src="/logo.png"
@@ -15,7 +25,7 @@ export const Logo = (): React.JSX.Element => {
           className={styles.logo}
         />
       </div>
-      <Paragraph fontSize="24">Tic Tac Dunk</Paragraph>
+      {showLabel && <Paragraph fontSize="24">Tic Tac Dunk</Paragraph>}
     </div>
   );
 };

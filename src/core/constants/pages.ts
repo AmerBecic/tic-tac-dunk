@@ -1,4 +1,4 @@
-import { DEV_BLOG_URL, HOME_URL, HOW_TO_PLAY_URL } from './routes';
+import { DEV_BLOG_URL, HOME_URL, HOW_TO_PLAY_URL } from './Routes';
 
 export const NAVIGATION = [
   { titleKey: 'home', href: HOME_URL },

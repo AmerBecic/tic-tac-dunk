@@ -2,23 +2,24 @@ import 'server-only';
 
 import { createSupabase } from '@/core/supabase/Server';
 import {
-  type CategoryCounts,
-  type CategoryType,
-  type Grid,
-  type GridCategory,
-  type GridGenerationConfig,
-  type GridGenerationResult,
-  type GridValidationResult,
-} from './GridTypes';
-import { GRID_SIZE } from '@/core/constants/grid';
-import { randomIndex, shuffle } from './GridHelpers';
-import {
   ACHIEVEMENT_CATEGORIES,
   CATEGORY_TYPES,
+  GRID_SIZE,
   GRID_VALIDATION_ERROR_CODES,
-  STAT_CATEGORIES,
   MAX_GENERATION_ATTEMPTS,
-} from './GridConstants';
+  STAT_CATEGORIES,
+} from '../types/GridConstants';
+
+import { randomIndex, shuffle } from './GridHelpers';
+import {
+  CategoryCounts,
+  CategoryType,
+  Grid,
+  GridCategory,
+  GridGenerationConfig,
+  GridGenerationResult,
+  GridValidationResult,
+} from '..';
 
 type Team = { code: string; name: string; included_names: string[] };
 type CluePlayer = { id: string; name: string };

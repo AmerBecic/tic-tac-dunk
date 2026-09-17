@@ -1,4 +1,4 @@
-import { NAVIGATION } from '@/core/constants/pages';
+import { NAVIGATION } from '@/core/constants/Pages';
 import styles from './DesktopNav.module.scss';
 import { getTranslations } from 'next-intl/server';
 import { NavbarLink } from '.';

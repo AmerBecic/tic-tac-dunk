@@ -1,7 +1,4 @@
-import type {
-  CATEGORY_TYPES,
-  GRID_VALIDATION_ERROR_CODES,
-} from './GridConstants';
+import { CATEGORY_TYPES, GRID_VALIDATION_ERROR_CODES } from '..';
 
 export type CategoryType = (typeof CATEGORY_TYPES)[number];
 export type CategoryCounts = Record<CategoryType, number>;

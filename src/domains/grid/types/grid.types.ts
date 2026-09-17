@@ -8,6 +8,7 @@ export type GridGenerationConfig = Record<
 >;
 export type GridCategory = {
   id: string;
+  referenceId?: string;
   type: CategoryType;
   label: string;
   includedNames?: string[];

@@ -1,0 +1,113 @@
+@use '@/core/styles/breakpoints' as breakpoints;
+@use '@/core/styles/design-tokens' as tokens;
+@use '@/core/styles/layout' as layout;
+
+.dailyPuzzle {
+  @include layout.flex-column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  padding: 16px 8px;
+  box-sizing: border-box;
+
+  @include breakpoints.respond-from(sm) {
+    gap: 28px;
+    padding: 32px 16px;
+  }
+
+  @include breakpoints.respond-from(md) {
+    gap: 40px;
+    padding: 48px 32px;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  width: min(100%, 600px);
+  gap: 4px;
+  border-radius: tokens.border-radius(large);
+
+  @include breakpoints.respond-from(sm) {
+    gap: 8px;
+  }
+
+  @include breakpoints.respond-from(md) {
+    gap: 14px;
+  }
+}
+
+.corner,
+.cell {
+  min-width: 0;
+  box-sizing: border-box;
+  aspect-ratio: 1;
+  border-radius: tokens.border-radius(medium);
+}
+
+.corner {
+  @include layout.flex-column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 4px;
+  border: 1px solid color-mix(in srgb, var(--color-secondary) 45%, transparent);
+  background-color: color-mix(
+    in srgb,
+    var(--color-secondary) 30%,
+    var(--background-primary)
+  );
+
+  @include breakpoints.respond-from(sm) {
+    gap: tokens.gap(small);
+  }
+}
+
+.title {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+
+  @include breakpoints.respond-from(sm) {
+    font-size: 18px;
+  }
+
+  @include breakpoints.respond-from(md) {
+    font-size: 24px;
+  }
+}
+
+.jersey {
+  width: 40px;
+  max-width: 80%;
+  height: auto;
+
+  @include breakpoints.respond-from(sm) {
+    width: 60px;
+  }
+
+  @include breakpoints.respond-from(md) {
+    width: 80px;
+  }
+}
+
+.cell {
+  @include layout.flex-column;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed color-mix(in srgb, var(--text-primary) 34%, transparent);
+
+  background-color: var(--color-primary);
+  cursor: pointer;
+
+  transition: background-color 150ms ease;
+
+  &:hover {
+    background-color: color-mix(
+      in srgb,
+      var(--color-primary) 80%,
+      var(--background-primary)
+    );
+  }
+}

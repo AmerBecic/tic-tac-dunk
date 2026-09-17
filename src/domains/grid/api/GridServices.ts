@@ -130,6 +130,7 @@ async function loadRandomGridCategories(
   }
   const categories: GridCategory[] = teams.map((team) => ({
     id: `TEAM:${team.code}`,
+    referenceId: team.code,
     type: 'TEAM',
     label: team.name,
     includedNames: team.included_names,
@@ -141,6 +142,7 @@ async function loadRandomGridCategories(
   for (const player of players) {
     categories.push({
       id: `TEAMMATE:${player.id}`,
+      referenceId: player.id,
       type: 'TEAMMATE',
       label: `Teammate of ${player.name}`,
     });

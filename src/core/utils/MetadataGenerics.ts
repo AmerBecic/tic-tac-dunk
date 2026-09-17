@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
-import { APP_URL } from '@/core/constants/env';
+import { APP_URL } from '@/core/constants/Env';
 
 export interface MetadataGenericsProps {
   title: string;

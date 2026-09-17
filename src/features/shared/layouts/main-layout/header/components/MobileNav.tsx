@@ -7,7 +7,7 @@ import { useClickAway } from 'react-use';
 
 import styles from './MobileNav.module.scss';
 import React from 'react';
-import { NAVIGATION } from '@/core/constants/pages';
+import { NAVIGATION } from '@/core/constants/Pages';
 import { NavbarLink } from '.';
 
 export const MobileNav = (): React.JSX.Element => {

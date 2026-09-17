@@ -1,4 +1,6 @@
-import type { GridCategory, GridGenerationConfig } from './GridTypes';
+import { GridCategory, GridGenerationConfig } from '..';
+
+export const GRID_SIZE = 3;
 
 export const DAILY_GRID_CONFIG: GridGenerationConfig = {
   TEAM: { min: 3, max: 5 },

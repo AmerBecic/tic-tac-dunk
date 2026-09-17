@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation';
 
 import '@/core/styles/globals.scss';
 
-import { APP_URL } from '@/core/constants/env';
+import { APP_URL } from '@/core/constants/Env';
 import { teko } from '@/core/fonts';
 import { routing } from '@/core/i18n/routing';
 

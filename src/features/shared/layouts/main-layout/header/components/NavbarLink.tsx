@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import { Link } from '@/features/shared/ui/link';
 import { usePathname } from 'next/navigation';
 
 import styles from './NavbarLink.module.scss';

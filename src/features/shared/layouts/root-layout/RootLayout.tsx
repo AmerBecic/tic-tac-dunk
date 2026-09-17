@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { hasLocale, NextIntlClientProvider } from 'next-intl';
+import { hasLocale } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 
@@ -8,7 +8,7 @@ import '@/core/styles/globals.scss';
 import { APP_URL } from '@/core/constants/Env';
 import { teko } from '@/core/fonts';
 import { routing } from '@/core/i18n/routing';
-import { QueryProvider } from '@/core/providers/QueryProvider';
+import { Providers } from '@/core/providers/Providers';
 
 export const metadata: Metadata = {
   description:
@@ -59,9 +59,9 @@ const RootLayout = async ({
   return (
     <html lang={locale} className={teko.variable}>
       <body className={teko.className}>
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          <QueryProvider>{children}</QueryProvider>
-        </NextIntlClientProvider>
+        <Providers locale={locale} messages={messages}>
+          {children}
+        </Providers>
       </body>
     </html>
   );

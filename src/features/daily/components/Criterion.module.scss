@@ -1,0 +1,65 @@
+@use '@/core/styles/design-tokens' as tokens;
+@use '@/core/styles/breakpoints' as breakpoints;
+
+.criterion {
+  aspect-ratio: 1;
+  border-radius: tokens.border-radius(medium);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  padding: 4px;
+  box-sizing: border-box;
+  border: 1px solid
+    color-mix(in srgb, var(--color-primary) 48%, var(--color-secondary));
+  background-color: color-mix(
+    in srgb,
+    var(--color-secondary) 74%,
+    var(--background-primary)
+  );
+
+  @include breakpoints.respond-from(sm) {
+    padding: 8px;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--text-primary);
+    outline-offset: 2px;
+  }
+}
+
+.teamLogo {
+  display: block;
+  width: 40px;
+  max-width: 100%;
+
+  @include breakpoints.respond-from(sm) {
+    width: 60px;
+  }
+
+  @include breakpoints.respond-from(md) {
+    width: 80px;
+  }
+
+  svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
+
+.criterionLabel {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.2;
+  text-align: center;
+  overflow-wrap: anywhere;
+
+  @include breakpoints.respond-from(sm) {
+    font-size: 16px;
+  }
+
+  @include breakpoints.respond-from(md) {
+    font-size: 18px;
+  }
+}

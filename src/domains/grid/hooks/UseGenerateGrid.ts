@@ -3,8 +3,8 @@
 import { useQuery, type UseQueryResult } from '@tanstack/react-query';
 
 import { GridApi } from '../api/GridApi';
-import type { GenerateGridResponse } from '../types/GenerateGridResponseDTO';
 import { GENERATE_GRID_QUERY_KEY } from '@/core/constants/QueryKeys';
+import { GenerateGridResponse } from '..';
 
 type GeneratedGrid = NonNullable<GenerateGridResponse['data']> | null;
 

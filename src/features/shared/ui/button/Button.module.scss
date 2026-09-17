@@ -5,6 +5,7 @@
 .button {
   @include layout.flex-row;
   font: inherit;
+  text-decoration: none;
   cursor: pointer;
   justify-content: center;
   align-items: center;

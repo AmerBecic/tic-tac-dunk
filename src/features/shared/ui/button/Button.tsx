@@ -7,12 +7,12 @@ import { cn } from '@/core/utils/Utils';
 import styles from './Button.module.scss';
 import { TextProps } from '../text';
 import { Paragraph } from '../paragraph';
+import { Link, type LinkProps } from '../link';
 
 type ButtonVariant = 'primary' | 'secondary' | 'danger' | 'ghost';
 type ButtonSize = 'sm' | 'md' | 'lg' | 'xl';
 
-export interface ButtonProps extends React.ComponentPropsWithoutRef<'button'> {
-  disabled?: boolean;
+interface BaseButtonProps {
   variant?: ButtonVariant;
   size?: ButtonSize;
   startIcon?: React.ReactNode;
@@ -20,8 +20,13 @@ export interface ButtonProps extends React.ComponentPropsWithoutRef<'button'> {
   textProps?: TextProps<'p'>;
 }
 
+export type ButtonProps = BaseButtonProps &
+  (
+    | (React.ComponentPropsWithoutRef<'button'> & { component?: 'button' })
+    | (LinkProps & { component: typeof Link; disabled?: never })
+  );
+
 export const Button = ({
-  disabled = false,
   variant = 'primary',
   size = 'md',
   children,
@@ -29,7 +34,6 @@ export const Button = ({
   endIcon,
   className,
   textProps,
-  onClick,
   ...rest
 }: ButtonProps): React.JSX.Element => {
   const variantClassMap = {
@@ -50,17 +54,12 @@ export const Button = ({
     styles.button,
     variantClassMap[variant],
     sizeClassMap[size],
-    disabled && styles.disabled,
+    rest.disabled && styles.disabled,
     className
   );
 
-  return (
-    <button
-      {...rest}
-      disabled={disabled}
-      className={classNames}
-      onClick={onClick}
-    >
+  const content = (
+    <>
       {startIcon && <span className={styles.icon}>{startIcon}</span>}
 
       {children && (
@@ -74,6 +73,22 @@ export const Button = ({
       )}
 
       {endIcon && <span className={styles.icon}>{endIcon}</span>}
-    </button>
+    </>
+  );
+
+  if (typeof rest.component === 'function') {
+    const { component: Component, ...linkProps } = rest;
+    return (
+      <Component {...linkProps} className={classNames}>
+        {content}
+      </Component>
+    );
+  }
+
+  const { component: Component = 'button', ...buttonProps } = rest;
+  return (
+    <Component {...buttonProps} className={classNames}>
+      {content}
+    </Component>
   );
 };

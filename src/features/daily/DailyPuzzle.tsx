@@ -2,12 +2,11 @@
 
 import { Fragment } from 'react';
 
-import { GRID_SIZE } from '@/core/constants/grid';
-
 import styles from './DailyPuzzle.module.scss';
 import { Logo } from '../shared/logo';
 import { Paragraph } from '../shared/ui/paragraph';
 import { useTranslations } from 'next-intl';
+import { GRID_SIZE } from '@/domains/grid';
 
 export const DailyPuzzle = (): React.JSX.Element => {
   const t = useTranslations('dailyPuzzle');

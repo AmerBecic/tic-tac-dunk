@@ -1,6 +1,6 @@
 import type { ComponentPropsWithoutRef } from 'react';
 
-import { cn } from '@/core/utils/utils';
+import { cn } from '@/core/utils/Utils';
 
 import styles from './SwitchSkeleton.module.scss';
 import { Skeleton } from '../skeleton';

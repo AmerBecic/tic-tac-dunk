@@ -2,7 +2,7 @@ import styles from './Logo.module.scss';
 import React from 'react';
 import { Image } from '../ui/image';
 import { Paragraph } from '../ui/paragraph';
-import { cn } from '@/core/utils/utils';
+import { cn } from '@/core/utils/Utils';
 
 interface LogoProps {
   showLabel?: boolean;

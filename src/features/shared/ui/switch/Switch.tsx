@@ -3,7 +3,7 @@
 import * as React from 'react';
 import * as SwitchPrimitive from '@radix-ui/react-switch';
 
-import { cn } from '@/core/utils/utils';
+import { cn } from '@/core/utils/Utils';
 import styles from './Switch.module.scss';
 
 export const Switch = React.forwardRef<

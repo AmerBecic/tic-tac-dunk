@@ -1,4 +1,4 @@
-import { cn } from '@/core/utils/utils';
+import { cn } from '@/core/utils/Utils';
 import styles from './Text.module.scss';
 import React from 'react';
 

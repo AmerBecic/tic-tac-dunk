@@ -1,7 +1,7 @@
 import NextImage, { type ImageProps as NextImageProps } from 'next/image';
 
 import styles from './Image.module.scss';
-import { cn } from '@/core/utils/utils';
+import { cn } from '@/core/utils/Utils';
 import React from 'react';
 
 interface BaseImageProps {

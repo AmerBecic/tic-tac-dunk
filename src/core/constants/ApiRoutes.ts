@@ -1,1 +1,1 @@
-export const GENERATE_GRID_API_URL = '/v1/grid/generate';
+export const GENERATE_GRID_API_URL = 'v1/grid/generate';

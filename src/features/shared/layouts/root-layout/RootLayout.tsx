@@ -8,6 +8,7 @@ import '@/core/styles/globals.scss';
 import { APP_URL } from '@/core/constants/Env';
 import { teko } from '@/core/fonts';
 import { routing } from '@/core/i18n/routing';
+import { QueryProvider } from '@/core/providers/QueryProvider';
 
 export const metadata: Metadata = {
   description:
@@ -59,7 +60,7 @@ const RootLayout = async ({
     <html lang={locale} className={teko.variable}>
       <body className={teko.className}>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          {children}
+          <QueryProvider>{children}</QueryProvider>
         </NextIntlClientProvider>
       </body>
     </html>

@@ -1,5 +1,3 @@
-import { BASE_API_URL } from '@/core/constants/Env';
-
 const call = async <T>(
   apiPath: string,
   method: string,
@@ -16,7 +14,7 @@ const call = async <T>(
     body: payload ? JSON.stringify(payload) : null,
     cache,
   };
-  const response = await fetch(`${BASE_API_URL}${apiPath}`, config);
+  const response = await fetch(`/api/${apiPath}`, config);
 
   if (!response.ok) {
     throw new Error(`API error: ${response.status} ${response.statusText}`);

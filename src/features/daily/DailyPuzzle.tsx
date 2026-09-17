@@ -6,11 +6,13 @@ import styles from './DailyPuzzle.module.scss';
 import { Logo } from '../shared/logo';
 import { Paragraph } from '../shared/ui/paragraph';
 import { useTranslations } from 'next-intl';
-import { GRID_SIZE } from '@/domains/grid';
+import { GRID_SIZE, useGenerateGrid } from '@/domains/grid';
 
 export const DailyPuzzle = (): React.JSX.Element => {
   const t = useTranslations('dailyPuzzle');
+  const { grid } = useGenerateGrid();
 
+  console.log('GRID:', grid);
   return (
     <section className={styles.dailyPuzzle}>
       <div className={styles.grid} aria-hidden="true">

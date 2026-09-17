@@ -1,4 +1,5 @@
 export { GridApi } from './api/GridApi';
+export { useGenerateGrid } from './hooks/UseGenerateGrid';
 export type { GenerateGridResponse } from './types/GenerateGridResponseDTO';
 export { randomIndex, shuffle } from './api/GridHelpers';
 export {

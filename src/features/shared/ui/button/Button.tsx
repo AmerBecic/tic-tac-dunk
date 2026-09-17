@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import { cn } from '@/core/utils/utils';
+import { cn } from '@/core/utils/Utils';
 
 import styles from './Button.module.scss';
 import { TextProps } from '../text';

@@ -1,6 +1,6 @@
 import type { HTMLAttributes } from 'react';
 
-import { cn } from '@/core/utils/utils';
+import { cn } from '@/core/utils/Utils';
 import styles from './Skeleton.module.scss';
 
 export type SkeletonProps = HTMLAttributes<HTMLDivElement>;

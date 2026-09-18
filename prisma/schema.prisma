@@ -7,6 +7,15 @@ datasource db {
   provider = "postgresql"
 }
 
+model DailyPuzzle {
+  id         String   @id
+  puzzleDate DateTime @unique @map("puzzle_date") @db.Date
+  gridData   Json     @map("grid_data") @db.JsonB
+  createdAt  DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  @@map("daily_puzzles")
+}
+
 model Team {
   code          String   @id
   name          String

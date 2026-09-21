@@ -1,5 +1,6 @@
+import { dailyPuzzleRepository } from '../repositories/daily-puzzle.repository';
 import type { createSupabase } from '@/core/supabase/Server';
-import { gridService } from './GridServices';
+import { gridService } from './grid.service';
 import { DAILY_GRID_CONFIG } from '@/domains/grid/types/GridConstants';
 
 interface DailyPuzzleGenerationResult {
@@ -15,11 +16,10 @@ async function generateDailyPuzzle(
   supabase: ReturnType<typeof createSupabase>
 ): Promise<DailyPuzzleGenerationResult> {
   const findPuzzle = async () => {
-    const { data, error } = await supabase
-      .from('daily_puzzles')
-      .select('id, puzzle_date')
-      .eq('puzzle_date', date)
-      .maybeSingle();
+    const { data, error } = await dailyPuzzleRepository.findByDate(
+      date,
+      supabase
+    );
     if (error)
       throw new Error(`Unable to read daily puzzles: ${error.message}`);
     return data;
@@ -42,11 +42,10 @@ async function generateDailyPuzzle(
   );
   if (!result.ok) throw new Error(`${result.code}: ${result.message}`);
 
-  const { data, error } = await supabase
-    .from('daily_puzzles')
-    .insert({ id: `daily:${date}`, puzzle_date: date, grid_data: result.grid })
-    .select('id, puzzle_date')
-    .single();
+  const { data, error } = await dailyPuzzleRepository.create(
+    { id: `daily:${date}`, date, grid: result.grid },
+    supabase
+  );
 
   if (error) {
     if (error.code === '23505') {

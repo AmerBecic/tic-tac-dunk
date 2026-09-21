@@ -1,3 +1,4 @@
+import { gridRepository } from '../repositories/grid.repository';
 import type { createSupabase } from '@/core/supabase/Server';
 import {
   ACHIEVEMENT_CATEGORIES,
@@ -8,7 +9,6 @@ import {
   STAT_CATEGORIES,
 } from '@/domains/grid/types/GridConstants';
 
-import { randomIndex, shuffle } from '../helpers/GridHelpers';
 import type {
   CategoryCounts,
   CategoryType,
@@ -18,9 +18,8 @@ import type {
   GridGenerationResult,
   GridValidationResult,
 } from '@/domains/grid/types/GridTypes';
+import { randomIndex, shuffle } from '../helpers/grid.helpers';
 
-type Team = { code: string; name: string; included_names: string[] };
-type CluePlayer = { id: string; name: string };
 const [TEAM, TEAMMATE, ACHIEVEMENT, STAT] = CATEGORY_TYPES;
 
 function selectGridCategoryCounts(
@@ -109,18 +108,16 @@ async function loadRandomGridCategories(
 ): Promise<GridCategory[]> {
   const [teamResult, playerResult] = await Promise.all([
     counts.TEAM > 0
-      ? supabase.rpc('get_random_teams', { requested_count: counts.TEAM })
+      ? gridRepository.getRandomTeams(counts.TEAM, supabase)
       : Promise.resolve({ data: [], error: null }),
     counts.TEAMMATE > 0
-      ? supabase.rpc('get_random_eligible_players', {
-          requested_count: counts.TEAMMATE,
-        })
+      ? gridRepository.getRandomEligiblePlayers(counts.TEAMMATE, supabase)
       : Promise.resolve({ data: [], error: null }),
   ]);
   if (teamResult.error) throw new Error(teamResult.error.message);
   if (playerResult.error) throw new Error(playerResult.error.message);
-  const teams = (teamResult.data ?? []) as Team[];
-  const players = (playerResult.data ?? []) as CluePlayer[];
+  const teams = teamResult.data;
+  const players = playerResult.data;
   if (teams.length !== counts.TEAM || players.length !== counts.TEAMMATE) {
     throw new Error(
       'Not enough teams or eligible players for the selected category counts.'
@@ -194,10 +191,7 @@ async function isGridSolvable(
   supabase: ReturnType<typeof createSupabase>
 ): Promise<GridValidationResult> {
   try {
-    const { data, error } = await supabase.rpc('validate_grid', {
-      _rows: grid.rows,
-      _columns: grid.columns,
-    });
+    const { data, error } = await gridRepository.validateGrid(grid, supabase);
 
     if (error) {
       return {

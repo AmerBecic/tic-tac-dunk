@@ -2,7 +2,7 @@ import 'dotenv/config';
 
 import { createAdminClient } from '@supabase/server/core';
 
-import { dailyPuzzleService } from '../src/server/grid/services/DailyPuzzleService';
+import { dailyPuzzleService } from '../src/server/grid/services/daily-puzzle.service';
 
 async function main(): Promise<void> {
   const args = process.argv.slice(2);

@@ -2,7 +2,7 @@
 
 import { useQuery, type UseQueryResult } from '@tanstack/react-query';
 
-import { GridApi } from '../api/GridApi';
+import { GridApi } from '../requests/GridApi';
 import { GENERATE_GRID_QUERY_KEY } from '@/core/constants/QueryKeys';
 import { GenerateGridResponse } from '..';
 

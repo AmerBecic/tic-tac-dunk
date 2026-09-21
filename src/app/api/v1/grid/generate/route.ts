@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { createSupabase } from '@/core/supabase/Server';
 import type { GenerateGridResponse } from '@/domains/grid';
 
-import { gridService } from '@/domains/grid/api/services/GridServices';
+import { gridService } from '@/server/grid/services/GridServices';
 import { DAILY_GRID_CONFIG, GRID_VALIDATION_ERROR_CODES } from '@/domains/grid';
 
 export async function GET(): Promise<NextResponse<GenerateGridResponse>> {

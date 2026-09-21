@@ -6,10 +6,10 @@ import {
   GRID_VALIDATION_ERROR_CODES,
   MAX_GENERATION_ATTEMPTS,
   STAT_CATEGORIES,
-} from '../../types/GridConstants';
+} from '@/domains/grid/types/GridConstants';
 
-import { randomIndex, shuffle } from '../GridHelpers';
-import {
+import { randomIndex, shuffle } from '../helpers/GridHelpers';
+import type {
   CategoryCounts,
   CategoryType,
   Grid,
@@ -17,7 +17,7 @@ import {
   GridGenerationConfig,
   GridGenerationResult,
   GridValidationResult,
-} from '../..';
+} from '@/domains/grid/types/GridTypes';
 
 type Team = { code: string; name: string; included_names: string[] };
 type CluePlayer = { id: string; name: string };

@@ -1,6 +1,6 @@
 import type { createSupabase } from '@/core/supabase/Server';
 import { gridService } from './GridServices';
-import { DAILY_GRID_CONFIG } from '../../types/GridConstants';
+import { DAILY_GRID_CONFIG } from '@/domains/grid/types/GridConstants';
 
 interface DailyPuzzleGenerationResult {
   success: true;
@@ -10,7 +10,7 @@ interface DailyPuzzleGenerationResult {
   date: string;
 }
 
-export async function generateDailyPuzzle(
+async function generateDailyPuzzle(
   date: string,
   supabase: ReturnType<typeof createSupabase>
 ): Promise<DailyPuzzleGenerationResult> {
@@ -72,3 +72,7 @@ export async function generateDailyPuzzle(
     date,
   };
 }
+
+export const dailyPuzzleService = {
+  generateDailyPuzzle,
+};

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 import { createSupabase } from '@/core/supabase/Server';
-import { generateDailyPuzzle } from '@/domains/grid/api/services/DailyPuzzleService';
+import { dailyPuzzleService } from '@/server/grid/services/DailyPuzzleService';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -18,7 +18,10 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 
   const date = new Date().toISOString().slice(0, 10);
   try {
-    const result = await generateDailyPuzzle(date, createSupabase());
+    const result = await dailyPuzzleService.generateDailyPuzzle(
+      date,
+      createSupabase()
+    );
     return NextResponse.json(result, {
       headers: { 'Cache-Control': 'no-store' },
     });

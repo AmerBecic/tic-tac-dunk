@@ -1,7 +1,6 @@
-export { GridApi } from './api/GridApi';
+export { GridApi } from './requests/GridApi';
 export { useGenerateGrid } from './hooks/useGenerateGrid';
-export type { GenerateGridResponse } from './types/generate-grid.response.dto';
-export { randomIndex, shuffle } from './api/GridHelpers';
+export type { GenerateGridResponse } from './types/GenerateGridResponseDTO';
 export {
   ACHIEVEMENT_CATEGORIES,
   CATEGORY_TYPES,
@@ -21,4 +20,4 @@ export type {
   GridValidationError,
   GridValidationErrorCode,
   GridValidationResult,
-} from './types/grid.types';
+} from './types/GridTypes';

@@ -2,7 +2,7 @@ import 'dotenv/config';
 
 import { createAdminClient } from '@supabase/server/core';
 
-import { generateDailyPuzzle } from '../src/domains/grid/api/services/DailyPuzzleService';
+import { dailyPuzzleService } from '../src/server/grid/services/DailyPuzzleService';
 
 async function main(): Promise<void> {
   const args = process.argv.slice(2);
@@ -37,7 +37,7 @@ async function main(): Promise<void> {
     env: { url, secretKeys: { default: secretKey } },
   });
 
-  const result = await generateDailyPuzzle(date, supabase);
+  const result = await dailyPuzzleService.generateDailyPuzzle(date, supabase);
   console.log(JSON.stringify(result, null, 2));
 }
 

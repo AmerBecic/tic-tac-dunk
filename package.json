@@ -12,6 +12,7 @@
     "prepare": "husky",
     "typecheck": "tsc --noEmit",
     "prisma:generate": "prisma generate",
+    "daily:generate": "tsx scripts/GenerateDailyPuzzle.ts",
     "seed": "pnpm seed:teams && pnpm seed:players && pnpm seed:teammates",
     "seed:teams": "tsx -r tsconfig-paths/register prisma/seed-teams.ts",
     "seed:players": "tsx -r tsconfig-paths/register prisma/seed.ts",

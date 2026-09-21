@@ -1,12 +1,16 @@
 import { NextResponse } from 'next/server';
+import { createSupabase } from '@/core/supabase/Server';
 import type { GenerateGridResponse } from '@/domains/grid';
 
-import { gridService } from '@/domains/grid/api/GridServices';
+import { gridService } from '@/domains/grid/api/services/GridServices';
 import { DAILY_GRID_CONFIG, GRID_VALIDATION_ERROR_CODES } from '@/domains/grid';
 
 export async function GET(): Promise<NextResponse<GenerateGridResponse>> {
   try {
-    const result = await gridService.generateAndValidate(DAILY_GRID_CONFIG);
+    const result = await gridService.generateAndValidate(
+      DAILY_GRID_CONFIG,
+      createSupabase()
+    );
 
     if (!result.ok) {
       const exhausted =

@@ -1,6 +1,4 @@
-import 'server-only';
-
-import { createSupabase } from '@/core/supabase/Server';
+import type { createSupabase } from '@/core/supabase/Server';
 import {
   ACHIEVEMENT_CATEGORIES,
   CATEGORY_TYPES,
@@ -8,9 +6,9 @@ import {
   GRID_VALIDATION_ERROR_CODES,
   MAX_GENERATION_ATTEMPTS,
   STAT_CATEGORIES,
-} from '../types/GridConstants';
+} from '../../types/GridConstants';
 
-import { randomIndex, shuffle } from './GridHelpers';
+import { randomIndex, shuffle } from '../GridHelpers';
 import {
   CategoryCounts,
   CategoryType,
@@ -19,7 +17,7 @@ import {
   GridGenerationConfig,
   GridGenerationResult,
   GridValidationResult,
-} from '..';
+} from '../..';
 
 type Team = { code: string; name: string; included_names: string[] };
 type CluePlayer = { id: string; name: string };
@@ -106,9 +104,9 @@ function generateGrid(
 }
 
 async function loadRandomGridCategories(
-  counts: CategoryCounts
+  counts: CategoryCounts,
+  supabase: ReturnType<typeof createSupabase>
 ): Promise<GridCategory[]> {
-  const supabase = createSupabase();
   const [teamResult, playerResult] = await Promise.all([
     counts.TEAM > 0
       ? supabase.rpc('get_random_teams', { requested_count: counts.TEAM })
@@ -151,7 +149,8 @@ async function loadRandomGridCategories(
 }
 
 async function generateAndValidate(
-  config: GridGenerationConfig
+  config: GridGenerationConfig,
+  supabase: ReturnType<typeof createSupabase>
 ): Promise<GridGenerationResult> {
   try {
     if (!validateGridConfig(config)) {
@@ -161,11 +160,12 @@ async function generateAndValidate(
         message: 'Invalid grid generation config.',
       };
     }
-    const supabase = createSupabase();
-
     for (let attempt = 0; attempt < MAX_GENERATION_ATTEMPTS; attempt++) {
       const categoryCounts = selectGridCategoryCounts(config);
-      const gridCategories = await loadRandomGridCategories(categoryCounts);
+      const gridCategories = await loadRandomGridCategories(
+        categoryCounts,
+        supabase
+      );
       const grid = generateGrid(gridCategories);
 
       const validation = await isGridSolvable(grid, supabase);

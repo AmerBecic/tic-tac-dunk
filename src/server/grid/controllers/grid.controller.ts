@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createSupabase } from '@/core/supabase/Server';
+import { createSupabase } from '@/core/supabase/server';
 import type { GenerateGridResponse } from '@/domains/grid/types/GenerateGridResponseDTO';
 
 import { gridService } from '@/server/grid/services/grid.service';

@@ -7,7 +7,7 @@ async function findByDate(
 ) {
   return await supabase
     .from('daily_puzzles')
-    .select('id, puzzle_date')
+    .select('id, puzzle_date, grid_data')
     .eq('puzzle_date', date)
     .maybeSingle();
 }

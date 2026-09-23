@@ -21,3 +21,5 @@ export type {
   GridValidationErrorCode,
   GridValidationResult,
 } from './types/GridTypes';
+export { useGetDailyPuzzle } from './hooks/useGetDailyPuzzle';
+export type { GetDailyPuzzleResponse } from './types/GetDailyPuzzleResponseDTO';

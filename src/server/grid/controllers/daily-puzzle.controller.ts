@@ -1,3 +1,4 @@
+import type { GetDailyPuzzleResponse } from '@/domains/grid/types/GetDailyPuzzleResponseDTO';
 import { NextRequest, NextResponse } from 'next/server';
 
 import { createSupabase } from '@/core/supabase/Server';
@@ -27,6 +28,23 @@ export async function generateDailyPuzzle(
     console.error('Daily puzzle cron failed:', error);
     return NextResponse.json(
       { success: false, date, error: 'Daily puzzle generation failed.' },
+      { status: 500, headers: { 'Cache-Control': 'no-store' } }
+    );
+  }
+}
+
+export async function getDailyPuzzle(): Promise<
+  NextResponse<GetDailyPuzzleResponse>
+> {
+  try {
+    const data = await dailyPuzzleService.getDailyPuzzle(createSupabase());
+    return NextResponse.json(
+      { data },
+      { headers: { 'Cache-Control': 'no-store' } }
+    );
+  } catch {
+    return NextResponse.json(
+      { error: 'Failed to fetch daily puzzle.' },
       { status: 500, headers: { 'Cache-Control': 'no-store' } }
     );
   }

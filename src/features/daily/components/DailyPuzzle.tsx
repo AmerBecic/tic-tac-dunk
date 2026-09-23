@@ -6,13 +6,13 @@ import styles from './DailyPuzzle.module.scss';
 import { Logo } from '../../shared/logo';
 import { Paragraph } from '../../shared/ui/paragraph';
 import { useTranslations } from 'next-intl';
-import { GRID_SIZE, useGenerateGrid } from '@/domains/grid';
+import { GRID_SIZE, useGetDailyPuzzle } from '@/domains/grid';
 import { Image } from '../../shared/ui/image';
 import { Criterion } from './Criterion';
 
 export const DailyPuzzle = (): React.JSX.Element => {
   const t = useTranslations('dailyPuzzle');
-  const { grid } = useGenerateGrid();
+  const { dailyPuzzle } = useGetDailyPuzzle();
 
   return (
     <section className={styles.dailyPuzzle}>
@@ -24,14 +24,14 @@ export const DailyPuzzle = (): React.JSX.Element => {
 
         {Array.from({ length: GRID_SIZE }, (_, columnIndex) => (
           <Criterion
-            category={grid?.columns[columnIndex]}
+            category={dailyPuzzle?.columns[columnIndex]}
             key={`column-${columnIndex}`}
           />
         ))}
 
         {Array.from({ length: GRID_SIZE }, (_, rowIndex) => (
           <Fragment key={`row-${rowIndex}`}>
-            <Criterion category={grid?.rows[rowIndex]} />
+            <Criterion category={dailyPuzzle?.rows[rowIndex]} />
 
             {Array.from({ length: GRID_SIZE }, (_, columnIndex) => (
               <div

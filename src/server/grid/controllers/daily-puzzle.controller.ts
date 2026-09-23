@@ -1,7 +1,7 @@
 import type { GetDailyPuzzleResponse } from '@/domains/grid/types/GetDailyPuzzleResponseDTO';
 import { NextRequest, NextResponse } from 'next/server';
 
-import { createSupabase } from '@/core/supabase/Server';
+import { createSupabase } from '@/core/supabase/server';
 import { dailyPuzzleService } from '@/server/grid/services/daily-puzzle.service';
 
 export async function generateDailyPuzzle(

@@ -1,5 +1,5 @@
 import { gridRepository } from '../repositories/grid.repository';
-import type { createSupabase } from '@/core/supabase/Server';
+import type { createSupabase } from '@/core/supabase/server';
 import {
   ACHIEVEMENT_CATEGORIES,
   CATEGORY_TYPES,

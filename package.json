@@ -11,6 +11,7 @@
     "lint:fix": "eslint . --fix",
     "prepare": "husky",
     "typecheck": "tsc --noEmit",
+    "typecheck:seed": "tsc --project tsconfig.seed.json --noEmit",
     "prisma:generate": "prisma generate",
     "daily:generate": "tsx scripts/GenerateDailyPuzzle.ts",
     "seed": "pnpm seed:teams && pnpm seed:players && pnpm seed:teammates",

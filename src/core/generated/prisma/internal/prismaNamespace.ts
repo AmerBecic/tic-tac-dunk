@@ -412,6 +412,7 @@ type FieldRefInputType<Model, FieldType> = Model extends never
   : FieldRef<Model, FieldType>;
 
 export const ModelName = {
+  DailyPuzzle: 'DailyPuzzle',
   Team: 'Team',
   Player: 'Player',
   PlayerTeammate: 'PlayerTeammate',
@@ -436,10 +437,86 @@ export type TypeMap<
     omit: GlobalOmitOptions;
   };
   meta: {
-    modelProps: 'team' | 'player' | 'playerTeammate';
+    modelProps: 'dailyPuzzle' | 'team' | 'player' | 'playerTeammate';
     txIsolationLevel: TransactionIsolationLevel;
   };
   model: {
+    DailyPuzzle: {
+      payload: Prisma.$DailyPuzzlePayload<ExtArgs>;
+      fields: Prisma.DailyPuzzleFieldRefs;
+      operations: {
+        findUnique: {
+          args: Prisma.DailyPuzzleFindUniqueArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DailyPuzzlePayload> | null;
+        };
+        findUniqueOrThrow: {
+          args: Prisma.DailyPuzzleFindUniqueOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DailyPuzzlePayload>;
+        };
+        findFirst: {
+          args: Prisma.DailyPuzzleFindFirstArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DailyPuzzlePayload> | null;
+        };
+        findFirstOrThrow: {
+          args: Prisma.DailyPuzzleFindFirstOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DailyPuzzlePayload>;
+        };
+        findMany: {
+          args: Prisma.DailyPuzzleFindManyArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DailyPuzzlePayload>[];
+        };
+        create: {
+          args: Prisma.DailyPuzzleCreateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DailyPuzzlePayload>;
+        };
+        createMany: {
+          args: Prisma.DailyPuzzleCreateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        createManyAndReturn: {
+          args: Prisma.DailyPuzzleCreateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DailyPuzzlePayload>[];
+        };
+        delete: {
+          args: Prisma.DailyPuzzleDeleteArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DailyPuzzlePayload>;
+        };
+        update: {
+          args: Prisma.DailyPuzzleUpdateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DailyPuzzlePayload>;
+        };
+        deleteMany: {
+          args: Prisma.DailyPuzzleDeleteManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateMany: {
+          args: Prisma.DailyPuzzleUpdateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateManyAndReturn: {
+          args: Prisma.DailyPuzzleUpdateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DailyPuzzlePayload>[];
+        };
+        upsert: {
+          args: Prisma.DailyPuzzleUpsertArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DailyPuzzlePayload>;
+        };
+        aggregate: {
+          args: Prisma.DailyPuzzleAggregateArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDailyPuzzle>;
+        };
+        groupBy: {
+          args: Prisma.DailyPuzzleGroupByArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.DailyPuzzleGroupByOutputType>[];
+        };
+        count: {
+          args: Prisma.DailyPuzzleCountArgs<ExtArgs>;
+          result:
+            | runtime.Types.Utils.Optional<Prisma.DailyPuzzleCountAggregateOutputType>
+            | number;
+        };
+      };
+    };
     Team: {
       payload: Prisma.$TeamPayload<ExtArgs>;
       fields: Prisma.TeamFieldRefs;
@@ -707,10 +784,21 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel =
   (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel];
 
+export const DailyPuzzleScalarFieldEnum = {
+  id: 'id',
+  puzzleDate: 'puzzleDate',
+  gridData: 'gridData',
+  createdAt: 'createdAt',
+} as const;
+
+export type DailyPuzzleScalarFieldEnum =
+  (typeof DailyPuzzleScalarFieldEnum)[keyof typeof DailyPuzzleScalarFieldEnum];
+
 export const TeamScalarFieldEnum = {
   code: 'code',
   name: 'name',
-  logoPath: 'logoPath',
+  primaryColor: 'primaryColor',
+  secondaryColor: 'secondaryColor',
   includedNames: 'includedNames',
 } as const;
 
@@ -752,6 +840,13 @@ export const SortOrder = {
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder];
 
+export const JsonNullValueInput = {
+  JsonNull: JsonNull,
+} as const;
+
+export type JsonNullValueInput =
+  (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput];
+
 export const QueryMode = {
   default: 'default',
   insensitive: 'insensitive',
@@ -759,12 +854,14 @@ export const QueryMode = {
 
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode];
 
-export const NullsOrder = {
-  first: 'first',
-  last: 'last',
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull,
 } as const;
 
-export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder];
+export type JsonNullValueFilter =
+  (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter];
 
 /**
  * Field references
@@ -784,6 +881,38 @@ export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<
 export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<
   $PrismaModel,
   'String[]'
+>;
+
+/**
+ * Reference to a field of type 'DateTime'
+ */
+export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<
+  $PrismaModel,
+  'DateTime'
+>;
+
+/**
+ * Reference to a field of type 'DateTime[]'
+ */
+export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<
+  $PrismaModel,
+  'DateTime[]'
+>;
+
+/**
+ * Reference to a field of type 'Json'
+ */
+export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<
+  $PrismaModel,
+  'Json'
+>;
+
+/**
+ * Reference to a field of type 'QueryMode'
+ */
+export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<
+  $PrismaModel,
+  'QueryMode'
 >;
 
 /**
@@ -944,6 +1073,7 @@ export type PrismaClientOptions = (
   queryPlanCacheMaxSize?: number;
 };
 export type GlobalOmitConfig = {
+  dailyPuzzle?: Prisma.DailyPuzzleOmit;
   team?: Prisma.TeamOmit;
   player?: Prisma.PlayerOmit;
   playerTeammate?: Prisma.PlayerTeammateOmit;

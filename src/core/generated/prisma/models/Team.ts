@@ -27,19 +27,22 @@ export type AggregateTeam = {
 export type TeamMinAggregateOutputType = {
   code: string | null;
   name: string | null;
-  logoPath: string | null;
+  primaryColor: string | null;
+  secondaryColor: string | null;
 };
 
 export type TeamMaxAggregateOutputType = {
   code: string | null;
   name: string | null;
-  logoPath: string | null;
+  primaryColor: string | null;
+  secondaryColor: string | null;
 };
 
 export type TeamCountAggregateOutputType = {
   code: number;
   name: number;
-  logoPath: number;
+  primaryColor: number;
+  secondaryColor: number;
   includedNames: number;
   _all: number;
 };
@@ -47,19 +50,22 @@ export type TeamCountAggregateOutputType = {
 export type TeamMinAggregateInputType = {
   code?: true;
   name?: true;
-  logoPath?: true;
+  primaryColor?: true;
+  secondaryColor?: true;
 };
 
 export type TeamMaxAggregateInputType = {
   code?: true;
   name?: true;
-  logoPath?: true;
+  primaryColor?: true;
+  secondaryColor?: true;
 };
 
 export type TeamCountAggregateInputType = {
   code?: true;
   name?: true;
-  logoPath?: true;
+  primaryColor?: true;
+  secondaryColor?: true;
   includedNames?: true;
   _all?: true;
 };
@@ -146,7 +152,8 @@ export type TeamGroupByArgs<
 export type TeamGroupByOutputType = {
   code: string;
   name: string;
-  logoPath: string | null;
+  primaryColor: string;
+  secondaryColor: string;
   includedNames: string[];
   _count: TeamCountAggregateOutputType | null;
   _min: TeamMinAggregateOutputType | null;
@@ -172,14 +179,16 @@ export type TeamWhereInput = {
   NOT?: Prisma.TeamWhereInput | Prisma.TeamWhereInput[];
   code?: Prisma.StringFilter<'Team'> | string;
   name?: Prisma.StringFilter<'Team'> | string;
-  logoPath?: Prisma.StringNullableFilter<'Team'> | string | null;
+  primaryColor?: Prisma.StringFilter<'Team'> | string;
+  secondaryColor?: Prisma.StringFilter<'Team'> | string;
   includedNames?: Prisma.StringNullableListFilter<'Team'>;
 };
 
 export type TeamOrderByWithRelationInput = {
   code?: Prisma.SortOrder;
   name?: Prisma.SortOrder;
-  logoPath?: Prisma.SortOrderInput | Prisma.SortOrder;
+  primaryColor?: Prisma.SortOrder;
+  secondaryColor?: Prisma.SortOrder;
   includedNames?: Prisma.SortOrder;
 };
 
@@ -190,7 +199,8 @@ export type TeamWhereUniqueInput = Prisma.AtLeast<
     OR?: Prisma.TeamWhereInput[];
     NOT?: Prisma.TeamWhereInput | Prisma.TeamWhereInput[];
     name?: Prisma.StringFilter<'Team'> | string;
-    logoPath?: Prisma.StringNullableFilter<'Team'> | string | null;
+    primaryColor?: Prisma.StringFilter<'Team'> | string;
+    secondaryColor?: Prisma.StringFilter<'Team'> | string;
     includedNames?: Prisma.StringNullableListFilter<'Team'>;
   },
   'code'
@@ -199,7 +209,8 @@ export type TeamWhereUniqueInput = Prisma.AtLeast<
 export type TeamOrderByWithAggregationInput = {
   code?: Prisma.SortOrder;
   name?: Prisma.SortOrder;
-  logoPath?: Prisma.SortOrderInput | Prisma.SortOrder;
+  primaryColor?: Prisma.SortOrder;
+  secondaryColor?: Prisma.SortOrder;
   includedNames?: Prisma.SortOrder;
   _count?: Prisma.TeamCountOrderByAggregateInput;
   _max?: Prisma.TeamMaxOrderByAggregateInput;
@@ -216,56 +227,64 @@ export type TeamScalarWhereWithAggregatesInput = {
     | Prisma.TeamScalarWhereWithAggregatesInput[];
   code?: Prisma.StringWithAggregatesFilter<'Team'> | string;
   name?: Prisma.StringWithAggregatesFilter<'Team'> | string;
-  logoPath?: Prisma.StringNullableWithAggregatesFilter<'Team'> | string | null;
+  primaryColor?: Prisma.StringWithAggregatesFilter<'Team'> | string;
+  secondaryColor?: Prisma.StringWithAggregatesFilter<'Team'> | string;
   includedNames?: Prisma.StringNullableListFilter<'Team'>;
 };
 
 export type TeamCreateInput = {
   code: string;
   name: string;
-  logoPath?: string | null;
+  primaryColor: string;
+  secondaryColor: string;
   includedNames?: Prisma.TeamCreateincludedNamesInput | string[];
 };
 
 export type TeamUncheckedCreateInput = {
   code: string;
   name: string;
-  logoPath?: string | null;
+  primaryColor: string;
+  secondaryColor: string;
   includedNames?: Prisma.TeamCreateincludedNamesInput | string[];
 };
 
 export type TeamUpdateInput = {
   code?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
-  logoPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  primaryColor?: Prisma.StringFieldUpdateOperationsInput | string;
+  secondaryColor?: Prisma.StringFieldUpdateOperationsInput | string;
   includedNames?: Prisma.TeamUpdateincludedNamesInput | string[];
 };
 
 export type TeamUncheckedUpdateInput = {
   code?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
-  logoPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  primaryColor?: Prisma.StringFieldUpdateOperationsInput | string;
+  secondaryColor?: Prisma.StringFieldUpdateOperationsInput | string;
   includedNames?: Prisma.TeamUpdateincludedNamesInput | string[];
 };
 
 export type TeamCreateManyInput = {
   code: string;
   name: string;
-  logoPath?: string | null;
+  primaryColor: string;
+  secondaryColor: string;
   includedNames?: Prisma.TeamCreateincludedNamesInput | string[];
 };
 
 export type TeamUpdateManyMutationInput = {
   code?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
-  logoPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  primaryColor?: Prisma.StringFieldUpdateOperationsInput | string;
+  secondaryColor?: Prisma.StringFieldUpdateOperationsInput | string;
   includedNames?: Prisma.TeamUpdateincludedNamesInput | string[];
 };
 
 export type TeamUncheckedUpdateManyInput = {
   code?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
-  logoPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  primaryColor?: Prisma.StringFieldUpdateOperationsInput | string;
+  secondaryColor?: Prisma.StringFieldUpdateOperationsInput | string;
   includedNames?: Prisma.TeamUpdateincludedNamesInput | string[];
 };
 
@@ -280,32 +299,27 @@ export type StringNullableListFilter<$PrismaModel = never> = {
 export type TeamCountOrderByAggregateInput = {
   code?: Prisma.SortOrder;
   name?: Prisma.SortOrder;
-  logoPath?: Prisma.SortOrder;
+  primaryColor?: Prisma.SortOrder;
+  secondaryColor?: Prisma.SortOrder;
   includedNames?: Prisma.SortOrder;
 };
 
 export type TeamMaxOrderByAggregateInput = {
   code?: Prisma.SortOrder;
   name?: Prisma.SortOrder;
-  logoPath?: Prisma.SortOrder;
+  primaryColor?: Prisma.SortOrder;
+  secondaryColor?: Prisma.SortOrder;
 };
 
 export type TeamMinOrderByAggregateInput = {
   code?: Prisma.SortOrder;
   name?: Prisma.SortOrder;
-  logoPath?: Prisma.SortOrder;
+  primaryColor?: Prisma.SortOrder;
+  secondaryColor?: Prisma.SortOrder;
 };
 
 export type TeamCreateincludedNamesInput = {
   set: string[];
-};
-
-export type StringFieldUpdateOperationsInput = {
-  set?: string;
-};
-
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null;
 };
 
 export type TeamUpdateincludedNamesInput = {
@@ -320,7 +334,8 @@ export type TeamSelect<
   {
     code?: boolean;
     name?: boolean;
-    logoPath?: boolean;
+    primaryColor?: boolean;
+    secondaryColor?: boolean;
     includedNames?: boolean;
   },
   ExtArgs['result']['team']
@@ -333,7 +348,8 @@ export type TeamSelectCreateManyAndReturn<
   {
     code?: boolean;
     name?: boolean;
-    logoPath?: boolean;
+    primaryColor?: boolean;
+    secondaryColor?: boolean;
     includedNames?: boolean;
   },
   ExtArgs['result']['team']
@@ -346,7 +362,8 @@ export type TeamSelectUpdateManyAndReturn<
   {
     code?: boolean;
     name?: boolean;
-    logoPath?: boolean;
+    primaryColor?: boolean;
+    secondaryColor?: boolean;
     includedNames?: boolean;
   },
   ExtArgs['result']['team']
@@ -355,7 +372,8 @@ export type TeamSelectUpdateManyAndReturn<
 export type TeamSelectScalar = {
   code?: boolean;
   name?: boolean;
-  logoPath?: boolean;
+  primaryColor?: boolean;
+  secondaryColor?: boolean;
   includedNames?: boolean;
 };
 
@@ -363,7 +381,7 @@ export type TeamOmit<
   ExtArgs extends
     runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = runtime.Types.Extensions.GetOmit<
-  'code' | 'name' | 'logoPath' | 'includedNames',
+  'code' | 'name' | 'primaryColor' | 'secondaryColor' | 'includedNames',
   ExtArgs['result']['team']
 >;
 
@@ -377,7 +395,8 @@ export type $TeamPayload<
     {
       code: string;
       name: string;
-      logoPath: string | null;
+      primaryColor: string;
+      secondaryColor: string;
       includedNames: string[];
     },
     ExtArgs['result']['team']
@@ -973,7 +992,8 @@ export interface Prisma__TeamClient<
 export interface TeamFieldRefs {
   readonly code: Prisma.FieldRef<'Team', 'String'>;
   readonly name: Prisma.FieldRef<'Team', 'String'>;
-  readonly logoPath: Prisma.FieldRef<'Team', 'String'>;
+  readonly primaryColor: Prisma.FieldRef<'Team', 'String'>;
+  readonly secondaryColor: Prisma.FieldRef<'Team', 'String'>;
   readonly includedNames: Prisma.FieldRef<'Team', 'String[]'>;
 }
 

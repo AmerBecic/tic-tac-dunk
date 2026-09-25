@@ -7,6 +7,7 @@
  *
  * 🟢 You can import this file directly.
  */
+export type * from './models/DailyPuzzle';
 export type * from './models/Team';
 export type * from './models/Player';
 export type * from './models/PlayerTeammate';

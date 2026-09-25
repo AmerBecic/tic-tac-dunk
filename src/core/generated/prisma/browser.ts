@@ -17,6 +17,11 @@ export { Prisma };
 export * as $Enums from './enums';
 export * from './enums';
 /**
+ * Model DailyPuzzle
+ *
+ */
+export type DailyPuzzle = Prisma.DailyPuzzleModel;
+/**
  * Model Team
  *
  */

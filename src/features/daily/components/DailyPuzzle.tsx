@@ -7,7 +7,7 @@ import { Logo } from '../../shared/logo';
 import { Paragraph } from '../../shared/ui/paragraph';
 import { useTranslations } from 'next-intl';
 import { GRID_SIZE, useGetDailyPuzzle } from '@/domains/grid';
-import { Image } from '../../shared/ui/image';
+import { BasketballJersey } from '../../shared/basketball-jersey/BasketballJersey';
 import { Criterion } from './Criterion';
 
 export const DailyPuzzle = (): React.JSX.Element => {
@@ -38,11 +38,9 @@ export const DailyPuzzle = (): React.JSX.Element => {
                 className={styles.cell}
                 key={`cell-${rowIndex}-${columnIndex}`}
               >
-                <Image
-                  src="/basketball-jersey-empty.svg"
+                <BasketballJersey
                   alt="Empty basketball jersey"
-                  width={80}
-                  height={80}
+                  size={80}
                   className={styles.jersey}
                 />
               </div>

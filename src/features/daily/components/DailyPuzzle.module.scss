@@ -79,16 +79,16 @@
 }
 
 .jersey {
-  width: 40px;
+  --jersey-display-size: 40px;
   max-width: 80%;
   height: auto;
 
   @include breakpoints.respond-from(sm) {
-    width: 60px;
+    --jersey-display-size: 60px;
   }
 
   @include breakpoints.respond-from(md) {
-    width: 80px;
+    --jersey-display-size: 80px;
   }
 }
 

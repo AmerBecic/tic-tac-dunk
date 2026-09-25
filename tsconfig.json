@@ -23,6 +23,7 @@
     }
   },
   "include": [
+    "src/assets/Svg.d.ts",
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",

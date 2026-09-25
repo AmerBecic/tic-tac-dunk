@@ -3,7 +3,8 @@ BEGIN;
 CREATE TABLE public.teams (
     code TEXT NOT NULL,
     name TEXT NOT NULL,
-    logo_path TEXT,
+    primary_color TEXT NOT NULL,
+    secondary_color TEXT NOT NULL,
     included_names TEXT[] NOT NULL DEFAULT ARRAY[]::TEXT[],
     CONSTRAINT teams_pkey PRIMARY KEY (code)
 );

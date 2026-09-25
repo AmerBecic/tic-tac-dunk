@@ -35,8 +35,7 @@ async function main(): Promise<void> {
         prisma.team.upsert({
           where: { code: team.code },
           create: team,
-          // Preserve any manually configured logo on reruns.
-          update: { name: team.name, includedNames: team.includedNames },
+          update: team,
         })
       )
     );

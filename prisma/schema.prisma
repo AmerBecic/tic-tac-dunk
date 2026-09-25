@@ -17,10 +17,11 @@ model DailyPuzzle {
 }
 
 model Team {
-  code          String   @id
-  name          String
-  logoPath      String?  @map("logo_path")
-  includedNames String[] @default([]) @map("included_names")
+  code           String   @id
+  name           String
+  primaryColor   String   @map("primary_color")
+  secondaryColor String   @map("secondary_color")
+  includedNames  String[] @default([]) @map("included_names")
 
   @@map("teams")
 }

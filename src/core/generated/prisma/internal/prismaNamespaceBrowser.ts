@@ -54,6 +54,7 @@ export const JsonNull = runtime.JsonNull;
 export const AnyNull = runtime.AnyNull;
 
 export const ModelName = {
+  DailyPuzzle: 'DailyPuzzle',
   Team: 'Team',
   Player: 'Player',
   PlayerTeammate: 'PlayerTeammate',
@@ -75,10 +76,21 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel =
   (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel];
 
+export const DailyPuzzleScalarFieldEnum = {
+  id: 'id',
+  puzzleDate: 'puzzleDate',
+  gridData: 'gridData',
+  createdAt: 'createdAt',
+} as const;
+
+export type DailyPuzzleScalarFieldEnum =
+  (typeof DailyPuzzleScalarFieldEnum)[keyof typeof DailyPuzzleScalarFieldEnum];
+
 export const TeamScalarFieldEnum = {
   code: 'code',
   name: 'name',
-  logoPath: 'logoPath',
+  primaryColor: 'primaryColor',
+  secondaryColor: 'secondaryColor',
   includedNames: 'includedNames',
 } as const;
 
@@ -120,6 +132,13 @@ export const SortOrder = {
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder];
 
+export const JsonNullValueInput = {
+  JsonNull: JsonNull,
+} as const;
+
+export type JsonNullValueInput =
+  (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput];
+
 export const QueryMode = {
   default: 'default',
   insensitive: 'insensitive',
@@ -127,9 +146,11 @@ export const QueryMode = {
 
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode];
 
-export const NullsOrder = {
-  first: 'first',
-  last: 'last',
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull,
 } as const;
 
-export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder];
+export type JsonNullValueFilter =
+  (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter];

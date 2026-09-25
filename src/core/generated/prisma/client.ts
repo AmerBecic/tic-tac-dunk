@@ -30,8 +30,8 @@ export * from './enums';
  * const prisma = new PrismaClient({
  *   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL })
  * })
- * // Fetch zero or more Teams
- * const teams = await prisma.team.findMany()
+ * // Fetch zero or more DailyPuzzles
+ * const dailyPuzzles = await prisma.dailyPuzzle.findMany()
  * ```
  *
  * Read more in our [docs](https://pris.ly/d/client).
@@ -46,6 +46,11 @@ export type PrismaClient<
 > = $Class.PrismaClient<LogOpts, OmitOpts, ExtArgs>;
 export { Prisma };
 
+/**
+ * Model DailyPuzzle
+ *
+ */
+export type DailyPuzzle = Prisma.DailyPuzzleModel;
 /**
  * Model Team
  *

@@ -17,6 +17,7 @@ export interface PlayerRaw {
   allSeasons: number[];
   allAges: number[];
   teams: string[];
+  mainTeam: string | null;
   highestFGPercentage: number;
   highestSeasonPointsTotal: number;
   mvp: boolean;
@@ -32,6 +33,7 @@ export interface Player {
   firstSeason: number;
   lastSeason: number;
   teams: string[];
+  mainTeam: string | null;
   highestFGPercentage: number;
   highestSeasonPointsTotal: number;
   mvp: boolean;

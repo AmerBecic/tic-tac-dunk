@@ -19,6 +19,7 @@ const players: Player[] = rawPlayers.map((rp): Player => {
     firstSeason,
     lastSeason,
     teams: rp.teams,
+    mainTeam: rp.mainTeam,
     highestFGPercentage: rp.highestFGPercentage,
     highestSeasonPointsTotal: rp.highestSeasonPointsTotal,
     mvp: rp.mvp,
@@ -41,6 +42,29 @@ for (const p of players) {
   if ((countsByBase.get(baseName) || 0) > 1) {
     p.name = `${baseName} (${p.firstSeason}-${p.lastSeason})`;
   }
+}
+
+// Reuse IDs for existing records so regenerating data preserves database links.
+const outputPath = 'data/json/players_final.json';
+const existingPlayers: Player[] = fs.existsSync(outputPath)
+  ? JSON.parse(fs.readFileSync(outputPath, 'utf-8'))
+  : [];
+const identityKey = (player: Player): string =>
+  JSON.stringify([
+    player.name,
+    player.firstSeason,
+    player.lastSeason,
+    [...player.teams].sort(),
+  ]);
+const existingIds = new Map<string, string>();
+for (const player of existingPlayers) {
+  const key = identityKey(player);
+  if (existingIds.has(key))
+    throw new Error(`Ambiguous existing player: ${player.name}`);
+  existingIds.set(key, player.id);
+}
+for (const player of players) {
+  player.id = existingIds.get(identityKey(player)) ?? player.id;
 }
 
 fs.writeFileSync(

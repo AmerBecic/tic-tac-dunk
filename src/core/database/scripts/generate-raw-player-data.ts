@@ -6,10 +6,12 @@ const rawJson = fs.readFileSync('data/json/player_seasons.json', 'utf-8');
 
 const playerSeasons = JSON.parse(rawJson) as PlayerSeason[];
 
-// Group by player name
-const groupsByName = new Map<string, PlayerRaw[]>();
+type PlayerGroup = Omit<PlayerRaw, 'mainTeam'> & {
+  teamSeasons: Map<string, Set<number>>;
+};
 
-const GAP_THRESHOLD = 2;
+// Group by player name
+const groupsByName = new Map<string, PlayerGroup[]>();
 
 for (const singlePlayerSeason of playerSeasons) {
   const {
@@ -28,11 +30,12 @@ for (const singlePlayerSeason of playerSeasons) {
 
   // If this player does not yet exist in the map, create a new player
   if (!groupsByName.has(playerName)) {
-    const initialGroup: PlayerRaw = {
+    const initialGroup: PlayerGroup = {
       name: playerName,
       allSeasons: [season],
       allAges: [age],
       teams: [team],
+      teamSeasons: new Map([[team, new Set([season])]]),
       highestFGPercentage: fgPercentage,
       highestSeasonPointsTotal: seasonPointsTotal,
       mvp,
@@ -57,10 +60,10 @@ for (const singlePlayerSeason of playerSeasons) {
 
     const seasonGap = season - lastRecordedSeason;
     const ageGap = age - lastRecordedAge;
-    const gapDiff = Math.abs(seasonGap - ageGap);
-
-    // If the gap is small enough, merge into this group:
-    if (gapDiff <= GAP_THRESHOLD) {
+    // Require the same season-minus-age value. A tolerance here merges
+    // distinct same-name players born one or two years apart.
+    // A source player ID should replace this heuristic when available.
+    if (seasonGap === ageGap) {
       // Append season and team if not already present
       if (!group.allSeasons.includes(season)) {
         group.allSeasons.push(season);
@@ -69,6 +72,10 @@ for (const singlePlayerSeason of playerSeasons) {
       if (!group.teams.includes(team)) {
         group.teams.push(team);
       }
+
+      const seasonsForTeam = group.teamSeasons.get(team) ?? new Set<number>();
+      seasonsForTeam.add(season);
+      group.teamSeasons.set(team, seasonsForTeam);
 
       //Update highest FG% and PTS total if needed
       if (fgPercentage > group.highestFGPercentage) {
@@ -94,11 +101,12 @@ for (const singlePlayerSeason of playerSeasons) {
     const newGroupIndex = groupList.length + 1;
     const newGroupName = `${playerName} #${newGroupIndex}`;
 
-    const newGroup: PlayerRaw = {
+    const newGroup: PlayerGroup = {
       name: newGroupName,
       allSeasons: [season],
       allAges: [age],
       teams: [team],
+      teamSeasons: new Map([[team, new Set([season])]]),
       highestFGPercentage: fgPercentage,
       highestSeasonPointsTotal: seasonPointsTotal,
       mvp,
@@ -114,7 +122,16 @@ for (const singlePlayerSeason of playerSeasons) {
 //Flatten all groups into one array of Player objects & sort
 const allPlayers: PlayerRaw[] = [];
 Array.from(groupsByName.values()).forEach((groups): void => {
-  allPlayers.push(...groups);
+  for (const { teamSeasons, ...player } of groups) {
+    // Count each team/season once; ignore aggregate rows and break ties by code.
+    const rankedTeams = [...teamSeasons.entries()]
+      .filter(([team]) => !/^(TOT|\d+TM)$/.test(team))
+      .sort(
+        ([teamA, seasonsA], [teamB, seasonsB]) =>
+          seasonsB.size - seasonsA.size || teamA.localeCompare(teamB)
+      );
+    allPlayers.push({ ...player, mainTeam: rankedTeams[0]?.[0] ?? null });
+  }
 });
 
 allPlayers.sort((a, b): number => a.name.localeCompare(b.name));

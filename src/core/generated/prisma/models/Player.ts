@@ -45,6 +45,7 @@ export type PlayerMinAggregateOutputType = {
   name: string | null;
   firstSeason: number | null;
   lastSeason: number | null;
+  mainTeam: string | null;
   highestFgPercentage: number | null;
   highestSeasonPointsTotal: number | null;
   mvp: boolean | null;
@@ -60,6 +61,7 @@ export type PlayerMaxAggregateOutputType = {
   name: string | null;
   firstSeason: number | null;
   lastSeason: number | null;
+  mainTeam: string | null;
   highestFgPercentage: number | null;
   highestSeasonPointsTotal: number | null;
   mvp: boolean | null;
@@ -76,6 +78,7 @@ export type PlayerCountAggregateOutputType = {
   firstSeason: number;
   lastSeason: number;
   teams: number;
+  mainTeam: number;
   highestFgPercentage: number;
   highestSeasonPointsTotal: number;
   mvp: number;
@@ -106,6 +109,7 @@ export type PlayerMinAggregateInputType = {
   name?: true;
   firstSeason?: true;
   lastSeason?: true;
+  mainTeam?: true;
   highestFgPercentage?: true;
   highestSeasonPointsTotal?: true;
   mvp?: true;
@@ -121,6 +125,7 @@ export type PlayerMaxAggregateInputType = {
   name?: true;
   firstSeason?: true;
   lastSeason?: true;
+  mainTeam?: true;
   highestFgPercentage?: true;
   highestSeasonPointsTotal?: true;
   mvp?: true;
@@ -137,6 +142,7 @@ export type PlayerCountAggregateInputType = {
   firstSeason?: true;
   lastSeason?: true;
   teams?: true;
+  mainTeam?: true;
   highestFgPercentage?: true;
   highestSeasonPointsTotal?: true;
   mvp?: true;
@@ -247,6 +253,7 @@ export type PlayerGroupByOutputType = {
   firstSeason: number;
   lastSeason: number;
   teams: string[];
+  mainTeam: string | null;
   highestFgPercentage: number;
   highestSeasonPointsTotal: number;
   mvp: boolean;
@@ -284,6 +291,7 @@ export type PlayerWhereInput = {
   firstSeason?: Prisma.IntFilter<'Player'> | number;
   lastSeason?: Prisma.IntFilter<'Player'> | number;
   teams?: Prisma.StringNullableListFilter<'Player'>;
+  mainTeam?: Prisma.StringNullableFilter<'Player'> | string | null;
   highestFgPercentage?: Prisma.FloatFilter<'Player'> | number;
   highestSeasonPointsTotal?: Prisma.IntFilter<'Player'> | number;
   mvp?: Prisma.BoolFilter<'Player'> | boolean;
@@ -302,6 +310,7 @@ export type PlayerOrderByWithRelationInput = {
   firstSeason?: Prisma.SortOrder;
   lastSeason?: Prisma.SortOrder;
   teams?: Prisma.SortOrder;
+  mainTeam?: Prisma.SortOrderInput | Prisma.SortOrder;
   highestFgPercentage?: Prisma.SortOrder;
   highestSeasonPointsTotal?: Prisma.SortOrder;
   mvp?: Prisma.SortOrder;
@@ -324,6 +333,7 @@ export type PlayerWhereUniqueInput = Prisma.AtLeast<
     firstSeason?: Prisma.IntFilter<'Player'> | number;
     lastSeason?: Prisma.IntFilter<'Player'> | number;
     teams?: Prisma.StringNullableListFilter<'Player'>;
+    mainTeam?: Prisma.StringNullableFilter<'Player'> | string | null;
     highestFgPercentage?: Prisma.FloatFilter<'Player'> | number;
     highestSeasonPointsTotal?: Prisma.IntFilter<'Player'> | number;
     mvp?: Prisma.BoolFilter<'Player'> | boolean;
@@ -344,6 +354,7 @@ export type PlayerOrderByWithAggregationInput = {
   firstSeason?: Prisma.SortOrder;
   lastSeason?: Prisma.SortOrder;
   teams?: Prisma.SortOrder;
+  mainTeam?: Prisma.SortOrderInput | Prisma.SortOrder;
   highestFgPercentage?: Prisma.SortOrder;
   highestSeasonPointsTotal?: Prisma.SortOrder;
   mvp?: Prisma.SortOrder;
@@ -372,6 +383,10 @@ export type PlayerScalarWhereWithAggregatesInput = {
   firstSeason?: Prisma.IntWithAggregatesFilter<'Player'> | number;
   lastSeason?: Prisma.IntWithAggregatesFilter<'Player'> | number;
   teams?: Prisma.StringNullableListFilter<'Player'>;
+  mainTeam?:
+    | Prisma.StringNullableWithAggregatesFilter<'Player'>
+    | string
+    | null;
   highestFgPercentage?: Prisma.FloatWithAggregatesFilter<'Player'> | number;
   highestSeasonPointsTotal?: Prisma.IntWithAggregatesFilter<'Player'> | number;
   mvp?: Prisma.BoolWithAggregatesFilter<'Player'> | boolean;
@@ -388,6 +403,7 @@ export type PlayerCreateInput = {
   firstSeason: number;
   lastSeason: number;
   teams?: Prisma.PlayerCreateteamsInput | string[];
+  mainTeam?: string | null;
   highestFgPercentage: number;
   highestSeasonPointsTotal: number;
   mvp: boolean;
@@ -406,6 +422,7 @@ export type PlayerUncheckedCreateInput = {
   firstSeason: number;
   lastSeason: number;
   teams?: Prisma.PlayerCreateteamsInput | string[];
+  mainTeam?: string | null;
   highestFgPercentage: number;
   highestSeasonPointsTotal: number;
   mvp: boolean;
@@ -424,6 +441,7 @@ export type PlayerUpdateInput = {
   firstSeason?: Prisma.IntFieldUpdateOperationsInput | number;
   lastSeason?: Prisma.IntFieldUpdateOperationsInput | number;
   teams?: Prisma.PlayerUpdateteamsInput | string[];
+  mainTeam?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   highestFgPercentage?: Prisma.FloatFieldUpdateOperationsInput | number;
   highestSeasonPointsTotal?: Prisma.IntFieldUpdateOperationsInput | number;
   mvp?: Prisma.BoolFieldUpdateOperationsInput | boolean;
@@ -442,6 +460,7 @@ export type PlayerUncheckedUpdateInput = {
   firstSeason?: Prisma.IntFieldUpdateOperationsInput | number;
   lastSeason?: Prisma.IntFieldUpdateOperationsInput | number;
   teams?: Prisma.PlayerUpdateteamsInput | string[];
+  mainTeam?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   highestFgPercentage?: Prisma.FloatFieldUpdateOperationsInput | number;
   highestSeasonPointsTotal?: Prisma.IntFieldUpdateOperationsInput | number;
   mvp?: Prisma.BoolFieldUpdateOperationsInput | boolean;
@@ -460,6 +479,7 @@ export type PlayerCreateManyInput = {
   firstSeason: number;
   lastSeason: number;
   teams?: Prisma.PlayerCreateteamsInput | string[];
+  mainTeam?: string | null;
   highestFgPercentage: number;
   highestSeasonPointsTotal: number;
   mvp: boolean;
@@ -476,6 +496,7 @@ export type PlayerUpdateManyMutationInput = {
   firstSeason?: Prisma.IntFieldUpdateOperationsInput | number;
   lastSeason?: Prisma.IntFieldUpdateOperationsInput | number;
   teams?: Prisma.PlayerUpdateteamsInput | string[];
+  mainTeam?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   highestFgPercentage?: Prisma.FloatFieldUpdateOperationsInput | number;
   highestSeasonPointsTotal?: Prisma.IntFieldUpdateOperationsInput | number;
   mvp?: Prisma.BoolFieldUpdateOperationsInput | boolean;
@@ -492,6 +513,7 @@ export type PlayerUncheckedUpdateManyInput = {
   firstSeason?: Prisma.IntFieldUpdateOperationsInput | number;
   lastSeason?: Prisma.IntFieldUpdateOperationsInput | number;
   teams?: Prisma.PlayerUpdateteamsInput | string[];
+  mainTeam?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   highestFgPercentage?: Prisma.FloatFieldUpdateOperationsInput | number;
   highestSeasonPointsTotal?: Prisma.IntFieldUpdateOperationsInput | number;
   mvp?: Prisma.BoolFieldUpdateOperationsInput | boolean;
@@ -508,6 +530,7 @@ export type PlayerCountOrderByAggregateInput = {
   firstSeason?: Prisma.SortOrder;
   lastSeason?: Prisma.SortOrder;
   teams?: Prisma.SortOrder;
+  mainTeam?: Prisma.SortOrder;
   highestFgPercentage?: Prisma.SortOrder;
   highestSeasonPointsTotal?: Prisma.SortOrder;
   mvp?: Prisma.SortOrder;
@@ -530,6 +553,7 @@ export type PlayerMaxOrderByAggregateInput = {
   name?: Prisma.SortOrder;
   firstSeason?: Prisma.SortOrder;
   lastSeason?: Prisma.SortOrder;
+  mainTeam?: Prisma.SortOrder;
   highestFgPercentage?: Prisma.SortOrder;
   highestSeasonPointsTotal?: Prisma.SortOrder;
   mvp?: Prisma.SortOrder;
@@ -545,6 +569,7 @@ export type PlayerMinOrderByAggregateInput = {
   name?: Prisma.SortOrder;
   firstSeason?: Prisma.SortOrder;
   lastSeason?: Prisma.SortOrder;
+  mainTeam?: Prisma.SortOrder;
   highestFgPercentage?: Prisma.SortOrder;
   highestSeasonPointsTotal?: Prisma.SortOrder;
   mvp?: Prisma.SortOrder;
@@ -582,6 +607,10 @@ export type IntFieldUpdateOperationsInput = {
 export type PlayerUpdateteamsInput = {
   set?: string[];
   push?: string | string[];
+};
+
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null;
 };
 
 export type FloatFieldUpdateOperationsInput = {
@@ -654,6 +683,7 @@ export type PlayerCreateWithoutTeammatePairsAsPlayerInput = {
   firstSeason: number;
   lastSeason: number;
   teams?: Prisma.PlayerCreateteamsInput | string[];
+  mainTeam?: string | null;
   highestFgPercentage: number;
   highestSeasonPointsTotal: number;
   mvp: boolean;
@@ -671,6 +701,7 @@ export type PlayerUncheckedCreateWithoutTeammatePairsAsPlayerInput = {
   firstSeason: number;
   lastSeason: number;
   teams?: Prisma.PlayerCreateteamsInput | string[];
+  mainTeam?: string | null;
   highestFgPercentage: number;
   highestSeasonPointsTotal: number;
   mvp: boolean;
@@ -696,6 +727,7 @@ export type PlayerCreateWithoutTeammatePairsAsTeammateInput = {
   firstSeason: number;
   lastSeason: number;
   teams?: Prisma.PlayerCreateteamsInput | string[];
+  mainTeam?: string | null;
   highestFgPercentage: number;
   highestSeasonPointsTotal: number;
   mvp: boolean;
@@ -713,6 +745,7 @@ export type PlayerUncheckedCreateWithoutTeammatePairsAsTeammateInput = {
   firstSeason: number;
   lastSeason: number;
   teams?: Prisma.PlayerCreateteamsInput | string[];
+  mainTeam?: string | null;
   highestFgPercentage: number;
   highestSeasonPointsTotal: number;
   mvp: boolean;
@@ -758,6 +791,7 @@ export type PlayerUpdateWithoutTeammatePairsAsPlayerInput = {
   firstSeason?: Prisma.IntFieldUpdateOperationsInput | number;
   lastSeason?: Prisma.IntFieldUpdateOperationsInput | number;
   teams?: Prisma.PlayerUpdateteamsInput | string[];
+  mainTeam?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   highestFgPercentage?: Prisma.FloatFieldUpdateOperationsInput | number;
   highestSeasonPointsTotal?: Prisma.IntFieldUpdateOperationsInput | number;
   mvp?: Prisma.BoolFieldUpdateOperationsInput | boolean;
@@ -775,6 +809,7 @@ export type PlayerUncheckedUpdateWithoutTeammatePairsAsPlayerInput = {
   firstSeason?: Prisma.IntFieldUpdateOperationsInput | number;
   lastSeason?: Prisma.IntFieldUpdateOperationsInput | number;
   teams?: Prisma.PlayerUpdateteamsInput | string[];
+  mainTeam?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   highestFgPercentage?: Prisma.FloatFieldUpdateOperationsInput | number;
   highestSeasonPointsTotal?: Prisma.IntFieldUpdateOperationsInput | number;
   mvp?: Prisma.BoolFieldUpdateOperationsInput | boolean;
@@ -812,6 +847,7 @@ export type PlayerUpdateWithoutTeammatePairsAsTeammateInput = {
   firstSeason?: Prisma.IntFieldUpdateOperationsInput | number;
   lastSeason?: Prisma.IntFieldUpdateOperationsInput | number;
   teams?: Prisma.PlayerUpdateteamsInput | string[];
+  mainTeam?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   highestFgPercentage?: Prisma.FloatFieldUpdateOperationsInput | number;
   highestSeasonPointsTotal?: Prisma.IntFieldUpdateOperationsInput | number;
   mvp?: Prisma.BoolFieldUpdateOperationsInput | boolean;
@@ -829,6 +865,7 @@ export type PlayerUncheckedUpdateWithoutTeammatePairsAsTeammateInput = {
   firstSeason?: Prisma.IntFieldUpdateOperationsInput | number;
   lastSeason?: Prisma.IntFieldUpdateOperationsInput | number;
   teams?: Prisma.PlayerUpdateteamsInput | string[];
+  mainTeam?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   highestFgPercentage?: Prisma.FloatFieldUpdateOperationsInput | number;
   highestSeasonPointsTotal?: Prisma.IntFieldUpdateOperationsInput | number;
   mvp?: Prisma.BoolFieldUpdateOperationsInput | boolean;
@@ -904,6 +941,7 @@ export type PlayerSelect<
     firstSeason?: boolean;
     lastSeason?: boolean;
     teams?: boolean;
+    mainTeam?: boolean;
     highestFgPercentage?: boolean;
     highestSeasonPointsTotal?: boolean;
     mvp?: boolean;
@@ -933,6 +971,7 @@ export type PlayerSelectCreateManyAndReturn<
     firstSeason?: boolean;
     lastSeason?: boolean;
     teams?: boolean;
+    mainTeam?: boolean;
     highestFgPercentage?: boolean;
     highestSeasonPointsTotal?: boolean;
     mvp?: boolean;
@@ -955,6 +994,7 @@ export type PlayerSelectUpdateManyAndReturn<
     firstSeason?: boolean;
     lastSeason?: boolean;
     teams?: boolean;
+    mainTeam?: boolean;
     highestFgPercentage?: boolean;
     highestSeasonPointsTotal?: boolean;
     mvp?: boolean;
@@ -973,6 +1013,7 @@ export type PlayerSelectScalar = {
   firstSeason?: boolean;
   lastSeason?: boolean;
   teams?: boolean;
+  mainTeam?: boolean;
   highestFgPercentage?: boolean;
   highestSeasonPointsTotal?: boolean;
   mvp?: boolean;
@@ -992,6 +1033,7 @@ export type PlayerOmit<
   | 'firstSeason'
   | 'lastSeason'
   | 'teams'
+  | 'mainTeam'
   | 'highestFgPercentage'
   | 'highestSeasonPointsTotal'
   | 'mvp'
@@ -1039,6 +1081,7 @@ export type $PlayerPayload<
       firstSeason: number;
       lastSeason: number;
       teams: string[];
+      mainTeam: string | null;
       highestFgPercentage: number;
       highestSeasonPointsTotal: number;
       mvp: boolean;
@@ -1670,6 +1713,7 @@ export interface PlayerFieldRefs {
   readonly firstSeason: Prisma.FieldRef<'Player', 'Int'>;
   readonly lastSeason: Prisma.FieldRef<'Player', 'Int'>;
   readonly teams: Prisma.FieldRef<'Player', 'String[]'>;
+  readonly mainTeam: Prisma.FieldRef<'Player', 'String'>;
   readonly highestFgPercentage: Prisma.FieldRef<'Player', 'Float'>;
   readonly highestSeasonPointsTotal: Prisma.FieldRef<'Player', 'Int'>;
   readonly mvp: Prisma.FieldRef<'Player', 'Boolean'>;

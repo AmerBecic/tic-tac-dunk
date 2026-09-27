@@ -32,6 +32,7 @@ model Player {
   firstSeason              Int      @map("first_season")
   lastSeason               Int      @map("last_season")
   teams                    String[]
+  mainTeam                 String?  @map("main_team")
   highestFgPercentage      Float    @map("highest_fg_percentage")
   highestSeasonPointsTotal Int      @map("highest_season_points_total")
   mvp                      Boolean
@@ -47,7 +48,6 @@ model Player {
   @@map("players")
 }
 
-/// Pair ordering, positive season counts, RLS, and grants are enforced by the SQL migration.
 model PlayerTeammate {
   playerId        String @map("player_id")
   teammateId      String @map("teammate_id")

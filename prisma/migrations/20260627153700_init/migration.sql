@@ -4,6 +4,7 @@ CREATE TABLE "players" (
     "first_season" INTEGER NOT NULL,
     "last_season" INTEGER NOT NULL,
     "teams" TEXT[],
+    "main_team" TEXT,
     "highest_fg_percentage" DOUBLE PRECISION NOT NULL,
     "highest_season_points_total" INTEGER NOT NULL,
     "mvp" BOOLEAN NOT NULL,

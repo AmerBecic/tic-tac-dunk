@@ -13,7 +13,7 @@ import type * as Prisma from '../internal/prismaNamespace';
 
 /**
  * Model PlayerTeammate
- * Pair ordering, positive season counts, RLS, and grants are enforced by the SQL migration.
+ *
  */
 export type PlayerTeammateModel =
   runtime.Types.Result.DefaultSelection<Prisma.$PlayerTeammatePayload>;

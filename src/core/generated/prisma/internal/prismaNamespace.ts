@@ -811,6 +811,7 @@ export const PlayerScalarFieldEnum = {
   firstSeason: 'firstSeason',
   lastSeason: 'lastSeason',
   teams: 'teams',
+  mainTeam: 'mainTeam',
   highestFgPercentage: 'highestFgPercentage',
   highestSeasonPointsTotal: 'highestSeasonPointsTotal',
   mvp: 'mvp',
@@ -862,6 +863,13 @@ export const JsonNullValueFilter = {
 
 export type JsonNullValueFilter =
   (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter];
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last',
+} as const;
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder];
 
 /**
  * Field references

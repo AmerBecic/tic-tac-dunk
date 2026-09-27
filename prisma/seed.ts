@@ -21,6 +21,9 @@ const prisma = new PrismaClient({ adapter });
 
 async function main(): Promise<void> {
   validateTeamCodes(players.flatMap((player) => player.teams));
+  validateTeamCodes(
+    players.flatMap((player) => (player.mainTeam ? [player.mainTeam] : []))
+  );
   const chunkSize = 500;
 
   for (let i = 0; i < players.length; i += chunkSize) {
@@ -31,6 +34,7 @@ async function main(): Promise<void> {
         firstSeason: p.firstSeason,
         lastSeason: p.lastSeason,
         teams: p.teams,
+        mainTeam: p.mainTeam,
         highestFgPercentage: p.highestFGPercentage ?? 0,
         highestSeasonPointsTotal: p.highestSeasonPointsTotal,
         mvp: p.mvp,
@@ -45,6 +49,21 @@ async function main(): Promise<void> {
       data: batch,
       skipDuplicates: true,
     });
+
+    // Backfill existing records as well as newly inserted players.
+    const mainTeams = JSON.stringify(
+      batch.map((player) => ({
+        id: player.id,
+        main_team: player.mainTeam,
+      }))
+    );
+    await prisma.$executeRaw`
+      UPDATE public.players AS player
+      SET main_team = source.main_team
+      FROM jsonb_to_recordset(${mainTeams}::jsonb)
+        AS source(id text, main_team text)
+      WHERE player.id = source.id
+    `;
   }
 
   // Synchronize both new and existing players, including clearing stale eligibility.

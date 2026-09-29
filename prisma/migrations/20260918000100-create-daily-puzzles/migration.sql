@@ -19,6 +19,9 @@ CREATE TABLE public.daily_puzzles (
     )
 );
 
+GRANT USAGE ON SCHEMA public TO service_role;
+GRANT SELECT, INSERT ON TABLE public.daily_puzzles TO service_role;
+
 CREATE FUNCTION public.reject_daily_puzzle_mutation()
 RETURNS TRIGGER
 LANGUAGE plpgsql

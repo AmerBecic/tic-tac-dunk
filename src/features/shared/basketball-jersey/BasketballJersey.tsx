@@ -6,8 +6,8 @@ import { cn } from '@/core/utils/Utils';
 interface BasketballJerseyProps {
   jerseyColor?: string;
   trimColor?: string;
-  number?: number | string;
-  numberColor?: string;
+  lastName?: string;
+  nameColor?: string;
   size?: number;
   className?: string;
   alt?: string;
@@ -16,18 +16,17 @@ interface BasketballJerseyProps {
 export const BasketballJersey = ({
   jerseyColor = '#9ca3af',
   trimColor = '#6b7280',
-  number,
-  numberColor = '#ffffff',
+  lastName,
+  nameColor = '#ffffff',
   size = 120,
   className,
   alt,
 }: BasketballJerseyProps): React.JSX.Element => {
-  const hasNumber = number !== undefined && number !== '';
+  const name = lastName?.trim() ?? '';
+  const hasName = name.length > 0;
   const label =
     alt ??
-    (hasNumber
-      ? `Basketball jersey number ${number}`
-      : 'Empty basketball jersey');
+    (hasName ? `Basketball jersey for ${name}` : 'Empty basketball jersey');
   const style = {
     '--jersey-color': jerseyColor,
     '--trim-color': trimColor,
@@ -37,7 +36,7 @@ export const BasketballJersey = ({
   return (
     <div
       className={cn(styles.jersey, className)}
-      data-empty={!hasNumber || undefined}
+      data-empty={!hasName || undefined}
       style={style}
       role={label ? 'img' : undefined}
       aria-label={label || undefined}
@@ -48,13 +47,16 @@ export const BasketballJersey = ({
         aria-hidden="true"
         focusable="false"
       />
-      {hasNumber && (
+      {hasName && (
         <span
-          className={styles.number}
-          style={{ color: numberColor }}
+          className={styles.name}
+          style={{
+            color: nameColor,
+            fontSize: `${Math.min(9, 60 / Array.from(name.toUpperCase()).length)}cqw`,
+          }}
           aria-hidden="true"
         >
-          {number}
+          {name}
         </span>
       )}
     </div>

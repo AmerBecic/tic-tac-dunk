@@ -1,14 +1,14 @@
 import type { createSupabase } from '@/core/supabase/server';
-import type { SearchPlayersRequest } from '@/domains/player/types/search.player.request.dto';
-import type { SearchPlayersResponse } from '@/domains/player/types/search.player.response.dto';
+import type { GetPlayersRequest } from '@/domains/player/types/get.players.request.dto';
+import type { GetPlayersResponse } from '@/domains/player/types/get.players.response.dto';
 import { playerRepository } from '../repositories/player.repository';
 
-async function searchPlayers(
-  { search = '', page = 1, limit = 20 }: SearchPlayersRequest,
+async function getPlayers(
+  { search = '', page = 1, limit = 20 }: GetPlayersRequest,
   supabase: ReturnType<typeof createSupabase>
-): Promise<SearchPlayersResponse> {
+): Promise<GetPlayersResponse> {
   const offset = (page - 1) * limit;
-  const result = await playerRepository.searchPlayers(
+  const result = await playerRepository.getPlayers(
     search,
     offset,
     limit,
@@ -20,12 +20,7 @@ async function searchPlayers(
 
   let total = result.total;
   if (result.data.length === 0 && offset > 0) {
-    const firstPage = await playerRepository.searchPlayers(
-      search,
-      0,
-      1,
-      supabase
-    );
+    const firstPage = await playerRepository.getPlayers(search, 0, 1, supabase);
     if (firstPage.error)
       throw new Error(`Unable to count players: ${firstPage.error.message}`);
     total = firstPage.total;
@@ -34,7 +29,7 @@ async function searchPlayers(
   const hasPrevPage = page > 1 && totalPages > 0;
   const hasNextPage = page < totalPages;
 
-  const response: SearchPlayersResponse = {
+  const response: GetPlayersResponse = {
     success: true,
     data: { players: result.data },
     pagination: {
@@ -53,4 +48,4 @@ async function searchPlayers(
   return response;
 }
 
-export const playerService = { searchPlayers };
+export const playerService = { getPlayers };

@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createSupabase } from '@/core/supabase/server';
-import type { SearchPlayersRequest } from '@/domains/player/types/search.player.request.dto';
-import type { SearchPlayersResponse } from '@/domains/player/types/search.player.response.dto';
+import type { GetPlayersRequest } from '@/domains/player/types/get.players.request.dto';
+import type { GetPlayersResponse } from '@/domains/player/types/get.players.response.dto';
 import { playerService } from '../services/player.service';
 
-export async function searchPlayers(
+export async function getPlayers(
   request: NextRequest
-): Promise<NextResponse<SearchPlayersResponse>> {
+): Promise<NextResponse<GetPlayersResponse>> {
   const params = request.nextUrl.searchParams;
   const pageParam = params.get('page');
   const limitParam = params.get('limit');
@@ -14,20 +14,20 @@ export async function searchPlayers(
   const limit = limitParam === null ? 20 : Number(limitParam);
   const headers = { 'Cache-Control': 'no-store' };
 
-  const query: SearchPlayersRequest = {
+  const query: GetPlayersRequest = {
     search: params.get('search')?.trim() ?? '',
     page,
     limit,
   };
   try {
-    const response: SearchPlayersResponse = await playerService.searchPlayers(
+    const response: GetPlayersResponse = await playerService.getPlayers(
       query,
       createSupabase()
     );
     return NextResponse.json(response, { headers });
   } catch (error) {
     console.error('Player search failed:', error);
-    return NextResponse.json<SearchPlayersResponse>(
+    return NextResponse.json<GetPlayersResponse>(
       { success: false, error: 'Failed to search players.' },
       { status: 500, headers }
     );

@@ -4,30 +4,39 @@
     "metadata_description": "Dobrodošli u najbolju NBA igru s mrežama.",
     "metadata_keywords": "NBA, trivia, immaculate grid, basketball, players, teams"
   },
-
   "dailyPuzzle": {
     "title": "Dnevni izazov",
     "metadata_title": "Dnevni NBA izazov | Tic Tac Dunk",
     "metadata_description": "Igrajte današnji Tic Tac Dunk NBA izazov i testirajte svoje košarkaško znanje.",
     "metadata_keywords": "dnevni NBA izazov, NBA kviz, košarkaška mreža, igrači, timovi"
   },
-
   "pages": {
     "home": "Home",
     "how_to_play": "Pravila igre",
     "dev_blog": "Dev blog"
   },
-
   "common": {
-    "play_now": "Igraj sada"
+    "play_now": "Igraj sada",
+    "close": "Zatvori",
+    "retry": "Pokušaj ponovo"
   },
-
   "themeSwitcher": {
     "switchTheme": "Promijeni temu"
   },
-
   "footer": {
     "description": "NBA mreža koja odvaja prave košarkaške znalce od povremenih navijača.",
     "copyright": "© 2026 Tic Tac Dunk. Sva prava zadržana."
+  },
+  "playersSearch": {
+    "search": "Pretraži igrače",
+    "searchLabel": "Pretraži igrače po imenu",
+    "clear": "Očisti pretragu",
+    "title": "Odaberi igrača",
+    "description": "Pretraži igrače po imenu i odaberi igrača iz rezultata.",
+    "loading": "Pretraživanje igrača…",
+    "error": "Nije moguće učitati igrače.",
+    "empty": "Nema pronađenih igrača.",
+    "resultsLabel": "Pronađeni igrači",
+    "moreResults": "Prikazano je prvih {count} rezultata. Preciziraj pretragu da pronađeš više igrača."
   }
 }

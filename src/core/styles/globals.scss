@@ -11,7 +11,7 @@
   --color-secondary: #{colors.color(secondary)};
   --color-warning: #{colors.color(warning)};
   --color-error: #{colors.color(error)};
-  --color-focus: #{colors.color(info)};
+  --color-focus: var(--color-secondary);
 
   --color-switch-unchecked: #{colors.gray(500)};
   --color-switch-thumb: #{colors.white(100)};

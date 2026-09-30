@@ -1,8 +1,8 @@
-import type { Grid } from '@/domains/grid/types/GridTypes';
+import type { Grid } from '@/domains/grid/types/grid.types';
 import { dailyPuzzleRepository } from '../repositories/daily-puzzle.repository';
 import type { createSupabase } from '@/core/supabase/server';
 import { gridService } from './grid.service';
-import { DAILY_GRID_CONFIG } from '@/domains/grid/types/GridConstants';
+import { DAILY_GRID_CONFIG } from '@/domains/grid/types/grid.constants';
 
 interface DailyPuzzleGenerationResult {
   success: true;

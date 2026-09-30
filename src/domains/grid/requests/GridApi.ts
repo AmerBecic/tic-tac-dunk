@@ -1,5 +1,5 @@
 import { GET_DAILY_PUZZLE_API_URL } from '@/core/constants/ApiRoutes';
-import type { GetDailyPuzzleResponse } from '../types/GetDailyPuzzleResponseDTO';
+import type { GetDailyPuzzleResponse } from '../types/get.daily.puzzle.response.dto';
 import { Api } from '@/core/api/Api';
 import { GENERATE_GRID_API_URL } from '@/core/constants/ApiRoutes';
 import { GenerateGridResponse } from '..';

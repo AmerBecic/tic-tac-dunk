@@ -1,6 +1,6 @@
 export { GridApi } from './requests/GridApi';
 export { useGenerateGrid } from './hooks/useGenerateGrid';
-export type { GenerateGridResponse } from './types/GenerateGridResponseDTO';
+export type { GenerateGridResponse } from './types/generate.grid.response.dto';
 export {
   ACHIEVEMENT_CATEGORIES,
   CATEGORY_TYPES,
@@ -9,7 +9,7 @@ export {
   GRID_VALIDATION_ERROR_CODES,
   MAX_GENERATION_ATTEMPTS,
   STAT_CATEGORIES,
-} from './types/GridConstants';
+} from './types/grid.constants';
 export type {
   CategoryCounts,
   CategoryType,
@@ -20,6 +20,6 @@ export type {
   GridValidationError,
   GridValidationErrorCode,
   GridValidationResult,
-} from './types/GridTypes';
+} from './types/grid.types';
 export { useGetDailyPuzzle } from './hooks/useGetDailyPuzzle';
-export type { GetDailyPuzzleResponse } from './types/GetDailyPuzzleResponseDTO';
+export type { GetDailyPuzzleResponse } from './types/get.daily.puzzle.response.dto';

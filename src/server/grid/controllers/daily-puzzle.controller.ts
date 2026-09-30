@@ -1,4 +1,4 @@
-import type { GetDailyPuzzleResponse } from '@/domains/grid/types/GetDailyPuzzleResponseDTO';
+import type { GetDailyPuzzleResponse } from '@/domains/grid/types/get.daily.puzzle.response.dto';
 import { NextRequest, NextResponse } from 'next/server';
 
 import { createSupabase } from '@/core/supabase/server';

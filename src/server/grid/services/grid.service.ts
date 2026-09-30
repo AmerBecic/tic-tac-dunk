@@ -7,7 +7,7 @@ import {
   GRID_VALIDATION_ERROR_CODES,
   MAX_GENERATION_ATTEMPTS,
   STAT_CATEGORIES,
-} from '@/domains/grid/types/GridConstants';
+} from '@/domains/grid/types/grid.constants';
 
 import type {
   CategoryCounts,
@@ -17,7 +17,7 @@ import type {
   GridGenerationConfig,
   GridGenerationResult,
   GridValidationResult,
-} from '@/domains/grid/types/GridTypes';
+} from '@/domains/grid/types/grid.types';
 import { randomIndex, shuffle } from '../helpers/grid.helpers';
 
 const [TEAM, TEAMMATE, ACHIEVEMENT, STAT] = CATEGORY_TYPES;

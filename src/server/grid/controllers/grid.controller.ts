@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server';
 import { createSupabase } from '@/core/supabase/server';
-import type { GenerateGridResponse } from '@/domains/grid/types/GenerateGridResponseDTO';
+import type { GenerateGridResponse } from '@/domains/grid/types/generate.grid.response.dto';
 
 import { gridService } from '@/server/grid/services/grid.service';
 import {
   DAILY_GRID_CONFIG,
   GRID_VALIDATION_ERROR_CODES,
-} from '@/domains/grid/types/GridConstants';
+} from '@/domains/grid/types/grid.constants';
 
 export async function generateGrid(): Promise<
   NextResponse<GenerateGridResponse>

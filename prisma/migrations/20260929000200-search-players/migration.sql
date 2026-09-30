@@ -56,8 +56,12 @@ BEGIN
         p.teammate_clue_eligible,
         COUNT(*) OVER() AS total_count
     FROM public.players AS p
-    WHERE COALESCE(_search, '') = ''
-        OR p.name ILIKE '%' || _search || '%'
+    WHERE NOT EXISTS (
+        SELECT 1
+        FROM regexp_split_to_table(lower(coalesce(_search, '')), '[[:space:]]+') AS term(word)
+        WHERE term.word <> ''
+          AND strpos(lower(p.name), term.word) = 0
+    )
     OFFSET _offset
     LIMIT _limit;
 END;

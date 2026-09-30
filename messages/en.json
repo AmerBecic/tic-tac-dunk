@@ -4,30 +4,39 @@
     "metadata_description": "Welcome to the ultimate NBA grid game.",
     "metadata_keywords": "NBA, trivia, immaculate grid, basketball, players, teams"
   },
-
   "dailyPuzzle": {
     "title": "Daily Puzzle",
     "metadata_title": "Daily NBA Puzzle | Tic Tac Dunk",
     "metadata_description": "Play today's Tic Tac Dunk NBA puzzle and test your basketball knowledge.",
     "metadata_keywords": "daily NBA puzzle, NBA trivia, basketball grid, players, teams"
   },
-
   "pages": {
     "home": "Home",
     "how_to_play": "How to play",
     "dev_blog": "Dev blog"
   },
-
   "common": {
-    "play_now": "Play Now"
+    "play_now": "Play Now",
+    "close": "Close",
+    "retry": "Try again"
   },
-
   "themeSwitcher": {
     "switchTheme": "Switch Theme"
   },
-
   "footer": {
     "description": "The NBA grid that separates true hoopers from casual fans.",
     "copyright": "© 2026 Tic Tac Dunk. All rights reserved."
+  },
+  "playersSearch": {
+    "search": "Search players",
+    "searchLabel": "Search players by name",
+    "clear": "Clear search",
+    "title": "Select a player",
+    "description": "Search by name and select a player from the results.",
+    "loading": "Searching players…",
+    "error": "Unable to load players.",
+    "empty": "No players found.",
+    "resultsLabel": "Matching players",
+    "moreResults": "Showing the first {count} matches. Refine your search to find more players."
   }
 }

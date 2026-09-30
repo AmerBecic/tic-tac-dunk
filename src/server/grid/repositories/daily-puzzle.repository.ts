@@ -1,5 +1,5 @@
 import type { createSupabase } from '@/core/supabase/server';
-import type { Grid } from '@/domains/grid/types/GridTypes';
+import type { Grid } from '@/domains/grid/types/grid.types';
 
 async function findByDate(
   date: string,

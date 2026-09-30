@@ -3,15 +3,18 @@
 import { Fragment } from 'react';
 
 import styles from './DailyPuzzle.module.scss';
-import { Logo } from '../../shared/logo';
-import { Paragraph } from '../../shared/ui/paragraph';
+import { Logo } from '../shared/logo';
+import { Paragraph } from '../shared/ui/paragraph';
 import { useTranslations } from 'next-intl';
 import { GRID_SIZE, useGetDailyPuzzle } from '@/domains/grid';
-import { BasketballJersey } from '../../shared/basketball-jersey/BasketballJersey';
-import { Criterion } from './Criterion';
+import { BasketballJersey } from '../shared/basketball-jersey/BasketballJersey';
+import { Criterion } from './criterion/Criterion';
+import { Button } from '@/features/shared/ui/button';
+import { PlayerSearchDialog } from './player-search-dialog/PlayerSearchDialog';
 
 export const DailyPuzzle = (): React.JSX.Element => {
   const t = useTranslations('dailyPuzzle');
+  const playerSearch = useTranslations('playersSearch');
   const { dailyPuzzle } = useGetDailyPuzzle();
 
   return (
@@ -34,16 +37,23 @@ export const DailyPuzzle = (): React.JSX.Element => {
             <Criterion category={dailyPuzzle?.rows[rowIndex]} />
 
             {Array.from({ length: GRID_SIZE }, (_, columnIndex) => (
-              <div
-                className={styles.cell}
+              <PlayerSearchDialog
                 key={`cell-${rowIndex}-${columnIndex}`}
-              >
-                <BasketballJersey
-                  alt="Empty basketball jersey"
-                  size={80}
-                  className={styles.jersey}
-                />
-              </div>
+                trigger={
+                  <Button
+                    type="button"
+                    className={styles.cell}
+                    textProps={{ style: { display: 'contents' } }}
+                    aria-label={playerSearch('search')}
+                  >
+                    <BasketballJersey
+                      alt=""
+                      size={80}
+                      className={styles.jersey}
+                    />
+                  </Button>
+                }
+              />
             ))}
           </Fragment>
         ))}

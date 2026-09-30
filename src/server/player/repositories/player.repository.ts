@@ -3,7 +3,7 @@ import type { Player } from '@/domains/player/types/player.types';
 
 type PlayerSearchRow = Player & { total_count: number | string };
 
-async function searchPlayers(
+async function getPlayers(
   search: string,
   offset: number,
   limit: number,
@@ -25,4 +25,4 @@ async function searchPlayers(
   };
 }
 
-export const playerRepository = { searchPlayers };
+export const playerRepository = { getPlayers };

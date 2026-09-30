@@ -36,6 +36,7 @@ export const PlayersSearch = ({
         containerClassName={styles.searchField}
         value={searchPlayers}
         onChange={setSearchPlayers}
+        autoComplete="off"
         placeholder={t('search')}
         clearLabel={t('clear')}
         aria-label={t('searchLabel')}
@@ -55,7 +56,7 @@ export const PlayersSearch = ({
                     type="button"
                     variant="ghost"
                     className={styles.player}
-                    textProps={{ className: styles.playerLabel }}
+                    textProps={{ className: styles.playerLabel, bold: false }}
                     onClick={() => onSelectPlayer?.(player)}
                   >
                     <Text className={styles.name} textAlign="left">

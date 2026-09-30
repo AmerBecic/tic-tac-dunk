@@ -34,7 +34,7 @@ export const BasketballJersey = ({
   } as CSSProperties;
 
   return (
-    <div
+    <span
       className={cn(styles.jersey, className)}
       data-empty={!hasName || undefined}
       style={style}
@@ -59,6 +59,6 @@ export const BasketballJersey = ({
           {name}
         </span>
       )}
-    </div>
+    </span>
   );
 };

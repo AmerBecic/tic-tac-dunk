@@ -5,8 +5,7 @@ import React from 'react';
 import { cn } from '@/core/utils/Utils';
 
 import styles from './Button.module.scss';
-import { TextProps } from '../text';
-import { Paragraph } from '../paragraph';
+import { Text, type TextProps } from '../text';
 import { Link, type LinkProps } from '../link';
 
 type ButtonVariant = 'primary' | 'secondary' | 'danger' | 'ghost';
@@ -17,7 +16,7 @@ interface BaseButtonProps {
   size?: ButtonSize;
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
-  textProps?: TextProps<'p'>;
+  textProps?: TextProps<'span'>;
 }
 
 export type ButtonProps = BaseButtonProps &
@@ -63,13 +62,15 @@ export const Button = ({
       {startIcon && <span className={styles.icon}>{startIcon}</span>}
 
       {children && (
-        <Paragraph
+        <Text
+          as="span"
+          fontSize="20"
           bold
           {...textProps}
           className={cn(styles.label, textProps?.className)}
         >
           {children}
-        </Paragraph>
+        </Text>
       )}
 
       {endIcon && <span className={styles.icon}>{endIcon}</span>}

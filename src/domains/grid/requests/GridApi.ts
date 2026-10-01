@@ -1,3 +1,7 @@
+import type {
+  ValidateAnswerRequest,
+  ValidateAnswerResponse,
+} from '../types/ValidateAnswer';
 import { GET_DAILY_PUZZLE_API_URL } from '@/core/constants/ApiRoutes';
 import type { GetDailyPuzzleResponse } from '../types/get.daily.puzzle.response.dto';
 import { Api } from '@/core/api/Api';
@@ -21,7 +25,17 @@ const getDailyPuzzle = async (): Promise<GetDailyPuzzleResponse['data']> => {
   return response.data;
 };
 
+const validateAnswer = async (input: ValidateAnswerRequest) => {
+  const response = await Api.post<ValidateAnswerResponse>(
+    'v1/grid/daily-puzzle/validate-answer',
+    input,
+    'no-store'
+  );
+  return response.data;
+};
+
 export const GridApi = {
+  validateAnswer,
   getDailyPuzzle,
   generateGrid,
 };

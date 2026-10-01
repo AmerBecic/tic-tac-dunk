@@ -13,6 +13,8 @@ export type GridCategory = {
   label: string;
   includedNames?: string[];
 };
+export type DailyPuzzle = Grid & { id: string };
+
 export type Grid = {
   rows: GridCategory[];
   columns: GridCategory[];

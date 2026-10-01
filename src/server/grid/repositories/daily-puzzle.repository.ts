@@ -23,7 +23,19 @@ async function create(
     .single();
 }
 
+async function findById(
+  id: string,
+  supabase: ReturnType<typeof createSupabase>
+) {
+  return supabase
+    .from('daily_puzzles')
+    .select('id, grid_data')
+    .eq('id', id)
+    .maybeSingle();
+}
+
 export const dailyPuzzleRepository = {
+  findById,
   findByDate,
   create,
 };

@@ -11,11 +11,13 @@ import { Text } from '../ui/text';
 import styles from './PlayersSearch.module.scss';
 
 interface PlayersSearchProps {
+  disabled?: boolean;
   onSelectPlayer?: (player: Player) => void;
 }
 
 export const PlayersSearch = ({
   onSelectPlayer,
+  disabled = false,
 }: PlayersSearchProps): React.JSX.Element => {
   const t = useTranslations('playersSearch');
   const [searchPlayers, setSearchPlayers] = useState('');
@@ -32,6 +34,7 @@ export const PlayersSearch = ({
   return (
     <div className={styles.search}>
       <SearchInput
+        disabled={disabled}
         className={styles.searchInput}
         containerClassName={styles.searchField}
         value={searchPlayers}
@@ -54,6 +57,7 @@ export const PlayersSearch = ({
                 <li key={player.id}>
                   <Button
                     type="button"
+                    disabled={disabled}
                     variant="ghost"
                     className={styles.player}
                     textProps={{ className: styles.playerLabel, bold: false }}

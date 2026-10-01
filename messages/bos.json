@@ -8,7 +8,10 @@
     "title": "Dnevni izazov",
     "metadata_title": "Dnevni NBA izazov | Tic Tac Dunk",
     "metadata_description": "Igrajte današnji Tic Tac Dunk NBA izazov i testirajte svoje košarkaško znanje.",
-    "metadata_keywords": "dnevni NBA izazov, NBA kviz, košarkaška mreža, igrači, timovi"
+    "metadata_keywords": "dnevni NBA izazov, NBA kviz, košarkaška mreža, igrači, timovi",
+    "score": "{count} / {total}",
+    "correctAnswer": "Tačno!",
+    "incorrectAnswer": "Netačno. Pokušajte s drugim igračem."
   },
   "pages": {
     "home": "Home",
@@ -37,6 +40,8 @@
     "error": "Nije moguće učitati igrače.",
     "empty": "Nema pronađenih igrača.",
     "resultsLabel": "Pronađeni igrači",
-    "moreResults": "Prikazano je prvih {count} rezultata. Preciziraj pretragu da pronađeš više igrača."
+    "moreResults": "Prikazano je prvih {count} rezultata. Preciziraj pretragu da pronađeš više igrača.",
+    "validating": "Provjera odgovora…",
+    "validationError": "Nije moguće provjeriti odgovor. Pokušajte ponovo."
   }
 }

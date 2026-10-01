@@ -1,4 +1,4 @@
-import type { Grid } from '@/domains/grid/types/grid.types';
+import type { Grid, DailyPuzzle } from '@/domains/grid/types/grid.types';
 import { dailyPuzzleRepository } from '../repositories/daily-puzzle.repository';
 import type { createSupabase } from '@/core/supabase/server';
 import { gridService } from './grid.service';
@@ -75,14 +75,14 @@ async function generateDailyPuzzle(
 
 async function getDailyPuzzle(
   supabase: ReturnType<typeof createSupabase>
-): Promise<Grid | null> {
+): Promise<DailyPuzzle | null> {
   const date = new Date().toISOString().slice(0, 10);
   const { data, error } = await dailyPuzzleRepository.findByDate(
     date,
     supabase
   );
   if (error) throw new Error(`Unable to read daily puzzle: ${error.message}`);
-  return (data?.grid_data as Grid | undefined) ?? null;
+  return data ? { ...(data.grid_data as Grid), id: data.id } : null;
 }
 
 export const dailyPuzzleService = {

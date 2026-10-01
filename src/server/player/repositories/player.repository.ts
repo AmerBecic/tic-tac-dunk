@@ -25,4 +25,25 @@ async function getPlayers(
   };
 }
 
-export const playerRepository = { getPlayers };
+async function findPlayer(id: string, db: ReturnType<typeof createSupabase>) {
+  const { data, error } = await db
+    .from('players')
+    .select('id, teams, mvp, dpoy, roy, mip, highest_season_points_total')
+    .eq('id', id)
+    .maybeSingle();
+  return {
+    data: data as Pick<
+      Player,
+      | 'id'
+      | 'teams'
+      | 'mvp'
+      | 'dpoy'
+      | 'roy'
+      | 'mip'
+      | 'highest_season_points_total'
+    > | null,
+    error,
+  };
+}
+
+export const playerRepository = { getPlayers, findPlayer };

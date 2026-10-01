@@ -3,14 +3,14 @@
 import { Fragment } from 'react';
 
 import styles from './DailyPuzzle.module.scss';
-import { Logo } from '../shared/logo';
-import { Paragraph } from '../shared/ui/paragraph';
 import { useTranslations } from 'next-intl';
 import { GRID_SIZE, useGetDailyPuzzle } from '@/domains/grid';
-import { BasketballJersey } from '../shared/basketball-jersey/BasketballJersey';
 import { Criterion } from './criterion/Criterion';
 import { Button } from '@/features/shared/ui/button';
 import { PlayerSearchDialog } from './player-search-dialog/PlayerSearchDialog';
+import { Logo } from '@/features/shared/logo';
+import { Paragraph } from '@/features/shared/ui/paragraph';
+import { BasketballJersey } from '@/features/shared/basketball-jersey/BasketballJersey';
 
 export const DailyPuzzle = (): React.JSX.Element => {
   const t = useTranslations('dailyPuzzle');

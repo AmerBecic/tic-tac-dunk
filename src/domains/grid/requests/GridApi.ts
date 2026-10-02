@@ -1,7 +1,7 @@
 import type {
   ValidateAnswerRequest,
   ValidateAnswerResponse,
-} from '../types/ValidateAnswer';
+} from '../types/validate.answer';
 import {
   GENERATE_GRID_API_URL,
   GET_DAILY_PUZZLE_API_URL,

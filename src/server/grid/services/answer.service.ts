@@ -1,7 +1,7 @@
 import { teamRepository } from '@/server/team/repositories/team.repository';
 import type { createSupabase } from '@/core/supabase/server';
 import type { Grid, GridCategory } from '@/domains/grid/types/grid.types';
-import type { ValidateAnswerRequest } from '@/domains/grid/types/ValidateAnswer';
+import type { ValidateAnswerRequest } from '@/domains/grid/types/validate.answer';
 import { dailyPuzzleRepository } from '../repositories/daily-puzzle.repository';
 import { playerRepository } from '@/server/player/repositories/player.repository';
 import { answerRepository } from '../repositories/answer.repository';

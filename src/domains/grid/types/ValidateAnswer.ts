@@ -6,5 +6,5 @@ export type ValidateAnswerRequest = {
 };
 
 export type ValidateAnswerResponse = {
-  data: { correct: boolean };
+  data: { correct: boolean; jerseyColor?: string; trimColor?: string };
 };

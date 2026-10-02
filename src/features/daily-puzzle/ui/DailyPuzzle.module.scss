@@ -22,6 +22,8 @@
 }
 
 .grid {
+  position: relative;
+  isolation: isolate;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   width: min(100%, 600px);
@@ -37,7 +39,6 @@
   }
 }
 
-.corner,
 .cell {
   min-width: 0;
   box-sizing: border-box;
@@ -45,22 +46,18 @@
   border-radius: tokens.border-radius(medium);
 }
 
-.corner {
-  @include layout.flex-column;
-  align-items: center;
-  justify-content: center;
-  gap: 2px;
-  padding: 4px;
-  border: 1px solid color-mix(in srgb, var(--color-secondary) 45%, transparent);
-  background-color: color-mix(
-    in srgb,
-    var(--color-secondary) 30%,
-    var(--background-primary)
-  );
+.completionCheck {
+  width: 28%;
+  height: auto;
+  max-width: 36px;
+  color: var(--color-secondary);
+}
 
-  @include breakpoints.respond-from(sm) {
-    gap: tokens.gap(small);
-  }
+.completedLabel {
+  font-size: clamp(8px, 10cqi, 16px);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
 }
 
 .title {
@@ -79,16 +76,36 @@
 }
 
 .jersey {
-  --jersey-display-size: 40px;
+  --jersey-display-size: 52px;
   max-width: 80%;
   height: auto;
 
   @include breakpoints.respond-from(sm) {
-    --jersey-display-size: 60px;
+    --jersey-display-size: 78px;
   }
 
   @include breakpoints.respond-from(md) {
-    --jersey-display-size: 80px;
+    --jersey-display-size: 104px;
+  }
+}
+
+.playerName {
+  max-width: 100%;
+  padding: 0 4px;
+  box-sizing: border-box;
+  font-size: 9px;
+  line-height: 1.15;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+
+  @include breakpoints.respond-from(sm) {
+    font-size: 11px;
+  }
+
+  @include breakpoints.respond-from(md) {
+    font-size: 12px;
   }
 }
 
@@ -110,11 +127,95 @@
     outline-offset: 2px;
   }
 
-  &:hover {
+  &:disabled {
+    opacity: 1;
+    cursor: default;
+  }
+
+  &:not(:disabled):hover {
     background-color: color-mix(
       in srgb,
       var(--color-primary) 80%,
       var(--background-primary)
     );
+  }
+
+  &[data-celebration='impact'] {
+    position: relative;
+    z-index: 1;
+    animation: cell-impact 1000ms cubic-bezier(0.2, 0.8, 0.3, 1) 300ms;
+
+    .jersey {
+      animation: jersey-impact 800ms ease-out 300ms;
+    }
+  }
+
+  &[data-celebration='ripple'] {
+    animation: cell-ripple 1300ms ease-out var(--ripple-delay);
+  }
+}
+
+@keyframes jersey-impact {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  40% {
+    transform: translateY(-5px) scale(1.18, 1.1);
+  }
+  70% {
+    transform: translateY(2px) scale(0.96, 1.04);
+  }
+}
+
+@keyframes cell-impact {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 transparent;
+  }
+  25%,
+  40% {
+    transform: scale(1.09);
+    box-shadow:
+      0 0 0 5px color-mix(in srgb, var(--color-secondary) 80%, transparent),
+      0 0 24px color-mix(in srgb, var(--color-secondary) 50%, transparent);
+  }
+  65% {
+    transform: scale(0.98);
+  }
+}
+
+@keyframes cell-ripple {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 transparent;
+  }
+  25%,
+  40% {
+    transform: scale(1.06);
+    box-shadow:
+      0 0 0 4px color-mix(in srgb, var(--color-secondary) 65%, transparent),
+      0 0 18px color-mix(in srgb, var(--color-secondary) 35%, transparent);
+  }
+  65% {
+    transform: scale(0.985);
+  }
+}
+
+@keyframes completion-glow {
+  50% {
+    border-color: var(--color-secondary);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grid .cell[data-celebration] {
+    animation: completion-glow 1600ms ease-out 300ms;
+
+    .jersey {
+      animation: none;
+    }
   }
 }

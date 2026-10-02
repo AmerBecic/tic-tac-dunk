@@ -1,5 +1,20 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 496">
-  <!-- Adapted from basketball-jersey.svg (SVG Repo); chest dots removed. -->
+  <!-- Adapted from basketball-jersey.svg (SVG Repo), with matte mesh and seams. -->
+  <defs>
+    <pattern id="jersey-mesh" width="7" height="8" patternUnits="userSpaceOnUse">
+      <ellipse cx="1.75" cy="2" rx="0.8" ry="1.2" fill="#17191c" opacity="0.13" />
+      <ellipse cx="5.25" cy="6" rx="0.8" ry="1.2" fill="#17191c" opacity="0.13" />
+    </pattern>
+    <linearGradient id="jersey-folds" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#17191c" stop-opacity="0.12" />
+      <stop offset="0.16" stop-color="#17191c" stop-opacity="0.02" />
+      <stop offset="0.3" stop-color="#17191c" stop-opacity="0.07" />
+      <stop offset="0.5" stop-color="#17191c" stop-opacity="0" />
+      <stop offset="0.74" stop-color="#17191c" stop-opacity="0.06" />
+      <stop offset="0.86" stop-color="#17191c" stop-opacity="0.02" />
+      <stop offset="1" stop-color="#17191c" stop-opacity="0.14" />
+    </linearGradient>
+  </defs>
   <path
     fill="var(--jersey-color, #9ca3af)"
     d="M395.576,160.84C368.696,147.408,352,120.384,352,90.336V0h-56v64c0,26.472-21.528,48-48,48s-48-21.528-48-48V0h-56 v90.336c0,16.779-5.21,32.611-14.488,45.664H128v2.052c-7.162,9.409-16.502,17.254-27.576,22.788L96,163.056V496h304V163.056 L395.576,160.84z"
@@ -7,5 +22,21 @@
   <path
     fill="var(--trim-color, #6b7280)"
     d="M395.576,160.84C368.696,147.408,352,120.384,352,90.336V0h-56v64c0,26.472-21.528,48-48,48s-48-21.528-48-48V0h-56 v90.336c0,16.779-5.21,32.611-14.488,45.664H128v2.052c-7.162,9.409-16.502,17.254-27.576,22.788L96,163.056V496h304V163.056 L395.576,160.84z M384,172.8v79.888l-16-16v-75.267C372.868,165.7,378.213,169.524,384,172.8z M128,161.421v75.131l-16,15.145 V172.8C117.787,169.524,123.132,165.7,128,161.421z M112,480V273.734l32-30.286V143.207c10.267-15.295,16-33.562,16-52.871V16h24 v48c0,35.288,28.712,64,64,64c35.288,0,64-28.712,64-64V16h24v74.336c0,19.309,5.733,37.576,16,52.871v100.105l32,32V480H112z"
+  />
+  <path
+    fill="url(#jersey-mesh)"
+    d="M395.576,160.84C368.696,147.408,352,120.384,352,90.336V0h-56v64c0,26.472-21.528,48-48,48s-48-21.528-48-48V0h-56 v90.336c0,16.779-5.21,32.611-14.488,45.664H128v2.052c-7.162,9.409-16.502,17.254-27.576,22.788L96,163.056V496h304V163.056 L395.576,160.84z"
+  />
+  <path
+    fill="url(#jersey-folds)"
+    d="M395.576,160.84C368.696,147.408,352,120.384,352,90.336V0h-56v64c0,26.472-21.528,48-48,48s-48-21.528-48-48V0h-56 v90.336c0,16.779-5.21,32.611-14.488,45.664H128v2.052c-7.162,9.409-16.502,17.254-27.576,22.788L96,163.056V496h304V163.056 L395.576,160.84z"
+  />
+  <path
+    d="M119,283V471H377V284 M177,22V64C177,103.15,208.85,135,248,135S319,103.15,319,64V22"
+    fill="none"
+    stroke="#17191c"
+    stroke-opacity="0.18"
+    stroke-width="1.5"
+    stroke-dasharray="3 4"
   />
 </svg>

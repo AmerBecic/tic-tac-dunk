@@ -9,6 +9,8 @@ export type DailyPuzzleSubmission = {
   playerId: string;
   playerName: string;
   correct: boolean;
+  jerseyColor?: string;
+  trimColor?: string;
 };
 
 type Progress = {
@@ -33,7 +35,11 @@ function isSubmission(value: unknown): value is DailyPuzzleSubmission {
     typeof submission.playerId === 'string' &&
     submission.playerId.length > 0 &&
     typeof submission.playerName === 'string' &&
-    typeof submission.correct === 'boolean'
+    typeof submission.correct === 'boolean' &&
+    (submission.jerseyColor === undefined ||
+      typeof submission.jerseyColor === 'string') &&
+    (submission.trimColor === undefined ||
+      typeof submission.trimColor === 'string')
   );
 }
 

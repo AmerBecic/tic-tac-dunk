@@ -21,7 +21,7 @@ export const Home = (): React.JSX.Element => {
       <div className={styles.imageContainer}>
         <Image
           className={styles.gameplayImage}
-          src="/gameplay_home.png"
+          src="/gameplay-home.png"
           alt="Tic Tac Dunk gameplay grid"
           width={400}
           height={400}

@@ -1,3 +1,4 @@
+import { teamRepository } from '@/server/team/repositories/team.repository';
 import type { createSupabase } from '@/core/supabase/server';
 import type { Grid, GridCategory } from '@/domains/grid/types/grid.types';
 import type { ValidateAnswerRequest } from '@/domains/grid/types/ValidateAnswer';
@@ -58,7 +59,15 @@ async function validateAnswer(
     matches(row),
     matches(column),
   ]);
-  return { correct: matchesRow && matchesColumn };
+  const correct = matchesRow && matchesColumn;
+  if (!correct || !selected.main_team) return { correct };
+  const team = await teamRepository.findByCode(selected.main_team, db);
+  if (team.error) throw new Error('Unable to load team colors');
+  return {
+    correct,
+    jerseyColor: team.data?.primary_color,
+    trimColor: team.data?.secondary_color,
+  };
 }
 
 export const answerService = { validateAnswer };

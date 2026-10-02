@@ -6,6 +6,7 @@
   },
   "dailyPuzzle": {
     "title": "Daily Puzzle",
+    "completed": "Completed",
     "metadata_title": "Daily NBA Puzzle | Tic Tac Dunk",
     "metadata_description": "Play today's Tic Tac Dunk NBA puzzle and test your basketball knowledge.",
     "metadata_keywords": "daily NBA puzzle, NBA trivia, basketball grid, players, teams",

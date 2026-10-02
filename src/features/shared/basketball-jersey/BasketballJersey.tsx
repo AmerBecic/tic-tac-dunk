@@ -1,4 +1,4 @@
-import type { CSSProperties } from 'react';
+import { useId, type CSSProperties } from 'react';
 import JerseySvg from '@/assets/BasketballJersey.svg';
 import styles from './BasketballJersey.module.scss';
 import { cn } from '@/core/utils/Utils';
@@ -17,12 +17,14 @@ export const BasketballJersey = ({
   jerseyColor = '#9ca3af',
   trimColor = '#6b7280',
   lastName,
-  nameColor = '#ffffff',
+  nameColor = '#070707',
   size = 120,
   className,
   alt,
 }: BasketballJerseyProps): React.JSX.Element => {
+  const namePathId = useId();
   const name = lastName?.trim() ?? '';
+  const displayName = name.toUpperCase();
   const hasName = name.length > 0;
   const label =
     alt ??
@@ -48,16 +50,25 @@ export const BasketballJersey = ({
         focusable="false"
       />
       {hasName && (
-        <span
+        <svg
           className={styles.name}
-          style={{
-            color: nameColor,
-            fontSize: `${Math.min(9, 60 / Array.from(name.toUpperCase()).length)}cqw`,
-          }}
+          viewBox="0 0 100 100"
           aria-hidden="true"
+          focusable="false"
         >
-          {name}
-        </span>
+          <defs>
+            <path id={namePathId} d="M 29,49 Q 50,34 71,49" />
+          </defs>
+          <text
+            fill={nameColor}
+            fontSize={Math.min(9, 60 / Array.from(displayName).length)}
+            textAnchor="middle"
+          >
+            <textPath href={`#${namePathId}`} startOffset="50%">
+              {displayName}
+            </textPath>
+          </text>
+        </svg>
       )}
     </span>
   );

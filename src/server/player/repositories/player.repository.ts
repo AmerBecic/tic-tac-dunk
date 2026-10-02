@@ -28,7 +28,9 @@ async function getPlayers(
 async function findPlayer(id: string, db: ReturnType<typeof createSupabase>) {
   const { data, error } = await db
     .from('players')
-    .select('id, teams, mvp, dpoy, roy, mip, highest_season_points_total')
+    .select(
+      'id, teams, main_team, mvp, dpoy, roy, mip, highest_season_points_total'
+    )
     .eq('id', id)
     .maybeSingle();
   return {
@@ -36,6 +38,7 @@ async function findPlayer(id: string, db: ReturnType<typeof createSupabase>) {
       Player,
       | 'id'
       | 'teams'
+      | 'main_team'
       | 'mvp'
       | 'dpoy'
       | 'roy'

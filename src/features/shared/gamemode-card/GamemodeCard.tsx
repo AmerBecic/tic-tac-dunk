@@ -1,15 +1,12 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
 import { useId, type JSX, type ReactNode, type MouseEventHandler } from 'react';
 
 import { cn } from '@/core/utils/Utils';
-import { Button } from '@/features/shared/ui/button';
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
   type CardTitleProps,
@@ -21,7 +18,6 @@ interface BaseGamemodeCardProps {
   icon?: ReactNode;
   title: string;
   description: string;
-  playLabel?: string;
   disabled?: boolean;
   headingAs?: CardTitleProps['as'];
   className?: string;
@@ -46,18 +42,15 @@ export const GamemodeCard = ({
   title,
   description,
   onPlay,
-  playLabel,
   disabled = false,
   headingAs = 'h2',
   className,
   withBandage = false,
   bandagetitle,
 }: GamemodeCardProps): JSX.Element => {
-  const t = useTranslations('common');
   const id = useId();
   const titleId = `${id}-title`;
   const descriptionId = `${id}-description`;
-  const playId = `${id}-play`;
 
   return (
     <Card
@@ -76,19 +69,14 @@ export const GamemodeCard = ({
         </CardDescription>
       </CardContent>
       {!withBandage && (
-        <CardFooter className={styles.footer}>
-          <Button
-            type="button"
-            size="xl"
-            className={styles.playButton}
-            onClick={onPlay}
-            disabled={disabled}
-            aria-labelledby={`${playId} ${titleId}`}
-            aria-describedby={descriptionId}
-          >
-            <span id={playId}>{playLabel ?? t('play_now')}</span>
-          </Button>
-        </CardFooter>
+        <button
+          type="button"
+          className={styles.playButton}
+          onClick={onPlay}
+          disabled={disabled}
+          aria-labelledby={titleId}
+          aria-describedby={descriptionId}
+        />
       )}
     </Card>
   );

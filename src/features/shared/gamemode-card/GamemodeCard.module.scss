@@ -12,6 +12,27 @@
   min-height: 280px;
   white-space: normal;
   border-radius: tokens.border-radius(xLarge);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease;
+
+  @media (hover: hover) {
+    &:has(.playButton:enabled):hover {
+      z-index: 2;
+      transform: scale(1.03);
+      border-color: var(--color-primary);
+      box-shadow: 0 8px 24px rgba(colors.black(100), 0.16);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+
+    &:has(.playButton:enabled):hover {
+      transform: none;
+    }
+  }
 
   @include breakpoints.respond-from(md) {
     min-height: 500px;
@@ -43,7 +64,7 @@
   box-sizing: border-box;
   width: 200%;
   padding: 0.75rem 65%;
-  background: colors.gray(600);
+  background: rgba(colors.gray(600), 0.2);
   color: colors.white(100);
   box-shadow: 0 3px 12px rgba(colors.black(100), 0.08);
   font-size: 1rem;
@@ -93,26 +114,25 @@
   text-align: center;
 }
 
-.card > .footer {
-  justify-content: center;
-  padding: 0 1rem 1.5rem;
-
-  @include breakpoints.respond-from(md) {
-    padding: 0 1.75rem 1.75rem;
-  }
-}
-
 .playButton {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
   width: 100%;
-  max-width: 220px;
-  height: auto;
-  min-height: 48px;
-  border-radius: 999px;
-  overflow-wrap: anywhere;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: inherit;
+  background: transparent;
+  cursor: pointer;
 
   &:focus-visible {
-    outline-color: var(--text-primary);
+    outline: 2px solid var(--color-focus);
     outline-offset: 4px;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
   }
 }
 

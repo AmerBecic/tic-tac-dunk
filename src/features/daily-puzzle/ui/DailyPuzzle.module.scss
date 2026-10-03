@@ -62,9 +62,8 @@
 }
 
 .titleTile {
-  --surface-muted: #03170f;
-  --text-primary: #{colors.white(100)};
-  color: colors.white(100);
+  --surface-muted: light-dark(#{colors.white(300)}, #03170f);
+  color: var(--text-primary);
 }
 
 .title {
@@ -126,7 +125,7 @@
   border: 2px dashed colors.color(grid-cell-border);
 
   background-color: colors.color(grid-cell);
-  color: colors.white(100);
+  color: var(--text-primary);
   cursor: pointer;
 
   transition: background-color 150ms ease;

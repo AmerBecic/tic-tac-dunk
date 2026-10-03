@@ -1,3 +1,4 @@
+@use '@/core/styles/colors' as colors;
 @use '@/core/styles/design-tokens' as tokens;
 @use '@/core/styles/breakpoints' as breakpoints;
 
@@ -10,13 +11,9 @@
   min-width: 0;
   padding: 4px;
   box-sizing: border-box;
-  border: 1px solid
-    color-mix(in srgb, var(--color-primary) 48%, var(--color-secondary));
-  background-color: color-mix(
-    in srgb,
-    var(--color-secondary) 74%,
-    var(--background-primary)
-  );
+  border: 1px solid colors.color(grid-criterion-border);
+  background-color: colors.color(grid-criterion);
+  color: var(--color-white);
 
   @include breakpoints.respond-from(sm) {
     padding: 8px;

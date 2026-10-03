@@ -48,13 +48,11 @@
 
 .highlight {
   color: colors.color(primary);
-  text-shadow: 0 0 28px
-    color-mix(in srgb, colors.color(primary) 24%, transparent);
+  text-shadow: none;
 }
 
 .imageContainer {
-  box-shadow: 8px 10px 0
-    color-mix(in srgb, colors.color(primary) 34%, transparent);
+  box-shadow: 8px 10px 0 rgba(colors.color(primary), 0.34);
   line-height: 0;
   transform: rotate(3deg);
 }

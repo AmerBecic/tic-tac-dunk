@@ -1,3 +1,4 @@
+@use '@/core/styles/colors' as colors;
 @use '@/core/styles/breakpoints' as breakpoints;
 @use '@/core/styles/design-tokens' as tokens;
 @use '@/core/styles/layout' as layout;
@@ -115,9 +116,10 @@
   justify-content: center;
   height: auto;
   padding: 0;
-  border: 2px dashed color-mix(in srgb, var(--text-primary) 34%, transparent);
+  border: 2px dashed colors.color(grid-cell-border);
 
-  background-color: var(--color-primary);
+  background-color: colors.color(grid-cell);
+  color: colors.white(100);
   cursor: pointer;
 
   transition: background-color 150ms ease;
@@ -133,11 +135,8 @@
   }
 
   &:not(:disabled):hover {
-    background-color: color-mix(
-      in srgb,
-      var(--color-primary) 80%,
-      var(--background-primary)
-    );
+    background-color: colors.color(grid-cell);
+    border-color: colors.white(100);
   }
 
   &[data-celebration='impact'] {
@@ -178,8 +177,8 @@
   40% {
     transform: scale(1.09);
     box-shadow:
-      0 0 0 5px color-mix(in srgb, var(--color-secondary) 80%, transparent),
-      0 0 24px color-mix(in srgb, var(--color-secondary) 50%, transparent);
+      0 0 0 0 2px var(--color-secondary),
+      0 0 0 2px var(--color-secondary);
   }
   65% {
     transform: scale(0.98);
@@ -196,8 +195,8 @@
   40% {
     transform: scale(1.06);
     box-shadow:
-      0 0 0 4px color-mix(in srgb, var(--color-secondary) 65%, transparent),
-      0 0 18px color-mix(in srgb, var(--color-secondary) 35%, transparent);
+      0 0 0 0 2px var(--color-secondary),
+      0 0 0 2px var(--color-secondary);
   }
   65% {
     transform: scale(0.985);

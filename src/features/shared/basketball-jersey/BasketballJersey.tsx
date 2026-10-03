@@ -14,10 +14,10 @@ interface BasketballJerseyProps {
 }
 
 export const BasketballJersey = ({
-  jerseyColor = '#9ca3af',
-  trimColor = '#6b7280',
+  jerseyColor = 'var(--color-gray-400)',
+  trimColor = 'var(--color-gray-600)',
   lastName,
-  nameColor = '#070707',
+  nameColor = 'var(--color-black-200)',
   size = 120,
   className,
   alt,

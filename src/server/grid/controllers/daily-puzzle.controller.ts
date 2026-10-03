@@ -1,3 +1,4 @@
+import { getDailyPuzzleDateError } from '@/domains/grid/helpers/DailyPuzzleDate';
 import type { GetDailyPuzzleResponse } from '@/domains/grid/types/get.daily.puzzle.response.dto';
 import type { GetDailyPuzzleRequest } from '@/domains/grid/types/get.daily.puzzle.request.dto';
 import { NextRequest, NextResponse } from 'next/server';
@@ -39,14 +40,10 @@ export async function getDailyPuzzle(
   { params }: { params: Promise<GetDailyPuzzleRequest> }
 ): Promise<NextResponse<GetDailyPuzzleResponse>> {
   const { date } = await params;
-  const parsedDate = new Date(`${date}T00:00:00.000Z`);
-  if (
-    !/^\d{4}-\d{2}-\d{2}$/.test(date) ||
-    Number.isNaN(parsedDate.getTime()) ||
-    parsedDate.toISOString().slice(0, 10) !== date
-  ) {
+  const dateError = getDailyPuzzleDateError(date);
+  if (dateError) {
     return NextResponse.json(
-      { error: 'Invalid date. Expected a valid date in YYYY-MM-DD format.' },
+      { error: dateError },
       { status: 400, headers: { 'Cache-Control': 'no-store' } }
     );
   }

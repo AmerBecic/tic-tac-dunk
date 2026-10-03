@@ -14,6 +14,9 @@
       "comingSoon": "Uskoro"
     }
   },
+  "dailyPuzzleList": {
+    "title": "Dnevne zagonetke"
+  },
   "dailyPuzzle": {
     "title": "Dnevni izazov",
     "completed": "Završeno",

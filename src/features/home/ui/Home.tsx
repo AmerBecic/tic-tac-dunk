@@ -1,12 +1,10 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Image } from '@/features/shared/ui/image';
 import styles from './Home.module.scss';
 import { Text } from '@/features/shared/ui/text';
-import { PlayNowButton } from './play-now-button/PlayNowButton';
-import { Dialog } from '@/features/shared/ui/dialog';
-import { GamemodeSelection } from './gamemode-selection/GamemodeSelection';
+import { GamemodeDialog } from './gamemode-dialog/GamemodeDialog';
 
 export const Home = (): React.JSX.Element => {
   return (
@@ -19,10 +17,9 @@ export const Home = (): React.JSX.Element => {
           </Text>
         </h1>
 
-        <Dialog>
-          <PlayNowButton />
-          <GamemodeSelection />
-        </Dialog>
+        <Suspense fallback={null}>
+          <GamemodeDialog />
+        </Suspense>
       </div>
 
       <div className={styles.imageContainer}>

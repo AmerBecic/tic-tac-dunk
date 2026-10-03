@@ -4,8 +4,6 @@
     "metadata_description": "Dobrodošli u najbolju NBA igru s mrežama.",
     "metadata_keywords": "NBA, trivia, immaculate grid, basketball, players, teams",
     "gamemodeSelection": {
-      "title": "Odaberi način igre",
-      "description": "Odaberi izazov i počni igrati.",
       "dailyDescription": "Riješi današnju mrežu.",
       "previousTitle": "Prethodni dnevni izazovi",
       "previousDescription": "Vrati se i odigraj dnevne mreže koje si propustio.",

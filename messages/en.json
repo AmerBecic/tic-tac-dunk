@@ -2,7 +2,19 @@
   "home": {
     "metadata_title": "Home Page | Tic Tac Dunk",
     "metadata_description": "Welcome to the ultimate NBA grid game.",
-    "metadata_keywords": "NBA, trivia, immaculate grid, basketball, players, teams"
+    "metadata_keywords": "NBA, trivia, immaculate grid, basketball, players, teams",
+    "gamemodeSelection": {
+      "title": "Choose your game mode",
+      "description": "Pick a challenge and start playing.",
+      "dailyDescription": "Complete today’s grid.",
+      "previousTitle": "Previous Daily Puzzles",
+      "previousDescription": "Go back and play any daily grid you missed.",
+      "aiTitle": "Play Against AI",
+      "aiDescription": "Take turns against the AI.",
+      "playersTitle": "Play Against Players",
+      "playersDescription": "Challenge real players and prove who knows ball.",
+      "comingSoon": "Coming soon"
+    }
   },
   "dailyPuzzle": {
     "title": "Daily Puzzle",

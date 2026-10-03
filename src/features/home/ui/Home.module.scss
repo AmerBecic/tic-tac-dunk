@@ -20,6 +20,8 @@
 }
 
 .heroContent {
+  min-width: 0;
+  width: 100%;
   @include layout.flex-column;
   align-items: center;
   gap: 24px;
@@ -31,12 +33,12 @@
 
 .title {
   color: colors.color(secondary);
-  font-size: clamp(64px, 18vw, 96px);
+  font-size: clamp(2rem, 10vw, 6rem);
   font-weight: 700;
   line-height: 0.82;
   letter-spacing: 0.01em;
   text-align: center;
-  white-space: nowrap;
+  max-width: 100%;
 
   @include breakpoints.respond-from(lg) {
     font-size: 96px;

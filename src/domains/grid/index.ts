@@ -22,4 +22,5 @@ export type {
   GridValidationResult,
 } from './types/grid.types';
 export { useGetDailyPuzzle } from './hooks/useGetDailyPuzzle';
+export { useValidateAnswer } from './hooks/useValidateAnswer';
 export type { GetDailyPuzzleResponse } from './types/get.daily.puzzle.response.dto';

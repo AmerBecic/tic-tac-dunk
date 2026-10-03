@@ -2,7 +2,10 @@
 
 import { useTranslations } from 'next-intl';
 import { DialogContent } from '@/features/shared/ui/dialog';
-import { DAILY_PUZZLE_URL } from '@/core/constants/Routes';
+import {
+  DAILY_PUZZLE_URL,
+  DAILY_PUZZLE_LIST_URL,
+} from '@/core/constants/Routes';
 import { useRouter } from '@/core/i18n/navigation';
 import { GamemodeCard } from '@/features/shared/gamemode-card';
 import PreviousSvg from '@/assets/Previous.svg';
@@ -22,8 +25,7 @@ export const GamemodeSelection = () => {
           icon={<PreviousSvg aria-hidden="true" focusable="false" />}
           title={t('home.gamemodeSelection.previousTitle')}
           description={t('home.gamemodeSelection.previousDescription')}
-          withBandage
-          bandagetitle={t('home.gamemodeSelection.comingSoon')}
+          onPlay={() => router.push(DAILY_PUZZLE_LIST_URL)}
         />
         <GamemodeCard
           icon={<PuzzleSvg aria-hidden="true" focusable="false" />}

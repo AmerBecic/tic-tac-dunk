@@ -29,7 +29,9 @@ export const GamemodeSelection = () => {
           icon={<PuzzleSvg aria-hidden="true" focusable="false" />}
           title={t('dailyPuzzle.title')}
           description={t('home.gamemodeSelection.dailyDescription')}
-          onPlay={() => router.push(DAILY_PUZZLE_URL)}
+          onPlay={() =>
+            router.push(DAILY_PUZZLE_URL(new Date().toISOString().slice(0, 10)))
+          }
         />
         <GamemodeCard
           icon={<BotSvg aria-hidden="true" focusable="false" />}

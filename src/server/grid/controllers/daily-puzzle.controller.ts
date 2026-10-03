@@ -1,4 +1,5 @@
 import type { GetDailyPuzzleResponse } from '@/domains/grid/types/get.daily.puzzle.response.dto';
+import type { GetDailyPuzzleRequest } from '@/domains/grid/types/get.daily.puzzle.request.dto';
 import { NextRequest, NextResponse } from 'next/server';
 
 import { createSupabase } from '@/core/supabase/server';
@@ -33,11 +34,28 @@ export async function generateDailyPuzzle(
   }
 }
 
-export async function getDailyPuzzle(): Promise<
-  NextResponse<GetDailyPuzzleResponse>
-> {
+export async function getDailyPuzzle(
+  _request: NextRequest,
+  { params }: { params: Promise<GetDailyPuzzleRequest> }
+): Promise<NextResponse<GetDailyPuzzleResponse>> {
+  const { date } = await params;
+  const parsedDate = new Date(`${date}T00:00:00.000Z`);
+  if (
+    !/^\d{4}-\d{2}-\d{2}$/.test(date) ||
+    Number.isNaN(parsedDate.getTime()) ||
+    parsedDate.toISOString().slice(0, 10) !== date
+  ) {
+    return NextResponse.json(
+      { error: 'Invalid date. Expected a valid date in YYYY-MM-DD format.' },
+      { status: 400, headers: { 'Cache-Control': 'no-store' } }
+    );
+  }
+
   try {
-    const data = await dailyPuzzleService.getDailyPuzzle(createSupabase());
+    const data = await dailyPuzzleService.getDailyPuzzle(
+      date,
+      createSupabase()
+    );
     return NextResponse.json(
       { data },
       { headers: { 'Cache-Control': 'no-store' } }

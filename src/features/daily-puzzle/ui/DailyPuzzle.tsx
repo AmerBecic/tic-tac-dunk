@@ -20,10 +20,14 @@ import { BasketballJersey } from '@/features/shared/basketball-jersey/Basketball
 
 import { useDailyPuzzleProgress } from '../hooks/useDailyPuzzleProgress';
 
-export const DailyPuzzle = (): React.JSX.Element => {
+interface DailyPuzzleProps {
+  date: string;
+}
+
+export const DailyPuzzle = ({ date }: DailyPuzzleProps): React.JSX.Element => {
   const t = useTranslations('dailyPuzzle');
   const playerSearch = useTranslations('playersSearch');
-  const { dailyPuzzle } = useGetDailyPuzzle();
+  const { dailyPuzzle } = useGetDailyPuzzle({ date });
   const { validateAnswer } = useValidateAnswer();
   const progress = useDailyPuzzleProgress(dailyPuzzle?.id);
   const [celebration, setCelebration] = useState<{

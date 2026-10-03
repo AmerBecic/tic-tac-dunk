@@ -2,14 +2,14 @@
 
 A basketball grid puzzle application with daily puzzles, NBA player search, answer validation, and progress saved in the browser. The interface supports English and Bosnian.
 
-## Tech stack
+## 🧰 Tech stack
 
 - **Frontend:** Next.js App Router, React, TypeScript, TanStack Query, next-intl, and SCSS modules.
 - **Database:** PostgreSQL through Supabase. Runtime queries live in server repositories.
 - **Database tooling:** Prisma for schema, migrations, generated types/client, and seed scripts.
 - **Package manager:** pnpm, pinned to version 9.12.0 in `package.json`.
 
-## Prerequisites
+## ✅ Prerequisites
 
 - Node.js compatible with the installed Prisma version: `^20.19`, `^22.12`, or `>=24.0`.
 - pnpm.
@@ -18,15 +18,15 @@ A basketball grid puzzle application with daily puzzles, NBA player search, answ
 
 The Supabase CLI is a project dependency; run it through `pnpm exec`. Run all commands below from the project directory containing `package.json`.
 
-## Local setup
+## 🚀 Local setup
 
-### 1. Install dependencies
+### 1. 📦 Install dependencies
 
 ```bash
 pnpm install
 ```
 
-### 2. Start Supabase and configure the environment
+### 2. 🗄️ Start Supabase and configure the environment
 
 ```bash
 pnpm exec supabase start
@@ -55,7 +55,7 @@ Local services normally run at:
 
 Use `pnpm exec supabase status` to confirm the actual addresses for your environment.
 
-### 3. Prepare the NBA datasets
+### 3. 🏀 Prepare the NBA datasets
 
 Seeding requires these files in `data/json/`:
 
@@ -65,7 +65,7 @@ Seeding requires these files in `data/json/`:
 
 If you already have the prepared datasets, place them there and continue. Otherwise, follow [Generate or refresh NBA data](#generate-or-refresh-nba-data) before seeding. The repository's placeholder files do not contain the required data.
 
-### 4. Generate the Prisma client and apply migrations
+### 4. 🧬 Generate the Prisma client and apply migrations
 
 ```bash
 pnpm prisma:generate
@@ -74,7 +74,7 @@ pnpm exec prisma migrate deploy
 
 Migrations create the schema and database functions used by runtime queries. Regenerate the Prisma client after schema changes; do not edit `src/core/generated/prisma/` manually.
 
-### 5. Seed the database
+### 5. 🌱 Seed the database
 
 ```bash
 pnpm seed
@@ -82,7 +82,7 @@ pnpm seed
 
 This runs **teams → players → teammates** in order. The number of players depends on the source dataset. Inspect the resulting tables in Supabase Studio.
 
-### 6. Generate today's daily puzzle
+### 6. 🧩 Generate today's daily puzzle
 
 ```bash
 pnpm daily:generate
@@ -96,7 +96,7 @@ To generate a specific date:
 pnpm daily:generate 2026-10-02
 ```
 
-### 7. Start the app
+### 7. ▶️ Start the app
 
 ```bash
 pnpm dev
@@ -104,7 +104,7 @@ pnpm dev
 
 Open <http://localhost:3000>. Daily gameplay is available at <http://localhost:3000/daily>.
 
-## Generate or refresh NBA data
+## 🔄 Generate or refresh NBA data
 
 Historical NBA data comes from the companion [NBA scraping repository](https://github.com/AmerBecic/nba-webscrape). Follow that repository's scraping and cleanup instructions, then place its CSV output at:
 
@@ -128,7 +128,7 @@ CSV → player_seasons.json → players_raw.json → players_final.json
 
 The final transformation reuses existing player IDs when the player identity matches. Keep the existing `players_final.json` when refreshing data to preserve those IDs where possible. Run `pnpm seed` after preparing the datasets to update the configured database.
 
-## Project structure
+## 🗂️ Project structure
 
 | Location        | Responsibility                                                                                                                                       |
 | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -153,7 +153,7 @@ Feature → domain API hook/request → HTTP route → controller → service �
 
 Command-line workflows call services directly. Detailed development conventions live in the root [AGENTS.md](AGENTS.md) and the layer guides for [core](src/core/AGENTS.md), [domains](src/domains/AGENTS.md), [features](src/features/AGENTS.md), and [server](src/server/AGENTS.md).
 
-## Development commands
+## 🛠️ Development commands
 
 | Command                     | Purpose                                        |
 | --------------------------- | ---------------------------------------------- |
@@ -171,7 +171,7 @@ Command-line workflows call services directly. Detailed development conventions 
 
 There is currently no automated test script in `package.json`. Lint, type checks, and a production build are separate validation steps.
 
-### Schema changes
+### 🧱 Schema changes
 
 For local schema development, edit `prisma/schema.prisma`, then create and apply a migration:
 
@@ -182,7 +182,7 @@ pnpm prisma:generate
 
 Database functions called through repository RPCs are maintained in SQL migrations under `prisma/migrations/`. Use `pnpm exec prisma migrate deploy` to apply existing migrations to a configured environment.
 
-### Reset the local database
+### ♻️ Reset the local database
 
 The following deletes data in the database targeted by `DATABASE_URL`. Confirm that it points to your local database first:
 
@@ -192,13 +192,13 @@ pnpm seed
 pnpm daily:generate
 ```
 
-## Daily scheduling and deployment
+## ⏰ Daily scheduling and deployment
 
 `vercel.json` configures `/api/cron/daily-puzzle` with the schedule `0 0 * * *`. The application uses UTC dates for daily puzzles. The endpoint requires `CRON_SECRET` through a bearer authorization header and generates a puzzle only if one does not already exist for the date.
 
 For deployment, configure the environment variables above for the target database and app origin, apply migrations, seed the required NBA data, and generate the initial daily puzzle. Keep `CRON_SECRET` consistent with the scheduler's authorization configuration. The local development server does not run the deployed schedule; use `pnpm daily:generate` locally.
 
-## Troubleshooting
+## 🧯 Troubleshooting
 
 - **Supabase will not start:** Check that Docker Desktop is running, then inspect the output of `pnpm exec supabase start`.
 - **Missing dataset files during seeding:** Prepare all three JSON files, including the season and raw player data used by the teammate seed.

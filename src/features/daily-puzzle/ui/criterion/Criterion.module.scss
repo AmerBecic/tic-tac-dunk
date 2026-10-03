@@ -12,8 +12,11 @@
   padding: 4px;
   box-sizing: border-box;
   border: 1px solid colors.color(grid-criterion-border);
-  background-color: colors.color(grid-criterion);
-  color: var(--color-white);
+  background-color: light-dark(
+    color-mix(in srgb, colors.color(grid-criterion) 15%, colors.white(100)),
+    colors.color(grid-criterion)
+  );
+  color: var(--text-primary);
 
   @include breakpoints.respond-from(sm) {
     padding: 8px;

@@ -41,7 +41,7 @@
   --color-skeleton: #{colors.gray(300)};
   --color-tooltip-background: #{colors.black(100)};
   --color-tooltip-text: #{colors.white(100)};
-  --color-focus: var(--color-secondary);
+  --color-focus: var(--color-primary);
 }
 
 @media (prefers-color-scheme: dark) {

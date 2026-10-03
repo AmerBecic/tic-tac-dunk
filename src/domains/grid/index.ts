@@ -24,3 +24,4 @@ export type {
 export { useGetDailyPuzzle } from './hooks/useGetDailyPuzzle';
 export { useValidateAnswer } from './hooks/useValidateAnswer';
 export type { GetDailyPuzzleResponse } from './types/get.daily.puzzle.response.dto';
+export type { GetDailyPuzzleRequest } from './types/get.daily.puzzle.request.dto';

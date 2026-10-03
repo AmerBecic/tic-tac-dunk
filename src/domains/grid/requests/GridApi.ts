@@ -8,6 +8,7 @@ import {
   VALIDATE_ANSWER_API_URL,
 } from '@/core/constants/ApiRoutes';
 import type { GetDailyPuzzleResponse } from '../types/get.daily.puzzle.response.dto';
+import type { GetDailyPuzzleRequest } from '../types/get.daily.puzzle.request.dto';
 import { Api } from '@/core/api/Api';
 import { GenerateGridResponse } from '..';
 
@@ -20,9 +21,11 @@ const generateGrid = async (): Promise<GenerateGridResponse['data']> => {
   return response.data;
 };
 
-const getDailyPuzzle = async (): Promise<GetDailyPuzzleResponse['data']> => {
+const getDailyPuzzle = async ({
+  date,
+}: GetDailyPuzzleRequest): Promise<GetDailyPuzzleResponse['data']> => {
   const response = await Api.get<GetDailyPuzzleResponse>(
-    GET_DAILY_PUZZLE_API_URL,
+    GET_DAILY_PUZZLE_API_URL(date),
     'no-store'
   );
   return response.data;

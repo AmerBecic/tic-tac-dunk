@@ -74,9 +74,9 @@ async function generateDailyPuzzle(
 }
 
 async function getDailyPuzzle(
+  date: string,
   supabase: ReturnType<typeof createSupabase>
 ): Promise<DailyPuzzle | null> {
-  const date = new Date().toISOString().slice(0, 10);
   const { data, error } = await dailyPuzzleRepository.findByDate(
     date,
     supabase

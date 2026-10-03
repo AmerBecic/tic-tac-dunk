@@ -22,39 +22,4 @@
   z-index: 0;
   pointer-events: none;
   background-color: var(--background-primary);
-  background-image:
-    linear-gradient(
-      to right,
-      color-mix(in srgb, var(--text-primary) 5%, transparent) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      to bottom,
-      color-mix(in srgb, var(--text-primary) 5%, transparent) 1px,
-      transparent 1px
-    ),
-    radial-gradient(
-      circle at 90% 8%,
-      color-mix(in srgb, var(--color-secondary) 38%, transparent),
-      transparent 62%
-    ),
-    radial-gradient(
-      circle at 8% 56%,
-      color-mix(in srgb, var(--color-primary) 8%, transparent),
-      transparent 48%
-    ),
-    linear-gradient(
-      135deg,
-      color-mix(in srgb, var(--color-secondary) 14%, var(--background-primary))
-        0%,
-      var(--background-primary) 58%,
-      color-mix(in srgb, var(--color-secondary) 8%, var(--background-primary))
-        100%
-    );
-  background-size:
-    116px 116px,
-    116px 116px,
-    100% 100%,
-    100% 100%,
-    100% 100%;
 }

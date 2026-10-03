@@ -7,7 +7,7 @@
   container-type: inline-size;
 
   &[data-empty] {
-    opacity: 0.5;
+    opacity: 0.3;
   }
 }
 
@@ -15,7 +15,6 @@
   display: block;
   width: 100%;
   height: 100%;
-  filter: saturate(0.72) brightness(0.94);
 }
 
 .name {

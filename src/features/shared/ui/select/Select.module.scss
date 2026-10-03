@@ -6,7 +6,7 @@
   width: 100%;
   min-height: 2.25rem;
   padding: 0.5rem 0.75rem;
-  border: 1px solid color-mix(in srgb, var(--text-primary) 25%, transparent);
+  border: 1px solid var(--color-border-strong);
   border-radius: 0.375rem;
   background: var(--background-primary);
   color: var(--text-primary);
@@ -26,11 +26,12 @@
   }
 
   &[data-placeholder] {
-    color: color-mix(in srgb, var(--text-primary) 60%, transparent);
+    color: var(--text-secondary);
   }
   &:disabled {
     cursor: not-allowed;
-    opacity: 0.5;
+    color: var(--text-muted);
+    background-color: var(--surface-muted);
   }
 }
 
@@ -45,13 +46,13 @@
   min-width: 8rem;
   max-height: min(24rem, var(--radix-select-content-available-height, 24rem));
   overflow: hidden;
-  border: 1px solid color-mix(in srgb, var(--text-primary) 25%, transparent);
+  border: 1px solid var(--color-border-strong);
   border-radius: 0.375rem;
   background: var(--background-primary);
   color: var(--text-primary);
   box-shadow:
-    0 4px 8px rgb(0 0 0 / 12%),
-    0 10px 24px rgb(0 0 0 / 16%);
+    0 4px 8px var(--color-shadow),
+    0 10px 24px var(--color-shadow);
   transform-origin: var(--radix-select-content-transform-origin);
   &[data-state='open'] {
     animation: select-enter 150ms ease-out;
@@ -85,15 +86,12 @@
   user-select: none;
   outline: none;
   &[data-highlighted] {
-    background: color-mix(
-      in srgb,
-      var(--text-primary) 12%,
-      var(--background-primary)
-    );
+    background: var(--surface-highlight);
   }
   &[data-disabled] {
     pointer-events: none;
-    opacity: 0.5;
+    color: var(--text-muted);
+    background-color: var(--surface-muted);
   }
 }
 .indicator {
@@ -112,7 +110,7 @@
 .separator {
   height: 1px;
   margin: 0.25rem 0;
-  background: color-mix(in srgb, var(--text-primary) 20%, transparent);
+  background: var(--color-border);
 }
 @keyframes select-enter {
   from {

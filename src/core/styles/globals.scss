@@ -1,33 +1,52 @@
 @use '@/core/styles/layout' as layout;
 @use '@/core/styles/colors' as colors;
 
+@mixin dark-theme {
+  color-scheme: dark;
+  --background-primary: #{colors.black(100)};
+  --surface-highlight: #{colors.black(400)};
+  --surface-muted: #{colors.black(300)};
+  --text-primary: #{colors.white(100)};
+  --text-secondary: #{colors.gray(300)};
+  --color-border: #{colors.gray(900)};
+  --color-border-strong: #{colors.gray(700)};
+  --color-shadow: #{colors.black(300)};
+  --color-skeleton: #{colors.gray(600)};
+  --color-tooltip-background: #{colors.white(100)};
+  --color-tooltip-text: #{colors.black(100)};
+}
+
 :root {
   color-scheme: light;
-
   --background-primary: #{colors.white(100)};
+  --surface-highlight: #{colors.gray(50)};
+  --surface-muted: #{colors.white(300)};
   --text-primary: #{colors.black(100)};
-
+  --text-muted: #{colors.gray(500)};
+  --text-secondary: #{colors.gray(700)};
+  --color-border: #{colors.gray(100)};
+  --color-border-strong: #{colors.gray(300)};
+  --color-shadow: #{colors.gray(100)};
+  --color-overlay: #{rgba(colors.gray(700), 0.5)};
   --color-primary: #{colors.color(primary)};
   --color-secondary: #{colors.color(secondary)};
   --color-warning: #{colors.color(warning)};
   --color-error: #{colors.color(error)};
-  --color-focus: var(--color-secondary);
-
+  --color-white: #{colors.white(100)};
+  --color-gray-400: #{colors.gray(400)};
+  --color-gray-600: #{colors.gray(600)};
+  --color-black-200: #{colors.black(200)};
   --color-switch-unchecked: #{colors.gray(500)};
   --color-switch-thumb: #{colors.white(100)};
   --color-skeleton: #{colors.gray(300)};
-
   --color-tooltip-background: #{colors.black(100)};
   --color-tooltip-text: #{colors.white(100)};
+  --color-focus: var(--color-secondary);
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
-    --background-primary: #{colors.black(100)};
-    --text-primary: #{colors.white(100)};
-    --color-tooltip-background: #{colors.white(100)};
-    --color-tooltip-text: #{colors.black(100)};
-    --color-skeleton: #{colors.gray(600)};
+    @include dark-theme;
   }
 }
 
@@ -36,12 +55,7 @@
 }
 
 :root[data-theme='dark'] {
-  color-scheme: dark;
-  --background-primary: #{colors.black(100)};
-  --text-primary: #{colors.white(100)};
-  --color-tooltip-background: #{colors.white(100)};
-  --color-tooltip-text: #{colors.black(100)};
-  --color-skeleton: #{colors.gray(600)};
+  @include dark-theme;
 }
 
 * {

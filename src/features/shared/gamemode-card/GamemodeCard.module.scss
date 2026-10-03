@@ -1,0 +1,136 @@
+@use '@/core/styles/colors' as colors;
+@use '@/core/styles/design-tokens' as tokens;
+@use '@/core/styles/breakpoints' as breakpoints;
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  min-height: 280px;
+  white-space: normal;
+  border-radius: tokens.border-radius(xLarge);
+
+  @include breakpoints.respond-from(md) {
+    min-height: 500px;
+  }
+}
+
+.unavailable {
+  overflow: hidden;
+
+  > .header,
+  > .content {
+    opacity: 0.3;
+    filter: grayscale(1);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: color-mix(in srgb, var(--background-primary) 30%, transparent);
+    pointer-events: none;
+  }
+}
+
+.bandage {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  box-sizing: border-box;
+  width: 200%;
+  padding: 0.75rem 65%;
+  background: color-mix(in srgb, #9ca3af 25%, transparent);
+  color: color-mix(in srgb, var(--text-primary) 50%, var(--background-primary));
+  box-shadow: 0 3px 12px #{rgba(colors.black(100), 0.08)};
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.card > .header {
+  padding: 1.5rem 1rem 1rem;
+
+  @include breakpoints.respond-from(md) {
+    padding: 2rem 1.75rem 1.5rem;
+  }
+}
+
+.title {
+  box-sizing: content-box;
+  min-height: 2lh;
+  color: var(--color-primary);
+  padding-bottom: 1rem;
+  border-bottom: 1px solid
+    color-mix(in srgb, var(--color-primary) 35%, transparent);
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.15;
+  text-align: center;
+
+  @include breakpoints.respond-from(md) {
+    padding-bottom: 1.5rem;
+    font-size: 2.25rem;
+  }
+}
+
+.card > .content {
+  flex: 1;
+  padding: 0 1rem 1.5rem;
+
+  @include breakpoints.respond-from(md) {
+    padding: 0 1.75rem 2rem;
+  }
+}
+
+.description {
+  font-size: 1rem;
+  line-height: 1.65;
+  text-align: center;
+}
+
+.card > .footer {
+  justify-content: center;
+  padding: 0 1rem 1.5rem;
+
+  @include breakpoints.respond-from(md) {
+    padding: 0 1.75rem 1.75rem;
+  }
+}
+
+.playButton {
+  width: 100%;
+  max-width: 220px;
+  height: auto;
+  min-height: 48px;
+  border-radius: 999px;
+  overflow-wrap: anywhere;
+
+  &:focus-visible {
+    outline-color: var(--text-primary);
+    outline-offset: 4px;
+  }
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 5rem;
+  margin-bottom: 1rem;
+
+  > svg {
+    display: block;
+    width: 5rem;
+    height: 5rem;
+    max-width: 100%;
+  }
+}

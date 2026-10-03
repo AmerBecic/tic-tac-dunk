@@ -1,8 +1,10 @@
+'use client';
+
 import React from 'react';
 import { Image } from '@/features/shared/ui/image';
-import { PlayNowButton } from './PlayNowButton';
 import styles from './Home.module.scss';
 import { Text } from '@/features/shared/ui/text';
+import { PlayNowButton } from './play-now-button/PlayNowButton';
 
 export const Home = (): React.JSX.Element => {
   return (

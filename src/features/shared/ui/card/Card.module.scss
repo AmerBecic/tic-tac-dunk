@@ -47,7 +47,7 @@
   margin: 0;
   font-size: 0.875rem;
   line-height: 1.5;
-  color: color-mix(in srgb, var(--text-primary) 70%, var(--background-primary));
+  color: var(--text-primary);
   overflow-wrap: anywhere;
 }
 

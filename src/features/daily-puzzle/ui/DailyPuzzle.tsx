@@ -5,7 +5,11 @@ import { Fragment, useEffect, useState, type CSSProperties } from 'react';
 import styles from './DailyPuzzle.module.scss';
 import CheckmarkSvg from '@/assets/Checkmark.svg';
 import { useTranslations } from 'next-intl';
-import { GRID_SIZE, GridApi, useGetDailyPuzzle } from '@/domains/grid';
+import {
+  GRID_SIZE,
+  useGetDailyPuzzle,
+  useValidateAnswer,
+} from '@/domains/grid';
 import { Criterion } from './criterion/Criterion';
 import { Button } from '@/features/shared/ui/button';
 import { PlayerSearchDialog } from './player-search-dialog/PlayerSearchDialog';
@@ -20,6 +24,7 @@ export const DailyPuzzle = (): React.JSX.Element => {
   const t = useTranslations('dailyPuzzle');
   const playerSearch = useTranslations('playersSearch');
   const { dailyPuzzle } = useGetDailyPuzzle();
+  const { validateAnswer } = useValidateAnswer();
   const progress = useDailyPuzzleProgress(dailyPuzzle?.id);
   const [celebration, setCelebration] = useState<{
     puzzleId: string;
@@ -102,7 +107,7 @@ export const DailyPuzzle = (): React.JSX.Element => {
                   key={`cell-${dailyPuzzle?.id}-${rowIndex}-${columnIndex}`}
                   onSelectPlayer={async (player) => {
                     if (!dailyPuzzle || !progress.isReady) return;
-                    const result = await GridApi.validateAnswer({
+                    const result = await validateAnswer({
                       puzzleId: dailyPuzzle.id,
                       row: rowIndex,
                       column: columnIndex,

@@ -69,6 +69,9 @@ API route → controller → service → repository → database
 
 ## Development and validation
 
+- Write CSS and SCSS mobile-first: base styles must fit small screens, then enhance layouts for larger screens with `min-width` media queries using the existing `breakpoints.respond-from` mixin.
+- Keep component widths flexible, allow text to wrap, and prevent horizontal overflow. Check responsive changes at narrow mobile widths (including 320px) as well as larger breakpoints.
+
 Use pnpm; `package.json` is the source of truth for available scripts.
 
 | Command                | Purpose                                                                      |

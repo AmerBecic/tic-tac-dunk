@@ -1,6 +1,6 @@
 'use client';
 
-import { useId, useState } from 'react';
+import { useId, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { useDebounce } from 'use-debounce';
 import { useGetPlayers } from '@/domains/player/hooks/useGetPlayers';
@@ -23,6 +23,8 @@ export const PlayersSearch = ({
   const [searchPlayers, setSearchPlayers] = useState('');
   const [debouncedSearchName] = useDebounce(searchPlayers, 400);
   const resultsId = useId();
+  const inputRef = useRef<HTMLInputElement>(null);
+  const listRef = useRef<HTMLUListElement>(null);
   const { players, isLoading } = useGetPlayers({
     search: debouncedSearchName,
     page: 1,
@@ -31,14 +33,39 @@ export const PlayersSearch = ({
   const pending = searchPlayers !== debouncedSearchName || isLoading;
   const hasSearch = searchPlayers.trim().length > 0;
 
+  const focusResult = (index: number) => {
+    const buttons = listRef.current?.querySelectorAll<HTMLButtonElement>(
+      'button:not(:disabled)'
+    );
+    const button = buttons?.[index];
+    button?.focus({ preventScroll: true });
+    button?.scrollIntoView({ block: 'nearest' });
+  };
+
   return (
     <div className={styles.search}>
       <SearchInput
+        ref={inputRef}
         disabled={disabled}
         className={styles.searchInput}
         containerClassName={styles.searchField}
         value={searchPlayers}
         onChange={setSearchPlayers}
+        onKeyDown={(event) => {
+          if (
+            disabled ||
+            pending ||
+            !hasSearch ||
+            players.length === 0 ||
+            event.nativeEvent.isComposing
+          ) {
+            return;
+          }
+          if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+            event.preventDefault();
+            focusResult(event.key === 'ArrowDown' ? 0 : players.length - 1);
+          }
+        }}
         autoComplete="off"
         placeholder={t('search')}
         clearLabel={t('clear')}
@@ -52,8 +79,12 @@ export const PlayersSearch = ({
               {t('empty')}
             </Text>
           ) : (
-            <ul className={styles.list} aria-label={t('resultsLabel')}>
-              {players.map((player) => (
+            <ul
+              ref={listRef}
+              className={styles.list}
+              aria-label={t('resultsLabel')}
+            >
+              {players.map((player, index) => (
                 <li key={player.id}>
                   <Button
                     type="button"
@@ -62,6 +93,20 @@ export const PlayersSearch = ({
                     className={styles.player}
                     textProps={{ className: styles.playerLabel, bold: false }}
                     onClick={() => onSelectPlayer?.(player)}
+                    onKeyDown={(event) => {
+                      if (disabled || event.nativeEvent.isComposing) return;
+                      if (event.key === 'ArrowDown') {
+                        event.preventDefault();
+                        focusResult(Math.min(index + 1, players.length - 1));
+                      } else if (event.key === 'ArrowUp') {
+                        event.preventDefault();
+                        if (index === 0) {
+                          inputRef.current?.focus();
+                        } else {
+                          focusResult(index - 1);
+                        }
+                      }
+                    }}
                   >
                     <Text className={styles.name} textAlign="left">
                       {player.name}

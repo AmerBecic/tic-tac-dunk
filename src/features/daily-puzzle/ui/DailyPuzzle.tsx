@@ -46,6 +46,7 @@ export const DailyPuzzle = (): React.JSX.Element => {
     <section className={styles.dailyPuzzle}>
       <div className={styles.grid}>
         <FlipTile
+          className={styles.titleTile}
           isFlipped={progress.isComplete}
           isReady={progress.isReady}
           animate={isCelebrating}

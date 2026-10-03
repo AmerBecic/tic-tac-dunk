@@ -61,6 +61,12 @@
   letter-spacing: 0.025em;
 }
 
+.titleTile {
+  --surface-muted: #03170f;
+  --text-primary: #{colors.white(100)};
+  color: colors.white(100);
+}
+
 .title {
   margin: 0;
   font-size: 12px;

@@ -58,6 +58,7 @@ export const ModelName = {
   Team: 'Team',
   Player: 'Player',
   PlayerTeammate: 'PlayerTeammate',
+  Match: 'Match',
 } as const;
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName];
@@ -125,6 +126,30 @@ export const PlayerTeammateScalarFieldEnum = {
 
 export type PlayerTeammateScalarFieldEnum =
   (typeof PlayerTeammateScalarFieldEnum)[keyof typeof PlayerTeammateScalarFieldEnum];
+
+export const MatchScalarFieldEnum = {
+  id: 'id',
+  mode: 'mode',
+  player1Id: 'player1Id',
+  player2Id: 'player2Id',
+  grid: 'grid',
+  board: 'board',
+  history: 'history',
+  status: 'status',
+  currentPlayer: 'currentPlayer',
+  winner: 'winner',
+  endReason: 'endReason',
+  turnNumber: 'turnNumber',
+  turnDurationSeconds: 'turnDurationSeconds',
+  turnEndsAt: 'turnEndsAt',
+  version: 'version',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  finishedAt: 'finishedAt',
+} as const;
+
+export type MatchScalarFieldEnum =
+  (typeof MatchScalarFieldEnum)[keyof typeof MatchScalarFieldEnum];
 
 export const SortOrder = {
   asc: 'asc',

@@ -1,8 +1,8 @@
 import 'server-only';
 import type { createSupabase } from '@/core/supabase/server';
-import type { CreatedMatch } from '@/domains/tic-tac-toe/types/create.match.response.dto';
+import type { Match } from '@/domains/tic-tac-toe/types/match.types';
 
-type NewMatch = Omit<CreatedMatch, 'id' | 'createdAt' | 'updatedAt'>;
+type NewMatch = Omit<Match, 'id' | 'createdAt' | 'updatedAt'>;
 type CreatedRow = { id: string; created_at: string; updated_at: string };
 
 async function createMatch(
@@ -44,4 +44,43 @@ async function createMatch(
   };
 }
 
-export const ticTacToeRepository = { createMatch };
+async function getActiveAiGame(
+  playerId: string,
+  supabase: ReturnType<typeof createSupabase>
+) {
+  const { data, error } = await supabase
+    .from('matches')
+    .select(
+      'id, player1_id, grid, board, history, status, current_player, turn_number, turn_duration_seconds, turn_ends_at, version, created_at, updated_at'
+    )
+    .eq('player1_id', playerId)
+    .eq('mode', 'AI')
+    .in('status', ['WAITING', 'ACTIVE'])
+    .maybeSingle();
+
+  const game: Match | null = data
+    ? {
+        id: data.id,
+        mode: 'AI',
+        player1Id: data.player1_id,
+        player2Id: null,
+        grid: data.grid,
+        board: data.board,
+        history: data.history,
+        status: data.status,
+        currentPlayer: data.current_player,
+        winner: null,
+        endReason: null,
+        turnNumber: data.turn_number,
+        turnDurationSeconds: data.turn_duration_seconds,
+        turnEndsAt: data.turn_ends_at,
+        version: data.version,
+        createdAt: data.created_at,
+        updatedAt: data.updated_at,
+        finishedAt: null,
+      }
+    : null;
+  return { data: game, error };
+}
+
+export const ticTacToeRepository = { createMatch, getActiveAiGame };

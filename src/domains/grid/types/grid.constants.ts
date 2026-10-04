@@ -2,7 +2,7 @@ import { GridCategory, GridGenerationConfig } from '..';
 
 export const GRID_SIZE = 3;
 
-export const DAILY_GRID_CONFIG: GridGenerationConfig = {
+export const DEFAULT_GRID_CONFIG: GridGenerationConfig = {
   TEAM: { min: 3, max: 5 },
   TEAMMATE: { min: 1, max: 3 },
   ACHIEVEMENT: { min: 0, max: 2 },

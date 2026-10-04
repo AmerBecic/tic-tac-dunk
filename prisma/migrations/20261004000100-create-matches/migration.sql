@@ -71,7 +71,6 @@ CREATE INDEX matches_player1_id_created_at_idx ON public.matches (player1_id, cr
 CREATE INDEX matches_player2_id_created_at_idx ON public.matches (player2_id, created_at);
 CREATE INDEX matches_status_turn_ends_at_idx ON public.matches (status, turn_ends_at);
 
--- Keep timestamps current for Supabase writes as well as Prisma writes.
 CREATE FUNCTION public.set_match_updated_at()
 RETURNS TRIGGER
 LANGUAGE plpgsql

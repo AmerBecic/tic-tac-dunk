@@ -2,7 +2,7 @@ import type { Grid, DailyPuzzle } from '@/domains/grid/types/grid.types';
 import { dailyPuzzleRepository } from '../repositories/daily-puzzle.repository';
 import type { createSupabase } from '@/core/supabase/server';
 import { gridService } from './grid.service';
-import { DAILY_GRID_CONFIG } from '@/domains/grid/types/grid.constants';
+import { DEFAULT_GRID_CONFIG } from '@/domains/grid/types/grid.constants';
 
 interface DailyPuzzleGenerationResult {
   success: true;
@@ -38,7 +38,7 @@ async function generateDailyPuzzle(
   }
 
   const result = await gridService.generateAndValidate(
-    DAILY_GRID_CONFIG,
+    DEFAULT_GRID_CONFIG,
     supabase
   );
   if (!result.ok) throw new Error(`${result.code}: ${result.message}`);

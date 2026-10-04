@@ -1,3 +1,5 @@
+import type { GetActiveAiGameResponse } from '@/domains/tic-tac-toe/types/get.active.ai.game.response.dto';
+import { getSupabaseUser } from '@/core/supabase/user';
 import 'server-only';
 import { NextResponse } from 'next/server';
 import { createSupabase } from '@/core/supabase/server';
@@ -39,6 +41,32 @@ export async function createMatch(
     console.error('Match creation failed:', error);
     return NextResponse.json(
       { error: 'Failed to create match.' },
+      { status: 500, headers }
+    );
+  }
+}
+
+export async function getActiveAiGame(): Promise<
+  NextResponse<GetActiveAiGameResponse>
+> {
+  const headers = { 'Cache-Control': 'no-store' };
+  try {
+    const { data, error } = await getSupabaseUser();
+    if (error || !data.user) {
+      return NextResponse.json<GetActiveAiGameResponse>(
+        { success: false, error: 'Unauthorized' },
+        { status: 401, headers }
+      );
+    }
+    const response = await ticTacToeService.getActiveAiGame(
+      data.user.id,
+      createSupabase()
+    );
+    return NextResponse.json(response, { headers });
+  } catch (error) {
+    console.error('Active AI game lookup failed:', error);
+    return NextResponse.json<GetActiveAiGameResponse>(
+      { success: false, error: 'Failed to fetch active AI game.' },
       { status: 500, headers }
     );
   }

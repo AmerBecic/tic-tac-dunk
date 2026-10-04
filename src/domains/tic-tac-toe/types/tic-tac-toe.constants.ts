@@ -1,0 +1,1 @@
+export const DEFAULT_TURN_DURATION_SECONDS = 24;

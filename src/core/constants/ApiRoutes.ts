@@ -6,3 +6,6 @@ export const VALIDATE_ANSWER_API_URL = 'v1/grid/validate-answer';
 
 /* Player APIs */
 export const SEARCH_PLAYERS_API_URL = 'v1/players';
+
+/* Tic Tac Toe APIs */
+export const CREATE_TIC_TAC_TOE_MATCH_API_URL = 'v1/tic-tac-toe';

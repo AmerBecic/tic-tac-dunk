@@ -4,7 +4,7 @@ import type { GenerateGridResponse } from '@/domains/grid/types/generate.grid.re
 
 import { gridService } from '@/server/grid/services/grid.service';
 import {
-  DAILY_GRID_CONFIG,
+  DEFAULT_GRID_CONFIG,
   GRID_VALIDATION_ERROR_CODES,
 } from '@/domains/grid/types/grid.constants';
 
@@ -13,7 +13,7 @@ export async function generateGrid(): Promise<
 > {
   try {
     const result = await gridService.generateAndValidate(
-      DAILY_GRID_CONFIG,
+      DEFAULT_GRID_CONFIG,
       createSupabase()
     );
 

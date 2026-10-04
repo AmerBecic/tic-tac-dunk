@@ -4,7 +4,7 @@ export type { GenerateGridResponse } from './types/generate.grid.response.dto';
 export {
   ACHIEVEMENT_CATEGORIES,
   CATEGORY_TYPES,
-  DAILY_GRID_CONFIG,
+  DEFAULT_GRID_CONFIG,
   GRID_SIZE,
   GRID_VALIDATION_ERROR_CODES,
   MAX_GENERATION_ATTEMPTS,

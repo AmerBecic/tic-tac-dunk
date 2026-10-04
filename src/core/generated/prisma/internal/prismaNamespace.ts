@@ -416,6 +416,7 @@ export const ModelName = {
   Team: 'Team',
   Player: 'Player',
   PlayerTeammate: 'PlayerTeammate',
+  Match: 'Match',
 } as const;
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName];
@@ -437,7 +438,7 @@ export type TypeMap<
     omit: GlobalOmitOptions;
   };
   meta: {
-    modelProps: 'dailyPuzzle' | 'team' | 'player' | 'playerTeammate';
+    modelProps: 'dailyPuzzle' | 'team' | 'player' | 'playerTeammate' | 'match';
     txIsolationLevel: TransactionIsolationLevel;
   };
   model: {
@@ -745,6 +746,82 @@ export type TypeMap<
         };
       };
     };
+    Match: {
+      payload: Prisma.$MatchPayload<ExtArgs>;
+      fields: Prisma.MatchFieldRefs;
+      operations: {
+        findUnique: {
+          args: Prisma.MatchFindUniqueArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MatchPayload> | null;
+        };
+        findUniqueOrThrow: {
+          args: Prisma.MatchFindUniqueOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MatchPayload>;
+        };
+        findFirst: {
+          args: Prisma.MatchFindFirstArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MatchPayload> | null;
+        };
+        findFirstOrThrow: {
+          args: Prisma.MatchFindFirstOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MatchPayload>;
+        };
+        findMany: {
+          args: Prisma.MatchFindManyArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MatchPayload>[];
+        };
+        create: {
+          args: Prisma.MatchCreateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MatchPayload>;
+        };
+        createMany: {
+          args: Prisma.MatchCreateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        createManyAndReturn: {
+          args: Prisma.MatchCreateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MatchPayload>[];
+        };
+        delete: {
+          args: Prisma.MatchDeleteArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MatchPayload>;
+        };
+        update: {
+          args: Prisma.MatchUpdateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MatchPayload>;
+        };
+        deleteMany: {
+          args: Prisma.MatchDeleteManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateMany: {
+          args: Prisma.MatchUpdateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateManyAndReturn: {
+          args: Prisma.MatchUpdateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MatchPayload>[];
+        };
+        upsert: {
+          args: Prisma.MatchUpsertArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MatchPayload>;
+        };
+        aggregate: {
+          args: Prisma.MatchAggregateArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMatch>;
+        };
+        groupBy: {
+          args: Prisma.MatchGroupByArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.MatchGroupByOutputType>[];
+        };
+        count: {
+          args: Prisma.MatchCountArgs<ExtArgs>;
+          result:
+            | runtime.Types.Utils.Optional<Prisma.MatchCountAggregateOutputType>
+            | number;
+        };
+      };
+    };
   };
 } & {
   other: {
@@ -833,6 +910,30 @@ export const PlayerTeammateScalarFieldEnum = {
 
 export type PlayerTeammateScalarFieldEnum =
   (typeof PlayerTeammateScalarFieldEnum)[keyof typeof PlayerTeammateScalarFieldEnum];
+
+export const MatchScalarFieldEnum = {
+  id: 'id',
+  mode: 'mode',
+  player1Id: 'player1Id',
+  player2Id: 'player2Id',
+  grid: 'grid',
+  board: 'board',
+  history: 'history',
+  status: 'status',
+  currentPlayer: 'currentPlayer',
+  winner: 'winner',
+  endReason: 'endReason',
+  turnNumber: 'turnNumber',
+  turnDurationSeconds: 'turnDurationSeconds',
+  turnEndsAt: 'turnEndsAt',
+  version: 'version',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  finishedAt: 'finishedAt',
+} as const;
+
+export type MatchScalarFieldEnum =
+  (typeof MatchScalarFieldEnum)[keyof typeof MatchScalarFieldEnum];
 
 export const SortOrder = {
   asc: 'asc',
@@ -964,6 +1065,66 @@ export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<
 >;
 
 /**
+ * Reference to a field of type 'MatchMode'
+ */
+export type EnumMatchModeFieldRefInput<$PrismaModel> = FieldRefInputType<
+  $PrismaModel,
+  'MatchMode'
+>;
+
+/**
+ * Reference to a field of type 'MatchMode[]'
+ */
+export type ListEnumMatchModeFieldRefInput<$PrismaModel> = FieldRefInputType<
+  $PrismaModel,
+  'MatchMode[]'
+>;
+
+/**
+ * Reference to a field of type 'MatchStatus'
+ */
+export type EnumMatchStatusFieldRefInput<$PrismaModel> = FieldRefInputType<
+  $PrismaModel,
+  'MatchStatus'
+>;
+
+/**
+ * Reference to a field of type 'MatchStatus[]'
+ */
+export type ListEnumMatchStatusFieldRefInput<$PrismaModel> = FieldRefInputType<
+  $PrismaModel,
+  'MatchStatus[]'
+>;
+
+/**
+ * Reference to a field of type 'MatchParticipant'
+ */
+export type EnumMatchParticipantFieldRefInput<$PrismaModel> = FieldRefInputType<
+  $PrismaModel,
+  'MatchParticipant'
+>;
+
+/**
+ * Reference to a field of type 'MatchParticipant[]'
+ */
+export type ListEnumMatchParticipantFieldRefInput<$PrismaModel> =
+  FieldRefInputType<$PrismaModel, 'MatchParticipant[]'>;
+
+/**
+ * Reference to a field of type 'MatchEndReason'
+ */
+export type EnumMatchEndReasonFieldRefInput<$PrismaModel> = FieldRefInputType<
+  $PrismaModel,
+  'MatchEndReason'
+>;
+
+/**
+ * Reference to a field of type 'MatchEndReason[]'
+ */
+export type ListEnumMatchEndReasonFieldRefInput<$PrismaModel> =
+  FieldRefInputType<$PrismaModel, 'MatchEndReason[]'>;
+
+/**
  * Batch Payload for updateMany & deleteMany & createMany
  */
 export type BatchPayload = {
@@ -1085,6 +1246,7 @@ export type GlobalOmitConfig = {
   team?: Prisma.TeamOmit;
   player?: Prisma.PlayerOmit;
   playerTeammate?: Prisma.PlayerTeammateOmit;
+  match?: Prisma.MatchOmit;
 };
 
 /* Types for Logging */

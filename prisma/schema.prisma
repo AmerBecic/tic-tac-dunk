@@ -60,3 +60,60 @@ model PlayerTeammate {
   @@index([teammateId], map: "player_teammates_teammate_id_idx")
   @@map("player_teammates")
 }
+
+enum MatchMode {
+  AI
+  ONLINE
+
+  @@map("match_mode")
+}
+
+enum MatchParticipant {
+  PLAYER1
+  PLAYER2
+
+  @@map("match_participant")
+}
+
+enum MatchStatus {
+  WAITING
+  ACTIVE
+  FINISHED
+  ABANDONED
+
+  @@map("match_status")
+}
+
+enum MatchEndReason {
+  THREE_IN_ROW
+  DRAW
+  FORFEIT
+
+  @@map("match_end_reason")
+}
+
+model Match {
+  id                  String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  mode                MatchMode
+  player1Id           String            @map("player1_id") @db.Uuid
+  player2Id           String?           @map("player2_id") @db.Uuid
+  grid                Json              @db.JsonB
+  board               Json              @default("[null,null,null,null,null,null,null,null,null]") @db.JsonB
+  history             Json              @default("[]") @db.JsonB
+  status              MatchStatus       @default(WAITING)
+  currentPlayer       MatchParticipant? @map("current_player")
+  winner              MatchParticipant?
+  endReason           MatchEndReason?   @map("end_reason")
+  turnNumber          Int               @default(0) @map("turn_number")
+  turnDurationSeconds Int               @map("turn_duration_seconds")
+  turnEndsAt          DateTime?         @map("turn_ends_at") @db.Timestamptz(6)
+  version             Int               @default(0)
+  createdAt           DateTime          @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt           DateTime          @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
+  finishedAt          DateTime?         @map("finished_at") @db.Timestamptz(6)
+
+  @@index([player1Id, createdAt])
+  @@index([player2Id, createdAt])
+  @@index([status, turnEndsAt])
+  @@map("matches")
+}

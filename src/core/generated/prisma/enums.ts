@@ -8,5 +8,35 @@
  * 🟢 You can import this file directly.
  */
 
-// This file is empty because there are no enums in the schema.
-export {};
+export const MatchMode = {
+  AI: 'AI',
+  ONLINE: 'ONLINE',
+} as const;
+
+export type MatchMode = (typeof MatchMode)[keyof typeof MatchMode];
+
+export const MatchParticipant = {
+  PLAYER1: 'PLAYER1',
+  PLAYER2: 'PLAYER2',
+} as const;
+
+export type MatchParticipant =
+  (typeof MatchParticipant)[keyof typeof MatchParticipant];
+
+export const MatchStatus = {
+  WAITING: 'WAITING',
+  ACTIVE: 'ACTIVE',
+  FINISHED: 'FINISHED',
+  ABANDONED: 'ABANDONED',
+} as const;
+
+export type MatchStatus = (typeof MatchStatus)[keyof typeof MatchStatus];
+
+export const MatchEndReason = {
+  THREE_IN_ROW: 'THREE_IN_ROW',
+  DRAW: 'DRAW',
+  FORFEIT: 'FORFEIT',
+} as const;
+
+export type MatchEndReason =
+  (typeof MatchEndReason)[keyof typeof MatchEndReason];

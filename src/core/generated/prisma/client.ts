@@ -66,3 +66,8 @@ export type Player = Prisma.PlayerModel;
  *
  */
 export type PlayerTeammate = Prisma.PlayerTeammateModel;
+/**
+ * Model Match
+ *
+ */
+export type Match = Prisma.MatchModel;

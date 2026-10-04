@@ -15,7 +15,15 @@
     }
   },
   "dailyPuzzleList": {
+    "metadata_title": "Dnevni NBA izazovi | Tic Tac Dunk",
+    "metadata_description": "Pregledajte nedavne Tic Tac Dunk dnevne NBA izazove i odigrajte košarkaške mreže koje ste propustili.",
+    "metadata_keywords": "dnevni NBA izazovi, prethodni izazovi, NBA kviz, košarkaška mreža, igrači, timovi",
     "title": "Dnevne zagonetke"
+  },
+  "ticTacToe": {
+    "metadata_title": "NBA iks-oks | Tic Tac Dunk",
+    "metadata_description": "Testirajte svoje košarkaško znanje na Tic Tac Dunk NBA iks-oks mreži.",
+    "metadata_keywords": "NBA iks-oks, košarkaška mreža, NBA kviz, igrači, timovi"
   },
   "dailyPuzzle": {
     "title": "Dnevni izazov",

@@ -15,7 +15,15 @@
     }
   },
   "dailyPuzzleList": {
+    "metadata_title": "Daily NBA Puzzles | Tic Tac Dunk",
+    "metadata_description": "Browse recent Tic Tac Dunk daily NBA puzzles and play the basketball grids you missed.",
+    "metadata_keywords": "daily NBA puzzles, previous puzzles, NBA trivia, basketball grid, players, teams",
     "title": "Daily Puzzles"
+  },
+  "ticTacToe": {
+    "metadata_title": "NBA Tic Tac Toe | Tic Tac Dunk",
+    "metadata_description": "Test your basketball knowledge on the Tic Tac Dunk NBA tic-tac-toe grid.",
+    "metadata_keywords": "NBA tic tac toe, basketball grid, NBA trivia, players, teams"
   },
   "dailyPuzzle": {
     "title": "Daily Puzzle",

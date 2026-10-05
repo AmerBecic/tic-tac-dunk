@@ -1,4 +1,6 @@
-import type { GetActiveAiGameResponse } from '@/domains/tic-tac-toe/types/get.active.ai.game.response.dto';
+import type { GetMatchesRequest } from '@/domains/tic-tac-toe/types/get.matches.request.dto';
+import type { GetMatchesResponse } from '@/domains/tic-tac-toe/types/get.matches.response.dto';
+import type { Match } from '@/domains/tic-tac-toe/types/match.types';
 import { getSupabaseUser } from '@/core/supabase/user';
 import 'server-only';
 import { NextResponse } from 'next/server';
@@ -46,27 +48,38 @@ export async function createMatch(
   }
 }
 
-export async function getActiveAiGame(): Promise<
-  NextResponse<GetActiveAiGameResponse>
-> {
+export async function getMatches(
+  request: Request
+): Promise<NextResponse<GetMatchesResponse>> {
   const headers = { 'Cache-Control': 'no-store' };
+  const params = new URL(request.url).searchParams;
+  const modes = params.getAll('mode');
+  const statuses = params.getAll('status');
+
+  const filters: GetMatchesRequest = {
+    mode: modes[0] as Match['mode'] | undefined,
+    status: statuses.length
+      ? ([...new Set(statuses)] as Match['status'][])
+      : undefined,
+  };
   try {
     const { data, error } = await getSupabaseUser();
     if (error || !data.user) {
-      return NextResponse.json<GetActiveAiGameResponse>(
+      return NextResponse.json<GetMatchesResponse>(
         { success: false, error: 'Unauthorized' },
         { status: 401, headers }
       );
     }
-    const response = await ticTacToeService.getActiveAiGame(
+    const response = await ticTacToeService.getMatches(
+      filters,
       data.user.id,
       createSupabase()
     );
     return NextResponse.json(response, { headers });
   } catch (error) {
-    console.error('Active AI game lookup failed:', error);
-    return NextResponse.json<GetActiveAiGameResponse>(
-      { success: false, error: 'Failed to fetch active AI game.' },
+    console.error('Matches lookup failed:', error);
+    return NextResponse.json<GetMatchesResponse>(
+      { success: false, error: 'Failed to fetch matches.' },
       { status: 500, headers }
     );
   }

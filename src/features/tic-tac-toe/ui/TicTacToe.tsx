@@ -1,6 +1,6 @@
 'use client';
 
-import { useGetActiveAiGame } from '@/domains/tic-tac-toe/hooks/useGetActiveAiGame';
+import { useGetActiveAiMatch } from '@/domains/tic-tac-toe/hooks/useGetActiveAiMatch';
 import { useTranslations } from 'next-intl';
 import { Grid, GridCell } from '@/features/shared/grid';
 import { FlipTile } from '@/features/shared/flip-tile';
@@ -10,7 +10,7 @@ import styles from './TicTacToe.module.scss';
 
 export const TicTacToe = () => {
   const t = useTranslations('playersSearch');
-  const { activeAiGame: match } = useGetActiveAiGame();
+  const { activeAiMatch: match } = useGetActiveAiMatch();
 
   if (!match) return null;
 

@@ -1,10 +1,8 @@
-import type { Metadata } from 'next';
+import { getLocale } from 'next-intl/server';
+import { HOME_URL } from '@/core/constants/Routes';
+import { redirect } from '@/core/i18n/navigation';
 
-import { TIC_TAC_TOE_URL } from '@/core/constants/Routes';
-import { generateMetadataForRoute } from '@/core/utils/MetadataGenerics';
-import { TicTacToe } from '@/features/tic-tac-toe';
-
-export const generateMetadata = (): Promise<Metadata> =>
-  generateMetadataForRoute('ticTacToe', TIC_TAC_TOE_URL);
-
-export default TicTacToe;
+export default async function TicTacToePage() {
+  const locale = await getLocale();
+  redirect({ href: `${HOME_URL}?gamemode=open`, locale });
+}

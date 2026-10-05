@@ -1,3 +1,5 @@
+import 'server-only';
+import { ticTacToeRepository } from '@/server/tic-tac-toe/repositories/tic-tac-toe.repository';
 import { teamRepository } from '@/server/team/repositories/team.repository';
 import type { createSupabase } from '@/core/supabase/server';
 import type { Grid, GridCategory } from '@/domains/grid/types/grid.types';
@@ -6,21 +8,38 @@ import { dailyPuzzleRepository } from '../repositories/daily-puzzle.repository';
 import { playerRepository } from '@/server/player/repositories/player.repository';
 import { answerRepository } from '../repositories/answer.repository';
 
+async function loadGrid(
+  input: ValidateAnswerRequest,
+  db: ReturnType<typeof createSupabase>
+): Promise<Grid | null> {
+  if (input.source === 'DAILY') {
+    const { data } = await dailyPuzzleRepository.findById(input.puzzleId, db);
+    return data ? (data.grid_data as Grid) : null;
+  }
+
+  const { data, error } = await ticTacToeRepository.findById(input.matchId, db);
+  if (error) throw new Error('Unable to load match');
+  return data.grid;
+}
+
 async function validateAnswer(
   input: ValidateAnswerRequest,
   db: ReturnType<typeof createSupabase>
 ) {
-  const [puzzle, player] = await Promise.all([
-    dailyPuzzleRepository.findById(input.puzzleId, db),
-    playerRepository.findPlayer(input.playerId, db),
-  ]);
-  if (puzzle.error || player.error)
-    throw new Error('Unable to load answer data');
-  if (!puzzle.data || !player.data) return null;
-  const grid = puzzle.data.grid_data as Grid;
+  const grid = await loadGrid(input, db);
+  if (!grid) return null;
+  return validateGridAnswer(grid, input, db);
+}
+
+async function validateGridAnswer(
+  grid: Grid,
+  input: Pick<ValidateAnswerRequest, 'row' | 'column' | 'playerId'>,
+  db: ReturnType<typeof createSupabase>
+) {
+  const player = await playerRepository.findPlayer(input.playerId, db);
+  if (!player.data) return null;
   const row = grid.rows[input.row];
   const column = grid.columns[input.column];
-  if (!row || !column) throw new Error('Invalid stored puzzle');
   const selected = player.data;
 
   async function matches(criterion: GridCategory): Promise<boolean> {
@@ -70,4 +89,4 @@ async function validateAnswer(
   };
 }
 
-export const answerService = { validateAnswer };
+export const answerService = { validateAnswer, validateGridAnswer };

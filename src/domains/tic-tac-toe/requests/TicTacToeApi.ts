@@ -1,6 +1,9 @@
+import type { MatchActionRequest } from '../types/match.action.request.dto';
+import type { MatchActionResponse } from '../types/match.action.response.dto';
 import { Api } from '@/core/api/Api';
 import {
   CREATE_TIC_TAC_TOE_MATCH_API_URL,
+  UPDATE_TIC_TAC_TOE_MATCH_API_URL,
   GET_TIC_TAC_TOE_MATCHES_API_URL,
 } from '@/core/constants/ApiRoutes';
 import type { GetMatchesRequest } from '../types/get.matches.request.dto';
@@ -33,4 +36,17 @@ const getMatches = async (
   );
 };
 
-export const TicTacToeApi = { createMatch, getMatches };
+const updateMatch = async (
+  matchId: string,
+  input: MatchActionRequest
+): Promise<Extract<MatchActionResponse, { success: true }>> => {
+  const response = await Api.post<MatchActionResponse>(
+    UPDATE_TIC_TAC_TOE_MATCH_API_URL(matchId),
+    input,
+    'no-store'
+  );
+  if (!response.success) throw new Error(response.error);
+  return response;
+};
+
+export const TicTacToeApi = { createMatch, getMatches, updateMatch };

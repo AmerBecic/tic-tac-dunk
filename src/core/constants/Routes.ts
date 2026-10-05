@@ -8,4 +8,4 @@ export const DAILY_PUZZLE_URL = (date: string) => `/daily/${date}`;
 
 export const DAILY_PUZZLE_LIST_URL = '/daily/list';
 
-export const TIC_TAC_TOE_URL = '/tic-tac-toe';
+export const TIC_TAC_TOE_AI_URL = '/tic-tac-toe/ai';

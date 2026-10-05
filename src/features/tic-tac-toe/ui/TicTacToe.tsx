@@ -1,6 +1,7 @@
 'use client';
 
 import { useGetActiveAiMatch } from '@/domains/tic-tac-toe/hooks/useGetActiveAiMatch';
+import { useValidateAnswer } from '@/domains/grid/hooks/useValidateAnswer';
 import { useTranslations } from 'next-intl';
 import { Grid, GridCell } from '@/features/shared/grid';
 import { FlipTile } from '@/features/shared/flip-tile';
@@ -11,6 +12,7 @@ import styles from './TicTacToe.module.scss';
 export const TicTacToe = () => {
   const t = useTranslations('playersSearch');
   const { activeAiMatch: match } = useGetActiveAiMatch();
+  const { validateAnswer, isPending } = useValidateAnswer();
 
   if (!match) return null;
 
@@ -31,8 +33,20 @@ export const TicTacToe = () => {
           back={null}
         />
       }
-      renderCell={() => (
-        <GridCell disabled emptyLabel={t('search')} onSelectPlayer={() => {}} />
+      renderCell={(row, column) => (
+        <GridCell
+          disabled={isPending}
+          emptyLabel={t('search')}
+          onSelectPlayer={async (player) => {
+            await validateAnswer({
+              source: 'MATCH',
+              matchId: match.id,
+              row,
+              column,
+              playerId: player.id,
+            });
+          }}
+        />
       )}
     />
   );

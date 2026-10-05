@@ -1,3 +1,4 @@
+import { getSupabaseUser } from '@/core/supabase/user';
 import { NextRequest, NextResponse } from 'next/server';
 import { createSupabase } from '@/core/supabase/server';
 import { GRID_SIZE } from '@/domains/grid/types/grid.constants';
@@ -19,9 +20,8 @@ export async function validateAnswer(
   if (
     !body ||
     typeof body !== 'object' ||
-    typeof body.puzzleId !== 'string' ||
-    !body.puzzleId ||
-    body.puzzleId.length > 100 ||
+    (body.source !== 'DAILY' && body.source !== 'MATCH') ||
+    !isValidId(body.source === 'DAILY' ? body.puzzleId : body.matchId) ||
     typeof body.playerId !== 'string' ||
     !body.playerId ||
     body.playerId.length > 100 ||
@@ -38,10 +38,19 @@ export async function validateAnswer(
     );
   }
   try {
+    if (body.source === 'MATCH') {
+      const { data, error } = await getSupabaseUser();
+      if (error || !data.user) {
+        return NextResponse.json(
+          { error: 'Unauthorized' },
+          { status: 401, headers }
+        );
+      }
+    }
     const data = await answerService.validateAnswer(body, createSupabase());
     if (!data)
       return NextResponse.json(
-        { error: 'Puzzle or player not found.' },
+        { error: 'Puzzle, match, or player not found.' },
         { status: 404, headers }
       );
     return NextResponse.json({ data }, { headers });
@@ -52,4 +61,8 @@ export async function validateAnswer(
       { status: 500, headers }
     );
   }
+}
+
+function isValidId(value: unknown): value is string {
+  return typeof value === 'string' && value.length > 0 && value.length <= 100;
 }

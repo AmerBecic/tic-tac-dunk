@@ -7,7 +7,7 @@ import { DialogContent } from '@/features/shared/ui/dialog';
 import {
   DAILY_PUZZLE_URL,
   DAILY_PUZZLE_LIST_URL,
-  TIC_TAC_TOE_URL,
+  TIC_TAC_TOE_AI_URL,
 } from '@/core/constants/Routes';
 import { useRouter } from '@/core/i18n/navigation';
 import { GamemodeCard } from '@/features/shared/gamemode-card';
@@ -49,7 +49,7 @@ export const GamemodeSelection = () => {
       data: [match],
     });
 
-    router.push(TIC_TAC_TOE_URL);
+    router.push(TIC_TAC_TOE_AI_URL);
   };
 
   return (

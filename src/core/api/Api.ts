@@ -1,3 +1,14 @@
+export class ApiError extends Error {
+  constructor(
+    public readonly status: number,
+    message: string,
+    public readonly body: unknown = null
+  ) {
+    super(message);
+    this.name = 'ApiError';
+  }
+}
+
 const call = async <T>(
   apiPath: string,
   method: string,
@@ -17,7 +28,15 @@ const call = async <T>(
   const response = await fetch(`/api/${apiPath}`, config);
 
   if (!response.ok) {
-    throw new Error(`API error: ${response.status} ${response.statusText}`);
+    const body: unknown = await response.json().catch(() => null);
+    const message =
+      body &&
+      typeof body === 'object' &&
+      'error' in body &&
+      typeof body.error === 'string'
+        ? body.error
+        : `API error: ${response.status} ${response.statusText}`;
+    throw new ApiError(response.status, message, body);
   }
 
   return await response.json();

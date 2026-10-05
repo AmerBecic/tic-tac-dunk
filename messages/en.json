@@ -23,7 +23,13 @@
   "ticTacToe": {
     "metadata_title": "NBA Tic Tac Toe | Tic Tac Dunk",
     "metadata_description": "Test your basketball knowledge on the Tic Tac Dunk NBA tic-tac-toe grid.",
-    "metadata_keywords": "NBA tic tac toe, basketball grid, NBA trivia, players, teams"
+    "metadata_keywords": "NBA tic tac toe, basketball grid, NBA trivia, players, teams",
+    "yourTurn": "Your turn",
+    "aiTurn": "AI’s turn",
+    "waiting": "Waiting for opponent",
+    "finished": "Match ended",
+    "timeLeft": "Time left: {time}",
+    "timeExpired": "Time is up"
   },
   "dailyPuzzle": {
     "title": "Daily Puzzle",

@@ -30,9 +30,14 @@ function isAction(value: unknown): value is MatchActionRequest {
   }
   return (
     typeof body.action === 'string' &&
-    ['FORFEIT', 'SKIP', 'OFFER_DRAW', 'ACCEPT_DRAW', 'DECLINE_DRAW'].includes(
-      body.action
-    )
+    [
+      'FORFEIT',
+      'SKIP',
+      'TIMEOUT',
+      'OFFER_DRAW',
+      'ACCEPT_DRAW',
+      'DECLINE_DRAW',
+    ].includes(body.action)
   );
 }
 

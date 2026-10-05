@@ -34,6 +34,7 @@ function isAction(value: unknown): value is MatchActionRequest {
       'FORFEIT',
       'SKIP',
       'TIMEOUT',
+      'AI_TURN',
       'OFFER_DRAW',
       'ACCEPT_DRAW',
       'DECLINE_DRAW',

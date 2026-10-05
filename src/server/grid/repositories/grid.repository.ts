@@ -34,7 +34,26 @@ async function validateGrid(
   });
 }
 
+async function findGridAnswers(
+  grid: Grid,
+  supabase: ReturnType<typeof createSupabase>
+) {
+  const { data, error } = await supabase.rpc('find_grid_answers', {
+    _rows: grid.rows,
+    _columns: grid.columns,
+  });
+  return {
+    data: (data ?? []) as Array<{
+      row_index: number;
+      column_index: number;
+      player_id: string | null;
+    }>,
+    error,
+  };
+}
+
 export const gridRepository = {
+  findGridAnswers,
   getRandomTeams,
   getRandomEligiblePlayers,
   validateGrid,

@@ -5,6 +5,7 @@ export type MatchActionRequest = { expectedVersion: number } & (
         | 'FORFEIT'
         | 'SKIP'
         | 'TIMEOUT'
+        | 'AI_TURN'
         | 'OFFER_DRAW'
         | 'ACCEPT_DRAW'
         | 'DECLINE_DRAW';

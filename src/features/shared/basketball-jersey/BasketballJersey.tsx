@@ -7,6 +7,7 @@ interface BasketballJerseyProps {
   jerseyColor?: string;
   trimColor?: string;
   lastName?: string;
+  mark?: 'X' | 'O';
   nameColor?: string;
   size?: number;
   className?: string;
@@ -17,6 +18,7 @@ export const BasketballJersey = ({
   jerseyColor = 'var(--color-gray-400)',
   trimColor = 'var(--color-gray-600)',
   lastName,
+  mark,
   nameColor = 'var(--color-black-200)',
   size = 120,
   className,
@@ -49,7 +51,7 @@ export const BasketballJersey = ({
         aria-hidden="true"
         focusable="false"
       />
-      {hasName && (
+      {(hasName || mark) && (
         <svg
           className={styles.name}
           viewBox="0 0 100 100"
@@ -59,15 +61,28 @@ export const BasketballJersey = ({
           <defs>
             <path id={namePathId} d="M 29,49 Q 50,34 71,49" />
           </defs>
-          <text
-            fill={nameColor}
-            fontSize={Math.min(9, 60 / Array.from(displayName).length)}
-            textAnchor="middle"
-          >
-            <textPath href={`#${namePathId}`} startOffset="50%">
-              {displayName}
-            </textPath>
-          </text>
+          {hasName && (
+            <text
+              fill={nameColor}
+              fontSize={Math.min(9, 60 / Array.from(displayName).length)}
+              textAnchor="middle"
+            >
+              <textPath href={`#${namePathId}`} startOffset="50%">
+                {displayName}
+              </textPath>
+            </text>
+          )}
+          {mark && (
+            <text
+              x="50"
+              y="72"
+              textAnchor="middle"
+              fill={nameColor}
+              fontSize="28"
+            >
+              {mark}
+            </text>
+          )}
         </svg>
       )}
     </span>

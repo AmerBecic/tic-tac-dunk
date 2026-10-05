@@ -43,9 +43,14 @@ function pendingDraw(match: Match): Actor | null {
     const event = match.history[i];
     if (event.action === 'OFFER_DRAW') return event.actor;
     if (
-      ['MOVE', 'SKIP', 'DECLINE_DRAW', 'ACCEPT_DRAW', 'FORFEIT'].includes(
-        event.action
-      )
+      [
+        'MOVE',
+        'SKIP',
+        'TIMEOUT',
+        'DECLINE_DRAW',
+        'ACCEPT_DRAW',
+        'FORFEIT',
+      ].includes(event.action)
     )
       return null;
   }
@@ -159,9 +164,18 @@ async function applyAction(
       return fail('CONFLICT', 'Turn deadline has passed.');
     }
   }
+  if (
+    input.action === 'TIMEOUT' &&
+    (!match.currentPlayer ||
+      !match.turnEndsAt ||
+      !Number.isFinite(Date.parse(match.turnEndsAt)) ||
+      Date.parse(match.turnEndsAt) > Date.now())
+  ) {
+    return fail('CONFLICT', 'Turn has not expired.');
+  }
   const event: Match['history'][number] = {
     action: input.action,
-    actor,
+    actor: input.action === 'TIMEOUT' ? match.currentPlayer! : actor,
     turnNumber: match.turnNumber,
     at: new Date().toISOString(),
   };
@@ -179,6 +193,9 @@ async function applyAction(
       });
       break;
     }
+    case 'TIMEOUT':
+      skipTurn(match, match.currentPlayer!);
+      break;
     case 'SKIP':
       skipTurn(match, actor);
       break;
@@ -195,7 +212,7 @@ async function applyAction(
     match,
     input.expectedVersion,
     db,
-    turnAction
+    turnAction ? 'live' : input.action === 'TIMEOUT' ? 'expired' : null
   );
   if (saved.error)
     throw new Error(`Match update failed: ${saved.error.message}`);

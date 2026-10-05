@@ -23,7 +23,13 @@
   "ticTacToe": {
     "metadata_title": "NBA iks-oks | Tic Tac Dunk",
     "metadata_description": "Testirajte svoje košarkaško znanje na Tic Tac Dunk NBA iks-oks mreži.",
-    "metadata_keywords": "NBA iks-oks, košarkaška mreža, NBA kviz, igrači, timovi"
+    "metadata_keywords": "NBA iks-oks, košarkaška mreža, NBA kviz, igrači, timovi",
+    "yourTurn": "Ti si na potezu",
+    "aiTurn": "AI je na potezu",
+    "waiting": "Čekanje protivnika",
+    "finished": "Meč je završen",
+    "timeLeft": "Preostalo vrijeme: {time}",
+    "timeExpired": "Vrijeme je isteklo"
   },
   "dailyPuzzle": {
     "title": "Dnevni izazov",

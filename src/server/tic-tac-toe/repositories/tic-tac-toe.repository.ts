@@ -95,7 +95,7 @@ async function saveAction(
   match: Match,
   expectedVersion: number,
   supabase: ReturnType<typeof createSupabase>,
-  requireLiveTurn: boolean
+  deadlineCheck: 'live' | 'expired' | null
 ) {
   const now = new Date().toISOString();
   let query = supabase
@@ -116,7 +116,8 @@ async function saveAction(
     .eq('id', match.id)
     .eq('version', expectedVersion)
     .eq('status', 'ACTIVE');
-  if (requireLiveTurn) query = query.gt('turn_ends_at', now);
+  if (deadlineCheck === 'live') query = query.gt('turn_ends_at', now);
+  if (deadlineCheck === 'expired') query = query.lte('turn_ends_at', now);
   const { data, error } = await query.select('*').maybeSingle<MatchRow>();
   return { data: data ? mapMatch(data) : null, error };
 }

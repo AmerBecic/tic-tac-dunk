@@ -1,5 +1,6 @@
 'use client';
 
+import { useCallback } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { ApiError } from '@/core/api/Api';
 import { GET_TIC_TAC_TOE_MATCHES_QUERY_KEY } from '@/core/constants/QueryKeys';
@@ -31,8 +32,13 @@ export const useMatchActions = (matchId: string) => {
     },
   });
   void mutate;
+  const expireTurn = useCallback(
+    (input: VersionInput) => mutateAsync({ ...input, action: 'TIMEOUT' }),
+    [mutateAsync]
+  );
   return {
     ...state,
+    expireTurn,
     submitMove: (input: MoveInput) => mutateAsync({ ...input, action: 'MOVE' }),
     skipTurn: (input: VersionInput) =>
       mutateAsync({ ...input, action: 'SKIP' }),

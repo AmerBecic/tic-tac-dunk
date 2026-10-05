@@ -15,7 +15,7 @@ export type Match = {
     trimColor?: string;
   } | null>;
   history: Array<{
-    action: MatchActionRequest['action'];
+    action: MatchActionRequest['action'] | 'TIMEOUT';
     actor: 'PLAYER1' | 'PLAYER2';
     turnNumber: number;
     at: string;

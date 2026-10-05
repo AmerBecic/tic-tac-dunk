@@ -1,4 +1,5 @@
-import type { GetActiveAiGameResponse } from '@/domains/tic-tac-toe/types/get.active.ai.game.response.dto';
+import type { GetMatchesRequest } from '@/domains/tic-tac-toe/types/get.matches.request.dto';
+import type { GetMatchesResponse } from '@/domains/tic-tac-toe/types/get.matches.response.dto';
 import 'server-only';
 import type { createSupabase } from '@/core/supabase/server';
 import {
@@ -52,17 +53,17 @@ async function createMatch(
   return { success: true, data };
 }
 
-async function getActiveAiGame(
+async function getMatches(
+  filters: GetMatchesRequest,
   playerId: string,
   supabase: ReturnType<typeof createSupabase>
-): Promise<GetActiveAiGameResponse> {
-  const { data, error } = await ticTacToeRepository.getActiveAiGame(
+): Promise<GetMatchesResponse> {
+  const { data } = await ticTacToeRepository.getMatches(
+    filters,
     playerId,
     supabase
   );
-  if (error)
-    throw new Error(`Unable to fetch active AI game: ${error.message}`);
   return { success: true, data };
 }
 
-export const ticTacToeService = { createMatch, getActiveAiGame };
+export const ticTacToeService = { createMatch, getMatches };

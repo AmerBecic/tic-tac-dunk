@@ -1,3 +1,4 @@
+import type { GetMatchesRequest } from '@/domains/tic-tac-toe/types/get.matches.request.dto';
 import 'server-only';
 import type { createSupabase } from '@/core/supabase/server';
 import type { Match } from '@/domains/tic-tac-toe/types/match.types';
@@ -44,43 +45,46 @@ async function createMatch(
   };
 }
 
-async function getActiveAiGame(
+async function getMatches(
+  filters: GetMatchesRequest,
   playerId: string,
   supabase: ReturnType<typeof createSupabase>
 ) {
-  const { data, error } = await supabase
+  let query = supabase
     .from('matches')
     .select(
-      'id, player1_id, grid, board, history, status, current_player, turn_number, turn_duration_seconds, turn_ends_at, version, created_at, updated_at'
+      'id, mode, player1_id, player2_id, grid, board, history, status, current_player, winner, end_reason, turn_number, turn_duration_seconds, turn_ends_at, version, created_at, updated_at, finished_at'
     )
-    .eq('player1_id', playerId)
-    .eq('mode', 'AI')
-    .in('status', ['WAITING', 'ACTIVE'])
-    .maybeSingle();
+    .or(`player1_id.eq.${playerId},player2_id.eq.${playerId}`);
 
-  const game: Match | null = data
-    ? {
-        id: data.id,
-        mode: 'AI',
-        player1Id: data.player1_id,
-        player2Id: null,
-        grid: data.grid,
-        board: data.board,
-        history: data.history,
-        status: data.status,
-        currentPlayer: data.current_player,
-        winner: null,
-        endReason: null,
-        turnNumber: data.turn_number,
-        turnDurationSeconds: data.turn_duration_seconds,
-        turnEndsAt: data.turn_ends_at,
-        version: data.version,
-        createdAt: data.created_at,
-        updatedAt: data.updated_at,
-        finishedAt: null,
-      }
-    : null;
-  return { data: game, error };
+  if (filters.mode) query = query.eq('mode', filters.mode);
+  if (filters.status?.length) query = query.in('status', filters.status);
+
+  const { data, error } = await query
+    .order('created_at', { ascending: false })
+    .order('id', { ascending: false });
+
+  const matches: Match[] = (data ?? []).map((row) => ({
+    id: row.id,
+    mode: row.mode,
+    player1Id: row.player1_id,
+    player2Id: row.player2_id,
+    grid: row.grid,
+    board: row.board,
+    history: row.history,
+    status: row.status,
+    currentPlayer: row.current_player,
+    winner: row.winner,
+    endReason: row.end_reason,
+    turnNumber: row.turn_number,
+    turnDurationSeconds: row.turn_duration_seconds,
+    turnEndsAt: row.turn_ends_at,
+    version: row.version,
+    createdAt: row.created_at,
+    updatedAt: row.updated_at,
+    finishedAt: row.finished_at,
+  }));
+  return { data: matches, error };
 }
 
-export const ticTacToeRepository = { createMatch, getActiveAiGame };
+export const ticTacToeRepository = { createMatch, getMatches };

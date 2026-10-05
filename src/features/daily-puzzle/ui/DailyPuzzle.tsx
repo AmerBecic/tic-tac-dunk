@@ -101,6 +101,7 @@ export const DailyPuzzle = ({ date }: DailyPuzzleProps): React.JSX.Element => {
             onSelectPlayer={async (player) => {
               if (!dailyPuzzle || !progress.isReady) return;
               const result = await validateAnswer({
+                source: 'DAILY',
                 puzzleId: dailyPuzzle.id,
                 row: rowIndex,
                 column: columnIndex,

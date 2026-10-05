@@ -64,7 +64,94 @@ async function getMatches(
     .order('created_at', { ascending: false })
     .order('id', { ascending: false });
 
-  const matches: Match[] = (data ?? []).map((row) => ({
+  const matches = (data ?? []).map(mapMatch);
+  return { data: matches, error };
+}
+
+async function findById(
+  id: string,
+  supabase: ReturnType<typeof createSupabase>
+) {
+  return supabase
+    .from('matches')
+    .select('id, grid, player1_id, player2_id')
+    .eq('id', id)
+    .single();
+}
+
+async function findMatchById(
+  id: string,
+  supabase: ReturnType<typeof createSupabase>
+) {
+  const { data, error } = await supabase
+    .from('matches')
+    .select('*')
+    .eq('id', id)
+    .maybeSingle<MatchRow>();
+  return { data: data ? mapMatch(data) : null, error };
+}
+
+async function saveAction(
+  match: Match,
+  expectedVersion: number,
+  supabase: ReturnType<typeof createSupabase>,
+  requireLiveTurn: boolean
+) {
+  const now = new Date().toISOString();
+  let query = supabase
+    .from('matches')
+    .update({
+      board: match.board,
+      history: match.history,
+      status: match.status,
+      current_player: match.currentPlayer,
+      winner: match.winner,
+      end_reason: match.endReason,
+      turn_number: match.turnNumber,
+      turn_ends_at: match.turnEndsAt,
+      finished_at: match.finishedAt,
+      updated_at: now,
+      version: expectedVersion + 1,
+    })
+    .eq('id', match.id)
+    .eq('version', expectedVersion)
+    .eq('status', 'ACTIVE');
+  if (requireLiveTurn) query = query.gt('turn_ends_at', now);
+  const { data, error } = await query.select('*').maybeSingle<MatchRow>();
+  return { data: data ? mapMatch(data) : null, error };
+}
+
+export const ticTacToeRepository = {
+  createMatch,
+  getMatches,
+  findById,
+  findMatchById,
+  saveAction,
+};
+
+type MatchRow = {
+  id: Match['id'];
+  mode: Match['mode'];
+  player1_id: Match['player1Id'];
+  player2_id: Match['player2Id'];
+  grid: Match['grid'];
+  board: Match['board'];
+  history: Match['history'];
+  status: Match['status'];
+  current_player: Match['currentPlayer'];
+  winner: Match['winner'];
+  end_reason: Match['endReason'];
+  turn_number: Match['turnNumber'];
+  turn_duration_seconds: Match['turnDurationSeconds'];
+  turn_ends_at: Match['turnEndsAt'];
+  version: Match['version'];
+  created_at: Match['createdAt'];
+  updated_at: Match['updatedAt'];
+  finished_at: Match['finishedAt'];
+};
+
+function mapMatch(row: MatchRow): Match {
+  return {
     id: row.id,
     mode: row.mode,
     player1Id: row.player1_id,
@@ -83,8 +170,5 @@ async function getMatches(
     createdAt: row.created_at,
     updatedAt: row.updated_at,
     finishedAt: row.finished_at,
-  }));
-  return { data: matches, error };
+  };
 }
-
-export const ticTacToeRepository = { createMatch, getMatches };

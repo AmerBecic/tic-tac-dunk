@@ -1,3 +1,4 @@
+import { gridRepository } from '@/server/grid/repositories/grid.repository';
 import 'server-only';
 import type { createSupabase } from '@/core/supabase/server';
 import type { Match } from '@/domains/tic-tac-toe/types/match.types';
@@ -136,6 +137,53 @@ function handleDraw(
   return null;
 }
 
+async function chooseAiAction(
+  match: Match,
+  expectedVersion: number,
+  db: ReturnType<typeof createSupabase>
+): Promise<MatchActionRequest> {
+  const skip: MatchActionRequest = { action: 'SKIP', expectedVersion };
+  if (Math.random() >= 0.5) return skip;
+  const { data, error } = await gridRepository.findGridAnswers(match.grid, db);
+  if (error) throw new Error(`AI answer lookup failed: ${error.message}`);
+  const cells = data.filter(
+    (cell) =>
+      cell.player_id && !match.board[cell.row_index * 3 + cell.column_index]
+  );
+  if (!cells.length) return skip;
+  const lines = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+  const completes = (index: number, owner: Actor) =>
+    lines.some(
+      (line) =>
+        line.includes(index) &&
+        line.every((i) => i === index || match.board[i]?.owner === owner)
+    );
+  const winning = cells.filter((cell) =>
+    completes(cell.row_index * 3 + cell.column_index, 'PLAYER2')
+  );
+  const blocking = cells.filter((cell) =>
+    completes(cell.row_index * 3 + cell.column_index, 'PLAYER1')
+  );
+  const choices = winning.length ? winning : blocking.length ? blocking : cells;
+  const cell = choices[Math.floor(Math.random() * choices.length)];
+  return {
+    action: 'MOVE',
+    expectedVersion,
+    row: cell.row_index,
+    column: cell.column_index,
+    playerId: cell.player_id!,
+  };
+}
+
 async function applyAction(
   id: string,
   input: MatchActionRequest,
@@ -155,7 +203,28 @@ async function applyAction(
     return fail('INVALID_ACTION', 'Match is not active.');
   if (match.mode === 'ONLINE' && !match.player2Id)
     return fail('INVALID_ACTION', 'Match has no opponent.');
-  const actor: Actor = match.player1Id === userId ? 'PLAYER1' : 'PLAYER2';
+  const isAiAction = input.action === 'AI_TURN';
+  if (isAiAction) {
+    if (
+      match.mode !== 'AI' ||
+      match.player1Id !== userId ||
+      match.currentPlayer !== 'PLAYER2'
+    ) {
+      return fail('INVALID_ACTION', 'It is not the AI turn.');
+    }
+    const remaining = match.turnEndsAt
+      ? Date.parse(match.turnEndsAt) - Date.now()
+      : 0;
+    if (!Number.isFinite(remaining) || remaining <= 0 || remaining > 15000) {
+      return fail('CONFLICT', 'AI turn is outside its action window.');
+    }
+    input = await chooseAiAction(match, input.expectedVersion, db);
+  }
+  const actor: Actor = isAiAction
+    ? 'PLAYER2'
+    : match.player1Id === userId
+      ? 'PLAYER1'
+      : 'PLAYER2';
   const turnAction = input.action === 'MOVE' || input.action === 'SKIP';
   if (turnAction) {
     if (match.currentPlayer !== actor)
@@ -202,6 +271,8 @@ async function applyAction(
     case 'FORFEIT':
       forfeitMatch(match, actor);
       break;
+    case 'AI_TURN':
+      return fail('INVALID_ACTION', 'Invalid AI action.');
     default: {
       const error = handleDraw(match, input.action, actor);
       if (error) return error;

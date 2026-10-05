@@ -9,6 +9,7 @@ import { Grid, GridCell } from '@/features/shared/grid';
 import { FlipTile } from '@/features/shared/flip-tile';
 import { Logo } from '@/features/shared/logo';
 import { Paragraph } from '@/features/shared/ui/paragraph';
+import { useAiTurn } from '../hooks/useAiTurn';
 import styles from './TicTacToe.module.scss';
 
 export const TicTacToe = () => {
@@ -23,6 +24,7 @@ export const TicTacToe = () => {
   const { activeAiMatch } = useGetActiveAiMatch();
   const {
     submitMove,
+    playAiTurn,
     expireTurn,
     isPending,
     data: actionResult,
@@ -35,6 +37,8 @@ export const TicTacToe = () => {
         savedMatch.version >= activeAiMatch.version))
       ? savedMatch
       : activeAiMatch;
+
+  useAiTurn({ match, now, isPending, playAiTurn });
 
   const deadline = match?.turnEndsAt ? Date.parse(match.turnEndsAt) : null;
   const secondsLeft =
@@ -123,6 +127,9 @@ export const TicTacToe = () => {
           return (
             <GridCell
               answer={answer ?? undefined}
+              mark={
+                answer ? (answer.owner === 'PLAYER1' ? 'X' : 'O') : undefined
+              }
               disabled={isPending || !canMove || !!answer}
               emptyLabel={t('search')}
               onSelectPlayer={async (player) => {

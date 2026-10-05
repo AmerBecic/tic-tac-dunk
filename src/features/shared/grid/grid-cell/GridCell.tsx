@@ -13,6 +13,7 @@ interface GridCellProps {
     jerseyColor?: string;
     trimColor?: string;
   };
+  mark?: 'X' | 'O';
   disabled?: boolean;
   emptyLabel: string;
   celebration?: 'impact' | 'ripple';
@@ -23,6 +24,7 @@ interface GridCellProps {
 
 export const GridCell = ({
   answer,
+  mark,
   disabled,
   emptyLabel,
   celebration,
@@ -40,9 +42,14 @@ export const GridCell = ({
         data-celebration={celebration}
         style={{ '--ripple-delay': `${rippleDelayMs}ms` } as CSSProperties}
         textProps={{ style: { display: 'contents' } }}
-        aria-label={answer?.playerName ?? emptyLabel}
+        aria-label={
+          answer
+            ? [answer.playerName, mark].filter(Boolean).join(', ')
+            : emptyLabel
+        }
       >
         <BasketballJersey
+          mark={answer ? mark : undefined}
           jerseyColor={answer?.jerseyColor}
           trimColor={answer?.trimColor}
           nameColor={answer?.trimColor}

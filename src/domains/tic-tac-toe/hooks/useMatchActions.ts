@@ -36,8 +36,13 @@ export const useMatchActions = (matchId: string) => {
     (input: VersionInput) => mutateAsync({ ...input, action: 'TIMEOUT' }),
     [mutateAsync]
   );
+  const playAiTurn = useCallback(
+    (input: VersionInput) => mutateAsync({ ...input, action: 'AI_TURN' }),
+    [mutateAsync]
+  );
   return {
     ...state,
+    playAiTurn,
     expireTurn,
     submitMove: (input: MoveInput) => mutateAsync({ ...input, action: 'MOVE' }),
     skipTurn: (input: VersionInput) =>

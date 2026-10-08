@@ -8,6 +8,7 @@ interface BasketballJerseyProps {
   trimColor?: string;
   lastName?: string;
   mark?: 'X' | 'O';
+  showGuessIndicator?: boolean;
   nameColor?: string;
   size?: number;
   className?: string;
@@ -19,6 +20,7 @@ export const BasketballJersey = ({
   trimColor = 'var(--color-gray-600)',
   lastName,
   mark,
+  showGuessIndicator = false,
   nameColor = 'var(--color-black-200)',
   size = 120,
   className,
@@ -51,7 +53,7 @@ export const BasketballJersey = ({
         aria-hidden="true"
         focusable="false"
       />
-      {(hasName || mark) && (
+      {(hasName || mark || showGuessIndicator) && (
         <svg
           className={styles.name}
           viewBox="0 0 100 100"
@@ -71,6 +73,15 @@ export const BasketballJersey = ({
                 {displayName}
               </textPath>
             </text>
+          )}
+          {showGuessIndicator && !hasName && !mark && (
+            <path
+              d="M 50,48 V 68 M 40,58 H 60"
+              fill="none"
+              stroke="var(--text-primary)"
+              strokeWidth="4"
+              strokeLinecap="round"
+            />
           )}
           {mark && (
             <text

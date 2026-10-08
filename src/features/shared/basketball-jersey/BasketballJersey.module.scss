@@ -6,7 +6,7 @@
   aspect-ratio: 1;
   container-type: inline-size;
 
-  &[data-empty] {
+  &[data-empty] .artwork {
     opacity: 0.3;
   }
 }

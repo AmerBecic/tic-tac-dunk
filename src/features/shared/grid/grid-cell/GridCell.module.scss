@@ -20,6 +20,10 @@
   }
 
   @include breakpoints.respond-from(md) {
+    --jersey-display-size: 84px;
+  }
+
+  @include breakpoints.respond-from(xxl) {
     --jersey-display-size: 104px;
   }
 }

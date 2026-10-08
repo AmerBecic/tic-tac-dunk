@@ -15,6 +15,7 @@ interface GridCellProps {
   };
   mark?: 'X' | 'O';
   disabled?: boolean;
+  showGuessIndicator?: boolean;
   emptyLabel: string;
   celebration?: 'impact' | 'ripple';
   rippleDelayMs?: number;
@@ -26,6 +27,7 @@ export const GridCell = ({
   answer,
   mark,
   disabled,
+  showGuessIndicator = !disabled,
   emptyLabel,
   celebration,
   rippleDelayMs = 0,
@@ -49,6 +51,7 @@ export const GridCell = ({
         }
       >
         <BasketballJersey
+          showGuessIndicator={!answer && showGuessIndicator}
           mark={answer ? mark : undefined}
           jerseyColor={answer?.jerseyColor}
           trimColor={answer?.trimColor}

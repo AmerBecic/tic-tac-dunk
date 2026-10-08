@@ -17,10 +17,6 @@ export const TicTacToe = () => {
   const turnText = useTranslations('ticTacToe');
   const [now, setNow] = useState(() => Date.now());
 
-  useEffect(() => {
-    const timer = window.setInterval(() => setNow(Date.now()), 1000);
-    return () => window.clearInterval(timer);
-  }, []);
   const { activeAiMatch } = useGetActiveAiMatch();
   const {
     submitMove,
@@ -38,12 +34,25 @@ export const TicTacToe = () => {
       ? savedMatch
       : activeAiMatch;
 
+  useEffect(() => {
+    const refresh = () => setNow(Date.now());
+    const initialTick = window.setTimeout(refresh, 0);
+    const timer = window.setInterval(refresh, 1000);
+    return () => {
+      window.clearTimeout(initialTick);
+      window.clearInterval(timer);
+    };
+  }, [match?.id, match?.turnEndsAt]);
+
   useAiTurn({ match, now, isPending, playAiTurn });
 
   const deadline = match?.turnEndsAt ? Date.parse(match.turnEndsAt) : null;
   const secondsLeft =
     deadline !== null && Number.isFinite(deadline)
-      ? Math.max(0, Math.ceil((deadline - now) / 1000))
+      ? Math.min(
+          match?.turnDurationSeconds ?? 0,
+          Math.max(0, Math.ceil((deadline - now) / 1000))
+        )
       : 0;
   const timeoutAttempt = useRef({ pending: false, tick: 0, completed: '' });
   useEffect(() => {
@@ -91,14 +100,9 @@ export const TicTacToe = () => {
         <span role="status">{turnLabel}</span>
         {match.status === 'ACTIVE' && match.currentPlayer && (
           <>
-            {' '}
-            ·{' '}
             <span role="timer" aria-live="off">
               {turnText('timeLeft', { time: timeLeft })}
             </span>
-            {secondsLeft === 0 && (
-              <span role="status"> · {turnText('timeExpired')}</span>
-            )}
           </>
         )}
       </Paragraph>

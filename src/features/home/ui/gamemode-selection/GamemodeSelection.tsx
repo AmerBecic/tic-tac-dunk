@@ -1,7 +1,5 @@
 'use client';
 
-import { useQueryClient } from '@tanstack/react-query';
-import type { GetMatchesResponse } from '@/domains/tic-tac-toe/types/get.matches.response.dto';
 import { useTranslations } from 'next-intl';
 import { DialogContent } from '@/features/shared/ui/dialog';
 import {
@@ -16,41 +14,9 @@ import PuzzleSvg from '@/assets/Puzzle.svg';
 import BotSvg from '@/assets/Bot.svg';
 import PvPSvg from '@/assets/PvP.svg';
 import styles from './GamemodeSelection.module.scss';
-import {
-  useGetActiveAiMatch,
-  ACTIVE_AI_MATCH_QUERY_KEY,
-} from '@/domains/tic-tac-toe/hooks/useGetActiveAiMatch';
-import { useCreateTicTacToeMatch } from '@/domains/tic-tac-toe/hooks/useCreateTicTacToeMatch';
-import { DEFAULT_TURN_DURATION_SECONDS } from '@/domains/tic-tac-toe/types/tic-tac-toe.constants';
-
 export const GamemodeSelection = () => {
   const t = useTranslations();
   const router = useRouter();
-  const queryClient = useQueryClient();
-  const { activeAiMatch, isLoading, isError } = useGetActiveAiMatch();
-  const { createTicTacToeMatch, isPending } = useCreateTicTacToeMatch();
-
-  const handlePlayAi = async () => {
-    if (isLoading || isPending || isError) return;
-
-    const match =
-      activeAiMatch ??
-      (await createTicTacToeMatch({
-        mode: 'AI',
-        turnDurationSeconds: DEFAULT_TURN_DURATION_SECONDS,
-      }));
-    if (!match) return;
-
-    await queryClient.cancelQueries({
-      queryKey: ACTIVE_AI_MATCH_QUERY_KEY,
-    });
-    queryClient.setQueryData<GetMatchesResponse>(ACTIVE_AI_MATCH_QUERY_KEY, {
-      success: true,
-      data: [match],
-    });
-
-    router.push(TIC_TAC_TOE_AI_URL);
-  };
 
   return (
     <DialogContent className={styles.dialog} closeLabel={t('common.close')}>
@@ -73,7 +39,7 @@ export const GamemodeSelection = () => {
           icon={<BotSvg aria-hidden="true" focusable="false" />}
           title={t('home.gamemodeSelection.aiTitle')}
           description={t('home.gamemodeSelection.aiDescription')}
-          onPlay={handlePlayAi}
+          onPlay={() => router.push(TIC_TAC_TOE_AI_URL)}
         />
         <GamemodeCard
           icon={<PvPSvg aria-hidden="true" focusable="false" />}

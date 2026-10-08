@@ -22,14 +22,24 @@ interface UseGetActiveAiMatchResult
   activeAiMatch: Match | null;
 }
 
-export const useGetActiveAiMatch = (): UseGetActiveAiMatchResult => {
+export const useGetActiveAiMatch = (
+  matchId?: string
+): UseGetActiveAiMatchResult => {
+  const filters: GetMatchesRequest = matchId
+    ? { mode: 'AI' }
+    : activeAiMatchFilters;
   const { data, ...rest } = useQuery<GetMatchesResponse, Error>({
-    queryKey: ACTIVE_AI_MATCH_QUERY_KEY,
-    queryFn: () => TicTacToeApi.getMatches(activeAiMatchFilters),
+    queryKey: matchId
+      ? [GET_TIC_TAC_TOE_MATCHES_QUERY_KEY, filters, matchId]
+      : ACTIVE_AI_MATCH_QUERY_KEY,
+    queryFn: () => TicTacToeApi.getMatches(filters),
   });
 
   return {
-    activeAiMatch: data?.data?.[0] ?? null,
+    activeAiMatch:
+      (matchId
+        ? data?.data?.find((match) => match.id === matchId)
+        : data?.data?.[0]) ?? null,
     ...rest,
   };
 };

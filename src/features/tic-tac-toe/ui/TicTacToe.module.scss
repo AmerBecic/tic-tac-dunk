@@ -1,26 +1,53 @@
-@use '@/core/styles/colors' as colors;
 @use '@/core/styles/breakpoints' as breakpoints;
 
-.titleTile {
-  --surface-muted: light-dark(#{colors.white(300)}, #03170f);
+.fallback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  width: min(100%, 500px);
+  box-sizing: border-box;
+  padding: 0;
+  justify-self: center;
+
+  > button {
+    flex: 1;
+    min-width: 0;
+  }
+
+  @include breakpoints.respond-from(lg) {
+    flex-direction: column;
+    justify-self: start;
+    width: min(100%, 180px);
+    padding: 0;
+  }
+}
+
+.newGame.newGame {
+  color: var(--text-primary);
+
+  &:not(:disabled) {
+    background-color: var(--color-secondary);
+  }
+
+  &:not(:disabled):hover {
+    box-shadow: 0 0 0 2px var(--color-secondary);
+  }
+}
+
+.leave.leave {
+  background-color: var(--color-error);
   color: var(--text-primary);
 }
 
-.title {
-  margin: 0;
-  font-size: 12px;
-  line-height: 1.1;
-  overflow-wrap: anywhere;
-
-  @include breakpoints.respond-from(sm) {
-    font-size: 18px;
-  }
-
-  @include breakpoints.respond-from(md) {
-    font-size: 20px;
-  }
-
-  @include breakpoints.respond-from(xxl) {
-    font-size: 24px;
+.label {
+  @include breakpoints.respond-from(lg) {
+    padding-top: 2px;
   }
 }

@@ -129,6 +129,7 @@ export const DailyPuzzle = ({ date }: DailyPuzzleProps): React.JSX.Element => {
               }
             }}
             answer={answer}
+            showGuessIndicator
             disabled={!progress.isReady || Boolean(answer)}
             emptyLabel={playerSearch('search')}
             celebration={

@@ -18,6 +18,10 @@
 
   @include breakpoints.respond-from(md) {
     gap: 40px;
+    padding: 28px 24px;
+  }
+
+  @include breakpoints.respond-from(xxl) {
     padding: 48px 32px;
   }
 }
@@ -27,7 +31,7 @@
   isolation: isolate;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  width: min(100%, 600px);
+  width: min(100%, 500px);
   gap: 4px;
   border-radius: tokens.border-radius(large);
 
@@ -36,6 +40,11 @@
   }
 
   @include breakpoints.respond-from(md) {
+    gap: 10px;
+  }
+
+  @include breakpoints.respond-from(xxl) {
+    width: min(100%, 600px);
     gap: 14px;
   }
 }

@@ -1,3 +1,5 @@
+import { HOME_URL } from '@/core/constants/Routes';
+import { Link } from '@/features/shared/ui/link';
 import { Logo } from '../../../logo';
 import { ThemeSwitcher } from '../../../theme-switcher';
 import { DesktopNav, MobileNav } from './components';
@@ -7,7 +9,9 @@ import React from 'react';
 export const Header = (): React.JSX.Element => {
   return (
     <header className={styles.headerContainer}>
-      <Logo />
+      <Link href={HOME_URL} className={styles.logoLink}>
+        <Logo />
+      </Link>
 
       <div className={styles.desktopOnly}>
         <DesktopNav />

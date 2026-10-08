@@ -48,3 +48,41 @@
     gap: 14px;
   }
 }
+
+.header,
+.actions {
+  width: min(100%, 500px);
+  min-width: 0;
+
+  @include breakpoints.respond-from(xxl) {
+    width: min(100%, 600px);
+  }
+}
+
+.container[data-with-actions] {
+  @include breakpoints.respond-from(lg) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 500px minmax(0, 1fr);
+    column-gap: 48px;
+
+    .header {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .grid {
+      grid-column: 2;
+      grid-row: 2;
+    }
+
+    .actions {
+      grid-column: 3;
+      grid-row: 2;
+      align-self: center;
+    }
+  }
+
+  @include breakpoints.respond-from(xxl) {
+    grid-template-columns: minmax(0, 1fr) 600px minmax(0, 1fr);
+  }
+}

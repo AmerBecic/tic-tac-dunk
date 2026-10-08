@@ -8,11 +8,24 @@ interface GridProps {
   rows?: readonly GridCategory[];
   columns?: readonly GridCategory[];
   corner: ReactNode;
+  header?: ReactNode;
+  actions?: ReactNode;
   renderCell: (row: number, column: number) => ReactNode;
 }
 
-export const Grid = ({ rows, columns, corner, renderCell }: GridProps) => (
-  <section className={styles.container}>
+export const Grid = ({
+  rows,
+  columns,
+  corner,
+  header,
+  actions,
+  renderCell,
+}: GridProps) => (
+  <section
+    className={styles.container}
+    data-with-actions={actions ? true : undefined}
+  >
+    {header && <div className={styles.header}>{header}</div>}
     <div className={styles.grid}>
       {corner}
       {Array.from({ length: GRID_SIZE }, (_, column) => (
@@ -27,5 +40,6 @@ export const Grid = ({ rows, columns, corner, renderCell }: GridProps) => (
         </Fragment>
       ))}
     </div>
+    {actions && <div className={styles.actions}>{actions}</div>}
   </section>
 );

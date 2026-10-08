@@ -96,7 +96,13 @@ async function submitMove(
       )
     ) {
       finish(match, 'THREE_IN_ROW', actor);
-    } else if (match.board.every(Boolean)) {
+    } else if (
+      lines.every(
+        (line) =>
+          line.some((cell) => match.board[cell]?.owner === 'PLAYER1') &&
+          line.some((cell) => match.board[cell]?.owner === 'PLAYER2')
+      )
+    ) {
       finish(match, 'DRAW', null);
     }
   }

@@ -13,6 +13,7 @@
 - Name helper files `<name>.helpers.ts`, for example `grid.helpers.ts`.
 - Name controller files `<name>.controller.ts`, for example `grid.controller.ts` and `daily-puzzle.controller.ts`.
 - Name repository files `<name>.repository.ts`, for example `grid.repository.ts` and `daily-puzzle.repository.ts`.
+- Name backend type files `<name>.types.ts`, for example `team.types.ts` and `match.types.ts`.
 - Keep folder names in kebab-case and preserve required filenames such as `AGENTS.md`.
 - Keep exported service object names in camelCase, such as `gridService` and `dailyPuzzleService`.
 
@@ -22,6 +23,7 @@
 - Put HTTP request handlers in `<domain>/controllers/`.
 - Put supporting backend helpers in `<domain>/helpers/`.
 - Put the data access layer (DAL) in `<domain>/repositories/`; keep generic infrastructure in `src/core/`.
+- Put database table aliases (`Row`, `Insert`, and `Update`) in `<domain>/types/`, grouped by module. Import the generated schema from `src/core/supabase/DatabaseTypes.ts`; do not add handwritten aliases to that generated file.
 - For example, `grid/services/grid.service.ts` generates and validates grids, while `grid/services/daily-puzzle.service.ts` finds or creates and saves the daily puzzle.
 - Browser HTTP clients belong in `src/domains/<domain>/requests/`, not in this layer.
 
@@ -29,7 +31,7 @@
 
 - Keep direct Supabase/PostgREST queries (`.from(...)`) and database RPC calls (`.rpc(...)`) in repositories.
 - Repositories accept a database client, execute queries, and return data and database errors. Preserve error codes needed by services, such as unique-constraint violations.
-- Keep database row types and query result mapping in repositories; shared business contracts remain in domains.
+- Keep query-specific result types and query result mapping in repositories; reusable database table aliases belong in the module's `types/` folder, and shared business and API contracts remain in domains.
 - Export named camelCase repository objects, such as `gridRepository` and `dailyPuzzleRepository`, containing local functions.
 - Services call repositories and own business decisions, generation retries, validation of business rules, and recovery from concurrent creation.
 - Repositories must not import services or controllers, construct HTTP responses, choose HTTP status codes, or handle UI and process behavior.

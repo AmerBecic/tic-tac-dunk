@@ -5,7 +5,6 @@ async function findTeammate(
   teammateId: string,
   db: ReturnType<typeof createSupabase>
 ) {
-  // The database enforces ascending IDs for each unique teammate pair.
   const [first, second] = [playerId, teammateId].sort();
   return db
     .from('player_teammates')

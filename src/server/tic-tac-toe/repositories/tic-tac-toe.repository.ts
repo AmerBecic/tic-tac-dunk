@@ -1,16 +1,29 @@
+import type {
+  PostgrestMaybeSingleResponse,
+  PostgrestSingleResponse,
+} from '@supabase/supabase-js';
 import type { GetMatchesRequest } from '@/domains/tic-tac-toe/types/get.matches.request.dto';
 import 'server-only';
 import type { createSupabase } from '@/core/supabase/server';
 import type { Match } from '@/domains/tic-tac-toe/types/match.types';
+import { mapMatch } from '@/server/tic-tac-toe/mappers/match.mapper';
+import type { MatchRow } from '@/server/tic-tac-toe/types/match.types';
+
+type CreateMatchResult = PostgrestSingleResponse<Match>;
+type GetMatchesResult = PostgrestSingleResponse<Match[]>;
+type FindByIdResult = PostgrestSingleResponse<
+  Pick<MatchRow, 'id' | 'player1_id' | 'player2_id'> & { grid: Match['grid'] }
+>;
+type FindMatchByIdResult = PostgrestMaybeSingleResponse<Match>;
+type SaveActionResult = PostgrestMaybeSingleResponse<Match>;
 
 type NewMatch = Omit<Match, 'id' | 'createdAt' | 'updatedAt'>;
-type CreatedRow = { id: string; created_at: string; updated_at: string };
 
 async function createMatch(
   match: NewMatch,
   supabase: ReturnType<typeof createSupabase>
-) {
-  const { data, error } = await supabase
+): Promise<CreateMatchResult> {
+  const result = await supabase
     .from('matches')
     .insert({
       mode: match.mode,
@@ -30,18 +43,17 @@ async function createMatch(
       finished_at: match.finishedAt,
     })
     .select('id, created_at, updated_at')
-    .single<CreatedRow>();
+    .single();
 
+  if (result.error) return result;
   return {
-    data: data
-      ? {
-          ...match,
-          id: data.id,
-          createdAt: data.created_at,
-          updatedAt: data.updated_at,
-        }
-      : null,
-    error,
+    ...result,
+    data: {
+      ...match,
+      id: result.data.id,
+      createdAt: result.data.created_at,
+      updatedAt: result.data.updated_at,
+    },
   };
 }
 
@@ -49,7 +61,7 @@ async function getMatches(
   filters: GetMatchesRequest,
   playerId: string,
   supabase: ReturnType<typeof createSupabase>
-) {
+): Promise<GetMatchesResult> {
   let query = supabase
     .from('matches')
     .select(
@@ -60,35 +72,41 @@ async function getMatches(
   if (filters.mode) query = query.eq('mode', filters.mode);
   if (filters.status?.length) query = query.in('status', filters.status);
 
-  const { data, error } = await query
+  const result = await query
     .order('created_at', { ascending: false })
     .order('id', { ascending: false });
 
-  const matches = (data ?? []).map(mapMatch);
-  return { data: matches, error };
+  if (result.error) return result;
+  return { ...result, data: result.data.map(mapMatch) };
 }
 
 async function findById(
   id: string,
   supabase: ReturnType<typeof createSupabase>
-) {
-  return supabase
+): Promise<FindByIdResult> {
+  const result = await supabase
     .from('matches')
     .select('id, grid, player1_id, player2_id')
     .eq('id', id)
     .single();
+  if (result.error) return result;
+  return {
+    ...result,
+    data: { ...result.data, grid: result.data.grid as Match['grid'] },
+  };
 }
 
 async function findMatchById(
   id: string,
   supabase: ReturnType<typeof createSupabase>
-) {
-  const { data, error } = await supabase
+): Promise<FindMatchByIdResult> {
+  const result = await supabase
     .from('matches')
     .select('*')
     .eq('id', id)
-    .maybeSingle<MatchRow>();
-  return { data: data ? mapMatch(data) : null, error };
+    .maybeSingle();
+  if (result.error) return result;
+  return { ...result, data: result.data ? mapMatch(result.data) : null };
 }
 
 async function saveAction(
@@ -96,7 +114,7 @@ async function saveAction(
   expectedVersion: number,
   supabase: ReturnType<typeof createSupabase>,
   deadlineCheck: 'live' | 'expired' | null
-) {
+): Promise<SaveActionResult> {
   const now = new Date().toISOString();
   let query = supabase
     .from('matches')
@@ -118,8 +136,9 @@ async function saveAction(
     .eq('status', 'ACTIVE');
   if (deadlineCheck === 'live') query = query.gt('turn_ends_at', now);
   if (deadlineCheck === 'expired') query = query.lte('turn_ends_at', now);
-  const { data, error } = await query.select('*').maybeSingle<MatchRow>();
-  return { data: data ? mapMatch(data) : null, error };
+  const result = await query.select('*').maybeSingle();
+  if (result.error) return result;
+  return { ...result, data: result.data ? mapMatch(result.data) : null };
 }
 
 export const ticTacToeRepository = {
@@ -129,47 +148,3 @@ export const ticTacToeRepository = {
   findMatchById,
   saveAction,
 };
-
-type MatchRow = {
-  id: Match['id'];
-  mode: Match['mode'];
-  player1_id: Match['player1Id'];
-  player2_id: Match['player2Id'];
-  grid: Match['grid'];
-  board: Match['board'];
-  history: Match['history'];
-  status: Match['status'];
-  current_player: Match['currentPlayer'];
-  winner: Match['winner'];
-  end_reason: Match['endReason'];
-  turn_number: Match['turnNumber'];
-  turn_duration_seconds: Match['turnDurationSeconds'];
-  turn_ends_at: Match['turnEndsAt'];
-  version: Match['version'];
-  created_at: Match['createdAt'];
-  updated_at: Match['updatedAt'];
-  finished_at: Match['finishedAt'];
-};
-
-function mapMatch(row: MatchRow): Match {
-  return {
-    id: row.id,
-    mode: row.mode,
-    player1Id: row.player1_id,
-    player2Id: row.player2_id,
-    grid: row.grid,
-    board: row.board,
-    history: row.history,
-    status: row.status,
-    currentPlayer: row.current_player,
-    winner: row.winner,
-    endReason: row.end_reason,
-    turnNumber: row.turn_number,
-    turnDurationSeconds: row.turn_duration_seconds,
-    turnEndsAt: row.turn_ends_at,
-    version: row.version,
-    createdAt: row.created_at,
-    updatedAt: row.updated_at,
-    finishedAt: row.finished_at,
-  };
-}

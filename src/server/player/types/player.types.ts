@@ -10,3 +10,8 @@ export type PlayerTeammateInsert =
   Database['public']['Tables']['player_teammates']['Insert'];
 export type PlayerTeammateUpdate =
   Database['public']['Tables']['player_teammates']['Update'];
+
+/* Player RPC result types */
+
+export type SearchPlayerRPC =
+  Database['public']['Functions']['search_players']['Returns'][number];

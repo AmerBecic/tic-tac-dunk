@@ -58,11 +58,12 @@ async function getMatches(
   playerId: string,
   supabase: ReturnType<typeof createSupabase>
 ): Promise<GetMatchesResponse> {
-  const { data } = await ticTacToeRepository.getMatches(
+  const { data, error } = await ticTacToeRepository.getMatches(
     filters,
     playerId,
     supabase
   );
+  if (error) throw new Error(`Unable to load matches: ${error.message}`);
   return { success: true, data };
 }
 

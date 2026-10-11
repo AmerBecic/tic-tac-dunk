@@ -8,7 +8,7 @@ import type { Grid } from '@/domains/grid/types/grid.types';
 import type { DailyPuzzleRow } from '@/server/grid/types/grid.types';
 
 type FindByDateResult = PostgrestMaybeSingleResponse<
-  Pick<DailyPuzzleRow, 'id' | 'puzzle_date' | 'grid_data'>
+  Pick<DailyPuzzleRow, 'id' | 'puzzle_date'> & { grid_data: Grid }
 >;
 
 type CreateResult = PostgrestSingleResponse<
@@ -16,18 +16,25 @@ type CreateResult = PostgrestSingleResponse<
 >;
 
 type FindByIdResult = PostgrestMaybeSingleResponse<
-  Pick<DailyPuzzleRow, 'id' | 'grid_data'>
+  Pick<DailyPuzzleRow, 'id'> & { grid_data: Grid }
 >;
 
 async function findByDate(
   date: string,
   supabase: ReturnType<typeof createSupabase>
 ): Promise<FindByDateResult> {
-  return await supabase
+  const result = await supabase
     .from('daily_puzzles')
     .select('id, puzzle_date, grid_data')
     .eq('puzzle_date', date)
     .maybeSingle();
+  if (result.error) return result;
+  return {
+    ...result,
+    data: result.data
+      ? { ...result.data, grid_data: result.data.grid_data as Grid }
+      : null,
+  };
 }
 
 async function create(
@@ -45,11 +52,18 @@ async function findById(
   id: string,
   supabase: ReturnType<typeof createSupabase>
 ): Promise<FindByIdResult> {
-  return supabase
+  const result = await supabase
     .from('daily_puzzles')
     .select('id, grid_data')
     .eq('id', id)
     .maybeSingle();
+  if (result.error) return result;
+  return {
+    ...result,
+    data: result.data
+      ? { ...result.data, grid_data: result.data.grid_data as Grid }
+      : null,
+  };
 }
 
 export const dailyPuzzleRepository = {

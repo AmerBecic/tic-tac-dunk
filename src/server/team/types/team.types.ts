@@ -1,4 +1,4 @@
-import type { Database } from '@/core/supabase/DatabaseTypes';
+import type { Database } from '@/server/types/database.types';
 
 export type TeamRow = Database['public']['Tables']['teams']['Row'];
 export type TeamInsert = Database['public']['Tables']['teams']['Insert'];

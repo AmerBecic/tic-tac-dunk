@@ -19,11 +19,14 @@
 
 ## Structure
 
+- Shared API contracts and the generated database schema live in `src/server/types/`, with `<name>.types.ts` filenames. Browser and domain code may import shared API contracts from this directory using `import type` only; keep these contracts free of server runtime dependencies.
+- Shared server error classes and HTTP error handling live in `src/server/errors/`. The browser HTTP error class remains in core.
+
 - Put service functions and workflow orchestration in `<domain>/services/`.
 - Put HTTP request handlers in `<domain>/controllers/`.
 - Put supporting backend helpers in `<domain>/helpers/`.
 - Put the data access layer (DAL) in `<domain>/repositories/`; keep generic infrastructure in `src/core/`.
-- Put database table aliases (`Row`, `Insert`, and `Update`) in `<domain>/types/`, grouped by module. Import the generated schema from `src/core/supabase/DatabaseTypes.ts`; do not add handwritten aliases to that generated file.
+- Put database table aliases (`Row`, `Insert`, and `Update`) in `<domain>/types/`, grouped by module. Import the generated schema from `src/server/types/database.types.ts`; do not add handwritten aliases to that generated file.
 - For example, `grid/services/grid.service.ts` generates and validates grids, while `grid/services/daily-puzzle.service.ts` finds or creates and saves the daily puzzle.
 - Browser HTTP clients belong in `src/domains/<domain>/requests/`, not in this layer.
 

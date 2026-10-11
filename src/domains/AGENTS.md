@@ -57,7 +57,7 @@ These conventions override the root PascalCase filename default within domains. 
 ## Dependency boundaries
 
 - Domains may depend on browser-safe or environment-neutral `src/core/` infrastructure.
-- Never import from `src/server/`, `src/app/`, or `src/features/` into `src/domains/`.
+- Never import runtime code from `src/server/`, or import from `src/app/` or `src/features/` into `src/domains/`. Shared API contracts in `src/server/types/` are the only server import exception and must use `import type`.
 - Do not import server database clients, privileged credentials, or Node-only dependencies into domains.
 - Do not place React components, styling, form presentation, or UI orchestration in a domain.
 - Keep code with its owning domain unless a genuinely infrastructure-level abstraction belongs in `src/core/`.

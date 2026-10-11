@@ -8,10 +8,11 @@ import type { createSupabase } from '@/core/supabase/server';
 import type { Match } from '@/domains/tic-tac-toe/types/match.types';
 import { mapMatch } from '@/server/tic-tac-toe/mappers/match.mapper';
 import type { MatchRow } from '@/server/tic-tac-toe/types/match.types';
+import { Grid } from '@/domains/grid/types/grid.types';
 
 type CreateMatchResult = PostgrestSingleResponse<Match>;
 type GetMatchesResult = PostgrestSingleResponse<Match[]>;
-type FindByIdResult = PostgrestSingleResponse<
+type FindByIdResult = PostgrestMaybeSingleResponse<
   Pick<MatchRow, 'id' | 'player1_id' | 'player2_id'> & { grid: Match['grid'] }
 >;
 type FindMatchByIdResult = PostgrestMaybeSingleResponse<Match>;
@@ -88,11 +89,13 @@ async function findById(
     .from('matches')
     .select('id, grid, player1_id, player2_id')
     .eq('id', id)
-    .single();
+    .maybeSingle();
   if (result.error) return result;
   return {
     ...result,
-    data: { ...result.data, grid: result.data.grid as Match['grid'] },
+    data: result.data
+      ? { ...result.data, grid: result.data.grid as Grid }
+      : null,
   };
 }
 

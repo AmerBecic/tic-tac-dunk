@@ -1,13 +1,7 @@
-export class ApiError extends Error {
-  constructor(
-    public readonly status: number,
-    message: string,
-    public readonly body: unknown = null
-  ) {
-    super(message);
-    this.name = 'ApiError';
-  }
-}
+import { parseErrorResponse } from '@/core/helpers/ParseErrorResponse';
+import { ApiError } from '@/core/errors/ApiError';
+
+export { ApiError } from '@/core/errors/ApiError';
 
 const call = async <T>(
   apiPath: string,
@@ -22,21 +16,22 @@ const call = async <T>(
       'Content-Type': 'application/json',
       ...headers,
     },
-    body: payload ? JSON.stringify(payload) : null,
+    body: payload !== null ? JSON.stringify(payload) : null,
     cache,
   };
   const response = await fetch(`/api/${apiPath}`, config);
 
   if (!response.ok) {
     const body: unknown = await response.json().catch(() => null);
+    const errorResponse = parseErrorResponse(body);
     const message =
-      body &&
-      typeof body === 'object' &&
-      'error' in body &&
-      typeof body.error === 'string'
-        ? body.error
-        : `API error: ${response.status} ${response.statusText}`;
-    throw new ApiError(response.status, message, body);
+      errorResponse.message ??
+      errorResponse.error ??
+      `API error: ${response.status} ${response.statusText}`;
+    // Responses without `message` may contain human-readable text in `error`.
+    const code = errorResponse.message !== null ? errorResponse.error : null;
+
+    throw new ApiError(response.status, message, body, code);
   }
 
   return await response.json();

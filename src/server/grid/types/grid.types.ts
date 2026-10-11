@@ -1,4 +1,4 @@
-import type { Database } from '@/core/supabase/DatabaseTypes';
+import type { Database } from '@/server/types/database.types';
 
 /* Daily puzzle table types */
 

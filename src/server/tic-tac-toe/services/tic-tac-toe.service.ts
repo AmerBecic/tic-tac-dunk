@@ -10,25 +10,25 @@ import type { CreateMatchRequest } from '@/domains/tic-tac-toe/types/create.matc
 import type { CreateMatchResponse } from '@/domains/tic-tac-toe/types/create.match.response.dto';
 import { gridService } from '@/server/grid/services/grid.service';
 import { ticTacToeRepository } from '../repositories/tic-tac-toe.repository';
+import { AppError } from '@/server/errors/app.error';
+import { AppErrorType } from '@/server/types/app-error.types';
 
 async function createMatch(
   request: CreateMatchRequest,
   player1Id: string,
   supabase: ReturnType<typeof createSupabase>
 ): Promise<CreateMatchResponse> {
-  const generated = await gridService.generateAndValidate(
+  const grid = await gridService.generateAndValidate(
     DEFAULT_GRID_CONFIG,
     supabase
   );
-  if (!generated.ok)
-    throw new Error(`Unable to generate match grid: ${generated.message}`);
   const active = request.mode === 'AI';
   const { data, error } = await ticTacToeRepository.createMatch(
     {
       ...request,
       player1Id,
       player2Id: null,
-      grid: generated.grid,
+      grid,
       board: Array.from({ length: GRID_SIZE * GRID_SIZE }, () => null),
       history: [],
       status: active ? 'ACTIVE' : 'WAITING',
@@ -47,8 +47,11 @@ async function createMatch(
     supabase
   );
   if (error || !data)
-    throw new Error(
-      `Unable to create match: ${error?.message ?? 'No match returned.'}`
+    throw new AppError(
+      'Unable to create match',
+      'MATCH_CREATION_FAILED',
+      AppErrorType.INTERNAL_SERVER_ERROR,
+      { cause: error }
     );
   return { success: true, data };
 }
@@ -63,7 +66,14 @@ async function getMatches(
     playerId,
     supabase
   );
-  if (error) throw new Error(`Unable to load matches: ${error.message}`);
+  if (error) {
+    throw new AppError(
+      'Unable to load matches',
+      'MATCHES_LOAD_FAILED',
+      AppErrorType.INTERNAL_SERVER_ERROR,
+      { cause: error }
+    );
+  }
   return { success: true, data };
 }
 

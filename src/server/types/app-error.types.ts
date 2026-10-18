@@ -4,6 +4,7 @@ export const AppErrorType = {
   FORBIDDEN: 'forbidden',
   NOT_FOUND: 'not-found',
   CONFLICT: 'conflict',
+  SERVICE_UNAVAILABLE: 'service-unavailable',
   INTERNAL_SERVER_ERROR: 'internal',
 } as const;
 

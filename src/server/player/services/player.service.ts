@@ -2,6 +2,8 @@ import type { createSupabase } from '@/core/supabase/server';
 import type { GetPlayersRequest } from '@/domains/player/types/get.players.request.dto';
 import type { GetPlayersResponse } from '@/domains/player/types/get.players.response.dto';
 import { playerRepository } from '../repositories/player.repository';
+import { AppError } from '@/server/errors/app.error';
+import { AppErrorType } from '@/server/types/app-error.types';
 
 async function getPlayers(
   { search = '', page = 1, limit = 20 }: GetPlayersRequest,
@@ -15,14 +17,25 @@ async function getPlayers(
     supabase
   );
   if (result.error) {
-    throw new Error(`Unable to search players: ${result.error.message}`);
+    throw new AppError(
+      'Unable to search players',
+      'PLAYER_SEARCH_FAILED',
+      AppErrorType.INTERNAL_SERVER_ERROR,
+      { cause: result.error }
+    );
   }
 
   let total = result.total;
   if (result.data.length === 0 && offset > 0) {
     const firstPage = await playerRepository.getPlayers(search, 0, 1, supabase);
-    if (firstPage.error)
-      throw new Error(`Unable to count players: ${firstPage.error.message}`);
+    if (firstPage.error) {
+      throw new AppError(
+        'Unable to count players',
+        'PLAYER_COUNT_FAILED',
+        AppErrorType.INTERNAL_SERVER_ERROR,
+        { cause: firstPage.error }
+      );
+    }
     total = firstPage.total;
   }
   const totalPages = Math.ceil(total / limit);

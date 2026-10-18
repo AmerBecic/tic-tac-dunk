@@ -3,6 +3,7 @@ import { createSupabase } from '@/core/supabase/server';
 import type { GetPlayersRequest } from '@/domains/player/types/get.players.request.dto';
 import type { GetPlayersResponse } from '@/domains/player/types/get.players.response.dto';
 import { playerService } from '../services/player.service';
+import { handleApiError } from '@/server/errors/handle-api-error';
 
 export async function getPlayers(
   request: NextRequest
@@ -26,10 +27,6 @@ export async function getPlayers(
     );
     return NextResponse.json(response, { headers });
   } catch (error) {
-    console.error('Player search failed:', error);
-    return NextResponse.json<GetPlayersResponse>(
-      { success: false, error: 'Failed to search players.' },
-      { status: 500, headers }
-    );
+    return handleApiError(error, headers);
   }
 }

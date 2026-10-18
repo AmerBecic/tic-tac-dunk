@@ -1,5 +1,3 @@
-import 'server-only';
-
 import { AppErrorType } from '@/server/types/app-error.types';
 
 export class AppError extends Error {

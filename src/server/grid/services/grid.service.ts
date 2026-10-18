@@ -1,3 +1,5 @@
+import { AppError } from '@/server/errors/app.error';
+import { AppErrorType } from '@/server/types/app-error.types';
 import { gridRepository } from '../repositories/grid.repository';
 import type { createSupabase } from '@/core/supabase/server';
 import {
@@ -15,8 +17,6 @@ import type {
   Grid,
   GridCategory,
   GridGenerationConfig,
-  GridGenerationResult,
-  GridValidationResult,
 } from '@/domains/grid/types/grid.types';
 import { randomIndex, shuffle } from '../helpers/grid.helpers';
 
@@ -93,7 +93,11 @@ function generateGrid(
     new Set(categories.map((category) => category.id)).size !==
       categories.length
   ) {
-    throw new Error('A grid requires exactly six unique categories.');
+    throw new AppError(
+      'A grid requires exactly six unique categories.',
+      'INVALID_GRID_CATEGORIES',
+      AppErrorType.INTERNAL_SERVER_ERROR
+    );
   }
   const headings = shuffle(categories, random);
   return {
@@ -114,13 +118,27 @@ async function loadRandomGridCategories(
       ? gridRepository.getRandomEligiblePlayers(counts.TEAMMATE, supabase)
       : Promise.resolve({ data: [], error: null }),
   ]);
-  if (teamResult.error) throw new Error(teamResult.error.message);
-  if (playerResult.error) throw new Error(playerResult.error.message);
+  if (teamResult.error)
+    throw new AppError(
+      'Unable to load grid teams.',
+      'GRID_TEAMS_LOAD_FAILED',
+      AppErrorType.INTERNAL_SERVER_ERROR,
+      { cause: teamResult.error }
+    );
+  if (playerResult.error)
+    throw new AppError(
+      'Unable to load grid players.',
+      'GRID_PLAYERS_LOAD_FAILED',
+      AppErrorType.INTERNAL_SERVER_ERROR,
+      { cause: playerResult.error }
+    );
   const teams = teamResult.data;
   const players = playerResult.data;
   if (teams.length !== counts.TEAM || players.length !== counts.TEAMMATE) {
-    throw new Error(
-      'Not enough teams or eligible players for the selected category counts.'
+    throw new AppError(
+      'Not enough teams or eligible players for the selected category counts.',
+      'INSUFFICIENT_GRID_CATEGORIES',
+      AppErrorType.INTERNAL_SERVER_ERROR
     );
   }
   const categories: GridCategory[] = teams.map((team) => ({
@@ -148,14 +166,14 @@ async function loadRandomGridCategories(
 async function generateAndValidate(
   config: GridGenerationConfig,
   supabase: ReturnType<typeof createSupabase>
-): Promise<GridGenerationResult> {
+): Promise<Grid> {
   try {
     if (!validateGridConfig(config)) {
-      return {
-        ok: false,
-        code: GRID_VALIDATION_ERROR_CODES.INVALID_CONFIG,
-        message: 'Invalid grid generation config.',
-      };
+      throw new AppError(
+        'Invalid grid generation config.',
+        GRID_VALIDATION_ERROR_CODES.INVALID_CONFIG,
+        AppErrorType.VALIDATION
+      );
     }
     for (let attempt = 0; attempt < MAX_GENERATION_ATTEMPTS; attempt++) {
       const categoryCounts = selectGridCategoryCounts(config);
@@ -164,49 +182,46 @@ async function generateAndValidate(
         supabase
       );
       const grid = generateGrid(gridCategories);
-
-      const validation = await isGridSolvable(grid, supabase);
-      if (!validation.ok) return validation;
-      if (validation.solvable) {
-        return { ok: true, grid };
-      }
+      if (await isGridSolvable(grid, supabase)) return grid;
     }
-    return {
-      ok: false,
-      code: GRID_VALIDATION_ERROR_CODES.ATTEMPTS_EXHAUSTED,
-      message: 'Unable to generate a solvable grid. Please try again.',
-    };
+    throw new AppError(
+      'Unable to generate a solvable grid. Please try again.',
+      GRID_VALIDATION_ERROR_CODES.ATTEMPTS_EXHAUSTED,
+      AppErrorType.SERVICE_UNAVAILABLE
+    );
   } catch (error) {
-    return {
-      ok: false,
-      code: GRID_VALIDATION_ERROR_CODES.GENERATION_ERROR,
-      message:
-        error instanceof Error ? error.message : 'Failed to generate grid.',
-    };
+    if (error instanceof AppError) throw error;
+    throw new AppError(
+      'Failed to generate grid.',
+      GRID_VALIDATION_ERROR_CODES.GENERATION_ERROR,
+      AppErrorType.INTERNAL_SERVER_ERROR,
+      { cause: error }
+    );
   }
 }
 
 async function isGridSolvable(
   grid: Grid,
   supabase: ReturnType<typeof createSupabase>
-): Promise<GridValidationResult> {
+): Promise<boolean> {
   try {
     const { data, error } = await gridRepository.validateGrid(grid, supabase);
 
     if (error) {
-      return {
-        ok: false,
-        code: GRID_VALIDATION_ERROR_CODES.DATABASE_ERROR,
-        message: error.message,
-      };
+      throw new AppError(
+        'Unable to validate grid.',
+        GRID_VALIDATION_ERROR_CODES.DATABASE_ERROR,
+        AppErrorType.INTERNAL_SERVER_ERROR,
+        { cause: error }
+      );
     }
 
     if (!Array.isArray(data) || data.length !== GRID_SIZE ** 2) {
-      return {
-        ok: false,
-        code: GRID_VALIDATION_ERROR_CODES.MISSING_CELLS,
-        message: 'Grid validation did not return all nine cells.',
-      };
+      throw new AppError(
+        'Grid validation did not return all nine cells.',
+        GRID_VALIDATION_ERROR_CODES.MISSING_CELLS,
+        AppErrorType.INTERNAL_SERVER_ERROR
+      );
     }
 
     const positions = new Set<string>();
@@ -222,34 +237,33 @@ async function isGridSolvable(
         cell.column_index >= GRID_SIZE ||
         typeof cell.has_answer !== 'boolean'
       ) {
-        return {
-          ok: false,
-          code: GRID_VALIDATION_ERROR_CODES.INVALID_CELL,
-          message: 'Grid validation returned an invalid cell.',
-        };
+        throw new AppError(
+          'Grid validation returned an invalid cell.',
+          GRID_VALIDATION_ERROR_CODES.INVALID_CELL,
+          AppErrorType.INTERNAL_SERVER_ERROR
+        );
       }
       positions.add(`${cell.row_index}:${cell.column_index}`);
       if (!cell.has_answer) solvable = false;
     }
 
     if (positions.size !== GRID_SIZE ** 2) {
-      return {
-        ok: false,
-        code: GRID_VALIDATION_ERROR_CODES.DUPLICATE_CELLS,
-        message: 'Grid validation returned duplicate cells.',
-      };
+      throw new AppError(
+        'Grid validation returned duplicate cells.',
+        GRID_VALIDATION_ERROR_CODES.DUPLICATE_CELLS,
+        AppErrorType.INTERNAL_SERVER_ERROR
+      );
     }
 
-    return { ok: true, solvable };
+    return solvable;
   } catch (error) {
-    return {
-      ok: false,
-      code: GRID_VALIDATION_ERROR_CODES.UNEXPECTED_ERROR,
-      message:
-        error instanceof Error
-          ? error.message
-          : 'Unexpected grid validation failure.',
-    };
+    if (error instanceof AppError) throw error;
+    throw new AppError(
+      'Unexpected grid validation failure.',
+      GRID_VALIDATION_ERROR_CODES.UNEXPECTED_ERROR,
+      AppErrorType.INTERNAL_SERVER_ERROR,
+      { cause: error }
+    );
   }
 }
 

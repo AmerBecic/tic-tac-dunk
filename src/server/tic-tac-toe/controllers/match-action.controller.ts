@@ -1,3 +1,6 @@
+import { AppError } from '@/server/errors/app.error';
+import { AppErrorType } from '@/server/types/app-error.types';
+import { handleApiError } from '@/server/errors/handle-api-error';
 import 'server-only';
 import { NextResponse } from 'next/server';
 import { createSupabase } from '@/core/supabase/server';
@@ -52,9 +55,13 @@ export async function updateMatch(
   try {
     body = await request.json();
   } catch {
-    return NextResponse.json(
-      { success: false, code: 'INVALID_ACTION', error: 'Invalid JSON body.' },
-      { status: 400, headers }
+    return handleApiError(
+      new AppError(
+        'Invalid JSON body.',
+        'INVALID_ACTION',
+        AppErrorType.VALIDATION
+      ),
+      headers
     );
   }
   if (
@@ -63,21 +70,22 @@ export async function updateMatch(
     ) ||
     !isAction(body)
   ) {
-    return NextResponse.json(
-      {
-        success: false,
-        code: 'INVALID_ACTION',
-        error: 'Invalid match action request.',
-      },
-      { status: 400, headers }
+    return handleApiError(
+      new AppError(
+        'Invalid match action request.',
+        'INVALID_ACTION',
+        AppErrorType.VALIDATION
+      ),
+      headers
     );
   }
   try {
     const { data, error } = await getSupabaseUser();
     if (error || !data.user)
-      return NextResponse.json(
-        { success: false, code: 'UNAUTHORIZED', error: 'Unauthorized' },
-        { status: 401, headers }
+      throw new AppError(
+        'Unauthorized',
+        'UNAUTHORIZED',
+        AppErrorType.UNAUTHORIZED
       );
     const result = await matchActionService.applyAction(
       id,
@@ -85,26 +93,8 @@ export async function updateMatch(
       data.user.id,
       createSupabase()
     );
-    const statuses = {
-      INVALID_ACTION: 400,
-      NOT_FOUND: 404,
-      CONFLICT: 409,
-      UNAUTHORIZED: 401,
-      INTERNAL_ERROR: 500,
-    };
-    return NextResponse.json(result, {
-      status: result.success ? 200 : statuses[result.code],
-      headers,
-    });
+    return NextResponse.json(result, { headers });
   } catch (error) {
-    console.error('Match action failed:', error);
-    return NextResponse.json(
-      {
-        success: false,
-        code: 'INTERNAL_ERROR',
-        error: 'Unable to update match.',
-      },
-      { status: 500, headers }
-    );
+    return handleApiError(error, headers);
   }
 }

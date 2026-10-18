@@ -45,7 +45,7 @@ const updateMatch = async (
     input,
     'no-store'
   );
-  if (!response.success) throw new Error(response.error);
+  if (!response.success) throw new Error(response.message);
   return response;
 };
 

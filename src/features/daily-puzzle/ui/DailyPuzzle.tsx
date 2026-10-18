@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { ApiError } from '@/core/errors/ApiError';
 
 import styles from './DailyPuzzle.module.scss';
 import CheckmarkSvg from '@/assets/Checkmark.svg';
@@ -24,7 +25,7 @@ interface DailyPuzzleProps {
 export const DailyPuzzle = ({ date }: DailyPuzzleProps): React.JSX.Element => {
   const t = useTranslations('dailyPuzzle');
   const playerSearch = useTranslations('playersSearch');
-  const { dailyPuzzle } = useGetDailyPuzzle({ date });
+  const { dailyPuzzle, error } = useGetDailyPuzzle({ date });
   const { validateAnswer } = useValidateAnswer();
   const progress = useDailyPuzzleProgress(dailyPuzzle?.id);
   const [celebration, setCelebration] = useState<{
@@ -42,6 +43,10 @@ export const DailyPuzzle = ({ date }: DailyPuzzleProps): React.JSX.Element => {
     }, 3300);
     return () => window.clearTimeout(timeout);
   }, [celebration]);
+
+  if (error instanceof ApiError && error.status === 404) {
+    return <Paragraph></Paragraph>;
+  }
 
   return (
     <Grid

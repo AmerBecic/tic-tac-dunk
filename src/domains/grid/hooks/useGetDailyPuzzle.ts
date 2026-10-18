@@ -19,13 +19,15 @@ export const useGetDailyPuzzle = ({
     return (await GridApi.getDailyPuzzle({ date })) ?? null;
   };
 
-  const { data, ...rest } = useQuery<DailyPuzzle | null, Error>({
+  const { data, error, ...rest } = useQuery<DailyPuzzle | null, Error>({
     queryKey: [GET_DAILY_PUZZLE_QUERY_KEY, date],
     queryFn: fetchDailyPuzzle,
+    retry: false,
   });
 
   return {
     dailyPuzzle: data ?? null,
+    error,
     ...rest,
   };
 };

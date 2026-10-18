@@ -1,8 +1,10 @@
-import type { Grid, DailyPuzzle } from '@/domains/grid/types/grid.types';
+import type { DailyPuzzle } from '@/domains/grid/types/grid.types';
 import { dailyPuzzleRepository } from '../repositories/daily-puzzle.repository';
 import type { createSupabase } from '@/core/supabase/server';
 import { gridService } from './grid.service';
 import { DEFAULT_GRID_CONFIG } from '@/domains/grid/types/grid.constants';
+import { AppError } from '@/server/errors/app.error';
+import { AppErrorType } from '@/server/types/app-error.types';
 
 interface DailyPuzzleGenerationResult {
   success: true;
@@ -21,8 +23,14 @@ async function generateDailyPuzzle(
       date,
       supabase
     );
-    if (error)
-      throw new Error(`Unable to read daily puzzles: ${error.message}`);
+    if (error) {
+      throw new AppError(
+        'Unable to load daily puzzle',
+        'DAILY_PUZZLE_LOAD_FAILED',
+        AppErrorType.INTERNAL_SERVER_ERROR,
+        { cause: error }
+      );
+    }
     return data;
   };
 
@@ -37,14 +45,13 @@ async function generateDailyPuzzle(
     };
   }
 
-  const result = await gridService.generateAndValidate(
+  const grid = await gridService.generateAndValidate(
     DEFAULT_GRID_CONFIG,
     supabase
   );
-  if (!result.ok) throw new Error(`${result.code}: ${result.message}`);
 
   const { data, error } = await dailyPuzzleRepository.create(
-    { id: `daily:${date}`, date, grid: result.grid },
+    { id: `daily:${date}`, date, grid },
     supabase
   );
 
@@ -61,7 +68,12 @@ async function generateDailyPuzzle(
         };
       }
     }
-    throw new Error(`Unable to save daily puzzle: ${error.message}`);
+    throw new AppError(
+      'Unable to save daily puzzle',
+      'DAILY_PUZZLE_SAVE_FAILED',
+      AppErrorType.INTERNAL_SERVER_ERROR,
+      { cause: error }
+    );
   }
 
   return {
@@ -76,13 +88,27 @@ async function generateDailyPuzzle(
 async function getDailyPuzzle(
   date: string,
   supabase: ReturnType<typeof createSupabase>
-): Promise<DailyPuzzle | null> {
+): Promise<DailyPuzzle> {
   const { data, error } = await dailyPuzzleRepository.findByDate(
     date,
     supabase
   );
-  if (error) throw new Error(`Unable to read daily puzzle: ${error.message}`);
-  return data ? { ...(data.grid_data as Grid), id: data.id } : null;
+  if (error) {
+    throw new AppError(
+      'Unable to load daily puzzle',
+      'DAILY_PUZZLE_LOAD_FAILED',
+      AppErrorType.INTERNAL_SERVER_ERROR,
+      { cause: error }
+    );
+  }
+  if (!data) {
+    throw new AppError(
+      'Daily puzzle not found',
+      'DAILY_PUZZLE_NOT_FOUND',
+      AppErrorType.NOT_FOUND
+    );
+  }
+  return { ...data.grid_data, id: data.id };
 }
 
 export const dailyPuzzleService = {

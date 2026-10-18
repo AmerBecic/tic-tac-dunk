@@ -11,6 +11,7 @@ const STATUS_BY_KIND: Record<AppErrorType, number> = {
   [AppErrorType.FORBIDDEN]: 403,
   [AppErrorType.NOT_FOUND]: 404,
   [AppErrorType.CONFLICT]: 409,
+  [AppErrorType.SERVICE_UNAVAILABLE]: 503,
   [AppErrorType.INTERNAL_SERVER_ERROR]: 500,
 };
 

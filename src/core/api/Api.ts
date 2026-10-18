@@ -26,12 +26,20 @@ const call = async <T>(
     const errorResponse = parseErrorResponse(body);
     const message =
       errorResponse.message ??
-      errorResponse.error ??
       `API error: ${response.status} ${response.statusText}`;
-    // Responses without `message` may contain human-readable text in `error`.
-    const code = errorResponse.message !== null ? errorResponse.error : null;
+    const code = errorResponse.error;
 
-    throw new ApiError(response.status, message, body, code);
+    const error = new ApiError(response.status, message, body, code);
+    if (process.env.NODE_ENV === 'development') {
+      console.error('[Api] request failed', {
+        method,
+        path: `/api/${apiPath}`,
+        status: response.status,
+        code,
+        message,
+      });
+    }
+    throw error;
   }
 
   return await response.json();

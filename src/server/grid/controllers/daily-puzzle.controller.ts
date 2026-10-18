@@ -1,3 +1,6 @@
+import { AppError } from '@/server/errors/app.error';
+import { AppErrorType } from '@/server/types/app-error.types';
+import { handleApiError } from '@/server/errors/handle-api-error';
 import { getDailyPuzzleDateError } from '@/domains/grid/helpers/DailyPuzzleDate';
 import type { GetDailyPuzzleResponse } from '@/domains/grid/types/get.daily.puzzle.response.dto';
 import type { GetDailyPuzzleRequest } from '@/domains/grid/types/get.daily.puzzle.request.dto';
@@ -11,9 +14,9 @@ export async function generateDailyPuzzle(
 ): Promise<NextResponse> {
   const secret = process.env.CRON_SECRET;
   if (!secret || request.headers.get('authorization') !== `Bearer ${secret}`) {
-    return NextResponse.json(
-      { success: false, error: 'Unauthorized' },
-      { status: 401, headers: { 'Cache-Control': 'no-store' } }
+    return handleApiError(
+      new AppError('Unauthorized', 'UNAUTHORIZED', AppErrorType.UNAUTHORIZED),
+      { 'Cache-Control': 'no-store' }
     );
   }
 
@@ -27,11 +30,7 @@ export async function generateDailyPuzzle(
       headers: { 'Cache-Control': 'no-store' },
     });
   } catch (error) {
-    console.error('Daily puzzle cron failed:', error);
-    return NextResponse.json(
-      { success: false, date, error: 'Daily puzzle generation failed.' },
-      { status: 500, headers: { 'Cache-Control': 'no-store' } }
-    );
+    return handleApiError(error, { 'Cache-Control': 'no-store' });
   }
 }
 
@@ -42,9 +41,9 @@ export async function getDailyPuzzle(
   const { date } = await params;
   const dateError = getDailyPuzzleDateError(date);
   if (dateError) {
-    return NextResponse.json(
-      { error: dateError },
-      { status: 400, headers: { 'Cache-Control': 'no-store' } }
+    return handleApiError(
+      new AppError(dateError, 'INVALID_PUZZLE_DATE', AppErrorType.VALIDATION),
+      { 'Cache-Control': 'no-store' }
     );
   }
 
@@ -57,10 +56,7 @@ export async function getDailyPuzzle(
       { data },
       { headers: { 'Cache-Control': 'no-store' } }
     );
-  } catch {
-    return NextResponse.json(
-      { error: 'Failed to fetch daily puzzle.' },
-      { status: 500, headers: { 'Cache-Control': 'no-store' } }
-    );
+  } catch (error) {
+    return handleApiError(error, { 'Cache-Control': 'no-store' });
   }
 }

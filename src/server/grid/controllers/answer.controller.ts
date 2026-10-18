@@ -1,8 +1,11 @@
+import { AppError } from '@/server/errors/app.error';
+import { AppErrorType } from '@/server/types/app-error.types';
 import { getSupabaseUser } from '@/core/supabase/user';
 import { NextRequest, NextResponse } from 'next/server';
 import { createSupabase } from '@/core/supabase/server';
 import { GRID_SIZE } from '@/domains/grid/types/grid.constants';
 import { answerService } from '../services/answer.service';
+import { handleApiError } from '@/server/errors/handle-api-error';
 
 export async function validateAnswer(
   request: NextRequest
@@ -12,9 +15,9 @@ export async function validateAnswer(
   try {
     body = await request.json();
   } catch {
-    return NextResponse.json(
-      { error: 'Invalid JSON.' },
-      { status: 400, headers }
+    return handleApiError(
+      new AppError('Invalid JSON.', 'INVALID_JSON', AppErrorType.VALIDATION),
+      headers
     );
   }
   if (
@@ -32,34 +35,33 @@ export async function validateAnswer(
     body.column < 0 ||
     body.column >= GRID_SIZE
   ) {
-    return NextResponse.json(
-      { error: 'Invalid answer request.' },
-      { status: 400, headers }
+    return handleApiError(
+      new AppError(
+        'Invalid answer request.',
+        'INVALID_ANSWER_REQUEST',
+        AppErrorType.VALIDATION
+      ),
+      headers
     );
   }
   try {
     if (body.source === 'MATCH') {
       const { data, error } = await getSupabaseUser();
       if (error || !data.user) {
-        return NextResponse.json(
-          { error: 'Unauthorized' },
-          { status: 401, headers }
+        return handleApiError(
+          new AppError(
+            'Unauthorized',
+            'UNAUTHORIZED',
+            AppErrorType.UNAUTHORIZED
+          ),
+          headers
         );
       }
     }
     const data = await answerService.validateAnswer(body, createSupabase());
-    if (!data)
-      return NextResponse.json(
-        { error: 'Puzzle, match, or player not found.' },
-        { status: 404, headers }
-      );
     return NextResponse.json({ data }, { headers });
   } catch (error) {
-    console.error('Answer validation failed:', error);
-    return NextResponse.json(
-      { error: 'Unable to validate answer.' },
-      { status: 500, headers }
-    );
+    return handleApiError(error, headers);
   }
 }
 

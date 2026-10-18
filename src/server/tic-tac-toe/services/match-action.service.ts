@@ -1,3 +1,5 @@
+import { AppError } from '@/server/errors/app.error';
+import { AppErrorType } from '@/server/types/app-error.types';
 import { gridRepository } from '@/server/grid/repositories/grid.repository';
 import 'server-only';
 import type { createSupabase } from '@/core/supabase/server';
@@ -9,12 +11,6 @@ import { playerRepository } from '@/server/player/repositories/player.repository
 import { ticTacToeRepository } from '../repositories/tic-tac-toe.repository';
 
 type Actor = NonNullable<Match['currentPlayer']>;
-type Failure = Extract<MatchActionResponse, { success: false }>;
-const fail = (code: Failure['code'], error: string): Failure => ({
-  success: false,
-  code,
-  error,
-});
 const opponent = (actor: Actor): Actor =>
   actor === 'PLAYER1' ? 'PLAYER2' : 'PLAYER1';
 
@@ -63,15 +59,29 @@ async function submitMove(
   input: Extract<MatchActionRequest, { action: 'MOVE' }>,
   actor: Actor,
   db: ReturnType<typeof createSupabase>
-): Promise<Failure | { correct: boolean }> {
+): Promise<{ correct: boolean }> {
   const index = input.row * 3 + input.column;
-  if (match.board[index]) return fail('INVALID_ACTION', 'Cell is occupied.');
+  if (match.board[index])
+    throw new AppError(
+      'Cell is occupied.',
+      'INVALID_ACTION',
+      AppErrorType.VALIDATION
+    );
   const player = await playerRepository.findPlayer(input.playerId, db);
   if (player.error)
-    throw new Error(`Player lookup failed: ${player.error.message}`);
-  if (!player.data) return fail('INVALID_ACTION', 'Player not found.');
+    throw new AppError(
+      'Unable to load player',
+      'PLAYER_LOAD_FAILED',
+      AppErrorType.INTERNAL_SERVER_ERROR,
+      { cause: player.error }
+    );
+  if (!player.data)
+    throw new AppError(
+      'Player not found.',
+      'INVALID_ACTION',
+      AppErrorType.VALIDATION
+    );
   const result = await answerService.validateGridAnswer(match.grid, input, db);
-  if (!result) return fail('INVALID_ACTION', 'Player not found.');
   if (result.correct) {
     match.board[index] = {
       owner: actor,
@@ -122,25 +132,30 @@ function handleDraw(
   match: Match,
   action: 'OFFER_DRAW' | 'ACCEPT_DRAW' | 'DECLINE_DRAW',
   actor: Actor
-): Failure | null {
+): void {
   if (match.mode !== 'ONLINE')
-    return fail(
+    throw new AppError(
+      'Draw offers are only available in PvP matches.',
       'INVALID_ACTION',
-      'Draw offers are only available in PvP matches.'
+      AppErrorType.VALIDATION
     );
   const offer = pendingDraw(match);
   if (action === 'OFFER_DRAW') {
     if (offer)
-      return fail('INVALID_ACTION', 'A draw offer is already pending.');
+      throw new AppError(
+        'A draw offer is already pending.',
+        'INVALID_ACTION',
+        AppErrorType.VALIDATION
+      );
   } else {
     if (!offer || offer === actor)
-      return fail(
+      throw new AppError(
+        'No draw offer from the opponent is pending.',
         'INVALID_ACTION',
-        'No draw offer from the opponent is pending.'
+        AppErrorType.VALIDATION
       );
     if (action === 'ACCEPT_DRAW') finish(match, 'DRAW', null);
   }
-  return null;
 }
 
 async function chooseAiAction(
@@ -151,7 +166,13 @@ async function chooseAiAction(
   const skip: MatchActionRequest = { action: 'SKIP', expectedVersion };
   if (Math.random() >= 0.5) return skip;
   const { data, error } = await gridRepository.findGridAnswers(match.grid, db);
-  if (error) throw new Error(`AI answer lookup failed: ${error.message}`);
+  if (error)
+    throw new AppError(
+      'Unable to find AI answers',
+      'AI_ANSWER_LOOKUP_FAILED',
+      AppErrorType.INTERNAL_SERVER_ERROR,
+      { cause: error }
+    );
   const cells = data.filter(
     (cell) =>
       cell.player_id && !match.board[cell.row_index * 3 + cell.column_index]
@@ -195,20 +216,37 @@ async function applyAction(
   input: MatchActionRequest,
   userId: string,
   db: ReturnType<typeof createSupabase>
-): Promise<MatchActionResponse> {
+): Promise<Extract<MatchActionResponse, { success: true }>> {
   const found = await ticTacToeRepository.findMatchById(id, db);
   if (found.error)
-    throw new Error(`Match lookup failed: ${found.error.message}`);
+    throw new AppError(
+      'Unable to load match',
+      'MATCH_LOAD_FAILED',
+      AppErrorType.INTERNAL_SERVER_ERROR,
+      { cause: found.error }
+    );
   const match = found.data;
   if (!match || (match.player1Id !== userId && match.player2Id !== userId)) {
-    return fail('NOT_FOUND', 'Match not found.');
+    throw new AppError('Match not found.', 'NOT_FOUND', AppErrorType.NOT_FOUND);
   }
   if (match.version !== input.expectedVersion)
-    return fail('CONFLICT', 'Match changed. Refresh and try again.');
+    throw new AppError(
+      'Match changed. Refresh and try again.',
+      'CONFLICT',
+      AppErrorType.CONFLICT
+    );
   if (match.status !== 'ACTIVE')
-    return fail('INVALID_ACTION', 'Match is not active.');
+    throw new AppError(
+      'Match is not active.',
+      'INVALID_ACTION',
+      AppErrorType.VALIDATION
+    );
   if (match.mode === 'ONLINE' && !match.player2Id)
-    return fail('INVALID_ACTION', 'Match has no opponent.');
+    throw new AppError(
+      'Match has no opponent.',
+      'INVALID_ACTION',
+      AppErrorType.VALIDATION
+    );
   const isAiAction = input.action === 'AI_TURN';
   if (isAiAction) {
     if (
@@ -216,13 +254,21 @@ async function applyAction(
       match.player1Id !== userId ||
       match.currentPlayer !== 'PLAYER2'
     ) {
-      return fail('INVALID_ACTION', 'It is not the AI turn.');
+      throw new AppError(
+        'It is not the AI turn.',
+        'INVALID_ACTION',
+        AppErrorType.VALIDATION
+      );
     }
     const remaining = match.turnEndsAt
       ? Date.parse(match.turnEndsAt) - Date.now()
       : 0;
     if (!Number.isFinite(remaining) || remaining <= 0 || remaining > 15000) {
-      return fail('CONFLICT', 'AI turn is outside its action window.');
+      throw new AppError(
+        'AI turn is outside its action window.',
+        'CONFLICT',
+        AppErrorType.CONFLICT
+      );
     }
     input = await chooseAiAction(match, input.expectedVersion, db);
   }
@@ -234,9 +280,17 @@ async function applyAction(
   const turnAction = input.action === 'MOVE' || input.action === 'SKIP';
   if (turnAction) {
     if (match.currentPlayer !== actor)
-      return fail('INVALID_ACTION', 'It is not your turn.');
+      throw new AppError(
+        'It is not your turn.',
+        'INVALID_ACTION',
+        AppErrorType.VALIDATION
+      );
     if (!match.turnEndsAt || Date.parse(match.turnEndsAt) <= Date.now()) {
-      return fail('CONFLICT', 'Turn deadline has passed.');
+      throw new AppError(
+        'Turn deadline has passed.',
+        'CONFLICT',
+        AppErrorType.CONFLICT
+      );
     }
   }
   if (
@@ -246,7 +300,11 @@ async function applyAction(
       !Number.isFinite(Date.parse(match.turnEndsAt)) ||
       Date.parse(match.turnEndsAt) > Date.now())
   ) {
-    return fail('CONFLICT', 'Turn has not expired.');
+    throw new AppError(
+      'Turn has not expired.',
+      'CONFLICT',
+      AppErrorType.CONFLICT
+    );
   }
   const event: Match['history'][number] = {
     action: input.action,
@@ -258,7 +316,6 @@ async function applyAction(
   switch (input.action) {
     case 'MOVE': {
       const result = await submitMove(match, input, actor, db);
-      if ('success' in result) return result;
       correct = result.correct;
       Object.assign(event, {
         row: input.row,
@@ -278,10 +335,13 @@ async function applyAction(
       forfeitMatch(match, actor);
       break;
     case 'AI_TURN':
-      return fail('INVALID_ACTION', 'Invalid AI action.');
+      throw new AppError(
+        'Invalid AI action.',
+        'INVALID_ACTION',
+        AppErrorType.VALIDATION
+      );
     default: {
-      const error = handleDraw(match, input.action, actor);
-      if (error) return error;
+      handleDraw(match, input.action, actor);
     }
   }
   match.history.push(event);
@@ -292,11 +352,17 @@ async function applyAction(
     turnAction ? 'live' : input.action === 'TIMEOUT' ? 'expired' : null
   );
   if (saved.error)
-    throw new Error(`Match update failed: ${saved.error.message}`);
+    throw new AppError(
+      'Unable to update match',
+      'MATCH_UPDATE_FAILED',
+      AppErrorType.INTERNAL_SERVER_ERROR,
+      { cause: saved.error }
+    );
   if (!saved.data)
-    return fail(
+    throw new AppError(
+      'Match changed or turn expired. Refresh and try again.',
       'CONFLICT',
-      'Match changed or turn expired. Refresh and try again.'
+      AppErrorType.CONFLICT
     );
   return {
     success: true,

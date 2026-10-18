@@ -1,3 +1,6 @@
+import { AppError } from '@/server/errors/app.error';
+import { AppErrorType } from '@/server/types/app-error.types';
+import { handleApiError } from '@/server/errors/handle-api-error';
 import type { GetMatchesRequest } from '@/domains/tic-tac-toe/types/get.matches.request.dto';
 import type { GetMatchesResponse } from '@/domains/tic-tac-toe/types/get.matches.response.dto';
 import type { Match } from '@/domains/tic-tac-toe/types/match.types';
@@ -18,15 +21,22 @@ export async function createMatch(
   try {
     body = await request.json();
   } catch {
-    return NextResponse.json({ error: 'Invalid JSON body.' }, { status: 400 });
+    return handleApiError(
+      new AppError(
+        'Invalid JSON body.',
+        'INVALID_JSON',
+        AppErrorType.VALIDATION
+      ),
+      headers
+    );
   }
 
   try {
     const { data, error } = await getOrCreateSupabaseGuestUser();
     if (error || !data.user)
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401, headers }
+      return handleApiError(
+        new AppError('Unauthorized', 'UNAUTHORIZED', AppErrorType.UNAUTHORIZED),
+        headers
       );
 
     const response = await ticTacToeService.createMatch(
@@ -40,11 +50,7 @@ export async function createMatch(
       headers,
     });
   } catch (error) {
-    console.error('Match creation failed:', error);
-    return NextResponse.json(
-      { error: 'Failed to create match.' },
-      { status: 500, headers }
-    );
+    return handleApiError(error, headers);
   }
 }
 
@@ -65,9 +71,9 @@ export async function getMatches(
   try {
     const { data, error } = await getSupabaseUser();
     if (error || !data.user) {
-      return NextResponse.json<GetMatchesResponse>(
-        { success: false, error: 'Unauthorized' },
-        { status: 401, headers }
+      return handleApiError(
+        new AppError('Unauthorized', 'UNAUTHORIZED', AppErrorType.UNAUTHORIZED),
+        headers
       );
     }
     const response = await ticTacToeService.getMatches(
@@ -77,10 +83,6 @@ export async function getMatches(
     );
     return NextResponse.json(response, { headers });
   } catch (error) {
-    console.error('Matches lookup failed:', error);
-    return NextResponse.json<GetMatchesResponse>(
-      { success: false, error: 'Failed to fetch matches.' },
-      { status: 500, headers }
-    );
+    return handleApiError(error, headers);
   }
 }

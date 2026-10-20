@@ -8,10 +8,44 @@
       "previousTitle": "Previous Daily Puzzles",
       "previousDescription": "Go back and play any daily grid you missed.",
       "aiTitle": "Play Against Bot",
-      "aiDescription": "Take turns against the bot.",
+      "aiDescription": "Play NBA tic-tac-toe against the bot.",
       "playersTitle": "Play Against Players",
-      "playersDescription": "Go head-to-head and put your basketball knowledge to the test.",
+      "playersDescription": "Challenge other players to NBA tic-tac-toe.",
       "comingSoon": "Coming soon"
+    }
+  },
+  "howToPlay": {
+    "metadata_title": "How to Play | Tic Tac Dunk",
+    "metadata_description": "Learn how to play Tic Tac Dunk's daily NBA puzzle and NBA tic-tac-toe.",
+    "metadata_keywords": "NBA trivia, how to play, game rules, daily puzzle, tic-tac-toe",
+    "titleStart": "HOW TO",
+    "titleHighlight": "PLAY",
+    "modes": {
+      "title": "Game Modes",
+      "intro": "Tic Tac Dunk offers two ways to test your NBA knowledge.",
+      "daily": "Complete a 3×3 grid by finding NBA players who match the row and column criteria.",
+      "ticTacToe": "Challenge a bot in an NBA trivia twist on classic tic-tac-toe. Multiplayer is coming soon."
+    },
+    "shared": {
+      "title": "Shared rules",
+      "intro": "Both modes share the same basic gameplay:",
+      "grid": "Each grid has 3 rows and 3 columns, each with its own criterion.",
+      "select": "Select a square and find an NBA player who matches both its row and column criteria.",
+      "submit": "Submit your answer to claim the square."
+    },
+    "rulesTitle": "Game Rules",
+    "daily": {
+      "title": "Daily Puzzle",
+      "goal": "Fill all 9 squares with matching NBA players to complete the puzzle.",
+      "schedule": "A new puzzle is available every day."
+    },
+    "ticTacToe": {
+      "title": "Tic-Tac-Toe",
+      "opponent": "Take turns against a bot on the NBA grid.",
+      "timer": "You have <strong>24 seconds</strong> to answer on each turn.",
+      "correct": "A correct answer claims the square.",
+      "incorrect": "A wrong answer skips your turn.",
+      "win": "Claim <strong>3 squares in a row</strong> horizontally, vertically, or diagonally to win."
     }
   },
   "dailyPuzzleList": {

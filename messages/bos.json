@@ -8,10 +8,44 @@
       "previousTitle": "Prethodni dnevni izazovi",
       "previousDescription": "Vrati se i odigraj dnevne mreže koje si propustio.",
       "aiTitle": "Igraj protiv bota",
-      "aiDescription": "Igraj naizmjenično protiv bota.",
+      "aiDescription": "Igraj NBA iks-oks protiv bota.",
       "playersTitle": "Igraj protiv igrača",
-      "playersDescription": "Odmjeri snage s drugim igračima i pokaži svoje košarkaško znanje.",
+      "playersDescription": "Izazovi druge igrače na NBA iks-oks.",
       "comingSoon": "Uskoro"
+    }
+  },
+  "howToPlay": {
+    "metadata_title": "Pravila igre | Tic Tac Dunk",
+    "metadata_description": "Nauči kako igrati dnevni NBA izazov i NBA iks-oks u igri Tic Tac Dunk.",
+    "metadata_keywords": "NBA kviz, kako igrati, pravila igre, dnevni izazov, iks-oks",
+    "titleStart": "PRAVILA",
+    "titleHighlight": "IGRE",
+    "modes": {
+      "title": "Načini igre",
+      "intro": "Tic Tac Dunk nudi dva načina da testiraš svoje NBA znanje.",
+      "daily": "Popuni mrežu 3×3 NBA igračima koji ispunjavaju kriterije reda i kolone.",
+      "ticTacToe": "Izazovi bota u klasičnom iks-oksu uz NBA kviz. Igra protiv drugih igrača dolazi uskoro."
+    },
+    "shared": {
+      "title": "Zajednička pravila",
+      "intro": "Oba načina igre imaju ista osnovna pravila:",
+      "grid": "Svaka mreža ima 3 reda i 3 kolone, a svaki red i kolona imaju svoj kriterij.",
+      "select": "Odaberi polje i pronađi NBA igrača koji ispunjava kriterije i reda i kolone.",
+      "submit": "Pošalji odgovor da osvojiš polje."
+    },
+    "rulesTitle": "Pravila igre",
+    "daily": {
+      "title": "Dnevni izazov",
+      "goal": "Popuni svih 9 polja odgovarajućim NBA igračima da završiš izazov.",
+      "schedule": "Novi izazov je dostupan svakog dana."
+    },
+    "ticTacToe": {
+      "title": "Iks-oks",
+      "opponent": "Igraj naizmjenično protiv bota na NBA mreži.",
+      "timer": "Imaš <strong>24 sekunde</strong> za odgovor u svakom potezu.",
+      "correct": "Tačan odgovor osvaja polje.",
+      "incorrect": "Netačan odgovor preskače tvoj potez.",
+      "win": "Osvoji <strong>3 polja u nizu</strong> vodoravno, uspravno ili dijagonalno da pobijediš."
     }
   },
   "dailyPuzzleList": {

@@ -1,0 +1,88 @@
+@use '@/core/styles/colors' as colors;
+@use '@/core/styles/breakpoints' as breakpoints;
+@use '@/core/styles/design-tokens' as tokens;
+@use '@/core/styles/layout' as layout;
+
+.container {
+  @include layout.flex-column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  padding: 16px 8px;
+  box-sizing: border-box;
+
+  @include breakpoints.respond-from(sm) {
+    gap: 28px;
+    padding: 32px 16px;
+  }
+
+  @include breakpoints.respond-from(md) {
+    gap: 40px;
+    padding: 28px 24px;
+  }
+
+  @include breakpoints.respond-from(xxl) {
+    padding: 48px 32px;
+  }
+}
+
+.grid {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  width: min(100%, 500px);
+  gap: 4px;
+  border-radius: tokens.border-radius(large);
+
+  @include breakpoints.respond-from(sm) {
+    gap: 8px;
+  }
+
+  @include breakpoints.respond-from(md) {
+    gap: 10px;
+  }
+
+  @include breakpoints.respond-from(xxl) {
+    width: min(100%, 600px);
+    gap: 14px;
+  }
+}
+
+.header,
+.actions {
+  width: min(100%, 500px);
+  min-width: 0;
+
+  @include breakpoints.respond-from(xxl) {
+    width: min(100%, 600px);
+  }
+}
+
+.container[data-with-actions] {
+  @include breakpoints.respond-from(lg) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 500px minmax(0, 1fr);
+    column-gap: 48px;
+
+    .header {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .grid {
+      grid-column: 2;
+      grid-row: 2;
+    }
+
+    .actions {
+      grid-column: 3;
+      grid-row: 2;
+      align-self: center;
+    }
+  }
+
+  @include breakpoints.respond-from(xxl) {
+    grid-template-columns: minmax(0, 1fr) 600px minmax(0, 1fr);
+  }
+}

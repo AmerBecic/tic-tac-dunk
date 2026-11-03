@@ -1,0 +1,25 @@
+@use 'sass:map';
+
+$font-weight: (
+  normal: 400,
+  bold: 700,
+);
+
+$font-size: (
+  xxSmall: 12px,
+  xSmall: 16px,
+  small: 20px,
+  normal: 24px,
+  large: 32px,
+  xLarge: 40px,
+  xxLarge: 56px,
+  xxxLarge: 84px,
+);
+
+@function font-weight($type) {
+  @return map.get($font-weight, $type);
+}
+
+@function font-size($type) {
+  @return map.get($font-size, $type);
+}

@@ -3,12 +3,140 @@
     "metadata_title": "Home Page | Tic Tac Dunk",
     "metadata_description": "Welcome to the ultimate NBA grid game.",
     "metadata_keywords": "NBA, trivia, immaculate grid, basketball, players, teams",
-    "test": "testing"
+    "gamemodeSelection": {
+      "dailyDescription": "Complete today's grid.",
+      "previousTitle": "Previous Daily Puzzles",
+      "previousDescription": "Go back and play any daily grid you missed.",
+      "aiTitle": "Play Against Bot",
+      "aiDescription": "Play NBA tic-tac-toe against the bot.",
+      "playersTitle": "Play Against Players",
+      "playersDescription": "Challenge other players to NBA tic-tac-toe.",
+      "comingSoon": "Coming soon"
+    }
   },
-
-  "header": {
+  "howToPlay": {
+    "metadata_title": "How to Play | Tic Tac Dunk",
+    "metadata_description": "Learn how to play Tic Tac Dunk's daily NBA puzzle and NBA tic-tac-toe.",
+    "metadata_keywords": "NBA trivia, how to play, game rules, daily puzzle, tic-tac-toe",
+    "titleStart": "HOW TO",
+    "titleHighlight": "PLAY",
+    "modes": {
+      "title": "Game Modes",
+      "intro": "Tic Tac Dunk offers two ways to test your NBA knowledge.",
+      "daily": "Complete a 3×3 grid by finding NBA players who match the row and column criteria.",
+      "ticTacToe": "Challenge a bot in an NBA trivia twist on classic tic-tac-toe. Multiplayer is coming soon."
+    },
+    "shared": {
+      "title": "Shared rules",
+      "intro": "Both modes share the same basic gameplay:",
+      "grid": "Each grid has 3 rows and 3 columns, each with its own criterion.",
+      "select": "Select a square and find an NBA player who matches both its row and column criteria.",
+      "submit": "Submit your answer to claim the square."
+    },
+    "criteria": {
+      "title": "Possible criteria",
+      "intro": "Rows and columns can use any of the following criteria. Your answer must satisfy both criteria for the selected square.",
+      "team": {
+        "title": "NBA team",
+        "description": "Choose a player who has played for the team shown."
+      },
+      "teammate": {
+        "title": "Teammate of a player",
+        "description": "Choose a player who was a teammate of the named player."
+      },
+      "mvpOrDpoy": {
+        "title": "MVP or DPOY",
+        "description": "Choose a player who has won the NBA Most Valuable Player or Defensive Player of the Year award. Either award counts."
+      },
+      "royOrMip": {
+        "title": "ROY or MIP",
+        "description": "Choose a player who has won the NBA Rookie of the Year or Most Improved Player award. Either award counts."
+      },
+      "points": {
+        "title": "2,000+ points in a season",
+        "description": "Choose a player who scored at least 2,000 points in a single NBA season."
+      }
+    },
+    "rulesTitle": "Game Rules",
+    "daily": {
+      "title": "Daily Puzzle",
+      "goal": "Fill all 9 squares with matching NBA players to complete the puzzle.",
+      "schedule": "A new puzzle is available every day."
+    },
+    "ticTacToe": {
+      "title": "Tic-Tac-Toe",
+      "opponent": "Take turns against a bot on the NBA grid.",
+      "timer": "You have <strong>24 seconds</strong> to answer on each turn.",
+      "correct": "A correct answer claims the square.",
+      "incorrect": "A wrong answer skips your turn.",
+      "win": "Claim <strong>3 squares in a row</strong> horizontally, vertically, or diagonally to win."
+    }
+  },
+  "dailyPuzzleList": {
+    "metadata_title": "Daily NBA Puzzles | Tic Tac Dunk",
+    "metadata_description": "Browse recent Tic Tac Dunk daily NBA puzzles and play the basketball grids you missed.",
+    "metadata_keywords": "daily NBA puzzles, previous puzzles, NBA trivia, basketball grid, players, teams",
+    "title": "Daily Puzzles"
+  },
+  "ticTacToe": {
+    "metadata_title": "NBA Tic Tac Toe | Tic Tac Dunk",
+    "metadata_description": "Test your basketball knowledge on the Tic Tac Dunk NBA tic-tac-toe grid.",
+    "metadata_keywords": "NBA tic tac toe, basketball grid, NBA trivia, players, teams",
+    "waiting": "Waiting for opponent",
+    "finished": "Match ended",
+    "player1": "Player 1",
+    "player2": "Player 2",
+    "bot": "Bot",
+    "shotClock": "Shot clock",
+    "activeTurn": "{player}'s turn",
+    "secondsRemaining": "{seconds} seconds remaining",
+    "win": "Win",
+    "lost": "Defeat",
+    "draw": "Draw",
+    "creatingMatch": "Starting a new game…",
+    "createError": "Could not start a new game. Please try again.",
+    "newGame": "New Game",
+    "leave": "Leave"
+  },
+  "dailyPuzzle": {
+    "title": "Daily Puzzle",
+    "completed": "Completed",
+    "metadata_title": "Daily NBA Puzzle | Tic Tac Dunk",
+    "metadata_description": "Play today's Tic Tac Dunk NBA puzzle and test your basketball knowledge.",
+    "metadata_keywords": "daily NBA puzzle, NBA trivia, basketball grid, players, teams",
+    "score": "{count} / {total}",
+    "correctAnswer": "Correct!",
+    "incorrectAnswer": "Incorrect. Try another player."
+  },
+  "pages": {
     "home": "Home",
-    "how_to_play": "How to play",
-    "dev_blog": "Dev blog"
+    "how_to_play": "How to play"
+  },
+  "common": {
+    "play_now": "Play Now",
+    "close": "Close",
+    "retry": "Try again"
+  },
+  "themeSwitcher": {
+    "switchTheme": "Switch Theme"
+  },
+  "footer": {
+    "lastUpdated": "Data last updated:",
+    "description": "The NBA grid that separates true hoopers from casual fans.",
+    "copyright": "© 2026 Tic Tac Dunk. All rights reserved."
+  },
+  "playersSearch": {
+    "search": "Search players",
+    "searchLabel": "Search players by name",
+    "clear": "Clear search",
+    "title": "Select a player",
+    "description": "Search by name and select a player from the results.",
+    "loading": "Searching players…",
+    "error": "Unable to load players.",
+    "empty": "No players found.",
+    "resultsLabel": "Matching players",
+    "moreResults": "Showing the first {count} matches. Refine your search to find more players.",
+    "validating": "Checking answer…",
+    "validationError": "Unable to check your answer. Please try again."
   }
 }

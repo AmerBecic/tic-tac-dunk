@@ -1,0 +1,123 @@
+@use '@/core/styles/layout' as layout;
+@use '@/core/styles/colors' as *;
+@use '@/core/styles/design-tokens' as *;
+
+.button {
+  @include layout.flex-row;
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  gap: gap(small);
+  border: none;
+  background: none;
+  border-radius: border-radius(medium);
+  transition:
+    background-color 160ms ease,
+    box-shadow 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+
+  &:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  &:not(:disabled):active {
+    transform: translateY(1px) scale(0.98);
+  }
+}
+
+.label,
+.icon {
+  color: inherit;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    color: inherit;
+    stroke: currentColor;
+  }
+}
+
+.sm {
+  height: 32px;
+  padding: 8px 10px;
+}
+
+.md {
+  height: 36px;
+  padding: 12px;
+}
+
+.lg {
+  min-height: 44px;
+  padding: 10px 18px;
+}
+
+.xl {
+  height: 48px;
+  padding: 16px 20px;
+}
+
+.primary {
+  background-color: color(primary);
+  color: var(--text-primary);
+}
+
+.secondary {
+  background-color: var(--surface-highlight);
+  color: color(primary);
+}
+
+.danger {
+  background-color: color(error);
+  color: white(100);
+}
+
+.ghost {
+  background-color: transparent;
+  color: var(--text-primary);
+}
+
+.disabled {
+  cursor: not-allowed;
+  color: var(--text-muted);
+  background-color: var(--surface-muted);
+}
+
+.pending {
+  cursor: wait;
+}
+
+@media (hover: hover) {
+  .primary:not(:disabled):hover {
+    box-shadow: 0 0 0 2px var(--color-primary);
+  }
+
+  .secondary:not(:disabled):hover {
+    background-color: var(--surface-muted);
+    box-shadow: 0 0 0 2px var(--color-primary);
+  }
+
+  .danger:not(:disabled):hover {
+    background-color: var(--color-error);
+    box-shadow: 0 0 0 2px var(--color-error);
+  }
+
+  .ghost:not(:disabled):hover {
+    background-color: var(--surface-highlight);
+    box-shadow: 0 0 18px var(--color-border);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: none;
+  }
+}

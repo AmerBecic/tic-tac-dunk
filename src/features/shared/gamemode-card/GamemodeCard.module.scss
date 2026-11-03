@@ -1,0 +1,152 @@
+@use '@/core/styles/colors' as colors;
+@use '@/core/styles/design-tokens' as tokens;
+@use '@/core/styles/breakpoints' as breakpoints;
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  min-height: 280px;
+  white-space: normal;
+  border-radius: tokens.border-radius(xLarge);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease;
+
+  @media (hover: hover) {
+    &:has(.playButton:enabled):hover {
+      z-index: 2;
+      transform: scale(1.03);
+      border-color: var(--color-primary);
+      box-shadow: 0 8px 24px rgba(colors.black(100), 0.16);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+
+    &:has(.playButton:enabled):hover {
+      transform: none;
+    }
+  }
+
+  @include breakpoints.respond-from(md) {
+    min-height: 500px;
+  }
+}
+
+.unavailable .title {
+  color: var(--text-muted);
+}
+
+.unavailable {
+  overflow: hidden;
+  background-color: var(--surface-muted);
+
+  > .header,
+  > .content {
+    color: var(--text-muted);
+    background-color: var(--surface-muted);
+    opacity: 0.5;
+  }
+}
+
+.bandage {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  box-sizing: border-box;
+  width: 200%;
+  padding: 0.75rem 65%;
+  background: rgba(colors.gray(600), 0.2);
+  color: colors.white(100);
+  box-shadow: 0 3px 12px rgba(colors.black(100), 0.08);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.card > .header {
+  padding: 1.5rem 1rem 1rem;
+
+  @include breakpoints.respond-from(md) {
+    padding: 2rem 1.75rem 1.5rem;
+  }
+}
+
+.title {
+  box-sizing: content-box;
+  min-height: 2lh;
+  color: var(--color-primary);
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--color-primary);
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.15;
+  text-align: center;
+
+  @include breakpoints.respond-from(md) {
+    padding-bottom: 1.5rem;
+    font-size: 2.25rem;
+  }
+}
+
+.card > .content {
+  flex: 1;
+  padding: 0 1rem 1.5rem;
+
+  @include breakpoints.respond-from(md) {
+    padding: 0 1.75rem 2rem;
+  }
+}
+
+.description {
+  font-size: 1rem;
+  line-height: 1.65;
+  text-align: center;
+}
+
+.playButton {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: inherit;
+  background: transparent;
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 4px;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 5rem;
+  margin-bottom: 1rem;
+
+  > svg {
+    display: block;
+    width: 5rem;
+    height: 5rem;
+    max-width: 100%;
+  }
+}

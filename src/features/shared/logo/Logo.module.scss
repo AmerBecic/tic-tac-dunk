@@ -1,0 +1,26 @@
+@use '@/core/styles/layout' as layout;
+@use '@/core/styles/colors' as *;
+@use '@/core/styles/design-tokens' as *;
+@use '@/core/styles/breakpoints' as *;
+
+.logoAndTitleContainer {
+  @include layout.flex-row;
+  align-items: center;
+  gap: gap(medium);
+}
+
+.logoOnly {
+  justify-content: center;
+  width: 100%;
+}
+
+.logoWrapper {
+  background-color: color(primary);
+  width: 30px;
+  height: 30px;
+  border-radius: border-radius(xLarge);
+}
+
+.logo {
+  border-radius: border-radius(xLarge);
+}

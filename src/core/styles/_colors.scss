@@ -1,0 +1,53 @@
+@use 'sass:map';
+
+$color: (
+  primary: #cc5d3c,
+  secondary: #06402b,
+  warning: #ffc107,
+  error: #dc3545,
+  info: #0059ff,
+  grid-cell: #c65a38,
+  grid-cell-border: #dda078,
+  grid-criterion: #032e20,
+  grid-criterion-border: #655e43,
+);
+
+$white: (
+  100: #ffffff,
+  200: #fafafa,
+  300: #f5f5f5,
+);
+
+$black: (
+  100: #000000,
+  200: #0a0a0a,
+  300: #171717,
+  400: #1f1f1f,
+);
+
+$gray: (
+  50: #e0e0e0,
+  100: #d9d9d9,
+  300: #b3b3b3,
+  400: #9ca3af,
+  500: #808080,
+  600: #6b7280,
+  700: #525252,
+  900: #2b2b2b,
+);
+
+@function color($type) {
+  @return map.get($color, $type);
+}
+
+@function white($type) {
+  @return map.get($white, $type);
+}
+
+@function black($type) {
+  @return map.get($black, $type);
+}
+
+@function gray($type) {
+  @return map.get($gray, $type);
+}

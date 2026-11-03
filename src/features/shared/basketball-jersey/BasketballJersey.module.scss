@@ -1,0 +1,28 @@
+.jersey {
+  position: relative;
+  display: inline-block;
+  width: var(--jersey-display-size, var(--jersey-size));
+  max-width: 100%;
+  aspect-ratio: 1;
+  container-type: inline-size;
+
+  &[data-empty] .artwork {
+    opacity: 0.3;
+  }
+}
+
+.artwork {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.name {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  font-family: Arial, sans-serif;
+  font-weight: 700;
+}

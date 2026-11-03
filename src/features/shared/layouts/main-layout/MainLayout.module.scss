@@ -1,0 +1,52 @@
+@use '@/core/styles/layout' as layout;
+@use '@/core/styles/colors' as colors;
+@use '@/core/styles/breakpoints' as breakpoints;
+
+.layoutContainer {
+  @include layout.flex-column;
+  position: relative;
+  z-index: 1;
+
+  width: 100%;
+  min-height: 100dvh;
+  justify-content: space-between;
+  max-width: 1200px;
+  align-items: center;
+}
+
+.mainContent {
+  width: 100%;
+}
+
+.heroBackground {
+  --hero-grid-size: 80px;
+  --hero-grid-line: color-mix(in srgb, var(--text-primary) 5%, transparent);
+
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-color: var(--background-primary);
+  background-image:
+    linear-gradient(var(--hero-grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--hero-grid-line) 1px, transparent 1px),
+    radial-gradient(
+      ellipse at 10% 60%,
+      rgba(colors.color(primary), 0.09),
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse at 90% 20%,
+      rgba(colors.color(secondary), 0.32),
+      transparent 70%
+    );
+  background-size:
+    var(--hero-grid-size) var(--hero-grid-size),
+    var(--hero-grid-size) var(--hero-grid-size),
+    100% 100%,
+    100% 100%;
+
+  @include breakpoints.respond-from(md) {
+    --hero-grid-size: 120px;
+  }
+}

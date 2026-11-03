@@ -3,12 +3,140 @@
     "metadata_title": "Početna stranica | Tic Tac Dunk",
     "metadata_description": "Dobrodošli u najbolju NBA igru s mrežama.",
     "metadata_keywords": "NBA, trivia, immaculate grid, basketball, players, teams",
-    "test": "testiram"
+    "gamemodeSelection": {
+      "dailyDescription": "Riješi današnju mrežu.",
+      "previousTitle": "Prethodni dnevni izazovi",
+      "previousDescription": "Vrati se i odigraj dnevne mreže koje si propustio.",
+      "aiTitle": "Igraj protiv bota",
+      "aiDescription": "Igraj NBA iks-oks protiv bota.",
+      "playersTitle": "Igraj protiv igrača",
+      "playersDescription": "Izazovi druge igrače na NBA iks-oks.",
+      "comingSoon": "Uskoro"
+    }
   },
-
-  "header": {
+  "howToPlay": {
+    "metadata_title": "Pravila igre | Tic Tac Dunk",
+    "metadata_description": "Nauči kako igrati dnevni NBA izazov i NBA iks-oks u igri Tic Tac Dunk.",
+    "metadata_keywords": "NBA kviz, kako igrati, pravila igre, dnevni izazov, iks-oks",
+    "titleStart": "PRAVILA",
+    "titleHighlight": "IGRE",
+    "modes": {
+      "title": "Načini igre",
+      "intro": "Tic Tac Dunk nudi dva načina da testiraš svoje NBA znanje.",
+      "daily": "Popuni mrežu 3×3 NBA igračima koji ispunjavaju kriterije reda i kolone.",
+      "ticTacToe": "Izazovi bota u klasičnom iks-oksu uz NBA kviz. Igra protiv drugih igrača dolazi uskoro."
+    },
+    "shared": {
+      "title": "Zajednička pravila",
+      "intro": "Oba načina igre imaju ista osnovna pravila:",
+      "grid": "Svaka mreža ima 3 reda i 3 kolone, a svaki red i kolona imaju svoj kriterij.",
+      "select": "Odaberi polje i pronađi NBA igrača koji ispunjava kriterije i reda i kolone.",
+      "submit": "Pošalji odgovor da osvojiš polje."
+    },
+    "criteria": {
+      "title": "Mogući kriteriji",
+      "intro": "Redovi i kolone mogu imati bilo koji od sljedećih kriterija. Tvoj odgovor mora ispunjavati oba kriterija odabranog polja.",
+      "team": {
+        "title": "NBA tim",
+        "description": "Odaberi igrača koji je igrao za prikazani tim."
+      },
+      "teammate": {
+        "title": "Saigrač određenog igrača",
+        "description": "Odaberi igrača koji je bio saigrač navedenog igrača."
+      },
+      "mvpOrDpoy": {
+        "title": "MVP ili DPOY",
+        "description": "Odaberi igrača koji je osvojio NBA nagradu za najkorisnijeg igrača (MVP) ili najboljeg odbrambenog igrača godine (DPOY). Dovoljna je bilo koja od ove dvije nagrade."
+      },
+      "royOrMip": {
+        "title": "ROY ili MIP",
+        "description": "Odaberi igrača koji je osvojio NBA nagradu za najboljeg novajliju godine (ROY) ili igrača koji je najviše napredovao (MIP). Dovoljna je bilo koja od ove dvije nagrade."
+      },
+      "points": {
+        "title": "2.000+ poena u sezoni",
+        "description": "Odaberi igrača koji je postigao najmanje 2.000 poena u jednoj NBA sezoni."
+      }
+    },
+    "rulesTitle": "Pravila igre",
+    "daily": {
+      "title": "Dnevni izazov",
+      "goal": "Popuni svih 9 polja odgovarajućim NBA igračima da završiš izazov.",
+      "schedule": "Novi izazov je dostupan svakog dana."
+    },
+    "ticTacToe": {
+      "title": "Iks-oks",
+      "opponent": "Igraj naizmjenično protiv bota na NBA mreži.",
+      "timer": "Imaš <strong>24 sekunde</strong> za odgovor u svakom potezu.",
+      "correct": "Tačan odgovor osvaja polje.",
+      "incorrect": "Netačan odgovor preskače tvoj potez.",
+      "win": "Osvoji <strong>3 polja u nizu</strong> vodoravno, uspravno ili dijagonalno da pobijediš."
+    }
+  },
+  "dailyPuzzleList": {
+    "metadata_title": "Dnevni NBA izazovi | Tic Tac Dunk",
+    "metadata_description": "Pregledajte nedavne Tic Tac Dunk dnevne NBA izazove i odigrajte košarkaške mreže koje ste propustili.",
+    "metadata_keywords": "dnevni NBA izazovi, prethodni izazovi, NBA kviz, košarkaška mreža, igrači, timovi",
+    "title": "Dnevne zagonetke"
+  },
+  "ticTacToe": {
+    "metadata_title": "NBA iks-oks | Tic Tac Dunk",
+    "metadata_description": "Testirajte svoje košarkaško znanje na Tic Tac Dunk NBA iks-oks mreži.",
+    "metadata_keywords": "NBA iks-oks, košarkaška mreža, NBA kviz, igrači, timovi",
+    "waiting": "Čekanje protivnika",
+    "finished": "Meč je završen",
+    "player1": "Igrač 1",
+    "player2": "Igrač 2",
+    "bot": "Bot",
+    "shotClock": "Vrijeme za potez",
+    "activeTurn": "{player} je na potezu",
+    "secondsRemaining": "Preostalo sekundi: {seconds}",
+    "win": "Pobjeda",
+    "lost": "Poraz",
+    "draw": "Neriješeno",
+    "creatingMatch": "Pokretanje nove igre…",
+    "createError": "Nova igra nije pokrenuta. Pokušajte ponovo.",
+    "newGame": "Nova igra",
+    "leave": "Napusti"
+  },
+  "dailyPuzzle": {
+    "title": "Dnevni izazov",
+    "completed": "Završeno",
+    "metadata_title": "Dnevni NBA izazov | Tic Tac Dunk",
+    "metadata_description": "Igrajte današnji Tic Tac Dunk NBA izazov i testirajte svoje košarkaško znanje.",
+    "metadata_keywords": "dnevni NBA izazov, NBA kviz, košarkaška mreža, igrači, timovi",
+    "score": "{count} / {total}",
+    "correctAnswer": "Tačno!",
+    "incorrectAnswer": "Netačno. Pokušajte s drugim igračem."
+  },
+  "pages": {
     "home": "Home",
-    "how_to_play": "Pravila igre",
-    "dev_blog": "Dev blog"
+    "how_to_play": "Pravila igre"
+  },
+  "common": {
+    "play_now": "Igraj sada",
+    "close": "Zatvori",
+    "retry": "Pokušaj ponovo"
+  },
+  "themeSwitcher": {
+    "switchTheme": "Promijeni temu"
+  },
+  "footer": {
+    "lastUpdated": "Podaci posljednji put ažurirani:",
+    "description": "NBA mreža koja odvaja prave košarkaške znalce od povremenih navijača.",
+    "copyright": "© 2026 Tic Tac Dunk. Sva prava zadržana."
+  },
+  "playersSearch": {
+    "search": "Pretraži igrače",
+    "searchLabel": "Pretraži igrače po imenu",
+    "clear": "Očisti pretragu",
+    "title": "Odaberi igrača",
+    "description": "Pretraži igrače po imenu i odaberi igrača iz rezultata.",
+    "loading": "Pretraživanje igrača…",
+    "error": "Nije moguće učitati igrače.",
+    "empty": "Nema pronađenih igrača.",
+    "resultsLabel": "Pronađeni igrači",
+    "moreResults": "Prikazano je prvih {count} rezultata. Preciziraj pretragu da pronađeš više igrača.",
+    "validating": "Provjera odgovora…",
+    "validationError": "Nije moguće provjeriti odgovor. Pokušajte ponovo."
   }
 }

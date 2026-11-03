@@ -1,0 +1,84 @@
+@use '@/core/styles/layout' as layout;
+@use '@/core/styles/design-tokens' as *;
+@use '@/core/styles/breakpoints' as *;
+
+.footer {
+  @include layout.flex-column;
+  align-items: center;
+  text-align: center;
+  gap: gap(small);
+  padding: 1.25rem 1rem;
+  min-height: 72px;
+  width: 100%;
+
+  @include respond-from(md) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  }
+}
+
+.projectInfo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: gap(small);
+  max-width: 100%;
+  min-width: 0;
+
+  @include respond-from(md) {
+    display: contents;
+  }
+}
+
+.projectLink {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0 0.5rem;
+  color: var(--text-secondary);
+
+  @include respond-from(md) {
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: end;
+  }
+
+  &:hover {
+    color: inherit;
+  }
+
+  &:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+.lastUpdated {
+  min-width: 0;
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  line-height: 1.5;
+
+  @include respond-from(md) {
+    grid-column: 2;
+    grid-row: 1;
+  }
+}
+
+.copyright {
+  margin: 0;
+  min-width: 0;
+  line-height: 1.5;
+
+  @include respond-from(md) {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+    text-align: left;
+  }
+}

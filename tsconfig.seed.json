@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "incremental": false
+  },
+  "include": [
+    "prisma/seed.ts",
+    "prisma/seed-teams.ts",
+    "prisma/seed-teammates.ts"
+  ],
+  "exclude": ["node_modules"]
+}

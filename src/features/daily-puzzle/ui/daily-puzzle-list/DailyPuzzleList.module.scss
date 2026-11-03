@@ -1,0 +1,139 @@
+@use '@/core/styles/colors' as colors;
+@use '@/core/styles/breakpoints' as breakpoints;
+@use '@/core/styles/design-tokens' as tokens;
+@use '@/core/styles/layout' as layout;
+
+.dailyPuzzleList {
+  @include layout.flex-column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  padding: 16px 8px;
+  box-sizing: border-box;
+
+  @include breakpoints.respond-from(sm) {
+    gap: 28px;
+    padding: 32px 16px;
+  }
+
+  @include breakpoints.respond-from(md) {
+    gap: 40px;
+    padding: 28px 24px;
+  }
+
+  @include breakpoints.respond-from(xxl) {
+    padding: 48px 32px;
+  }
+}
+
+.grid {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  width: min(100%, 500px);
+  gap: 4px;
+  border-radius: tokens.border-radius(large);
+
+  @include breakpoints.respond-from(sm) {
+    gap: 8px;
+  }
+
+  @include breakpoints.respond-from(md) {
+    gap: 10px;
+  }
+
+  @include breakpoints.respond-from(xxl) {
+    width: min(100%, 600px);
+    gap: 14px;
+  }
+}
+
+.cell {
+  min-width: 0;
+  box-sizing: border-box;
+  aspect-ratio: 1;
+  border-radius: tokens.border-radius(medium);
+}
+
+.completionCheck {
+  width: 28%;
+  height: auto;
+  max-width: 36px;
+  color: var(--color-secondary);
+}
+
+.completedLabel {
+  font-size: clamp(8px, 10cqi, 16px);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.titleTile {
+  --surface-muted: light-dark(#{colors.white(300)}, #03170f);
+  color: var(--text-primary);
+}
+
+.title {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+
+  @include breakpoints.respond-from(sm) {
+    font-size: 18px;
+  }
+
+  @include breakpoints.respond-from(md) {
+    font-size: 20px;
+  }
+
+  @include breakpoints.respond-from(xxl) {
+    font-size: 24px;
+  }
+}
+
+.cell {
+  @include layout.flex-column;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border: 2px dashed colors.color(grid-cell-border);
+  background-color: colors.color(grid-cell);
+  color: var(--text-primary);
+  text-align: center;
+  text-decoration: none;
+  font-size: 10px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+
+  &:hover {
+    border-color: var(--color-focus);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  &[data-completed='true'] {
+    container-type: inline-size;
+    gap: 4px;
+    border: 2px solid var(--color-secondary);
+    background-color: light-dark(#{colors.white(300)}, #03170f);
+    box-shadow: 0 0 0 2px var(--color-secondary);
+
+    time {
+      line-height: 1.2;
+    }
+  }
+
+  @include breakpoints.respond-from(sm) {
+    font-size: 16px;
+  }
+
+  @include breakpoints.respond-from(md) {
+    font-size: 18px;
+  }
+}

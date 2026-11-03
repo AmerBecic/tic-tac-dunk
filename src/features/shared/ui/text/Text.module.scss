@@ -1,0 +1,55 @@
+@use '@/core/styles/text' as *;
+@use '@/core/styles/colors' as *;
+
+.text {
+  text-decoration: none;
+  height: min-content;
+}
+
+.center {
+  text-align: center;
+}
+
+.left {
+  text-align: left;
+}
+
+.right {
+  text-align: right;
+}
+
+.bold {
+  font-weight: font-weight(bold);
+}
+
+.text56 {
+  font-size: 56px;
+}
+
+.text40 {
+  font-size: 40px;
+}
+
+.text32 {
+  font-size: 32px;
+}
+
+.text28 {
+  font-size: 28px;
+}
+
+.text24 {
+  font-size: 24px;
+}
+
+.text20 {
+  font-size: 20px;
+}
+
+.text16 {
+  font-size: 16px;
+}
+
+.text12 {
+  font-size: 12px;
+}

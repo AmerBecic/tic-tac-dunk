@@ -1,0 +1,44 @@
+@use '@/core/styles/colors' as colors;
+@use '@/core/styles/breakpoints' as breakpoints;
+
+.titleTile {
+  --surface-muted: light-dark(#{colors.white(300)}, #03170f);
+  color: var(--text-primary);
+}
+
+.title {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+
+  @include breakpoints.respond-from(sm) {
+    font-size: 18px;
+  }
+
+  @include breakpoints.respond-from(md) {
+    font-size: 20px;
+  }
+
+  @include breakpoints.respond-from(xxl) {
+    font-size: 24px;
+  }
+}
+
+.win {
+  --surface-muted: #166534;
+  --color-secondary: #22c55e;
+  --text-primary: #fff;
+}
+
+.lost {
+  --surface-muted: #991b1b;
+  --color-secondary: #ef4444;
+  --text-primary: #fff;
+}
+
+.draw {
+  --surface-muted: #52525b;
+  --color-secondary: #71717a;
+  --text-primary: #fff;
+}

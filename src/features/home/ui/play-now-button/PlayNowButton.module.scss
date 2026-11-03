@@ -1,0 +1,16 @@
+@use '@/core/styles/breakpoints' as breakpoints;
+
+.button {
+  width: 100%;
+  max-width: 400px;
+
+  @include breakpoints.respond-from(lg) {
+    width: fit-content;
+  }
+}
+
+.label {
+  @include breakpoints.respond-from(lg) {
+    padding-top: 2px;
+  }
+}

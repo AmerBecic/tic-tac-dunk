@@ -1,0 +1,7 @@
+@use '@/core/styles/layout' as layout;
+@use '@/core/styles/design-tokens' as *;
+
+.nav {
+  @include layout.flex-row;
+  gap: gap(large);
+}

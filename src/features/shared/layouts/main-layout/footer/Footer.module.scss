@@ -4,36 +4,30 @@
 
 .footer {
   @include layout.flex-column;
-  gap: gap(large);
-  padding: 1rem;
-  height: 72px;
+  align-items: center;
+  text-align: center;
+  gap: gap(small);
+  padding: 1.25rem 1rem;
+  min-height: 72px;
   width: 100%;
 
   @include respond-from(md) {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    text-align: left;
   }
 }
 
-.brand {
-  @include layout.flex-column;
-  gap: gap(medium);
-
-  @include respond-from(md) {
-    flex-direction: row;
-    align-items: center;
-  }
+.lastUpdated {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  line-height: 1.5;
 }
 
 .copyright {
-  flex-shrink: 0;
-}
-
-.desktopOnly {
-  display: none;
-
-  @include respond-from(lg) {
-    display: block;
-  }
+  margin: 0;
+  min-width: 0;
+  line-height: 1.5;
 }

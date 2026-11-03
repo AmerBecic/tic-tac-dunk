@@ -98,6 +98,7 @@
     "switchTheme": "Switch Theme"
   },
   "footer": {
+    "lastUpdated": "Data last updated:",
     "description": "The NBA grid that separates true hoopers from casual fans.",
     "copyright": "© 2026 Tic Tac Dunk. All rights reserved."
   },

@@ -33,6 +33,30 @@
       "select": "Odaberi polje i pronađi NBA igrača koji ispunjava kriterije i reda i kolone.",
       "submit": "Pošalji odgovor da osvojiš polje."
     },
+    "criteria": {
+      "title": "Mogući kriteriji",
+      "intro": "Redovi i kolone mogu imati bilo koji od sljedećih kriterija. Tvoj odgovor mora ispunjavati oba kriterija odabranog polja.",
+      "team": {
+        "title": "NBA tim",
+        "description": "Odaberi igrača koji je igrao za prikazani tim."
+      },
+      "teammate": {
+        "title": "Saigrač određenog igrača",
+        "description": "Odaberi igrača koji je bio saigrač navedenog igrača."
+      },
+      "mvpOrDpoy": {
+        "title": "MVP ili DPOY",
+        "description": "Odaberi igrača koji je osvojio NBA nagradu za najkorisnijeg igrača (MVP) ili najboljeg odbrambenog igrača godine (DPOY). Dovoljna je bilo koja od ove dvije nagrade."
+      },
+      "royOrMip": {
+        "title": "ROY ili MIP",
+        "description": "Odaberi igrača koji je osvojio NBA nagradu za najboljeg novajliju godine (ROY) ili igrača koji je najviše napredovao (MIP). Dovoljna je bilo koja od ove dvije nagrade."
+      },
+      "points": {
+        "title": "2.000+ poena u sezoni",
+        "description": "Odaberi igrača koji je postigao najmanje 2.000 poena u jednoj NBA sezoni."
+      }
+    },
     "rulesTitle": "Pravila igre",
     "daily": {
       "title": "Dnevni izazov",

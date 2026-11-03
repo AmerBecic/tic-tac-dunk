@@ -38,6 +38,21 @@ export const HowToPlay = async () => {
           </ol>
         </section>
 
+        <section className={styles.section} aria-labelledby="possible-criteria">
+          <h2 id="possible-criteria">{t('criteria.title')}</h2>
+          <p>{t('criteria.intro')}</p>
+          <ul>
+            {(
+              ['team', 'teammate', 'mvpOrDpoy', 'royOrMip', 'points'] as const
+            ).map((criterion) => (
+              <li key={criterion}>
+                <strong>{t(`criteria.${criterion}.title`)}</strong> —{' '}
+                {t(`criteria.${criterion}.description`)}
+              </li>
+            ))}
+          </ul>
+        </section>
+
         <section className={styles.section} aria-labelledby="game-rules">
           <h2 id="game-rules">{t('rulesTitle')}</h2>
           <h3>{t('daily.title')}</h3>

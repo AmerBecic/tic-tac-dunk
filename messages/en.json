@@ -33,6 +33,30 @@
       "select": "Select a square and find an NBA player who matches both its row and column criteria.",
       "submit": "Submit your answer to claim the square."
     },
+    "criteria": {
+      "title": "Possible criteria",
+      "intro": "Rows and columns can use any of the following criteria. Your answer must satisfy both criteria for the selected square.",
+      "team": {
+        "title": "NBA team",
+        "description": "Choose a player who has played for the team shown."
+      },
+      "teammate": {
+        "title": "Teammate of a player",
+        "description": "Choose a player who was a teammate of the named player."
+      },
+      "mvpOrDpoy": {
+        "title": "MVP or DPOY",
+        "description": "Choose a player who has won the NBA Most Valuable Player or Defensive Player of the Year award. Either award counts."
+      },
+      "royOrMip": {
+        "title": "ROY or MIP",
+        "description": "Choose a player who has won the NBA Rookie of the Year or Most Improved Player award. Either award counts."
+      },
+      "points": {
+        "title": "2,000+ points in a season",
+        "description": "Choose a player who scored at least 2,000 points in a single NBA season."
+      }
+    },
     "rulesTitle": "Game Rules",
     "daily": {
       "title": "Daily Puzzle",

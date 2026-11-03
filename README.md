@@ -109,7 +109,7 @@ Open <http://localhost:3000>. Daily gameplay is available at <http://localhost:3
 Historical NBA data comes from the companion [NBA scraping repository](https://github.com/AmerBecic/nba-webscrape). Follow that repository's scraping and cleanup instructions, then place its CSV output at:
 
 ```text
-data/csv/player_team_1950_2026.csv
+data/csv/player_team_1950_2027.csv
 ```
 
 Run the transformations in this order:

@@ -17,7 +17,6 @@ export type RandomTeamRPC =
 export type EligiblePlayerRPC =
   Database['public']['Functions']['get_random_eligible_players']['Returns'][number];
 
-// The SQL lookup returns null when a cell has no matching player.
 export type GridAnswerRPC = Omit<
   Database['public']['Functions']['find_grid_answers']['Returns'][number],
   'player_id'

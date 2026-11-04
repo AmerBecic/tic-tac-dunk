@@ -20,7 +20,9 @@ export async function generateDailyPuzzle(
     );
   }
 
-  const date = new Date().toISOString().slice(0, 10);
+  const tomorrow = new Date();
+  tomorrow.setUTCDate(tomorrow.getUTCDate() + 1);
+  const date = tomorrow.toISOString().slice(0, 10);
   try {
     const result = await dailyPuzzleService.generateDailyPuzzle(
       date,

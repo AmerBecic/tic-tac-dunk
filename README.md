@@ -1,12 +1,11 @@
 # 🏀 Tic Tac Dunk
 
-A basketball grid puzzle application with daily puzzles, NBA player search, answer validation, and progress saved in the browser. The interface supports English and Bosnian.
+A basketball grid puzzle application with tic tac toe games and daily puzzles.
 
 ## 🧰 Tech stack
 
 - **Frontend:** Next.js App Router, React, TypeScript, TanStack Query, next-intl, and SCSS modules.
-- **Database:** PostgreSQL through Supabase. Runtime queries live in server repositories.
-- **Database tooling:** Prisma for schema, migrations, generated types/client, and seed scripts.
+- **Database:** PostgreSQL through Supabase, Prisma.
 - **Package manager:** pnpm, pinned to version 9.12.0 in `package.json`.
 
 ## ✅ Prerequisites
@@ -34,36 +33,35 @@ pnpm exec supabase status
 cp .env.example .env
 ```
 
-Fill in `.env` using the local connection details and keys reported by Supabase:
+Create `.env` from `.env.example` using the `cp` command above.
 
-| Variable                               | Purpose                                                                                                                                                               |
-| -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `NEXT_PUBLIC_SUPABASE_URL`             | Local API URL, normally `http://127.0.0.1:54321`.                                                                                                                     |
-| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Supabase publishable key for public client configuration.                                                                                                             |
-| `SUPABASE_SECRET_KEY`                  | Server-only Supabase secret key used by backend queries and daily generation.                                                    |
-| `DATABASE_URL`                         | PostgreSQL connection URL used by Prisma and seeds. Locally, normally `postgresql://postgres:postgres@127.0.0.1:54322/postgres`.                                      |
-| `CRON_SECRET`                          | Secret checked by the daily puzzle cron endpoint against the `Authorization: Bearer <secret>` header.                                                                 |
-| `NEXT_PUBLIC_APP_URL`                  | App origin used for canonical and social metadata URLs. |
+For the sample dataset, disable award and 2,000+ season-point categories in `.env`:
 
-Keep `.env` private. Restart the development server after changing environment values.
+```dotenv
+GRID_ENABLE_AWARDS=false
+GRID_ENABLE_STATS=false
+```
 
-Local services normally run at:
-
-- Supabase Studio: <http://127.0.0.1:54323>
-- Mailpit: <http://127.0.0.1:54324>
-- Supabase API: <http://127.0.0.1:54321>
-
-Use `pnpm exec supabase status` to confirm the actual addresses for your environment.
+Each setting can be toggled independently. Set it to `true` (the default when omitted) to enable that category again. Restart the app after changing these values. They apply to new daily puzzles and games against AI; saved daily puzzles are unchanged. Grids still require enough team and teammate overlap in the seeded data.
 
 ### 3. 🏀 Prepare the NBA datasets
 
-Seeding requires these files in `data/json/`:
+The included [synthetic testing dataset](data/csv/tic_tac_dunk_synthetic_dataset.csv) uses real player–team links from the last two seasons (2026 and 2027) and adds 130 fictional player–team links to make grids easier to generate and solve during testing. These added links are marked with `IsSynthetic=True`. This dataset is intended for testing, not accurate NBA history.
+
+Copy the testing dataset to the filename expected by the importer, then generate the JSON files:
+
+```bash
+cp data/csv/tic_tac_dunk_synthetic_dataset.csv data/csv/player_team_1950_2027.csv
+pnpm generate-player-data-per-season
+pnpm generate-raw-player-data
+pnpm generate-final-player-data
+```
+
+This creates the files required for seeding in `data/json/`:
 
 - `player_seasons.json`
 - `players_raw.json`
 - `players_final.json`
-
-If you already have the prepared datasets, place them there and continue. Otherwise, follow [Generate or refresh NBA data](#generate-or-refresh-nba-data) before seeding. The repository's placeholder files do not contain the required data.
 
 ### 4. 🧬 Generate the Prisma client and apply migrations
 
@@ -145,14 +143,6 @@ The final transformation reuses existing player IDs when the player identity mat
 | `scripts/`      | Command-line workflows, including daily puzzle generation.                                                                                           |
 | `data/`         | Source CSV and transformed JSON datasets.                                                                                                            |
 
-The main request flow is:
-
-```text
-Feature → domain API hook/request → HTTP route → controller → service → repository → database
-```
-
-Command-line workflows call services directly. Detailed development conventions live in the root [AGENTS.md](AGENTS.md) and the layer guides for [core](src/core/AGENTS.md), [domains](src/domains/AGENTS.md), [features](src/features/AGENTS.md), and [server](src/server/AGENTS.md).
-
 ## 🛠️ Development commands
 
 | Command                     | Purpose                                        |
@@ -191,18 +181,3 @@ pnpm exec prisma migrate reset
 pnpm seed
 pnpm daily:generate
 ```
-
-## ⏰ Daily scheduling and deployment
-
-`vercel.json` configures `/api/cron/daily-puzzle` with the schedule `0 0 * * *`. The application uses UTC dates for daily puzzles. The endpoint requires `CRON_SECRET` through a bearer authorization header and generates a puzzle only if one does not already exist for the date.
-
-For deployment, configure the environment variables above for the target database and app origin, apply migrations, seed the required NBA data, and generate the initial daily puzzle. Keep `CRON_SECRET` consistent with the scheduler's authorization configuration. The local development server does not run the deployed schedule; use `pnpm daily:generate` locally.
-
-## 🧯 Troubleshooting
-
-- **Supabase will not start:** Check that Docker Desktop is running, then inspect the output of `pnpm exec supabase start`.
-- **Missing dataset files during seeding:** Prepare all three JSON files, including the season and raw player data used by the teammate seed.
-- **Database tables or RPC functions are missing:** Apply the committed Prisma migrations to the database the app uses.
-- **Daily puzzle is empty:** Run `pnpm daily:generate` for today's UTC date against the same database as the app.
-- **Cron endpoint returns 401:** Check `CRON_SECRET` and the bearer authorization header.
-- **Metadata URLs are incorrect:** Set `NEXT_PUBLIC_APP_URL` to the app origin and restart or rebuild the app.

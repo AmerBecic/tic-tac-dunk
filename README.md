@@ -35,9 +35,29 @@ cp .env.example .env
 
 Create `.env` from `.env.example` using the `cp` command above.
 
+For the sample dataset, disable award and 2,000+ season-point categories in `.env`:
+
+```dotenv
+GRID_ENABLE_AWARDS=false
+GRID_ENABLE_STATS=false
+```
+
+Each setting can be toggled independently. Set it to `true` (the default when omitted) to enable that category again. Restart the app after changing these values. They apply to new daily puzzles and games against AI; saved daily puzzles are unchanged. Grids still require enough team and teammate overlap in the seeded data.
+
 ### 3. 🏀 Prepare the NBA datasets
 
-Seeding requires these files in `data/json/`:
+The included [synthetic testing dataset](data/csv/tic_tac_dunk_synthetic_dataset.csv) uses real player–team links from the last two seasons (2026 and 2027) and adds 130 fictional player–team links to make grids easier to generate and solve during testing. These added links are marked with `IsSynthetic=True`. This dataset is intended for testing, not accurate NBA history.
+
+Copy the testing dataset to the filename expected by the importer, then generate the JSON files:
+
+```bash
+cp data/csv/tic_tac_dunk_synthetic_dataset.csv data/csv/player_team_1950_2027.csv
+pnpm generate-player-data-per-season
+pnpm generate-raw-player-data
+pnpm generate-final-player-data
+```
+
+This creates the files required for seeding in `data/json/`:
 
 - `player_seasons.json`
 - `players_raw.json`

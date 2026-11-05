@@ -16,7 +16,13 @@ type Theme = 'light' | 'dark';
 
 const THEME_STORAGE_KEY = 'theme';
 
-export const ThemeSwitcher = (): React.JSX.Element => {
+interface ThemeSwitcherProps {
+  id?: string;
+}
+
+export const ThemeSwitcher = ({
+  id,
+}: ThemeSwitcherProps): React.JSX.Element => {
   const t = useTranslations('profile');
   const [theme, setTheme] = useState<Theme | null>(null);
 
@@ -54,6 +60,7 @@ export const ThemeSwitcher = (): React.JSX.Element => {
       <Tooltip>
         <TooltipTrigger asChild>
           <Switch
+            id={id}
             checked={theme === 'dark'}
             onCheckedChange={switchTheme}
             aria-label={t('switchTheme')}

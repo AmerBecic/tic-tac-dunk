@@ -28,11 +28,12 @@ export const ProfileDialog = (): React.JSX.Element => {
     } else {
       url.searchParams.delete('profile');
     }
-    window.history.replaceState(
-      null,
-      '',
-      `${url.pathname}${url.search}${url.hash}`
-    );
+    const nextUrl = `${url.pathname}${url.search}${url.hash}`;
+    if (open) {
+      window.history.pushState(null, '', nextUrl);
+    } else {
+      window.history.replaceState(null, '', nextUrl);
+    }
   };
 
   return (

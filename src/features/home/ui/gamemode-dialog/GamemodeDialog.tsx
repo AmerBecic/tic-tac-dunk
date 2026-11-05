@@ -24,11 +24,12 @@ export const GamemodeDialog = () => {
     } else {
       url.searchParams.delete('gamemode');
     }
-    window.history.replaceState(
-      null,
-      '',
-      `${url.pathname}${url.search}${url.hash}`
-    );
+    const nextUrl = `${url.pathname}${url.search}${url.hash}`;
+    if (open) {
+      window.history.pushState(null, '', nextUrl);
+    } else {
+      window.history.replaceState(null, '', nextUrl);
+    }
   };
 
   return (

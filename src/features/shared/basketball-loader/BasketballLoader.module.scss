@@ -11,49 +11,22 @@
 }
 
 .sm {
-  --loader-width: 64px;
+  --loader-width: 32px;
 }
 .md {
-  --loader-width: 96px;
+  --loader-width: 48px;
 }
 .lg {
-  --loader-width: 128px;
-}
-
-.scene {
-  position: relative;
-  width: var(--loader-width);
-  max-width: 100%;
-  aspect-ratio: 1;
-}
-
-.bounce {
-  position: absolute;
-  bottom: 8%;
-  left: 25%;
-  width: 50%;
-  height: 50%;
-  animation: bounce 900ms infinite;
+  --loader-width: 64px;
 }
 
 .ball {
   display: block;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-  transform-origin: center bottom;
-  animation: squash 900ms infinite;
-}
-
-.shadow {
-  position: absolute;
-  bottom: 4%;
-  left: 22%;
-  width: 56%;
-  height: 8%;
-  border-radius: 50%;
-  background: currentColor;
-  animation: shadow 900ms infinite;
+  width: var(--loader-width);
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  animation: spin 1200ms linear infinite;
 }
 
 .label {
@@ -64,53 +37,14 @@
   overflow-wrap: anywhere;
 }
 
-@keyframes bounce {
-  0%,
-  100% {
-    transform: translateY(-78%);
-    animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
-  }
-  50% {
-    transform: translateY(0);
-    animation-timing-function: cubic-bezier(0, 0.55, 0.45, 1);
-  }
-}
-
-@keyframes squash {
-  0%,
-  25%,
-  75%,
-  100% {
-    transform: scale(1);
-  }
-  42%,
-  62% {
-    transform: scale(0.94, 1.06);
-  }
-  50% {
-    transform: scale(1.15, 0.85);
-  }
-}
-
-@keyframes shadow {
-  0%,
-  100% {
-    transform: scaleX(0.55);
-    opacity: 0.1;
-  }
-  50% {
-    transform: scaleX(1);
-    opacity: 0.25;
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .bounce,
-  .ball,
-  .shadow {
+  .ball {
     animation: none;
-  }
-  .shadow {
-    opacity: 0.2;
   }
 }

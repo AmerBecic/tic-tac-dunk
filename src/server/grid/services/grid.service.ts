@@ -175,8 +175,20 @@ async function generateAndValidate(
         AppErrorType.VALIDATION
       );
     }
+    const generationConfig: GridGenerationConfig = {
+      ...config,
+      ACHIEVEMENT:
+        process.env.GRID_ENABLE_AWARDS?.trim().toLowerCase() === 'false'
+          ? { min: 0, max: 0 }
+          : config.ACHIEVEMENT,
+      STAT:
+        process.env.GRID_ENABLE_STATS?.trim().toLowerCase() === 'false'
+          ? { min: 0, max: 0 }
+          : config.STAT,
+    };
+
     for (let attempt = 0; attempt < MAX_GENERATION_ATTEMPTS; attempt++) {
-      const categoryCounts = selectGridCategoryCounts(config);
+      const categoryCounts = selectGridCategoryCounts(generationConfig);
       const gridCategories = await loadRandomGridCategories(
         categoryCounts,
         supabase

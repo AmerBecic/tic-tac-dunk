@@ -40,10 +40,10 @@ Fill in `.env` using the local connection details and keys reported by Supabase:
 | -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `NEXT_PUBLIC_SUPABASE_URL`             | Local API URL, normally `http://127.0.0.1:54321`.                                                                                                                     |
 | `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Supabase publishable key for public client configuration.                                                                                                             |
-| `SUPABASE_SECRET_KEY`                  | Server-only Supabase secret key used by backend queries and daily generation. Never prefix it with `NEXT_PUBLIC_`.                                                    |
+| `SUPABASE_SECRET_KEY`                  | Server-only Supabase secret key used by backend queries and daily generation.                                                    |
 | `DATABASE_URL`                         | PostgreSQL connection URL used by Prisma and seeds. Locally, normally `postgresql://postgres:postgres@127.0.0.1:54322/postgres`.                                      |
 | `CRON_SECRET`                          | Secret checked by the daily puzzle cron endpoint against the `Authorization: Bearer <secret>` header.                                                                 |
-| `NEXT_PUBLIC_APP_URL`                  | App origin used for canonical and social metadata URLs. Add `NEXT_PUBLIC_APP_URL=http://localhost:3000` to `.env`; this variable is not yet listed in `.env.example`. |
+| `NEXT_PUBLIC_APP_URL`                  | App origin used for canonical and social metadata URLs. |
 
 Keep `.env` private. Restart the development server after changing environment values.
 

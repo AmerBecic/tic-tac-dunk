@@ -70,6 +70,9 @@ importers:
       react:
         specifier: ^19.2.7
         version: 19.2.7
+      react-circle-flags:
+        specifier: ^0.0.30
+        version: 0.0.30(react@19.2.7)
       react-dom:
         specifier: ^19.2.7
         version: 19.2.7(react@19.2.7)
@@ -7246,6 +7249,15 @@ packages:
         integrity: sha512-gMDyleLWVE+i6Sgtc0QbbY6pEKqYs97NGi6isHQPqYlLemPoO8dxQ3uGi0f4NiP98c+jMW6cG1Kx9dDwfvqARQ==,
       }
 
+  react-circle-flags@0.0.30:
+    resolution:
+      {
+        integrity: sha512-LVbJGOcw8PO/OtxfT/2fDadT7IAYlKN6NOIWWN5KdoPyiICFM/WrCEM8ZiDTV+DpdFpN+uwDMtnno8qU4NluOw==,
+      }
+    engines: { node: '>=10' }
+    peerDependencies:
+      react: ^16.0.0 || 17.x || 18.x || 19.x
+
   react-dom@19.2.7:
     resolution:
       {
@@ -13102,6 +13114,10 @@ snapshots:
     dependencies:
       defu: 6.1.7
       destr: 2.0.5
+
+  react-circle-flags@0.0.30(react@19.2.7):
+    dependencies:
+      react: 19.2.7
 
   react-dom@19.2.7(react@19.2.7):
     dependencies:

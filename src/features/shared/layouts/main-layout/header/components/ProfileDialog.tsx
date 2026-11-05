@@ -11,7 +11,7 @@ import {
 } from '@/features/shared/ui/dialog';
 import { useSearchParams } from 'next/navigation';
 import { IconUserCircle } from '@tabler/icons-react';
-import { Profile } from './Profile';
+import { Profile } from '@/features/shared/profile';
 import styles from './ProfileDialog.module.scss';
 import { useTranslations } from 'next-intl';
 

@@ -118,7 +118,11 @@
     "retry": "Pokušaj ponovo"
   },
   "profile": {
+    "favouriteTeam": "Omiljeni tim",
+    "choose": "Odaberi",
+    "language": "Jezik",
     "title": "Profil",
+    "username": "Korisničko ime",
     "switchTheme": "Promijeni temu"
   },
   "footer": {

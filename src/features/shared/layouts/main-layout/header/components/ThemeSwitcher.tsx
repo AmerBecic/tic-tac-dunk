@@ -17,7 +17,7 @@ type Theme = 'light' | 'dark';
 const THEME_STORAGE_KEY = 'theme';
 
 export const ThemeSwitcher = (): React.JSX.Element => {
-  const t = useTranslations('themeSwitcher');
+  const t = useTranslations('profile');
   const [theme, setTheme] = useState<Theme | null>(null);
 
   useEffect(() => {

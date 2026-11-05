@@ -1,0 +1,17 @@
+.themeRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+}
+
+.label {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.switcher {
+  display: flex;
+  flex-shrink: 0;
+}

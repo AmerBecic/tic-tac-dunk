@@ -10,7 +10,7 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '../ui/tooltip';
+} from '@/features/shared/ui/tooltip';
 
 type Theme = 'light' | 'dark';
 

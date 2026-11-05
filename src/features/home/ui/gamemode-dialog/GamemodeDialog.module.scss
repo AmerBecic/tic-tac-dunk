@@ -1,0 +1,15 @@
+@use '@/core/styles/breakpoints' as breakpoints;
+
+.dialog.dialog {
+  max-width: 64rem;
+  padding: 1rem;
+
+  @include breakpoints.respond-from(md) {
+    padding: 1.5rem;
+  }
+
+  @include breakpoints.respond-from(xl) {
+    max-width: 90rem;
+    padding: 2rem;
+  }
+}

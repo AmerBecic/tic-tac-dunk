@@ -1,7 +1,6 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { DialogContent } from '@/features/shared/ui/dialog';
 import {
   DAILY_PUZZLE_URL,
   DAILY_PUZZLE_LIST_URL,
@@ -19,36 +18,34 @@ export const GamemodeSelection = () => {
   const router = useRouter();
 
   return (
-    <DialogContent className={styles.dialog} closeLabel={t('common.close')}>
-      <div className={styles.grid}>
-        <GamemodeCard
-          icon={<PreviousSvg aria-hidden="true" focusable="false" />}
-          title={t('home.gamemodeSelection.previousTitle')}
-          description={t('home.gamemodeSelection.previousDescription')}
-          onPlay={() => router.push(DAILY_PUZZLE_LIST_URL)}
-        />
-        <GamemodeCard
-          icon={<PuzzleSvg aria-hidden="true" focusable="false" />}
-          title={t('dailyPuzzle.title')}
-          description={t('home.gamemodeSelection.dailyDescription')}
-          onPlay={() =>
-            router.push(DAILY_PUZZLE_URL(new Date().toISOString().slice(0, 10)))
-          }
-        />
-        <GamemodeCard
-          icon={<BotSvg aria-hidden="true" focusable="false" />}
-          title={t('home.gamemodeSelection.aiTitle')}
-          description={t('home.gamemodeSelection.aiDescription')}
-          onPlay={() => router.push(TIC_TAC_TOE_AI_URL)}
-        />
-        <GamemodeCard
-          icon={<PvPSvg aria-hidden="true" focusable="false" />}
-          title={t('home.gamemodeSelection.playersTitle')}
-          description={t('home.gamemodeSelection.playersDescription')}
-          withBandage
-          bandagetitle={t('home.gamemodeSelection.comingSoon')}
-        />
-      </div>
-    </DialogContent>
+    <div className={styles.grid}>
+      <GamemodeCard
+        icon={<PreviousSvg aria-hidden="true" focusable="false" />}
+        title={t('home.gamemodeSelection.previousTitle')}
+        description={t('home.gamemodeSelection.previousDescription')}
+        onPlay={() => router.push(DAILY_PUZZLE_LIST_URL)}
+      />
+      <GamemodeCard
+        icon={<PuzzleSvg aria-hidden="true" focusable="false" />}
+        title={t('dailyPuzzle.title')}
+        description={t('home.gamemodeSelection.dailyDescription')}
+        onPlay={() =>
+          router.push(DAILY_PUZZLE_URL(new Date().toISOString().slice(0, 10)))
+        }
+      />
+      <GamemodeCard
+        icon={<BotSvg aria-hidden="true" focusable="false" />}
+        title={t('home.gamemodeSelection.aiTitle')}
+        description={t('home.gamemodeSelection.aiDescription')}
+        onPlay={() => router.push(TIC_TAC_TOE_AI_URL)}
+      />
+      <GamemodeCard
+        icon={<PvPSvg aria-hidden="true" focusable="false" />}
+        title={t('home.gamemodeSelection.playersTitle')}
+        description={t('home.gamemodeSelection.playersDescription')}
+        withBandage
+        bandagetitle={t('home.gamemodeSelection.comingSoon')}
+      />
+    </div>
   );
 };

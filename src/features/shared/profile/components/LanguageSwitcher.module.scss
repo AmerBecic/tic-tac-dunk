@@ -1,0 +1,15 @@
+.trigger.trigger {
+  min-height: 2.5rem;
+  line-height: 1.5;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  > img {
+    display: block;
+    flex-shrink: 0;
+  }
+}

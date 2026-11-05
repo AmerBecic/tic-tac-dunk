@@ -1,0 +1,28 @@
+@use '@/core/styles/breakpoints' as breakpoints;
+
+.profile {
+  display: grid;
+  gap: 1.5rem;
+  min-width: 0;
+}
+
+.row {
+  display: grid;
+  gap: 0.5rem;
+  min-width: 0;
+
+  > label {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  @include breakpoints.respond-from(sm) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 1rem;
+
+    > :last-child {
+      justify-self: end;
+    }
+  }
+}

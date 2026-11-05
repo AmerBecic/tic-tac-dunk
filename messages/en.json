@@ -118,7 +118,11 @@
     "retry": "Try again"
   },
   "profile": {
+    "favouriteTeam": "Favourite team",
+    "choose": "Choose",
+    "language": "Language",
     "title": "Profile",
+    "username": "Username",
     "switchTheme": "Switch Theme"
   },
   "footer": {

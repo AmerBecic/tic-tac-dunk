@@ -3,7 +3,7 @@ import { cn } from '@/core/utils/Utils';
 import styles from './BasketballLoader.module.scss';
 
 interface BasketballLoaderProps {
-  label: string;
+  label?: string;
   size?: 'sm' | 'md' | 'lg';
   className?: string;
 }
@@ -14,12 +14,11 @@ export const BasketballLoader = ({
   className,
 }: BasketballLoaderProps): React.JSX.Element => (
   <div className={cn(styles.loader, styles[size], className)} role="status">
-    <div className={styles.scene} aria-hidden="true">
-      <span className={styles.shadow} />
-      <div className={styles.bounce}>
-        <BasketballSvg className={styles.ball} focusable="false" />
-      </div>
-    </div>
+    <BasketballSvg
+      className={styles.ball}
+      aria-hidden="true"
+      focusable="false"
+    />
     <span className={styles.label}>{label}</span>
   </div>
 );

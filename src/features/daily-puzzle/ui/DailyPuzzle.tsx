@@ -17,6 +17,7 @@ import { Logo } from '@/features/shared/logo';
 import { Paragraph } from '@/features/shared/ui/paragraph';
 
 import { useDailyPuzzleProgress } from '../hooks/useDailyPuzzleProgress';
+import { BasketballLoader } from '@/features/shared/basketball-loader';
 
 interface DailyPuzzleProps {
   date: string;
@@ -25,7 +26,7 @@ interface DailyPuzzleProps {
 export const DailyPuzzle = ({ date }: DailyPuzzleProps): React.JSX.Element => {
   const t = useTranslations('dailyPuzzle');
   const playerSearch = useTranslations('playersSearch');
-  const { dailyPuzzle, error } = useGetDailyPuzzle({ date });
+  const { dailyPuzzle, error, isLoading } = useGetDailyPuzzle({ date });
   const { validateAnswer } = useValidateAnswer();
   const progress = useDailyPuzzleProgress(dailyPuzzle?.id);
   const [celebration, setCelebration] = useState<{
@@ -46,6 +47,14 @@ export const DailyPuzzle = ({ date }: DailyPuzzleProps): React.JSX.Element => {
 
   if (error instanceof ApiError && error.status === 404) {
     return <Paragraph></Paragraph>;
+  }
+
+  if (isLoading || !dailyPuzzle) {
+    return (
+      <div className={styles.loading}>
+        <BasketballLoader />
+      </div>
+    );
   }
 
   return (

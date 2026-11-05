@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import { useCreateTicTacToeMatch } from '@/domains/tic-tac-toe/hooks/useCreateTicTacToeMatch';
 import { DEFAULT_TURN_DURATION_SECONDS } from '@/domains/tic-tac-toe/types/tic-tac-toe.constants';
 import { Button } from '@/features/shared/ui/button';
-import { Paragraph } from '@/features/shared/ui/paragraph';
+import { BasketballLoader } from '@/features/shared/basketball-loader';
 import { AiMatch } from './ai-match/AiMatch';
 import { HOME_URL } from '@/core/constants/Routes';
 import { useRouter } from '@/core/i18n/navigation';
@@ -60,7 +60,7 @@ export const TicTacToe = () => {
   if (!data || isPending)
     return (
       <div className={styles.fallback}>
-        <Paragraph role="status">{t('creatingMatch')}</Paragraph>
+        <BasketballLoader label={t('creatingMatch')} />
       </div>
     );
   return <AiMatch key={data.id} initialMatch={data} actions={actions} />;

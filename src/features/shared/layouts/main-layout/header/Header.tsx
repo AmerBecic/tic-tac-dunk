@@ -1,7 +1,7 @@
 import { HOME_URL } from '@/core/constants/Routes';
 import { Link } from '@/features/shared/ui/link';
 import { Logo } from '../../../logo';
-import { DesktopNav, MobileNav, ThemeSwitcher } from './components';
+import { DesktopNav, MobileNav, ProfileDialog } from './components';
 import styles from './Header.module.scss';
 import React from 'react';
 
@@ -15,7 +15,9 @@ export const Header = (): React.JSX.Element => {
       <div className={styles.desktopOnly}>
         <DesktopNav />
       </div>
-      <ThemeSwitcher />
+      <React.Suspense fallback={null}>
+        <ProfileDialog />
+      </React.Suspense>
       <div className={styles.mobileOnly}>
         <MobileNav />
       </div>

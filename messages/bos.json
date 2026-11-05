@@ -117,7 +117,8 @@
     "close": "Zatvori",
     "retry": "Pokušaj ponovo"
   },
-  "themeSwitcher": {
+  "profile": {
+    "title": "Profil",
     "switchTheme": "Promijeni temu"
   },
   "footer": {

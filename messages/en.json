@@ -117,7 +117,8 @@
     "close": "Close",
     "retry": "Try again"
   },
-  "themeSwitcher": {
+  "profile": {
+    "title": "Profile",
     "switchTheme": "Switch Theme"
   },
   "footer": {

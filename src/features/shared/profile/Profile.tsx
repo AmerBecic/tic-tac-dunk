@@ -38,7 +38,7 @@ export const Profile = (): React.JSX.Element => {
       </div>
       <div className={styles.row}>
         <Label htmlFor={favouriteTeamId}>{t('favouriteTeam')}</Label>
-        <Button id={favouriteTeamId} type="button" variant="secondary">
+        <Button id={favouriteTeamId} type="button" variant="primary">
           {t('choose')}
         </Button>
       </div>

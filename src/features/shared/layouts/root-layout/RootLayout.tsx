@@ -9,6 +9,7 @@ import { APP_URL } from '@/core/constants/Env';
 import { teko } from '@/core/fonts';
 import { routing } from '@/core/i18n/routing';
 import { Providers } from '@/core/providers/Providers';
+import { UserStoreProvider } from '@/providers/UserStoreProvider';
 
 export const metadata: Metadata = {
   description:
@@ -60,7 +61,7 @@ const RootLayout = async ({
     <html lang={locale} className={teko.variable}>
       <body className={teko.className}>
         <Providers locale={locale} messages={messages}>
-          {children}
+          <UserStoreProvider>{children}</UserStoreProvider>
         </Providers>
       </body>
     </html>

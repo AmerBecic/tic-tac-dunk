@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useUserStore } from '@/providers/UserStoreProvider';
 import { Button } from '@/features/shared/ui/button';
 import {
   Dialog,
@@ -17,6 +18,7 @@ import { useTranslations } from 'next-intl';
 
 export const ProfileDialog = (): React.JSX.Element => {
   const searchParams = useSearchParams();
+  const username = useUserStore((state) => state.username);
   const t = useTranslations('common');
   const profileT = useTranslations('profile');
   const isOpen = searchParams.get('profile') === 'open';
@@ -45,8 +47,11 @@ export const ProfileDialog = (): React.JSX.Element => {
           size="sm"
           aria-label={profileT('title')}
           className={styles.trigger}
-          startIcon={<IconUserCircle size={30} stroke={2} aria-hidden="true" />}
-        />
+          textProps={{ className: styles.username }}
+          endIcon={<IconUserCircle size={30} stroke={2} aria-hidden="true" />}
+        >
+          {username.trim() || undefined}
+        </Button>
       </DialogTrigger>
       <DialogContent closeLabel={t('close')} aria-describedby={undefined}>
         <DialogHeader>

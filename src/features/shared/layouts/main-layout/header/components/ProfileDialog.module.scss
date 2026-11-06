@@ -1,9 +1,9 @@
 .trigger.trigger {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: 30px;
+  justify-content: flex-end;
+  min-width: 30px;
+  width: 100%;
   height: 30px;
   padding: 0;
   border: 0;
@@ -11,8 +11,21 @@
   color: inherit;
   cursor: pointer;
 
+  > span:first-child {
+    flex-shrink: 0;
+  }
+
   &:focus-visible {
     outline: 2px solid var(--color-focus);
     outline-offset: 4px;
   }
+}
+
+.username {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 1rem;
+  line-height: 1;
 }

@@ -15,9 +15,11 @@ export const Header = (): React.JSX.Element => {
       <div className={styles.desktopOnly}>
         <DesktopNav />
       </div>
-      <React.Suspense fallback={null}>
-        <ProfileDialog />
-      </React.Suspense>
+      <div className={styles.profileSlot}>
+        <React.Suspense fallback={null}>
+          <ProfileDialog />
+        </React.Suspense>
+      </div>
       <div className={styles.mobileOnly}>
         <MobileNav />
       </div>

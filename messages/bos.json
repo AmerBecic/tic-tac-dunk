@@ -118,6 +118,8 @@
     "retry": "Pokušaj ponovo"
   },
   "profile": {
+    "change": "Promijeni",
+    "none": "Nijedan",
     "favouriteTeam": "Omiljeni tim",
     "choose": "Odaberi",
     "language": "Jezik",

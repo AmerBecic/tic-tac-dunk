@@ -118,6 +118,8 @@
     "retry": "Try again"
   },
   "profile": {
+    "change": "Change",
+    "none": "None",
     "favouriteTeam": "Favourite team",
     "choose": "Choose",
     "language": "Language",

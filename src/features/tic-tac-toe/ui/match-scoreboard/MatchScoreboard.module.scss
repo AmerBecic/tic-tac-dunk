@@ -85,7 +85,6 @@
   font-weight: 800;
   line-height: 1.2;
   text-align: center;
-  text-transform: uppercase;
   overflow-wrap: anywhere;
 
   @include breakpoints.respond-from(sm) {

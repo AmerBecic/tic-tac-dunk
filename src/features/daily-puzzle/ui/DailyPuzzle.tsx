@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useFavouriteTeamColors } from '@/features/shared/hooks/useFavouriteTeamColors';
 import { ApiError } from '@/core/errors/ApiError';
 
 import styles from './DailyPuzzle.module.scss';
@@ -25,6 +26,7 @@ interface DailyPuzzleProps {
 
 export const DailyPuzzle = ({ date }: DailyPuzzleProps): React.JSX.Element => {
   const t = useTranslations('dailyPuzzle');
+  const favouriteTeamColors = useFavouriteTeamColors();
   const playerSearch = useTranslations('playersSearch');
   const { dailyPuzzle, error, isLoading } = useGetDailyPuzzle({ date });
   const { validateAnswer } = useValidateAnswer();
@@ -142,7 +144,11 @@ export const DailyPuzzle = ({ date }: DailyPuzzleProps): React.JSX.Element => {
                 });
               }
             }}
-            answer={answer}
+            answer={
+              answer && favouriteTeamColors
+                ? { ...answer, ...favouriteTeamColors }
+                : answer
+            }
             showGuessIndicator
             disabled={!progress.isReady || Boolean(answer)}
             emptyLabel={playerSearch('search')}

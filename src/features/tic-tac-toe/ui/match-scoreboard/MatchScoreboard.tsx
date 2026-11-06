@@ -29,11 +29,13 @@ const DIGITS: Record<string, string> = {
 interface MatchScoreboardProps {
   match: Pick<Match, 'mode' | 'status' | 'currentPlayer' | 'winner'>;
   secondsLeft: number;
+  playerName?: string;
 }
 
 export const MatchScoreboard = ({
   match,
   secondsLeft,
+  playerName,
 }: MatchScoreboardProps) => {
   const t = useTranslations('ticTacToe');
   const isActive = match.status === 'ACTIVE';
@@ -42,7 +44,7 @@ export const MatchScoreboard = ({
     ? String(Math.max(0, secondsLeft)).padStart(2, '0')
     : '--';
   const players = [
-    { id: 'PLAYER1', name: t('player1'), mark: 'X' },
+    { id: 'PLAYER1', name: playerName || t('player1'), mark: 'X' },
     {
       id: 'PLAYER2',
       name: t(match.mode === 'AI' ? 'bot' : 'player2'),

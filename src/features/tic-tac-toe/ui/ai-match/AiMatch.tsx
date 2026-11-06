@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 
+import { useFavouriteTeamColors } from '@/features/shared/hooks/useFavouriteTeamColors';
+import { useUserStore } from '@/providers/UserStoreProvider';
 import type { Match } from '@/domains/tic-tac-toe/types/match.types';
 import { useGetActiveAiMatch } from '@/domains/tic-tac-toe/hooks/useGetActiveAiMatch';
 import { useMatchActions } from '@/domains/tic-tac-toe/hooks/useMatchActions';
@@ -22,6 +24,8 @@ export const AiMatch = ({
   actions: ReactNode;
 }) => {
   const t = useTranslations('playersSearch');
+  const favouriteTeamColors = useFavouriteTeamColors();
+  const username = useUserStore((state) => state.username);
   const matchText = useTranslations('ticTacToe');
   const [now, setNow] = useState(() => Date.now());
 
@@ -105,7 +109,13 @@ export const AiMatch = ({
   return (
     <Grid
       actions={actions}
-      header={<MatchScoreboard match={match} secondsLeft={secondsLeft} />}
+      header={
+        <MatchScoreboard
+          match={match}
+          secondsLeft={secondsLeft}
+          playerName={username.trim() || undefined}
+        />
+      }
       rows={match.grid.rows}
       columns={match.grid.columns}
       corner={
@@ -137,7 +147,11 @@ export const AiMatch = ({
           secondsLeft > 0;
         return (
           <GridCell
-            answer={answer ?? undefined}
+            answer={
+              answer && answer.owner === 'PLAYER1' && favouriteTeamColors
+                ? { ...answer, ...favouriteTeamColors }
+                : (answer ?? undefined)
+            }
             mark={answer ? (answer.owner === 'PLAYER1' ? 'X' : 'O') : undefined}
             disabled={isPending || !canMove || !!answer}
             emptyLabel={t('search')}

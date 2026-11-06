@@ -20,6 +20,22 @@
   }
 }
 
+.profileSlot {
+  flex: 0 0 5rem;
+  width: 5rem;
+  min-width: 0;
+
+  @include respond-from(sm) {
+    flex-basis: 10rem;
+    width: 10rem;
+  }
+
+  @include respond-from(lg) {
+    flex-basis: 12rem;
+    width: 12rem;
+  }
+}
+
 .desktopOnly {
   display: none;
 

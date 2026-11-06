@@ -21,7 +21,7 @@ export const FavouriteTeamDialog = (): React.JSX.Element => {
   const favouriteTeam = useUserStore((state) => state.favouriteTeam);
   const setFavouriteTeam = useUserStore((state) => state.setFavouriteTeam);
 
-  const selectTeam = (code: string): void => {
+  const selectTeam = (code: string | null): void => {
     setFavouriteTeam(code);
     setIsOpen(false);
   };

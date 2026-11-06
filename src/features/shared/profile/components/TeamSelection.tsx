@@ -1,3 +1,7 @@
+'use client';
+
+import { useTranslations } from 'next-intl';
+import { TEAM_LOGOS } from '@/core/constants/TeamLogos';
 import { Button } from '@/features/shared/ui/button';
 import styles from './TeamSelection.module.scss';
 
@@ -36,26 +40,50 @@ const TEAM_CODES = [
 
 interface TeamSelectionProps {
   selectedTeam: string | null;
-  onSelect: (code: string) => void;
+  onSelect: (code: string | null) => void;
 }
 
 export const TeamSelection = ({
   selectedTeam,
   onSelect,
-}: TeamSelectionProps): React.JSX.Element => (
-  <ul className={styles.list}>
-    {TEAM_CODES.map((code) => (
-      <li key={code}>
+}: TeamSelectionProps): React.JSX.Element => {
+  const t = useTranslations('profile');
+
+  return (
+    <ul className={styles.list}>
+      <li className={styles.none}>
         <Button
           type="button"
-          size="sm"
-          variant={selectedTeam === code ? 'primary' : 'ghost'}
-          aria-pressed={selectedTeam === code}
-          onClick={() => onSelect(code)}
+          className={styles.team}
+          variant={selectedTeam === null ? 'primary' : 'ghost'}
+          aria-pressed={selectedTeam === null}
+          onClick={() => onSelect(null)}
         >
-          {code}
+          {t('none')}
         </Button>
       </li>
-    ))}
-  </ul>
-);
+      {TEAM_CODES.map((code) => {
+        const TeamLogo = TEAM_LOGOS[code];
+
+        return (
+          <li key={code}>
+            <Button
+              type="button"
+              size="sm"
+              className={styles.team}
+              textProps={{ className: styles.content }}
+              variant={selectedTeam === code ? 'primary' : 'ghost'}
+              aria-pressed={selectedTeam === code}
+              onClick={() => onSelect(code)}
+            >
+              <span className={styles.logo} aria-hidden="true">
+                {TeamLogo && <TeamLogo size={48} />}
+              </span>
+              <span>{code}</span>
+            </Button>
+          </li>
+        );
+      })}
+    </ul>
+  );
+};

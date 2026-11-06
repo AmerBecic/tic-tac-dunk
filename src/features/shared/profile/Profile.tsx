@@ -2,9 +2,10 @@
 
 import { useTranslations } from 'next-intl';
 import { useId } from 'react';
+import { useUserStore } from '@/providers/UserStoreProvider';
 import { Label } from '@/features/shared/ui/label';
 import { Input } from '@/features/shared/ui/input';
-import { Button } from '@/features/shared/ui/button';
+import { FavouriteTeamDialog } from './components/FavouriteTeamDialog';
 import { LanguageSwitcher } from './components/LanguageSwitcher';
 import { ThemeSwitcher } from './components/ThemeSwitcher';
 import styles from './Profile.module.scss';
@@ -14,7 +15,9 @@ export const Profile = (): React.JSX.Element => {
   const themeSwitchId = useId();
   const usernameId = useId();
   const languageId = useId();
-  const favouriteTeamId = useId();
+  const username = useUserStore((state) => state.username);
+  const setUsername = useUserStore((state) => state.setUsername);
+  const favouriteTeam = useUserStore((state) => state.favouriteTeam);
 
   return (
     <div className={styles.profile}>
@@ -34,13 +37,16 @@ export const Profile = (): React.JSX.Element => {
           type="text"
           autoComplete="username"
           maxLength={20}
+          value={username}
+          onChange={(event) => setUsername(event.target.value)}
         />
       </div>
       <div className={styles.row}>
-        <Label htmlFor={favouriteTeamId}>{t('favouriteTeam')}</Label>
-        <Button id={favouriteTeamId} type="button" variant="primary">
-          {t('choose')}
-        </Button>
+        <span>{t('favouriteTeam')}</span>
+        <div className={styles.teamControl}>
+          <span>{favouriteTeam ?? t('none')}</span>
+          <FavouriteTeamDialog />
+        </div>
       </div>
     </div>
   );
